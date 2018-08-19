@@ -4,7 +4,7 @@
 
 Source code is built every night at 00:00 GMT+2 time.
 
-[Nighly builds are available here](https://sc2-nightly.7777.lt)
+[Latest nighly build is available here](https://sc2-nightly.7777.lt)
 
 ## Development
 
