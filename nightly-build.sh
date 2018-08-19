@@ -11,7 +11,7 @@ git pull origin master
 npm i
 
 if ! npm run build; then
-  return 1
+  exit 1
 fi
 
 # If success copy files to public
