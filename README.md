@@ -1,5 +1,9 @@
 # survival-clicker2
 
+## Intro
+
+Read what's planned [here](docs/proposal.md)
+
 ## Nightly builds
 
 Source code is built every night at 00:00 GMT+2 time.
