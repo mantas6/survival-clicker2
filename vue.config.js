@@ -9,6 +9,7 @@ module.exports = {
   },
   configureWebpack: {
     output: {
+      // Fixes issue with script in the Web Worker crash while trying to get/set window global
       globalObject: 'this',
     },
   },
