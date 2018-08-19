@@ -9,6 +9,11 @@ cd $1
 git checkout -- .
 git pull origin master
 npm i
-npm run build
+
+if ! npm run build; then
+  return 1
+fi
+
+# If success copy files to public
 rm -rf $2/*
-cp -a $1/dist $2/
+cp -a $1/dist/. $2/
