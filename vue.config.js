@@ -12,4 +12,9 @@ module.exports = {
       globalObject: 'this',
     },
   },
+  pluginOptions:{
+    env: {
+      BUILD_DATE: new Date,
+    }
+  }
 };

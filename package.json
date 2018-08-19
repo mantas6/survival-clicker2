@@ -37,6 +37,7 @@
     "sass-loader": "^7.0.1",
     "typescript": "^3.0.0",
     "vue-cli-plugin-bootstrap-vue": "^0.1.0",
+    "vue-cli-plugin-env": "^1.0.0",
     "vue-template-compiler": "^2.5.17",
     "worker-loader": "^2.0.0"
   }
