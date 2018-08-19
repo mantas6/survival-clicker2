@@ -17,7 +17,7 @@ module.exports = {
   },
   pluginOptions:{
     env: {
-      BUILD_DATE: new Date,
+      BUILD_TIME: Date.now(),
     },
     'style-resources-loader': {
       preProcessor: 'scss',

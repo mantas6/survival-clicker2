@@ -17,7 +17,7 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 })
 export default class Home extends Vue {
   get buildDate() {
-    return process.env.BUILD_DATE;
+    return process.env.BUILD_TIME;
   }
 }
 </script>
