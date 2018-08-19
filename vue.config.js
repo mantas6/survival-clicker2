@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   chainWebpack: config => {
     config.module
@@ -16,6 +18,12 @@ module.exports = {
   pluginOptions:{
     env: {
       BUILD_DATE: new Date,
+    },
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: [
+        path.resolve(__dirname, 'src/styles/mixin.scss'),
+      ]
     }
   }
 };

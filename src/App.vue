@@ -9,3 +9,7 @@
     </b-container>
   </div>
 </template>
+
+<style lang="scss">
+  
+</style>
