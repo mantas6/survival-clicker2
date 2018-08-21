@@ -5,6 +5,8 @@
 # First argument is path to repository files
 # Second argument is public folder of the web server
 
+# TODO: do not compile if source hasn't been changed
+
 cd $1
 git checkout -- .
 git pull origin master
