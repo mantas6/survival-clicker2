@@ -32,4 +32,6 @@ npm run serve
 #### Runs tests
 ```
 npm run test:unit
+
+npm run test:e2e
 ```
