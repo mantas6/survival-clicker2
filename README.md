@@ -4,11 +4,11 @@
 
 Read what's planned [here](docs/proposal.md)
 
-## Nightly builds
+## Development builds
 
-Source code is built every night at 00:00 GMT+2 time.
+Master branch is built every minute.
 
-[Latest nighly build is available here](https://sc2-nightly.7777.lt)
+[Latest build is available here](https://dev.sc2.7777.lt)
 
 ## Development
 
