@@ -28,3 +28,8 @@ npm install
 ```
 npm run serve
 ```
+
+#### Runs tests
+```
+npm run test:unit
+```
