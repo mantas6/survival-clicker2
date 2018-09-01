@@ -29,6 +29,11 @@ npm install
 npm run serve
 ```
 
+#### Runs linter
+```
+npm run lint
+```
+
 #### Runs tests
 ```
 npm run test:unit
