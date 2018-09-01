@@ -13,7 +13,7 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "decimal.js": "^10.0.1",
     "lodash": "^4.17.10",
-    "rxjs": "^6.2.2",
+    "rxjs": "^6.3.1",
     "swarm-numberformat": "^0.4.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
@@ -22,7 +22,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.0.0-beta.53",
+    "@babel/polyfill": "^7.0.0",
     "@types/chai": "^4.1.0",
     "@types/lodash": "^4.14.116",
     "@types/mocha": "^5.2.4",
@@ -36,7 +36,7 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "style-resources-loader": "^1.2.1",
-    "typescript": "^3.0.0",
+    "typescript": "^3.0.3",
     "vue-cli-plugin-bootstrap-vue": "^0.1.0",
     "vue-cli-plugin-env": "^1.0.0",
     "vue-cli-plugin-style-resources-loader": "^0.1.3",
