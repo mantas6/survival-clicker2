@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import { Relay, RelayPayload } from '@/classes/relay';
 
 interface MessageEvent {
@@ -21,7 +21,6 @@ class StubWorker {
 
 describe('classes/relay', () => {
   it('delivers a message', (done) => {
-    // expect(Relay).to.exist();
     const worker = new StubWorker();
     const relay = new Relay(worker as any);
 
