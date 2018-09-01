@@ -1,4 +1,4 @@
-interface RelayPayload {
+export interface RelayPayload {
   name: string;
   data: any;
 }
