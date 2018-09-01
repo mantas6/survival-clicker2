@@ -18,20 +18,20 @@ import { timer, Subscription } from 'rxjs';
   },
 })
 export default class Home extends Vue {
-  count: number = 0;
-  countSub?: Subscription;
+  public count: number = 0;
+  public countSub?: Subscription;
 
   get buildDate() {
     return process.env.BUILD_TIME;
   }
 
-  mounted() {
-    this.countSub = timer(100, 100).subscribe(_ => {
+  public mounted() {
+    this.countSub = timer(100, 100).subscribe((_) => {
       this.count++;
     });
   }
 
-  destroyed() {
+  public destroyed() {
     if (this.countSub) {
       this.countSub.unsubscribe();
     }
