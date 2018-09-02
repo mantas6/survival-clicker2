@@ -1,4 +1,4 @@
-import { Stat, Container } from '@/classes/game/stat';
+import { Stat, Container } from '@/classes/game/base/stat';
 import Decimal from 'decimal.js';
 
 export class Character {

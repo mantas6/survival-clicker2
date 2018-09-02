@@ -1,4 +1,3 @@
-import { Stat } from '@/classes/game/stat';
 import { Character } from './character';
 import { Finance } from './finance';
 
