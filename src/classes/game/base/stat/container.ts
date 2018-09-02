@@ -4,7 +4,8 @@ import { Stat, StatOptions } from './stat';
 type MaximumFunction = () => Decimal;
 
 export interface ContainerOptions extends StatOptions {
-  maximumFunction: MaximumFunction;
+  /** Maximum value descriptor function */
+  maximum: MaximumFunction;
 }
 
 export class Container extends Stat {
@@ -12,7 +13,7 @@ export class Container extends Stat {
 
   constructor(options: ContainerOptions) {
     super(options);
-    this.maximumFunction = options.maximumFunction;
+    this.maximumFunction = options.maximum;
   }
 
   get maximum(): Decimal {

@@ -1,14 +1,15 @@
 import { Decimal } from 'decimal.js';
 
 export interface StatOptions {
-  defaultValue: number | string;
+  /** Default or starting value */
+  default: number | string;
 }
 
 export class Stat {
   private current: Decimal;
 
   constructor(config: StatOptions) {
-    this.current = new Decimal(config.defaultValue);
+    this.current = new Decimal(config.default);
   }
 
   get value(): Decimal {
