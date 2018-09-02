@@ -1,11 +1,6 @@
 import { Stat } from '@/classes/game/stat';
-
-interface Stats {
-  character: {
-    health: Stat;
-  };
-}
+import { Character } from '@/classes/game/character';
 
 export class Game {
-  public stats?: Stats;
+  public character = new Character();
 }
