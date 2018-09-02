@@ -1,4 +1,4 @@
-import { Stat } from './stat';
+import { Stat } from '@/classes/game/stat';
 
 interface Stats {
   character: {
