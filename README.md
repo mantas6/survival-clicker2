@@ -2,7 +2,7 @@
 
 ## Intro
 
-Read what's planned [here](docs/proposal.md)
+Read what's planned [here](docs/Design-Document/Design-Document-e000f04c-b05b-4dfc-83b0-3770f478d276.md)
 
 ## Development builds
 
