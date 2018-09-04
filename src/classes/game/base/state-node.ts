@@ -1,6 +1,16 @@
 export class StateNode {
     protected parent?: StateNode;
 
+    constructor() {
+        /**
+         * Forcing the code to be executed after classes that extends this (constructors)
+         * Looking for a better solution
+         */
+        setImmediate(() => {
+            this.emitParent();
+        });
+    }
+
     public setParent(parent: StateNode) {
         this.parent = parent;
     }
@@ -9,7 +19,6 @@ export class StateNode {
         for (const property of this) {
             if (property.setParent) {
                 property.setParent(this);
-                property.emitParent();
             }
         }
     }
