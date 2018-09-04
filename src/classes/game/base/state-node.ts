@@ -19,4 +19,14 @@ export class StateNode {
             yield (this as any)[propertyName];
         }
     }
+
+    get root(): StateNode {
+        let rootNode: StateNode = this;
+
+        while (rootNode.parent) {
+            rootNode = rootNode.parent;
+        }
+
+        return rootNode;
+    }
 }
