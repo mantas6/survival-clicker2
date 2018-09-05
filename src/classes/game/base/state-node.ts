@@ -1,8 +1,10 @@
 export class StateNode {
     protected parent?: StateNode;
+    protected root?: StateNode;
 
     public setParent(parent: StateNode) {
         this.parent = parent;
+        this.findRoot();
     }
 
     public emitParent() {
@@ -20,13 +22,13 @@ export class StateNode {
         }
     }
 
-    get root(): StateNode {
+    private findRoot(): void {
         let rootNode: StateNode = this;
 
         while (rootNode.parent) {
             rootNode = rootNode.parent;
         }
 
-        return rootNode;
+        this.root = rootNode;
     }
 }
