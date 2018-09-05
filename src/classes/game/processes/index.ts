@@ -1,10 +1,16 @@
-type ProcessType = 'manual' | 'auto';
+enum ProcessType {
+    Manual = 'manual',
+    Auto = 'auto',
+}
+
+interface ProcessOptions {
+    type: ProcessType;
+}
 
 export abstract class Process {
-  public name?: string;
-  public readonly type?: ProcessType;
+  public readonly type: ProcessType;
 
-  public checkInput() {
-    return;
+  constructor(options: ProcessOptions) {
+    this.type = options.type;
   }
 }
