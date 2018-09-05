@@ -1,4 +1,4 @@
-import { Stat } from './stat';
+import { Value } from '@/classes/game/base/stats/value';
 import { Container } from './container';
 
-export { Stat, Container };
+export { Value, Container };

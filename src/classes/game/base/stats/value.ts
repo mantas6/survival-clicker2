@@ -1,14 +1,14 @@
 import { Decimal } from 'decimal.js';
 
-export interface StatOptions {
+export interface ValueOptions {
   /** Default or starting value */
   default: number | string;
 }
 
-export class Stat {
+export class Value {
   private current: Decimal;
 
-  constructor(options: StatOptions) {
+  constructor(options: ValueOptions) {
     this.current = new Decimal(options.default);
   }
 

@@ -1,5 +1,5 @@
-import { Stat } from '@/classes/game/base/stats';
+import { Value } from '@/classes/game/base/stats';
 
 export class Finance {
-  public money = new Stat({ default: 0 });
+  public money = new Value({ default: 0 });
 }
