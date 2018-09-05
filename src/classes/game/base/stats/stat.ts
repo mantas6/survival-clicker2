@@ -8,8 +8,8 @@ export interface StatOptions {
 export class Stat {
   private current: Decimal;
 
-  constructor(config: StatOptions) {
-    this.current = new Decimal(config.default);
+  constructor(options: StatOptions) {
+    this.current = new Decimal(options.default);
   }
 
   get value(): Decimal {
