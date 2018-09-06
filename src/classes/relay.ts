@@ -3,10 +3,14 @@ export interface RelayPayload {
   data: any;
 }
 
+interface EventMap {
+    [ name: string ]: RelayEvent[];
+}
+
 type RelayEvent = (data: any) => void;
 
 export class Relay {
-  private events: { [ name: string ]: RelayEvent[] } = {};
+  private events: EventMap = {};
   private ctx: Worker;
 
   constructor(ctx: Worker) {
