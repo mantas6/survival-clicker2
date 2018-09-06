@@ -20,11 +20,11 @@ class StubWorker {
 }
 
 describe('classes/relay', () => {
-  it('delivers a message', (done) => {
+  it('delivers a message', done => {
     const worker = new StubWorker();
     const relay = new Relay(worker as any);
 
-    relay.on('testMessage', (data) => {
+    relay.on('testMessage', data => {
       expect(data).to.equals('testPayload');
       done();
     });

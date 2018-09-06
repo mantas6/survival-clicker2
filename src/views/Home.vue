@@ -26,7 +26,7 @@ export default class Home extends Vue {
   }
 
   public mounted() {
-    this.countSub = timer(100, 100).subscribe((_) => {
+    this.countSub = timer(100, 100).subscribe(_ => {
       this.count++;
     });
   }
