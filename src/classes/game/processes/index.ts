@@ -1,16 +1,18 @@
+import Decimal from 'decimal.js';
+
 enum ProcessType {
     Manual = 'manual',
     Auto = 'auto',
 }
 
-interface ProcessOptions {
-    type: ProcessType;
+interface ProcessEffect {
+  stat: any;
+  diff: Decimal;
 }
 
 export abstract class Process {
-  public readonly type: ProcessType;
+  public abstract readonly type: ProcessType;
 
-  constructor(options: ProcessOptions) {
-    this.type = options.type;
-  }
+  public abstract readonly input: ProcessEffect;
+  public abstract readonly output: ProcessEffect;
 }
