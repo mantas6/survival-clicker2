@@ -1,18 +1,6 @@
-import Decimal from 'decimal.js';
+import { Process } from '@/classes/game/base/processes';
 
-enum ProcessType {
-    Manual = 'manual',
-    Auto = 'auto',
-}
 
-interface ProcessEffect {
-  stat: any;
-  diff: Decimal;
-}
-
-export abstract class Process {
-  public abstract readonly type: ProcessType;
-
-  public abstract readonly input: ProcessEffect;
-  public abstract readonly output: ProcessEffect;
+export class Processes {
+  public empty?: any;
 }
