@@ -8,7 +8,4 @@ enum ProcessType {
 
 export abstract class Process {
   public abstract readonly type: ProcessType;
-
-  public abstract readonly input: Effect[];
-  public abstract readonly output: Effect[];
 }

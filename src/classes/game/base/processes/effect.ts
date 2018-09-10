@@ -2,14 +2,18 @@ import { Value, Container } from '@/classes/game/base/stats';
 import Decimal from 'decimal.js';
 
 type Stat = Value | Container;
-type DiffFunction = () => void;
+type DiffFunction = () => Decimal;
 
-export class Effect {
-  public stat: Stat;
+export class Effect<StatType> {
+  public stat: StatType;
   private diffFunction: DiffFunction;
 
-  constructor(stat: Stat, diffFunction: DiffFunction) {
+  constructor(stat: StatType, diffFunction: DiffFunction) {
     this.stat = stat;
     this.diffFunction = diffFunction;
+  }
+
+  public calculate(): Decimal {
+    return this.diffFunction();
   }
 }
