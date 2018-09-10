@@ -1,4 +1,4 @@
-import { Value } from '@/classes/game/base/stats/value';
+import { Value } from './value';
 import { Container } from './container';
 
 export { Value, Container };
