@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <span>Build date: {{ buildDate }}</span>
-    <div>Brains cells died while thinking about this project: {{ count }}</div>
+    <div>Eye strain level: {{ count }}</div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import { timer, Subscription } from 'rxjs';
   },
 })
 export default class Home extends Vue {
-  public count: number = 0;
+  public count: number = 9000;
   public countSub?: Subscription;
 
   get buildDate() {
