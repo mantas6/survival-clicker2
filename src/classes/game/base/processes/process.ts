@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { Effect } from './effect';
+import { Effect } from '@/classes/game/base/processes/effect';
 
 enum ProcessType {
     Manual = 'manual',

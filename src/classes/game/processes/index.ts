@@ -1,4 +1,4 @@
-import { Process } from '@/classes/game/base/processes';
+import { Process } from '@/classes/game/base/processes/process';
 
 
 export class Processes {
