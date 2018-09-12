@@ -1,5 +1,8 @@
 <template>
-  <span>{{ formatted }}</span>
+  <span>
+    <template>{{ formatted }}</template>
+    <template v-if="postFix">{{ postFix }}</template>
+  </span>
 </template>
 
 <script lang="ts">
@@ -9,7 +12,11 @@ import { Formatter } from 'swarm-numberformat';
 
 @Component
 export default class NumberFormat extends Vue {
-  @Prop() private number!: Decimal;
+  @Prop({ required: true })
+  private number!: Decimal;
+
+  @Prop()
+  private postFix?: string;
 
   formatter = new Formatter();
 
