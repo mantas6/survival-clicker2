@@ -1,11 +1,11 @@
 import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/processes/effect';
 
-enum ProcessType {
+export enum ProcessType {
     Manual = 'manual',
     Auto = 'auto',
 }
 
 export abstract class Process {
-  public abstract readonly type: ProcessType;
+  public static readonly type: ProcessType = ProcessType.Manual;
 }
