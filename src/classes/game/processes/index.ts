@@ -1,6 +1,5 @@
-import { Process } from '@/classes/game/base/processes/process';
-
+import { StaminaRestore } from '@/classes/game/processes/stamina-restore';
 
 export class Processes {
-  public empty?: any;
+  public staminaRestore = new StaminaRestore();
 }
