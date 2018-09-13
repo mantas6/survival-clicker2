@@ -12,16 +12,16 @@ import { Formatter } from 'swarm-numberformat';
 
 @Component
 export default class NumberFormat extends Vue {
+
+  get formatted(): string {
+    return this.formatter.format(this.number);
+  }
+
+  public formatter = new Formatter();
   @Prop({ required: true })
   private number!: Decimal;
 
   @Prop()
   private postFix?: string;
-
-  formatter = new Formatter();
-
-  get formatted(): string {
-    return this.formatter.format(this.number);
-  }
 }
 </script>
