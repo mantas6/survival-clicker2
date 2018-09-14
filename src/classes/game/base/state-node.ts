@@ -1,56 +1,60 @@
 interface SerializedNode {
-    [ propertyName: string ]: SerializedNode | string;
+  [ propertyName: string ]: SerializedNode | string;
 }
 
 export class StateNode {
-    protected parent?: StateNode;
-    protected root!: StateNode;
+  protected parent?: StateNode;
+  protected root!: StateNode;
 
-    public setParent(parent: StateNode) {
-        this.parent = parent;
-        this.findRoot();
+  public setParent(parent: StateNode) {
+    this.parent = parent;
+    this.findRoot();
+  }
+
+  public emitParent() {
+    for (const property of this.values()) {
+      if (property.setParent) {
+        property.setParent(this);
+        property.emitParent();
+      }
+    }
+  }
+
+  public serialize() {
+    const serialized: SerializedNode = {};
+
+    for (const { name, node } of this.entries()) {
+      serialized[name] = node.serialize();
     }
 
-    public emitParent() {
-        for (const property of this.values()) {
-            if (property.setParent) {
-                property.setParent(this);
-                property.emitParent();
-            }
-        }
+    return serialized;
+  }
+
+  public *values(): IterableIterator<StateNode> {
+    for (const propertyName of Object.getOwnPropertyNames(this)) {
+      yield (this as any)[propertyName];
+    }
+  }
+
+  public *entries(): IterableIterator<{ name: string, node: StateNode }> {
+    for (const name of Object.getOwnPropertyNames(this)) {
+      const node = (this as any)[name];
+
+      yield { name, node };
+    }
+  }
+
+  private getPropertiesByTag(tag: string): string[] {
+    return [];
+  }
+
+  private findRoot(): void {
+    let rootNode: StateNode = this;
+
+    while (rootNode.parent) {
+      rootNode = rootNode.parent;
     }
 
-    public serialize() {
-        const serialized: SerializedNode = {};
-
-        for (const { name, node } of this.entries()) {
-            serialized[name] = node.serialize();
-        }
-
-        return serialized;
-    }
-
-    public *values(): IterableIterator<StateNode> {
-        for (const propertyName of Object.getOwnPropertyNames(this)) {
-            yield (this as any)[propertyName];
-        }
-    }
-
-    public *entries(): IterableIterator<{ name: string, node: StateNode }> {
-        for (const name of Object.getOwnPropertyNames(this)) {
-            const node = (this as any)[name];
-
-            yield { name, node };
-        }
-    }
-
-    private findRoot(): void {
-        let rootNode: StateNode = this;
-
-        while (rootNode.parent) {
-            rootNode = rootNode.parent;
-        }
-
-        this.root = rootNode;
-    }
+    this.root = rootNode;
+  }
 }
