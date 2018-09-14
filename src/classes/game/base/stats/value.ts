@@ -1,6 +1,7 @@
 import { Decimal } from 'decimal.js';
+import { StateNode } from '@/classes/game/base/state-node';
 
-export abstract class Value {
+export abstract class Value extends StateNode {
   public abstract default: number | string;
   private current?: Decimal;
 

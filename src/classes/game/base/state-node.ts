@@ -1,6 +1,6 @@
 export class StateNode {
     protected parent?: StateNode;
-    protected root?: StateNode;
+    protected root!: StateNode;
 
     public setParent(parent: StateNode) {
         this.parent = parent;
