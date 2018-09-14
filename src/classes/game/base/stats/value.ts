@@ -18,7 +18,7 @@ export abstract class Value extends StateNode {
 
     return this.current;
   }
-
+  /*
   public serialize(): SerializedData {
     if (this.current) {
       return { current: this.current.toString() };
@@ -30,4 +30,5 @@ export abstract class Value extends StateNode {
       this.current = new Decimal(serialized.current);
     }
   }
+  */
 }
