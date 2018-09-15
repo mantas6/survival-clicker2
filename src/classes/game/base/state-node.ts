@@ -1,7 +1,3 @@
-interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | string;
-}
-
 export class StateNode {
   protected parent?: StateNode;
   protected root!: StateNode;
@@ -20,16 +16,6 @@ export class StateNode {
     }
   }
 
-  public serialize() {
-    const serialized: SerializedNode = {};
-
-    for (const { name, node } of this.entries()) {
-      serialized[name] = node.serialize();
-    }
-
-    return serialized;
-  }
-
   public *values(): IterableIterator<StateNode> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       yield (this as any)[propertyName];
@@ -42,10 +28,6 @@ export class StateNode {
 
       yield { name, node };
     }
-  }
-
-  private getPropertiesByTag(tag: string): string[] {
-    return [];
   }
 
   private findRoot(): void {
