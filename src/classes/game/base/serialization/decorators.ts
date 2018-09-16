@@ -2,7 +2,7 @@ import { Serializable, TagName } from './serializable';
 
 export function Tag(tagName: TagName) {
   return (serializableClass: Serializable, propertyName: string) => {
-    initializeDescriptorsOfProperties(serializableClass, propertyName);
+    initializeDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptors = serializableClass.constructor.descriptorsOfProperties;
     const descriptor = descriptors.get(propertyName);
@@ -15,7 +15,7 @@ export function Tag(tagName: TagName) {
 
 export function Filter<Target>(serializationFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
-    initializeDescriptorsOfProperties(serializableClass, propertyName);
+    initializeDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptors = serializableClass.constructor.descriptorsOfProperties;
     const descriptor = descriptors.get(propertyName);
@@ -26,7 +26,7 @@ export function Filter<Target>(serializationFunc: (input: Target) => string | nu
   };
 }
 
-function initializeDescriptorsOfProperties(serializableClass: Serializable, propertyName: string) {
+function initializeDescriptorsOfProperty(serializableClass: Serializable, propertyName: string) {
     const ctor = serializableClass.constructor;
     // Copying the variable so that it doesn't mutate the prototype class
     const descriptors = new Map(ctor.descriptorsOfProperties);
