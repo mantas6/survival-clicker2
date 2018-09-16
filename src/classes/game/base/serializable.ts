@@ -1,3 +1,5 @@
+import { StateNode } from '@/classes/game/base/state-node';
+
 interface SerializedNode {
   [ propertyName: string ]: SerializedNode | string;
 }
@@ -7,7 +9,7 @@ interface PropertyTagUnion {
   tagName: string;
 }
 
-export abstract class Serializable {
+export abstract class Serializable extends StateNode {
   protected static tagsOfProperties: PropertyTagUnion[] = [];
   protected 'constructor': typeof Serializable;
   [ propertyName: string ]: any;

@@ -1,5 +1,5 @@
 import { Decimal } from 'decimal.js';
-import { StateNode } from '@/classes/game/base/state-node';
+import { Serializable } from '@/classes/game/base/serializable';
 
 interface SerializedValue {
   current: string;
@@ -7,7 +7,7 @@ interface SerializedValue {
 
 type SerializedData = SerializedValue | undefined;
 
-export abstract class Value extends StateNode {
+export abstract class Value extends Serializable {
   public abstract default: number | string;
   private current?: Decimal;
 

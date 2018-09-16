@@ -1,6 +1,6 @@
 import { StaminaRestore } from '@/classes/game/processes/stamina-restore';
-import { StateNode } from '@/classes/game/base/state-node';
+import { Serializable } from '@/classes/game/base/serializable';
 
-export class Processes extends StateNode {
+export class Processes extends Serializable {
   public staminaRestore = new StaminaRestore();
 }
