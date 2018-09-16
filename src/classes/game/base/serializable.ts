@@ -1,26 +1,36 @@
 import { StateNode } from '@/classes/game/base/state-node';
 
 interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | string;
+  [ propertyName: string ]: SerializedNode | string | number;
+}
+
+interface PropertyTagDescriptor {
+  tagNames: string[];
+  serializationFunc?: (input: any) => string | number;
 }
 
 interface PropertyTagUnion {
   propertyName: string;
   tagName: string;
+  serializationFunc?: (input: any) => string | number;
 }
 
 type TagName = 'emit' | 'store';
+type PropertyTagIterator = IterableIterator<{ name: string, node: Serializable, descriptor: PropertyTagDescriptor }>;
 
 export abstract class Serializable extends StateNode {
-  protected static tagsOfProperties: PropertyTagUnion[] = [];
-  protected 'constructor': typeof Serializable;
+  public static descriptorsOfProperties = new Map<string, PropertyTagDescriptor>();
+  public 'constructor': typeof Serializable;
   [ propertyName: string ]: any;
 
   public serialize(tagName: TagName) {
     const serialized: SerializedNode = {};
 
-    for (const { name, node } of this.propertiesWithTag(tagName)) {
-      if (node) {
+    for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
+      if (descriptor.serializationFunc) {
+        serialized[name] = descriptor.serializationFunc(node);
+        //
+      } else if (node) {
         serialized[name] = node.serialize(tagName);
       }
     }
@@ -28,30 +38,48 @@ export abstract class Serializable extends StateNode {
     return serialized;
   }
 
-  protected *propertiesWithTag(tagName: TagName): IterableIterator<{ name: string, node: Serializable }> {
-    for (const name of this.getPropertiesByTagName(tagName)) {
-      const node = this[name];
-      yield { name, node };
-    }
-  }
-
-  protected getPropertiesByTagName(tagName: TagName): string[] {
-    const matchingProperties: string[] = [];
-    const unions = this.constructor.tagsOfProperties.filter(d => d.tagName === tagName);
-
-    for (const { propertyName } of unions) {
-      if (!matchingProperties.includes(propertyName)) {
-        matchingProperties.push(propertyName);
+  protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
+    for (const [ name, descriptor ] of this.constructor.descriptorsOfProperties) {
+      if (descriptor.tagNames.includes(tagName)) {
+        const node = this[name];
+        yield { name, node, descriptor };
       }
     }
-
-    return matchingProperties;
   }
 }
 
 export function Tag(tagName: TagName) {
-  return (serializableClass: any, propertyName: string) => {
-    const original = serializableClass.constructor.tagsOfProperties;
-    serializableClass.constructor.tagsOfProperties = [ ...original, { propertyName, tagName } ];
+  return (serializableClass: Serializable, propertyName: string) => {
+    initializeDescriptorsOfProperties(serializableClass, propertyName);
+
+    const descriptors = serializableClass.constructor.descriptorsOfProperties;
+    const descriptor = descriptors.get(propertyName);
+
+    if (descriptor) {
+      descriptor.tagNames.push(tagName);
+    }
   };
+}
+
+export function TagValue<Target>(tagName: TagName, serializationFunc: (input: Target) => string | number) {
+  return (serializableClass: Serializable, propertyName: string) => {
+    initializeDescriptorsOfProperties(serializableClass, propertyName);
+
+    const descriptors = serializableClass.constructor.descriptorsOfProperties;
+    const descriptor = descriptors.get(propertyName);
+
+    if (descriptor) {
+      descriptor.tagNames.push(tagName);
+      descriptor.serializationFunc = serializationFunc;
+    }
+  };
+}
+
+function initializeDescriptorsOfProperties(serializableClass: Serializable, propertyName: string) {
+    const ctor = serializableClass.constructor;
+    const descriptors = ctor.descriptorsOfProperties;
+
+    if (!descriptors.has(propertyName)) {
+      descriptors.set(propertyName, { tagNames: [] });
+    }
 }
