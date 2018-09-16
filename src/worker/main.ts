@@ -9,5 +9,9 @@ const relay = new Relay(ctx);
 
 const state = new State();
 
-state.stats.finance.money.value = new Decimal(50);
+const mySave = JSON.parse('{"character":{"health":{}},"finance":{"money":{"current":"150"}}}');
+
+state.stats.unserialize(mySave);
+
+// state.stats.finance.money.value = new Decimal(50);
 console.log(state.stats.serialize('emit'));
