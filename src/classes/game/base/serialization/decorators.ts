@@ -1,6 +1,6 @@
 import { Serializable, TagName } from './serializable';
 
-export function Tag(tagName: TagName) {
+export function Tag(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     initializeDescriptorsOfProperty(serializableClass, propertyName);
 
@@ -8,7 +8,7 @@ export function Tag(tagName: TagName) {
     const descriptor = descriptors.get(propertyName);
 
     if (descriptor) {
-      descriptor.tagNames.push(tagName);
+      descriptor.tagNames.push(...tagNames);
     }
   };
 }
