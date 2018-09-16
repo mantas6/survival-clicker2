@@ -9,12 +9,6 @@ interface PropertyTagDescriptor {
   serializationFunc?: (input: any) => string | number;
 }
 
-interface PropertyTagUnion {
-  propertyName: string;
-  tagName: string;
-  serializationFunc?: (input: any) => string | number;
-}
-
 type TagName = 'emit' | 'store';
 type PropertyTagIterator = IterableIterator<{ name: string, node: Serializable, descriptor: PropertyTagDescriptor }>;
 
