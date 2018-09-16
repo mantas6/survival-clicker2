@@ -10,4 +10,4 @@ const relay = new Relay(ctx);
 const state = new State();
 
 state.stats.finance.money.value = new Decimal(50);
-console.log(state.stats.serialize('emit'))
+console.log(state.stats.serialize('emit'));
