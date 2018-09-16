@@ -8,7 +8,7 @@ export class StateNode {
   }
 
   public emitParent() {
-    for (const property of this.values()) {
+    for (const property of this.children()) {
       if (property.setParent) {
         property.setParent(this);
         property.emitParent();
@@ -16,17 +16,9 @@ export class StateNode {
     }
   }
 
-  public *values(): IterableIterator<StateNode> {
+  public *children(): IterableIterator<StateNode> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       yield (this as any)[propertyName];
-    }
-  }
-
-  public *entries(): IterableIterator<{ name: string, node: StateNode }> {
-    for (const name of Object.getOwnPropertyNames(this)) {
-      const node = (this as any)[name];
-
-      yield { name, node };
     }
   }
 

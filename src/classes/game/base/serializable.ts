@@ -12,8 +12,6 @@ export abstract class Serializable {
   protected 'constructor': typeof Serializable;
   [ propertyName: string ]: any;
 
-  public abstract entries(): IterableIterator<{ name: string, node: Serializable }>;
-
   public serialize(tagName: string) {
     const serialized: SerializedNode = {};
 
