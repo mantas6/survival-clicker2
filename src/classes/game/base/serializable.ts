@@ -27,11 +27,13 @@ export abstract class Serializable extends StateNode {
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
-      if (descriptor.serializationFunc) {
-        serialized[name] = descriptor.serializationFunc(node);
-        //
-      } else if (node) {
-        serialized[name] = node.serialize(tagName);
+      if (node) {
+        if (descriptor.serializationFunc) {
+          serialized[name] = descriptor.serializationFunc(node);
+          //
+        } else {
+          serialized[name] = node.serialize(tagName);
+        }
       }
     }
 
@@ -77,9 +79,12 @@ export function TagValue<Target>(tagName: TagName, serializationFunc: (input: Ta
 
 function initializeDescriptorsOfProperties(serializableClass: Serializable, propertyName: string) {
     const ctor = serializableClass.constructor;
-    const descriptors = ctor.descriptorsOfProperties;
+    // Copying the variable so that it doesn't mutate the prototype class
+    const descriptors = new Map(ctor.descriptorsOfProperties);
 
     if (!descriptors.has(propertyName)) {
       descriptors.set(propertyName, { tagNames: [] });
+      // Forwarding the copy to the class
+      ctor.descriptorsOfProperties = descriptors;
     }
 }

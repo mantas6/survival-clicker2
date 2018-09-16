@@ -1,5 +1,5 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, Tag } from '@/classes/game/base/serializable';
+import { Serializable, Tag, TagValue } from '@/classes/game/base/serializable';
 
 interface SerializedValue {
   current: string;
@@ -9,7 +9,7 @@ type SerializedData = SerializedValue | undefined;
 
 export abstract class Value extends Serializable {
   public abstract default: number | string;
-  @Tag('emit')
+  @TagValue('emit', (value: Decimal) => value.toString())
   private current?: Decimal;
 
   get value(): Decimal {
@@ -19,17 +19,8 @@ export abstract class Value extends Serializable {
 
     return this.current;
   }
-  /*
-  public serialize(): SerializedData {
-    if (this.current) {
-      return { current: this.current.toString() };
-    }
-  }
 
-  public parse(serialized: SerializedData) {
-    if (serialized) {
-      this.current = new Decimal(serialized.current);
-    }
+  set value(value: Decimal) {
+    this.current = value;
   }
-  */
 }
