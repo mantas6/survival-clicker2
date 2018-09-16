@@ -1,11 +1,12 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, Filter, Tag } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAs, UnserializeAs, Tag } from '@/classes/game/base/serialization';
 
 export abstract class Value extends Serializable {
   public abstract default: number | string;
 
   @Tag('emit')
-  @Filter((value: Decimal) => value.toString())
+  @SerializeAs((value: Decimal) => value.toString())
+  @UnserializeAs(input => new Decimal(input))
   private current?: Decimal;
 
   get value(): Decimal {

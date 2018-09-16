@@ -13,7 +13,7 @@ export function Tag(...tagNames: TagName[]) {
   };
 }
 
-export function Filter<Target>(serializationFunc: (input: Target) => string | number) {
+export function SerializeAs<Target>(serializationFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
     initializeDescriptorsOfProperty(serializableClass, propertyName);
 
@@ -22,6 +22,19 @@ export function Filter<Target>(serializationFunc: (input: Target) => string | nu
 
     if (descriptor) {
       descriptor.serializationFunc = serializationFunc;
+    }
+  };
+}
+
+export function UnserializeAs<Target>(unserializationFunc: (input: number | string) => Target) {
+  return (serializableClass: Serializable, propertyName: string) => {
+    initializeDescriptorsOfProperty(serializableClass, propertyName);
+
+    const descriptors = serializableClass.constructor.descriptorsOfProperties;
+    const descriptor = descriptors.get(propertyName);
+
+    if (descriptor) {
+      descriptor.unserializationFunc = unserializationFunc;
     }
   };
 }

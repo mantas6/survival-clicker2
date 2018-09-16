@@ -7,6 +7,7 @@ export interface SerializedNode {
 export interface PropertyTagDescriptor {
   tagNames: string[];
   serializationFunc?: (input: any) => string | number;
+  unserializationFunc?: (input: string | number) => any;
 }
 
 export type TagName = 'emit' | 'store';

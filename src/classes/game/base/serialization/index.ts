@@ -1,4 +1,9 @@
 import { Serializable } from './serializable';
-import { Tag, Filter } from './decorators';
+import { Tag, SerializeAs, UnserializeAs } from './decorators';
 
-export { Serializable, Tag, Filter };
+export {
+  Serializable,
+  Tag,
+  SerializeAs,
+  UnserializeAs,
+};
