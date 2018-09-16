@@ -63,7 +63,7 @@ export function Tag(tagName: TagName) {
   };
 }
 
-export function TagValue<Target>(tagName: TagName, serializationFunc: (input: Target) => string | number) {
+export function Filter<Target>(serializationFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
     initializeDescriptorsOfProperties(serializableClass, propertyName);
 
@@ -71,7 +71,6 @@ export function TagValue<Target>(tagName: TagName, serializationFunc: (input: Ta
     const descriptor = descriptors.get(propertyName);
 
     if (descriptor) {
-      descriptor.tagNames.push(tagName);
       descriptor.serializationFunc = serializationFunc;
     }
   };
