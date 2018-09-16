@@ -1,4 +1,4 @@
-export class StateNode {
+export abstract class StateNode {
   protected parent?: StateNode;
   protected root!: StateNode;
 
