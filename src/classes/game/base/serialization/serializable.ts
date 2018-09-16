@@ -42,14 +42,12 @@ export abstract class Serializable extends StateNode {
 
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
-      if (descriptor && descriptor.unserializationFunc) {
-        if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
+      if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
+        if (descriptor && descriptor.unserializationFunc) {
           this[name] = descriptor.unserializationFunc(serializedValue);
         }
       } else if (node) {
-        if (typeof serializedValue !== 'string' && typeof serializedValue !== 'number') {
-          node.unserialize(serializedValue);
-        }
+        node.unserialize(serializedValue);
       }
     }
   }
