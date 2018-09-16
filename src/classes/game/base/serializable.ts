@@ -9,19 +9,26 @@ interface PropertyTagUnion {
 
 export abstract class Serializable {
   protected static tagsOfProperties: PropertyTagUnion[] = [];
-  protected static tagsOfAllProperties: string[] = [];
   protected 'constructor': typeof Serializable;
+  [ propertyName: string ]: any;
 
   public abstract entries(): IterableIterator<{ name: string, node: Serializable }>;
 
-  public serialize() {
+  public serialize(tagName: string) {
     const serialized: SerializedNode = {};
 
-    for (const { name, node } of this.entries()) {
-      serialized[name] = node.serialize();
+    for (const { name, node } of this.propertiesWithTag(tagName)) {
+      serialized[name] = node.serialize(tagName);
     }
 
     return serialized;
+  }
+
+  protected *propertiesWithTag(tagName: string): IterableIterator<{ name: string, node: Serializable }> {
+    for (const name of this.getPropertiesByTagName(tagName)) {
+      const node = this[name];
+      yield { name, node };
+    }
   }
 
   protected getPropertiesByTagName(tagName: string): string[] {
@@ -38,7 +45,7 @@ export abstract class Serializable {
   }
 }
 
-export function Serialize(tagName: string) {
+export function Tag(tagName: string) {
   return (serializableClass: any, propertyName: string) => {
     const original = serializableClass.constructor.tagsOfProperties;
     serializableClass.constructor.tagsOfProperties = [ ...original, { propertyName, tagName } ];
