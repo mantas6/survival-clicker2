@@ -1,5 +1,5 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, Filter, Tag } from '@/classes/game/base/serializable';
+import { Serializable, Filter, Tag } from '@/classes/game/base/serialization';
 
 export abstract class Value extends Serializable {
   public abstract default: number | string;

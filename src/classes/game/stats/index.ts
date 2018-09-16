@@ -1,6 +1,6 @@
 import { Character } from './character';
 import { Finance } from './finance';
-import { Serializable, Tag } from '@/classes/game/base/serializable';
+import { Serializable, Tag } from '@/classes/game/base/serialization';
 
 export class Stats extends Serializable {
   @Tag('emit')
