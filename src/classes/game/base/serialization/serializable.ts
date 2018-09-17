@@ -6,8 +6,8 @@ export interface SerializedNode {
 
 export interface PropertyTagDescriptor {
   tagNames: string[];
-  serializationFunc?: (input: any) => string | number;
-  unserializationFunc?: (input: string | number) => any;
+  serializeFunc?: (input: any) => string | number;
+  unserializeFunc?: (input: string | number) => any;
 }
 
 export type TagName = 'emit' | 'store';
@@ -26,8 +26,8 @@ export abstract class Serializable extends StateNode {
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
-      if (descriptor.serializationFunc) {
-        serialized[name] = descriptor.serializationFunc(node);
+      if (descriptor.serializeFunc) {
+        serialized[name] = descriptor.serializeFunc(node);
       } else {
         serialized[name] = node.serialize(tagName);
       }
@@ -43,8 +43,8 @@ export abstract class Serializable extends StateNode {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
       if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
-        if (descriptor && descriptor.unserializationFunc) {
-          this[name] = descriptor.unserializationFunc(serializedValue);
+        if (descriptor && descriptor.unserializeFunc) {
+          this[name] = descriptor.unserializeFunc(serializedValue);
         }
       } else if (node) {
         node.unserialize(serializedValue);

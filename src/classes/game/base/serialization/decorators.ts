@@ -13,7 +13,7 @@ export function Tag(...tagNames: TagName[]) {
   };
 }
 
-export function SerializeAs<Target>(serializationFunc: (input: Target) => string | number) {
+export function SerializeAs<Target>(serializeFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
     initializeDescriptorsOfProperty(serializableClass, propertyName);
 
@@ -21,12 +21,12 @@ export function SerializeAs<Target>(serializationFunc: (input: Target) => string
     const descriptor = descriptors.get(propertyName);
 
     if (descriptor) {
-      descriptor.serializationFunc = serializationFunc;
+      descriptor.serializeFunc = serializeFunc;
     }
   };
 }
 
-export function UnserializeAs<Target>(unserializationFunc: (input: number | string) => Target) {
+export function UnserializeAs<Target>(unserializeFunc: (input: number | string) => Target) {
   return (serializableClass: Serializable, propertyName: string) => {
     initializeDescriptorsOfProperty(serializableClass, propertyName);
 
@@ -34,7 +34,7 @@ export function UnserializeAs<Target>(unserializationFunc: (input: number | stri
     const descriptor = descriptors.get(propertyName);
 
     if (descriptor) {
-      descriptor.unserializationFunc = unserializationFunc;
+      descriptor.unserializeFunc = unserializeFunc;
     }
   };
 }
