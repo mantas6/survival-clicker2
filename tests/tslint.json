@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "../tslint.json"
+  ],
+  "rules": {
+    "max-classes-per-file": false,
+    "only-arrow-functions": false,
+    "no-unused-expression": false
+  },
+}
