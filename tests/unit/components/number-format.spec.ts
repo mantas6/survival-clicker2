@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import { expect } from 'chai';
 import NumberFormat from '@/components/NumberFormat.vue';
 
-
 describe('NumberFormat.vue', () => {
   it('renders value when passed', () => {
     const value = '1000';
