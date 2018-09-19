@@ -1,10 +1,14 @@
 import { Value, Container } from '@/classes/game/base/stats';
 import Decimal from 'decimal.js';
+import { MutationFunction } from '@/classes/game/base/stats/value';
 
-type Stat = Value | Container;
+interface MutableStat {
+  mutate: (mutateFunc: MutationFunction) => void;
+}
+
 type DiffFunction = () => Decimal;
 
-export class Effect<StatType> {
+export class Effect<StatType extends MutableStat> {
   public stat: StatType;
   private diffFunction: DiffFunction;
 
@@ -13,7 +17,8 @@ export class Effect<StatType> {
     this.diffFunction = diffFunction;
   }
 
-  public calculate(): Decimal {
-    return this.diffFunction();
+  public calculate() {
+    const diff = this.diffFunction();
+    this.stat.mutate(value => value.add(diff));
   }
 }
