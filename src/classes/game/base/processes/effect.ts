@@ -10,15 +10,15 @@ type DiffFunction = () => Decimal;
 
 export class Effect<StatType extends MutableStat> {
   public stat: StatType;
-  private diffFunction: DiffFunction;
+  private diffFunc: DiffFunction;
 
-  constructor(stat: StatType, diffFunction: DiffFunction) {
+  constructor(stat: StatType, diffFunc: DiffFunction) {
     this.stat = stat;
-    this.diffFunction = diffFunction;
+    this.diffFunc = diffFunc;
   }
 
   public calculate() {
-    const diff = this.diffFunction();
+    const diff = this.diffFunc();
     this.stat.mutate(value => value.add(diff));
   }
 }
