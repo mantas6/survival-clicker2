@@ -8,4 +8,12 @@ export enum ProcessType {
 export abstract class Process extends Serializable {
   public static type: ProcessType = ProcessType.Manual;
   public 'constructor': typeof Process;
+
+  public validate(): boolean {
+    return true;
+  }
+
+  public run() {
+    //
+  }
 }
