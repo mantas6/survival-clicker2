@@ -20,7 +20,6 @@ export type PropertyTagIterator = IterableIterator<{
 export abstract class Serializable extends StateNode {
   public static descriptorsOfProperties = new Map<string, PropertyTagDescriptor>();
   public 'constructor': typeof Serializable;
-  [ propertyName: string ]: any;
 
   public serialize(tagName: TagName) {
     const serialized: SerializedNode = {};
@@ -44,7 +43,7 @@ export abstract class Serializable extends StateNode {
 
       if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
         if (descriptor && descriptor.unserializeFunc) {
-          this[name] = descriptor.unserializeFunc(serializedValue);
+          (this as any)[name] = descriptor.unserializeFunc(serializedValue);
         }
       } else if (node) {
         node.unserialize(serializedValue);
@@ -65,6 +64,6 @@ export abstract class Serializable extends StateNode {
   }
 
   protected getPropertyByName(propertyName: string): Serializable | undefined {
-    return this[propertyName];
+    return (this as any)[propertyName];
   }
 }
