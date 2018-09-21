@@ -1,6 +1,6 @@
 import { StateReference } from '@/classes/game/base/state-reference';
 
-export abstract class StateNode extends StateReference {
+export abstract class StateNode {
   protected parent?: StateNode;
   protected root!: StateNode;
 
