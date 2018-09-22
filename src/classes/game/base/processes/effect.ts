@@ -7,7 +7,11 @@ interface MutableStat {
 
 type DiffFunction = () => Decimal;
 
-export class Effect<StatType extends MutableStat> {
+export interface Calculable {
+  calculate: () => void;
+}
+
+export class Effect<StatType extends MutableStat> implements Calculable {
   public stat: StatType;
   private diffFunc: DiffFunction;
 
