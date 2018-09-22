@@ -1,8 +1,8 @@
-import { StateNode } from '@/classes/game/base/state-node';
+import { StateNode } from './state-node';
 import { State } from '@/classes/game/state';
 import { Stats } from '@/classes/game/stats';
 
-export abstract class StateReference {
+export abstract class StateReference extends StateNode {
   protected abstract root: StateNode;
 
   get state(): State {
