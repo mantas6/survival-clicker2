@@ -13,7 +13,7 @@ export abstract class Value extends Serializable {
   @Tag('emit')
   @SerializeAs((value: Decimal) => value.toString())
   @UnserializeAs(input => new Decimal(input))
-  private current?: Decimal;
+  protected current?: Decimal;
 
   get value(): Decimal {
     if (this.current === undefined) {
