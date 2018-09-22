@@ -23,10 +23,6 @@ export abstract class Value extends Serializable {
     return this.current;
   }
 
-  set value(value: Decimal) {
-    this.current = value;
-  }
-
   public mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
 
