@@ -1,4 +1,4 @@
-import { StateNode } from '@/classes/game/base/state/state-node';
+import { StateNode } from '@/classes/game/base/state-node';
 
 export interface SerializedNode {
   [ propertyName: string ]: SerializedNode | string | number;
