@@ -5,6 +5,10 @@ export type MutationFunction = (value: Decimal) => Decimal;
 
 export abstract class Value extends Serializable {
   public abstract default: number | string;
+  /**
+   * Standard value stat 99% of the time will default to zero as minimum value
+   */
+  public minimum: number | string = 0;
 
   @Tag('emit')
   @SerializeAs((value: Decimal) => value.toString())
@@ -24,6 +28,12 @@ export abstract class Value extends Serializable {
   }
 
   public mutate(mutateFunc: MutationFunction) {
-    this.current = mutateFunc(this.value);
+    const mutated = mutateFunc(this.value);
+
+    if (mutated.lessThan(this.minimum)) {
+      this.current = new Decimal(this.minimum);
+    } else {
+      this.current = mutated;
+    }
   }
 }
