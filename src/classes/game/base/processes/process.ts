@@ -1,12 +1,12 @@
-import { Serializable } from '@/classes/game/base/serialization/serializable';
 import { Calculable } from '@/classes/game/base/processes/effect';
+import { SerializableWithReference } from '@/classes/game/base/serialization';
 
 export enum ProcessType {
     Manual = 'manual',
     Auto = 'auto',
 }
 
-export abstract class Process extends Serializable {
+export abstract class Process extends SerializableWithReference {
   public static type: ProcessType = ProcessType.Manual;
   public 'constructor': typeof Process;
 
