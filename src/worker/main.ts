@@ -15,3 +15,5 @@ state.stats.unserialize(mySave);
 
 // state.stats.finance.money.value = new Decimal(50);
 console.log(state.stats.serialize('emit'));
+
+relay.emit('stats', state.stats.serialize('emit'));

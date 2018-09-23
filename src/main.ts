@@ -15,3 +15,7 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app');
+
+relay.on('stats', stats => {
+  store.commit('updateStats', stats);
+});
