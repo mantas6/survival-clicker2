@@ -1,5 +1,11 @@
 export abstract class StateNode {
+  public static nonChildrenNames: string[] = [];
+  public 'constructor': typeof StateNode;
+
+  @NonChild
   protected parent?: StateNode;
+
+  @NonChild
   protected root!: StateNode;
 
   public setParent(parent: StateNode) {
@@ -18,7 +24,9 @@ export abstract class StateNode {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const child = (this as any)[propertyName];
 
-      if (child instanceof StateNode) {
+      const excludeNames = this.constructor.nonChildrenNames;
+
+      if (child instanceof StateNode && !excludeNames.includes(propertyName)) {
         yield child;
       }
     }
@@ -33,4 +41,10 @@ export abstract class StateNode {
 
     this.root = rootNode;
   }
+}
+
+export function NonChild(nodeClass: StateNode, propertyName: string) {
+  const ctor = nodeClass.constructor;
+
+  ctor.nonChildrenNames = [ ...ctor.nonChildrenNames, propertyName ];
 }
