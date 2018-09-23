@@ -6,22 +6,24 @@ interface MutableStat {
 }
 
 type DiffFunction = () => Decimal;
+type StatFunction<StatType> = () => StatType;
 
 export interface Calculable {
   calculate: () => void;
 }
 
 export class Effect<StatType extends MutableStat> implements Calculable {
-  public stat: StatType;
+  public statFunc: StatFunction<StatType>;
   private diffFunc: DiffFunction;
 
-  constructor(stat: StatType, diffFunc: DiffFunction) {
-    this.stat = stat;
+  constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
+    this.statFunc = statFunc;
     this.diffFunc = diffFunc;
   }
 
   public calculate() {
     const diff = this.diffFunc();
-    this.stat.mutate(value => value.add(diff));
+    const stat = this.statFunc();
+    stat.mutate(value => value.add(diff));
   }
 }
