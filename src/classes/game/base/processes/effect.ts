@@ -13,8 +13,8 @@ export interface Calculable {
 }
 
 export class Effect<StatType extends MutableStat> implements Calculable {
-  public statFunc: StatFunction<StatType>;
-  private diffFunc: DiffFunction;
+  protected statFunc: StatFunction<StatType>;
+  protected diffFunc: DiffFunction;
 
   constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
     this.statFunc = statFunc;
