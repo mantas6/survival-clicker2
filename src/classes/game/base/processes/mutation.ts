@@ -12,7 +12,7 @@ export interface Calculable {
   calculate: () => void;
 }
 
-export class Effect<StatType extends MutableStat> implements Calculable {
+export class Mutation<StatType extends MutableStat> implements Calculable {
   protected statFunc: StatFunction<StatType>;
   protected diffFunc: DiffFunction;
 

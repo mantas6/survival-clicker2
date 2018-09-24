@@ -1,4 +1,4 @@
-import { Calculable } from '@/classes/game/base/processes/effect';
+import { Calculable } from '@/classes/game/base/processes/mutation';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 
 export enum ProcessType {
