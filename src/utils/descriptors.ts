@@ -1,19 +1,19 @@
-export interface DecorateClassConstructor<Descriptor> {
-  descriptorsOfProperties: Map<string, Descriptor>;
+export interface DecorateClassConstructor<Descriptors> {
+  descriptorsOfProperties: Map<string, Descriptors>;
 }
 
 interface ClassWithConstructor {
   constructor: DecorateClassConstructor<any>;
 }
 
-export type DescriptorMap<Descriptor> = Map<string, Descriptor>;
+export type DescriptorsMap<Descriptors> = Map<string, Descriptors>;
 
-export function prepareDescriptorsOfProperty<DecorateClass extends ClassWithConstructor, Descriptor>(
+export function prepareDescriptorsOfProperty<DecorateClass extends ClassWithConstructor, Descriptors>(
   decorateClass: DecorateClass,
   propertyName: string,
-  defaultDescriptors: Descriptor,
-): DescriptorMap<Descriptor> {
-  const ctor = decorateClass.constructor as DecorateClassConstructor<Descriptor>;
+  defaultDescriptors: Descriptors,
+): DescriptorsMap<Descriptors> {
+  const ctor = decorateClass.constructor as DecorateClassConstructor<Descriptors>;
   // Copying the variable so that it doesn't mutate the prototype class
   const descriptors = new Map(ctor.descriptorsOfProperties);
 
