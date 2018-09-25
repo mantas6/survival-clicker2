@@ -20,6 +20,7 @@ export abstract class Process extends SerializableWithReference {
     }
   }
 
+  // Rename this method to match Process child classes
   public *effects(): IterableIterator<Calculable> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       yield (this as any)[propertyName];
