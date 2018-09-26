@@ -3,6 +3,7 @@ export interface DecorateClassConstructor<Descriptors> {
 }
 
 interface ClassWithConstructor {
+  // Find a way to avoid this any
   constructor: DecorateClassConstructor<any>;
 }
 
