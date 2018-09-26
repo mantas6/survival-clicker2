@@ -10,7 +10,10 @@ export interface PropertyTagDescriptor {
   unserializeFunc?: (input: string | number) => any;
 }
 
+export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>
+
 export type TagName = 'emit' | 'store';
+
 export type PropertyTagIterator = IterableIterator<{
   name: string,
   node: Serializable,
@@ -18,7 +21,7 @@ export type PropertyTagIterator = IterableIterator<{
 }>;
 
 export abstract class Serializable extends StateNode {
-  public static descriptorsOfProperties = new Map<string, PropertyTagDescriptor>();
+  public static descriptorsOfProperties: PropertyTagDescriptorMap = new Map();
   public 'constructor': typeof Serializable;
 
   public serialize(tagName: TagName) {

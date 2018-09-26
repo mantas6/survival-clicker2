@@ -1,13 +1,8 @@
-import { Serializable, TagName, PropertyTagDescriptor } from './serializable';
-import { prepareDescriptorsOfProperty } from '@/utils/descriptors';
-
-function defaultDescriptorFunc(): PropertyTagDescriptor {
-  return { tagNames: [] };
-}
+import { Serializable, TagName, PropertyTagDescriptorMap } from './serializable';
 
 export function Tag(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName, defaultDescriptorFunc);
+    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptor = descriptors.get(propertyName);
 
@@ -19,7 +14,7 @@ export function Tag(...tagNames: TagName[]) {
 
 export function SerializeAs<Target>(serializeFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName, defaultDescriptorFunc);
+    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptor = descriptors.get(propertyName);
 
@@ -31,7 +26,7 @@ export function SerializeAs<Target>(serializeFunc: (input: Target) => string | n
 
 export function UnserializeAs<Target>(unserializeFunc: (input: number | string) => Target) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName, defaultDescriptorFunc);
+    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptor = descriptors.get(propertyName);
 
@@ -39,4 +34,18 @@ export function UnserializeAs<Target>(unserializeFunc: (input: number | string) 
       descriptor.unserializeFunc = unserializeFunc;
     }
   };
+}
+
+function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertyTagDescriptorMap {
+  const ctor = serializableClass.constructor;
+  // Copying the variable so that it doesn't mutate the prototype class
+  const descriptors = new Map(ctor.descriptorsOfProperties);
+
+  if (!descriptors.has(propertyName)) {
+    descriptors.set(propertyName, { tagNames: [] });
+    // Forwarding the copy to the class
+    ctor.descriptorsOfProperties = descriptors;
+  }
+
+  return descriptors;
 }
