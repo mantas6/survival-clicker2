@@ -10,7 +10,7 @@ export interface PropertyTagDescriptor {
   unserializeFunc?: (input: string | number) => any;
 }
 
-export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>
+export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>;
 
 export type TagName = 'emit' | 'store';
 
