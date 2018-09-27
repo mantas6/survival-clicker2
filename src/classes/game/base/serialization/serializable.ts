@@ -21,6 +21,7 @@ export type PropertyTagIterator = IterableIterator<{
 }>;
 
 export abstract class Serializable extends StateNode {
+  // Rename this to be more serializable specific?
   public static descriptorsOfProperties: PropertyTagDescriptorMap = new Map();
   public 'constructor': typeof Serializable;
 

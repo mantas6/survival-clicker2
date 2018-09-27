@@ -1,5 +1,6 @@
 import { Serializable, TagName, PropertyTagDescriptorMap } from './serializable';
 
+// Rename to SerializeWhen or SerializeOn?
 export function Tag(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
