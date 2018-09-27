@@ -5,8 +5,8 @@ interface PropertyDescriptor {
 }
 
 export class Effect extends SerializableWithReference {
-  // public static descriptorsOfProperties = new Map<string, PropertyDescriptor>();
-  // public 'constructor': typeof Effect;
+  // public static descriptorsOfEffects = new Map<string, PropertyDescriptor>();
+  public 'constructor': typeof Effect;
 
   // Time that this effect is active for
   public elapsed: number = 0;
