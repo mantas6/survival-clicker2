@@ -9,10 +9,10 @@ interface WithPrototype {
  */
 export function Implements(...baseCtors: WithPrototype[]) {
     return (derivedCtor: WithPrototype) => {
-        baseCtors.forEach(baseCtor => {
-            Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            });
-        });
+      for (const baseCtor of baseCtors) {
+        for (const name of Object.getOwnPropertyNames(baseCtor.prototype)) {
+          derivedCtor.prototype[name] = baseCtor.prototype[name];
+        }
+      }
     };
 }
