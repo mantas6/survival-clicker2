@@ -1,5 +1,7 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Decimal } from 'decimal.js';
+import { Calculable } from '@/classes/game/base/processes/mutation';
+import { Mutation } from 'vuex-module-decorators';
 
 export interface PropertyDescriptor {
   groupIndex?: number;
@@ -14,4 +16,20 @@ export class Effect extends SerializableWithReference {
 
   // Time that this effect is active for
   public elapsed: number = 0;
+
+  public calculate() {
+    for (const mutation of this.mutations()) {
+      mutation.calculate();
+    }
+  }
+
+  public *mutations(): IterableIterator<Calculable> {
+    for (const propertyName of Object.getOwnPropertyNames(this)) {
+      const child = (this as any)[propertyName];
+
+      if (child instanceof Mutation) {
+        yield child;
+      }
+    }
+  }
 }
