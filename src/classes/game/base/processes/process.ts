@@ -1,5 +1,7 @@
 import { Calculable } from '@/classes/game/base/processes/mutation';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
+import { Mutation } from './mutation';
+import { Effect } from '@/classes/game/base/effects';
 
 export enum ProcessType {
     Manual = 'manual',
@@ -23,7 +25,11 @@ export abstract class Process extends SerializableWithReference {
   // Rename this method to match Process child classes
   public *effects(): IterableIterator<Calculable> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
-      yield (this as any)[propertyName];
+      const child = (this as any)[propertyName];
+
+      if (child instanceof Mutation || child instanceof Effect) {
+        yield child;
+      }
     }
   }
 }
