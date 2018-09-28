@@ -44,9 +44,10 @@ function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyN
 
   if (!descriptors.has(propertyName)) {
     descriptors.set(propertyName, { tagNames: [] });
-    // Forwarding the copy to the class
-    ctor.descriptorsOfProperties = descriptors;
   }
+
+  // Forwarding the copy to the class
+  ctor.descriptorsOfProperties = descriptors;
 
   return descriptors;
 }

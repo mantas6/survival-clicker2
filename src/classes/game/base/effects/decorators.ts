@@ -30,9 +30,10 @@ function prepareDescriptorsOfProperty(effectClass: Effect, propertyName: string)
 
   if (!descriptors.has(propertyName)) {
     descriptors.set(propertyName, {});
-    // Forwarding the copy to the class
-    ctor.descriptorsOfMutations = descriptors;
   }
+
+  // Forwarding the copy to the class
+  ctor.descriptorsOfMutations = descriptors;
 
   return descriptors;
 }
