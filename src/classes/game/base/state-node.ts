@@ -19,20 +19,28 @@ export abstract class StateNode {
   }
 
   public emitParent() {
-    for (const child of this.children()) {
+    for (const child of this.nodes()) {
       child.setParent(this);
       child.emitParent();
     }
   }
 
-  public *children(): IterableIterator<StateNode> {
+  public *nodes(): IterableIterator<StateNode> {
+    for (const child of this.children<StateNode>(entry => entry instanceof StateNode)) {
+      yield child;
+    }
+  }
+
+  public *children<T>(filterFunc: (entry: T) => boolean): IterableIterator<T> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const child = (this as any)[propertyName];
 
       const excludeNames = this.constructor.nonChildrenNames;
 
-      if (child instanceof StateNode && !excludeNames.includes(propertyName)) {
-        yield child;
+      if (!excludeNames.includes(propertyName)) {
+        if (filterFunc(child)) {
+          yield child;
+        }
       }
     }
   }

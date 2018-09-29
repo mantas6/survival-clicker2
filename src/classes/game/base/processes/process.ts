@@ -24,12 +24,8 @@ export abstract class Process extends SerializableWithReference {
 
   // Rename this method to match Process child classes
   public *effects(): IterableIterator<Calculable> {
-    for (const propertyName of Object.getOwnPropertyNames(this)) {
-      const child = (this as any)[propertyName];
-
-      if (child instanceof Mutation || child instanceof Effect) {
-        yield child;
-      }
+    for (const child of this.children<Calculable>(entry => entry instanceof Mutation || entry instanceof Effect)) {
+      yield child;
     }
   }
 }

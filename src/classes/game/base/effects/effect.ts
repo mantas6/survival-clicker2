@@ -24,12 +24,8 @@ export class Effect extends SerializableWithReference {
   }
 
   public *mutations(): IterableIterator<Calculable> {
-    for (const propertyName of Object.getOwnPropertyNames(this)) {
-      const child = (this as any)[propertyName];
-
-      if (child instanceof Mutation) {
-        yield child;
-      }
+    for (const child of this.children<Calculable>(entry => entry instanceof Mutation)) {
+      yield child;
     }
   }
 }
