@@ -1,3 +1,5 @@
+import { camelCase } from 'lodash';
+
 export abstract class StateNode {
   public static nonChildrenNames: string[] = [];
   public 'constructor': typeof StateNode;
@@ -7,6 +9,9 @@ export abstract class StateNode {
 
   @NonChild
   protected root!: StateNode;
+
+  @NonChild
+  protected path!: string;
 
   public setParent(parent: StateNode) {
     this.parent = parent;
@@ -32,14 +37,21 @@ export abstract class StateNode {
     }
   }
 
+  get name(): string {
+    return camelCase(this.constructor.name);
+  }
+
   private findRoot(): void {
     let rootNode: StateNode = this;
+    let path = this.name;
 
     while (rootNode.parent) {
       rootNode = rootNode.parent;
+      path = `${rootNode.name}.${path}`;
     }
 
     this.root = rootNode;
+    this.path = path;
   }
 }
 
