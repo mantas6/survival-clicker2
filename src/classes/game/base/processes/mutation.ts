@@ -1,5 +1,6 @@
 import Decimal from 'decimal.js';
 import { MutationFunction } from '@/classes/game/base/stats/value';
+import { Tag, Serializable, SerializeAs } from '@/classes/game/base/serialization';
 
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
@@ -12,11 +13,12 @@ export interface Calculable {
   calculate: () => void;
 }
 
-export class Mutation<StatType extends MutableStat> implements Calculable {
+export class Mutation<StatType extends MutableStat> extends Serializable implements Calculable {
   protected statFunc: StatFunction<StatType>;
   protected diffFunc: DiffFunction;
 
   constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
+    super();
     this.statFunc = statFunc;
     this.diffFunc = diffFunc;
   }
@@ -26,5 +28,10 @@ export class Mutation<StatType extends MutableStat> implements Calculable {
     const diff = this.diffFunc();
     const stat = this.statFunc();
     stat.mutate(value => value.add(diff));
+  }
+
+  @Tag('emit')
+  get diff() {
+    return this.diffFunc();
   }
 }
