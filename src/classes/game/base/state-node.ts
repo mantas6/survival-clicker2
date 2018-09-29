@@ -37,6 +37,10 @@ export abstract class StateNode {
     }
   }
 
+  public isChild<PropertyName extends keyof this>(propertyName: PropertyName): boolean {
+    return this.constructor.nonChildrenNames.includes(propertyName as string);
+  }
+
   get name(): string {
     return camelCase(this.constructor.name);
   }
