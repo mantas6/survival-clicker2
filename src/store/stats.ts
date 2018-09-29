@@ -1,15 +1,12 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-
-interface StatMap {
-  [ name: string ]: StatMap | string | number;
-}
+import { SerializedMap } from '@/store/types';
 
 @Module
 export class Stats extends VuexModule {
-  public list: StatMap = {};
+  public stats: SerializedMap = {};
 
   @Mutation
-  public updateStats(list: StatMap) {
-    this.list = list;
+  public updateStats(stats: SerializedMap) {
+    this.stats = stats;
   }
 }
