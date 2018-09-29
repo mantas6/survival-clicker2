@@ -17,3 +17,4 @@ state.stats.unserialize(mySave);
 console.log(state.stats.serialize('emit'));
 
 relay.emit('stats', state.stats.serialize('emit'));
+relay.emit('processes', state.processes.serialize('emit'));

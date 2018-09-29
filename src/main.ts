@@ -19,3 +19,7 @@ new Vue({
 relay.on('stats', stats => {
   store.commit('updateStats', stats);
 });
+
+relay.on('processes', processes => {
+  store.commit('updateProcesses', processes);
+});
