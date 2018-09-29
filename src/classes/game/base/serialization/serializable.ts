@@ -16,7 +16,7 @@ export type TagName = 'emit' | 'store';
 
 export type PropertyTagIterator = IterableIterator<{
   name: string,
-  node: Serializable,
+  node: Serializable | number | string,
   descriptor: PropertyTagDescriptor,
 }>;
 
@@ -32,7 +32,11 @@ export abstract class Serializable extends StateNode {
       if (descriptor.serializeFunc) {
         serialized[name] = descriptor.serializeFunc(node);
       } else {
-        serialized[name] = node.serialize(tagName);
+        if (node instanceof Serializable) {
+          serialized[name] = node.serialize(tagName);
+        } else {
+          serialized[name] = node.toString();
+        }
       }
     }
 
@@ -49,7 +53,7 @@ export abstract class Serializable extends StateNode {
         if (descriptor && descriptor.unserializeFunc) {
           (this as any)[name] = descriptor.unserializeFunc(serializedValue);
         }
-      } else if (node) {
+      } else if (node instanceof Serializable) {
         node.unserialize(serializedValue);
       }
     }
@@ -67,7 +71,7 @@ export abstract class Serializable extends StateNode {
     }
   }
 
-  protected getPropertyByName(propertyName: string): Serializable | undefined {
+  protected getPropertyByName(propertyName: string): Serializable | number | string | undefined {
     return (this as any)[propertyName];
   }
 }
