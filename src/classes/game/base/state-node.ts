@@ -5,13 +5,13 @@ export abstract class StateNode {
   public 'constructor': typeof StateNode;
 
   @NonChild
+  public path!: string;
+
+  @NonChild
   protected parent?: StateNode;
 
   @NonChild
   protected root!: StateNode;
-
-  @NonChild
-  protected path!: string;
 
   public setParent(parent: StateNode) {
     this.parent = parent;
