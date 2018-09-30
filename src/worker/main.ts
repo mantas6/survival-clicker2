@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
 import Decimal from 'decimal.js';
@@ -13,11 +11,5 @@ const mySave = JSON.parse('{"character":{"health":{}},"finance":{"money":{"curre
 
 state.stats.unserialize(mySave);
 
-// state.stats.finance.money.value = new Decimal(50);
-console.log(state.stats.serialize('emit'));
-
 relay.emit('stats', state.stats.serialize('emit'));
 relay.emit('processes', state.processes.serialize('emit'));
-
-state.processes.staminaRestore.calculate();
-relay.emit('stats', state.stats.serialize('emit'));
