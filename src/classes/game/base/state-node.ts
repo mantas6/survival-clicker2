@@ -31,20 +31,20 @@ export abstract class StateNode {
     }
   }
 
-  public *children<T>(filterFunc: (entry: T) => boolean): IterableIterator<T> {
+  public *children<T>(filterFunc?: (entry: T) => boolean): IterableIterator<T> {
     for (const { node } of this.childrenWithNames<T>(filterFunc)) {
       yield node;
     }
   }
 
-  public *childrenWithNames<T>(filterFunc: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
+  public *childrenWithNames<T>(filterFunc?: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const node = (this as any)[propertyName];
 
       const excludeNames = this.constructor.nonChildrenNames;
 
       if (!excludeNames.includes(propertyName)) {
-        if (filterFunc(node)) {
+        if (!filterFunc || filterFunc(node)) {
           yield { node, name: propertyName };
         }
       }
