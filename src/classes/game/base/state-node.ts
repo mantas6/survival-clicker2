@@ -32,6 +32,12 @@ export abstract class StateNode {
   }
 
   public *children<T>(filterFunc: (entry: T) => boolean): IterableIterator<T> {
+    for (const { child } of this.childrenWithNames<T>(filterFunc)) {
+      yield child;
+    }
+  }
+
+  public *childrenWithNames<T>(filterFunc: (entry: T) => boolean): IterableIterator<{ child: T, name: string }> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const child = (this as any)[propertyName];
 
@@ -39,7 +45,7 @@ export abstract class StateNode {
 
       if (!excludeNames.includes(propertyName)) {
         if (filterFunc(child)) {
-          yield child;
+          yield { child, name: propertyName };
         }
       }
     }
