@@ -4,6 +4,7 @@ import { Tag, Serializable, SerializeAs } from '@/classes/game/base/serializatio
 
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
+  path: string;
 }
 
 type DiffFunction = () => Decimal;
@@ -33,5 +34,10 @@ export class Mutation<StatType extends MutableStat> extends Serializable impleme
   @Tag('emit')
   get diff() {
     return this.diffFunc();
+  }
+
+  @Tag('emit')
+  get stat() {
+    return this.statFunc().path;
   }
 }
