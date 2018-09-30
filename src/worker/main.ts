@@ -18,3 +18,6 @@ console.log(state.stats.serialize('emit'));
 
 relay.emit('stats', state.stats.serialize('emit'));
 relay.emit('processes', state.processes.serialize('emit'));
+
+state.processes.staminaRestore.calculate();
+relay.emit('stats', state.stats.serialize('emit'));

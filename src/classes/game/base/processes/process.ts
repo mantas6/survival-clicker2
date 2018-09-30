@@ -16,7 +16,7 @@ export abstract class Process extends SerializableWithReference {
     return true;
   }
 
-  public run() {
+  public calculate() {
     for (const effect of this.effects()) {
       effect.calculate();
     }
