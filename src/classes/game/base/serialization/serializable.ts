@@ -17,7 +17,7 @@ export type TagName = 'emit' | 'store';
 export type PropertyTagIterator = IterableIterator<{
   name: string,
   node: Serializable | number | string,
-  descriptor: PropertyTagDescriptor,
+  descriptor?: PropertyTagDescriptor,
 }>;
 
 export abstract class Serializable extends StateNode {
@@ -30,7 +30,7 @@ export abstract class Serializable extends StateNode {
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
-      if (descriptor.serializeFunc) {
+      if (descriptor && descriptor.serializeFunc) {
         serialized[name] = descriptor.serializeFunc(node);
       } else {
         if (node instanceof Serializable) {
@@ -61,13 +61,15 @@ export abstract class Serializable extends StateNode {
   }
 
   protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
-    for (const [ name, descriptor ] of this.constructor.descriptorsOfProperties) {
-      if (descriptor.tagNames.includes(tagName)) {
-        const node = this.getPropertyByName(name);
+    for (const { name, node } of this.childrenWithNames<Serializable>()) {
+      const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
-        if (node) {
-          yield { name, node, descriptor };
-        }
+      const property = { name, node, descriptor };
+
+      if (descriptor && descriptor.tagNames.includes(tagName)) {
+        yield property;
+      } else if (this.constructor.defaultTagNames.includes(tagName)) {
+        yield property;
       }
     }
   }
