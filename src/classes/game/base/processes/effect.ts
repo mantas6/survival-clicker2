@@ -14,7 +14,7 @@ export interface Calculable {
   calculate: () => void;
 }
 
-export class Mutation<StatType extends MutableStat> extends Serializable implements Calculable {
+export class Effect<StatType extends MutableStat> extends Serializable implements Calculable {
   protected statFunc: StatFunction<StatType>;
   protected diffFunc: DiffFunction;
 
