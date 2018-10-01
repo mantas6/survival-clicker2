@@ -1,21 +1,20 @@
-import { Serializable, TagName, PropertyTagDescriptorMap } from './serializable';
+import { Serializable, SerializeOnName, PropertySerializeOnDescriptorMap } from './serializable';
 
-export function TagAll(...tagNames: TagName[]) {
+export function SerializeAllOn(...SerializeOnNames: SerializeOnName[]) {
   return (serializableClass: Serializable) => {
     const ctor = serializableClass.constructor;
-    ctor.defaultTagNames = [ ...ctor.defaultTagNames, ...tagNames ];
+    ctor.defaultSerializeOnNames = [ ...ctor.defaultSerializeOnNames, ...SerializeOnNames ];
   };
 }
 
-// Rename to SerializeWhen or SerializeOn?
-export function Tag(...tagNames: TagName[]) {
+export function SerializeOn(...SerializeOnNames: SerializeOnName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
 
     const descriptor = descriptors.get(propertyName);
 
     if (descriptor) {
-      descriptor.tagNames.push(...tagNames);
+      descriptor.SerializeOnNames.push(...SerializeOnNames);
     }
   };
 }
@@ -44,13 +43,13 @@ export function UnserializeAs<Target>(unserializeFunc: (input: number | string) 
   };
 }
 
-function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertyTagDescriptorMap {
+function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertySerializeOnDescriptorMap {
   const ctor = serializableClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
   const descriptors = new Map(ctor.descriptorsOfProperties);
 
   if (!descriptors.has(propertyName)) {
-    descriptors.set(propertyName, { tagNames: [] });
+    descriptors.set(propertyName, { SerializeOnNames: [] });
   }
 
   // Forwarding the copy to the class

@@ -1,14 +1,14 @@
-import { Serializable, Tag, SerializeAs } from '@/classes/game/base/serialization';
+import { Serializable, SerializeOn, SerializeAs } from '@/classes/game/base/serialization';
 import { expect } from 'chai';
 
 class ChildClass extends Serializable {
-  @Tag('emit')
+  @SerializeOn('emit')
   @SerializeAs((input: string) => input)
   public someText: string = 'someValue';
 }
 
 class ParentClass extends Serializable {
-  @Tag('emit')
+  @SerializeOn('emit')
   public someProperty = new ChildClass();
 }
 

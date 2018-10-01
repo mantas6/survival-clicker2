@@ -4,37 +4,37 @@ export interface SerializedNode {
   [ propertyName: string ]: SerializedNode | string | number;
 }
 
-export interface PropertyTagDescriptor {
-  tagNames: string[];
+export interface PropertySerializeOnDescriptor {
+  SerializeOnNames: string[];
   serializeFunc?: (input: any) => string | number;
   unserializeFunc?: (input: string | number) => any;
 }
 
-export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>;
+export type PropertySerializeOnDescriptorMap = Map<string, PropertySerializeOnDescriptor>;
 
-export type TagName = 'emit' | 'store';
+export type SerializeOnName = 'emit' | 'store';
 
-export type PropertyTagIterator = IterableIterator<{
+export type PropertySerializeOnIterator = IterableIterator<{
   name: string,
   node: Serializable | number | string,
-  descriptor?: PropertyTagDescriptor,
+  descriptor?: PropertySerializeOnDescriptor,
 }>;
 
 export abstract class Serializable extends StateNode {
   // Rename this to be more serializable specific?
-  public static descriptorsOfProperties: PropertyTagDescriptorMap = new Map();
-  public static defaultTagNames: string[] = [];
+  public static descriptorsOfProperties: PropertySerializeOnDescriptorMap = new Map();
+  public static defaultSerializeOnNames: string[] = [];
   public 'constructor': typeof Serializable;
 
-  public serialize(tagName: TagName) {
+  public serialize(SerializeOnName: SerializeOnName) {
     const serialized: SerializedNode = {};
 
-    for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
+    for (const { name, node, descriptor } of this.propertiesWithSerializeOn(SerializeOnName)) {
       if (descriptor && descriptor.serializeFunc) {
         serialized[name] = descriptor.serializeFunc(node);
       } else {
         if (node instanceof Serializable) {
-          serialized[name] = node.serialize(tagName);
+          serialized[name] = node.serialize(SerializeOnName);
         } else {
           serialized[name] = node.toString();
         }
@@ -60,15 +60,15 @@ export abstract class Serializable extends StateNode {
     }
   }
 
-  protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
+  protected *propertiesWithSerializeOn(SerializeOnName: SerializeOnName): PropertySerializeOnIterator {
     for (const { name, node } of this.childrenWithNames<Serializable>()) {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
       const property = { name, node, descriptor };
 
-      if (descriptor && descriptor.tagNames.includes(tagName)) {
+      if (descriptor && descriptor.SerializeOnNames.includes(SerializeOnName)) {
         yield property;
-      } else if (this.constructor.defaultTagNames.includes(tagName)) {
+      } else if (this.constructor.defaultSerializeOnNames.includes(SerializeOnName)) {
         yield property;
       }
     }

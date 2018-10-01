@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
 import { MutationFunction } from '@/classes/game/base/stats/value';
-import { Tag, Serializable, SerializeAs } from '@/classes/game/base/serialization';
+import { SerializeOn, Serializable, SerializeAs } from '@/classes/game/base/serialization';
 
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
@@ -31,12 +31,12 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
     stat.mutate(value => value.add(diff));
   }
 
-  @Tag('emit')
+  @SerializeOn('emit')
   get diff() {
     return this.diffFunc();
   }
 
-  @Tag('emit')
+  @SerializeOn('emit')
   get stat() {
     return this.statFunc().path;
   }

@@ -1,10 +1,10 @@
 import { Serializable } from './serializable';
 import { SerializableWithReference } from '@/classes/game/base/serialization/serializable-with-reference';
-import { Tag, SerializeAs, UnserializeAs } from './decorators';
+import { SerializeOn, SerializeAs, UnserializeAs } from './decorators';
 
 export {
   Serializable,
-  Tag,
+  SerializeOn,
   SerializeAs,
   UnserializeAs,
   SerializableWithReference,

@@ -1,5 +1,5 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, SerializeAs, UnserializeAs, Tag } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAs, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
 
 export type MutationFunction = (value: Decimal) => Decimal;
 
@@ -10,7 +10,7 @@ export abstract class Value extends Serializable {
    */
   public minimum: number | string = 0;
 
-  @Tag('emit')
+  @SerializeOn('emit')
   @SerializeAs((value: Decimal) => value.toString())
   @UnserializeAs(input => new Decimal(input))
   protected current?: Decimal;
