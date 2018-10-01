@@ -7,6 +7,18 @@ export function SerializeAllOn(...tagNames: TagName[]) {
   };
 }
 
+export function DonNotSerialize() {
+  return (serializableClass: Serializable, propertyName: string) => {
+    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
+
+    const descriptor = descriptors.get(propertyName);
+
+    if (descriptor) {
+      descriptor.tagNames = [];
+    }
+  };
+}
+
 export function SerializeOn(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
