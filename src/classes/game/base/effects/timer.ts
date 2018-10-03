@@ -1,4 +1,4 @@
-import { Calculable } from './effect';
+import { Calculable } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 
 export class Timer {

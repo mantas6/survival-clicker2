@@ -1,6 +1,5 @@
-import { Calculable } from '@/classes/game/base/processes/effect';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
-import { Effect } from './effect';
+import { Effect, Calculable } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 
 export enum ProcessType {
