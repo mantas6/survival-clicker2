@@ -60,6 +60,7 @@ export abstract class Serializable extends StateNode {
     }
   }
 
+  // TODO: add iteration over constructor.prototype props
   protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
     for (const { name, node } of this.childrenWithNames<Serializable>()) {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
