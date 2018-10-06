@@ -1,9 +1,10 @@
-import { Serializable, SerializeOn, SerializeAs } from '@/classes/game/base/serialization';
+import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
 import { expect } from 'chai';
 
 class ChildClass extends Serializable {
   @SerializeOn('emit')
   @SerializeAs((input: string) => input)
+  @UnserializeAs(input => input)
   public someText: string = 'someValue';
 }
 
@@ -13,18 +14,23 @@ class ParentClass extends Serializable {
 }
 
 describe('serializable.ts', () => {
-  const ser = new ParentClass();
+  const serializable = new ParentClass();
 
   it('serializes', () => {
-    expect(ser).has.property('serialize');
-    const serialized = ser.serialize('emit');
+    expect(serializable).has.property('serialize');
+    const serialized = serializable.serialize('emit');
     expect(serialized).to.be.not.null;
     expect(serialized).has.property('someProperty');
   });
 
   it('serializes children property', () => {
-    const serialized = ser.serialize('emit');
+    const serialized = serializable.serialize('emit');
     expect(serialized.someProperty).property('someText').exist;
     expect(serialized.someProperty).property('someText').equals('someValue');
+  });
+
+  it('unserializes children property', () => {
+    serializable.unserialize({ someProperty: { someText: 'unserializedValue' } });
+    expect(serializable.someProperty.someText).to.be.equal('unserializedValue');
   });
 });
