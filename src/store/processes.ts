@@ -3,10 +3,14 @@ import { SerializedMap } from '@/store/types';
 
 @Module
 export class Processes extends VuexModule {
-  public processes: SerializedMap = {};
+  public list: SerializedMap = {};
 
   @Mutation
   public updateProcesses(processes: SerializedMap) {
-    this.processes = processes;
+    this.list = processes;
+  }
+
+  get processes() {
+    return this.list;
   }
 }

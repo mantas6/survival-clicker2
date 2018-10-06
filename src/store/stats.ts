@@ -3,10 +3,14 @@ import { SerializedMap } from '@/store/types';
 
 @Module
 export class Stats extends VuexModule {
-  public stats: SerializedMap = {};
+  public list: SerializedMap = {};
 
   @Mutation
   public updateStats(stats: SerializedMap) {
-    this.stats = stats;
+    this.list = stats;
+  }
+
+  get stats() {
+    return this.list;
   }
 }
