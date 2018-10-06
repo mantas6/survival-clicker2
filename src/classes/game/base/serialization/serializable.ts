@@ -14,9 +14,11 @@ export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>;
 
 export type TagName = 'emit' | 'store';
 
+type ConstructorProperty = () => void;
+
 export type PropertyTagIterator = IterableIterator<{
   name: string,
-  node: Serializable | number | string,
+  node: Serializable | number | string | ConstructorProperty,
   descriptor?: PropertyTagDescriptor,
 }>;
 
@@ -60,8 +62,8 @@ export abstract class Serializable extends StateNode {
     }
   }
 
-  // TODO: add iteration over constructor.prototype props
   protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
+    // Iterating through children of the class, that is its properties
     for (const { name, node } of this.childrenWithNames<Serializable>()) {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
@@ -71,6 +73,16 @@ export abstract class Serializable extends StateNode {
         yield property;
       } else if (this.constructor.defaultTagNames.includes(tagName)) {
         yield property;
+      }
+    }
+
+    // Iterating through methods of the class, so that getters and/or functions can be serialized
+    for (const [ name, descriptor ] of this.constructor.descriptorsOfProperties ) {
+      const ctor = this.constructor as { [propertyName: string]: any };
+      const node = ctor[name] as () => ConstructorProperty;
+
+      if (node) {
+        yield { name, node, descriptor };
       }
     }
   }
