@@ -78,8 +78,8 @@ export abstract class Serializable extends StateNode {
 
     // Iterating through methods of the class, so that getters and/or functions can be serialized
     for (const [ name, descriptor ] of this.constructor.descriptorsOfProperties ) {
-      const ctor = this.constructor as { [propertyName: string]: any };
-      const node = ctor[name] as () => ConstructorProperty;
+      const ctx = this as { [propertyName: string]: any };
+      const node = ctx[name] as () => ConstructorProperty;
 
       if (node) {
         yield { name, node, descriptor };
