@@ -9,8 +9,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { timer, Subscription } from 'rxjs';
+import { mapGetters } from 'vuex';
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters(['processes', 'stats'])
+  },
+})
 export default class Home extends Vue {
   public count: number = 9000;
   public countSub?: Subscription;
