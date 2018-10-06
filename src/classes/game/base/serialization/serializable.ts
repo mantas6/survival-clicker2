@@ -31,7 +31,7 @@ export abstract class Serializable extends StateNode {
   public serialize(tagName: TagName) {
     const serialized: SerializedNode = {};
 
-    for (const { name, node, descriptor } of this.propertiesWithTag(tagName)) {
+    for (const { name, node, descriptor } of this.serializableProperties(tagName)) {
       if (descriptor && descriptor.serializeFunc) {
         serialized[name] = descriptor.serializeFunc(node);
       } else {
@@ -62,7 +62,7 @@ export abstract class Serializable extends StateNode {
     }
   }
 
-  protected *propertiesWithTag(tagName: TagName): PropertyTagIterator {
+  protected *serializableProperties(tagName: TagName): PropertyTagIterator {
     // Iterating through children of the class, that is its properties
     for (const { name, node } of this.childrenWithNames<Serializable>()) {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
