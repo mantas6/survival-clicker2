@@ -5,6 +5,7 @@ import router from './router';
 import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
+import { enableLogging } from '@/utils/log';
 
 const worker = new Worker();
 const relay = new Relay(worker);
@@ -22,3 +23,7 @@ relay.on('stats', stats => {
 relay.on('processes', processes => {
   store.commit('updateProcesses', processes);
 });
+
+if (localStorage.getItem('debug')) {
+  enableLogging();
+}
