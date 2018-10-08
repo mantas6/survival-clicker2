@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file only-arrow-functions no-unused-expression */
+
 import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
 import { expect } from 'chai';
 

@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file only-arrow-functions no-unused-expression */
+
 import { shallowMount } from '@vue/test-utils';
 import { expect } from 'chai';
 import NumberFormat from '@/components/NumberFormat.vue';

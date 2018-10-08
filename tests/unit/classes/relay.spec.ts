@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file only-arrow-functions no-unused-expression */
+
 import { expect } from 'chai';
 import { Relay, RelayPayload } from '@/classes/relay';
 
