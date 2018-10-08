@@ -30,19 +30,19 @@ describe('serializable.ts', () => {
     expect(serialized).has.property('someProperty');
   });
 
-  it('serializes children property', () => {
+  it('serializes children property correctly', () => {
     const serialized = serializable.serialize('emit');
     expect(serialized.someProperty).property('someText').exist;
     expect(serialized.someProperty).property('someText').equals('someValue');
   });
 
-  it('serializes getter', () => {
+  it('serializes a defined getter correctly', () => {
     const serialized = serializable.serialize('emit');
     expect(serialized.someProperty).property('someGetter').exist;
     expect(serialized.someProperty).property('someGetter').equals('someValueFromGetter');
   });
 
-  it('unserializes children property', () => {
+  it('unserializes children property correctly', () => {
     serializable.unserialize({ someProperty: { someText: 'unserializedValue' } });
     expect(serializable.someProperty.someText).to.be.equal('unserializedValue');
   });
