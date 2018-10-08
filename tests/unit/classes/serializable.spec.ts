@@ -8,6 +8,11 @@ class ChildClass extends Serializable {
   @SerializeAs((input: string) => input)
   @UnserializeAs(input => input)
   public someText: string = 'someValue';
+
+  @SerializeOn('emit')
+  get someGetter() {
+    return this.someText + 'FromGetter';
+  }
 }
 
 class ParentClass extends Serializable {
@@ -29,6 +34,12 @@ describe('serializable.ts', () => {
     const serialized = serializable.serialize('emit');
     expect(serialized.someProperty).property('someText').exist;
     expect(serialized.someProperty).property('someText').equals('someValue');
+  });
+
+  it('serializes getter', () => {
+    const serialized = serializable.serialize('emit');
+    expect(serialized.someProperty).property('someGetter').exist;
+    expect(serialized.someProperty).property('someGetter').equals('someValueFromGetter');
   });
 
   it('unserializes children property', () => {
