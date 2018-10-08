@@ -13,7 +13,7 @@ import { mapGetters } from 'vuex';
 
 @Component({
   computed: {
-    ...mapGetters(['processes', 'stats'])
+    ...mapGetters(['processes', 'stats']),
   },
 })
 export default class Home extends Vue {
