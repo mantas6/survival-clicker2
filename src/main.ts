@@ -6,9 +6,12 @@ import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
 import { enableLogging } from '@/utils/log';
+import NumberFormat from '@/components/NumberFormat.vue';
 
 const worker = new Worker();
 const relay = new Relay(worker);
+
+Vue.component('NumberFormat', NumberFormat);
 
 new Vue({
   router,
