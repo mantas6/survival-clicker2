@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <span>Build date: {{ buildDate }}</span>
     <div>Eye strain level: {{ count }}</div>
   </div>
