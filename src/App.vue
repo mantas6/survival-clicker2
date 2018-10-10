@@ -4,7 +4,8 @@
       <header-container></header-container>
       <main>
         <nav>
-          <router-link to="/">Home</router-link>
+          <router-link to="/actions/consumables">Consumables</router-link>
+          <router-link to="/actions/jobs">Jobs</router-link>
         </nav>
         <article>
           <router-view/>
@@ -34,5 +35,18 @@ export default class App extends Vue {
 <style lang="scss">
   #app > div {
     display: flex;
+  }
+
+  nav {
+    margin-bottom: 4rem;
+
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      color: grey;
+      &.router-link-exact-active {
+        color: lightblue;
+      }
+    }
   }
 </style>
