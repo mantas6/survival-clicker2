@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <header>
-      <game-logo></game-logo>
-    </header>
+    <header-container></header-container>
     <main>
       <nav>
         <router-link to="/">Home</router-link>
@@ -17,10 +15,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import GameLogo from '@/components/GameLogo.vue';
+import HeaderContainer from '@/components/header/HeaderContainer.vue';
 
 @Component({
-  components: { GameLogo },
+  components: { HeaderContainer },
 })
 export default class App extends Vue {
 
