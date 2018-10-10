@@ -4,13 +4,13 @@ export interface SerializedNode {
   [ propertyName: string ]: SerializedNode | string | number;
 }
 
-export interface PropertyTagDescriptor {
+export interface PropertyDescriptor {
   tagNames: string[];
   serializeFunc?: (input: any) => string | number;
   unserializeFunc?: (input: string | number) => any;
 }
 
-export type PropertyTagDescriptorMap = Map<string, PropertyTagDescriptor>;
+export type PropertyDescriptorMap = Map<string, PropertyDescriptor>;
 
 export type TagName = 'emit' | 'store';
 
@@ -19,12 +19,12 @@ type ConstructorProperty = () => void;
 export type PropertyTagIterator = IterableIterator<{
   name: string,
   node: Serializable | number | string | ConstructorProperty,
-  descriptor?: PropertyTagDescriptor,
+  descriptor?: PropertyDescriptor,
 }>;
 
 export abstract class Serializable extends StateNode {
   // Rename this to be more serializable specific?
-  public static descriptorsOfProperties: PropertyTagDescriptorMap = new Map();
+  public static descriptorsOfProperties: PropertyDescriptorMap = new Map();
   public static defaultTagNames: string[] = [];
   public 'constructor': typeof Serializable;
 

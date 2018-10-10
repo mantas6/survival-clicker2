@@ -1,4 +1,4 @@
-import { Serializable, TagName, PropertyTagDescriptorMap } from './serializable';
+import { Serializable, TagName, PropertyDescriptorMap } from './serializable';
 
 export function SerializeAllOn(...tagNames: TagName[]) {
   return (serializableClass: Serializable) => {
@@ -55,7 +55,7 @@ export function UnserializeAs<Target>(unserializeFunc: (input: number | string) 
   };
 }
 
-function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertyTagDescriptorMap {
+function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertyDescriptorMap {
   const ctor = serializableClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
   const descriptors = new Map(ctor.descriptorsOfProperties);
