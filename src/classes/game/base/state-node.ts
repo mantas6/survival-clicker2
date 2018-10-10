@@ -65,7 +65,10 @@ export abstract class StateNode {
 
     while (rootNode.parent) {
       rootNode = rootNode.parent;
-      path = `${rootNode.name}.${path}`;
+
+      if (rootNode.parent) {
+        path = `${rootNode.name}.${path}`;
+      }
     }
 
     this.root = rootNode;
