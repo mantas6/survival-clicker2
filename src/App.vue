@@ -1,10 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    <div>
-      <router-view/>
-    </div>
+    <header></header>
+    <main>
+      <nav>
+        <router-link to="/">Home</router-link>
+      </nav>
+      <article>
+        <router-view/>
+      </article>
+    </main>
+    <aside></aside>
   </div>
 </template>
+
+<style lang="scss">
+  #app {
+    display: flex;
+  }
+</style>
