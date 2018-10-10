@@ -20,8 +20,8 @@ relay.on('stats', stats => {
   store.commit('updateStats', stats);
 });
 
-relay.on('processes', processes => {
-  store.commit('updateProcesses', processes);
+relay.on('actions', processes => {
+  store.commit('updateActions', processes);
 });
 
 if (localStorage.getItem('debug')) {

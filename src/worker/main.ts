@@ -12,4 +12,4 @@ const mySave = JSON.parse('{"character":{"health":{}},"finance":{"money":{"curre
 state.stats.unserialize(mySave);
 
 relay.emit('stats', state.stats.serialize('emit'));
-relay.emit('processes', state.processes.serialize('emit'));
+relay.emit('actions', state.actions.serialize('emit'));
