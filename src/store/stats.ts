@@ -1,12 +1,14 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-import { SerializedMap } from '@/store/types';
+import { Stats as StateStats } from '@/classes/game/stats';
+
+export type SerializedStats = StateStats;
 
 @Module
 export class Stats extends VuexModule {
-  public list: SerializedMap = {};
+  public list: SerializedStats = {} as any;
 
   @Mutation
-  public updateStats(stats: SerializedMap) {
+  public updateStats(stats: SerializedStats) {
     this.list = stats;
   }
 

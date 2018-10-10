@@ -10,14 +10,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
 import { mapGetters } from 'vuex';
 import { Stats } from '@/store/stats';
-import { SerializedMap } from '@/store/types';
+import { SerializedStats } from '@/store/stats';
 
 @Component({
   components: { GameLogo },
   computed: { ...mapGetters(['stats']) },
 })
 export default class HeaderContainer extends Vue {
-  stats!: SerializedMap;
+  private stats!: SerializedStats;
 
   get money() {
     if (this.stats.finance) {
