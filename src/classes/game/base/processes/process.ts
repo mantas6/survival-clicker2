@@ -14,7 +14,7 @@ export interface EffectDescriptor {
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;
 
 export abstract class Process extends SerializableWithReference {
-  public static type: ProcessType = ProcessType.Manual;
+  public static type: ProcessType = ProcessType.Auto;
   public static descriptorsOfEffects: EffectDescriptorMap = new Map();
   public 'constructor': typeof Process;
 
