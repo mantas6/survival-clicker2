@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <header-container></header-container>
-    <main>
-      <nav>
-        <router-link to="/">Home</router-link>
-      </nav>
-      <article>
-        <router-view/>
-      </article>
-    </main>
-    <aside></aside>
+    <div>
+      <header-container></header-container>
+      <main>
+        <nav>
+          <router-link to="/">Home</router-link>
+        </nav>
+        <article>
+          <router-view/>
+        </article>
+      </main>
+      <aside></aside>
+    </div>
+    <footer>
+      <span>Build time: {{ buildTime }}</span>
+    </footer>
   </div>
 </template>
 
@@ -21,13 +26,13 @@ import HeaderContainer from '@/components/header/HeaderContainer.vue';
   components: { HeaderContainer },
 })
 export default class App extends Vue {
-
+  buildTime: number = process.env.BUILD_TIME;
 }
 </script>
 
 
 <style lang="scss">
-  #app {
+  #app > div {
     display: flex;
   }
 </style>
