@@ -27,7 +27,7 @@ import HeaderContainer from '@/components/header/HeaderContainer.vue';
   components: { HeaderContainer },
 })
 export default class App extends Vue {
-  buildTime: number = process.env.BUILD_TIME;
+  public buildTime: number = process.env.BUILD_TIME;
 }
 </script>
 

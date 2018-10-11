@@ -14,6 +14,6 @@ import { mapGetters } from 'vuex';
   },
 })
 export default class Actions extends Vue {
-  
+
 }
 </script>
