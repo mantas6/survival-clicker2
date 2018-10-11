@@ -11,13 +11,13 @@ import GameLogo from './GameLogo.vue';
 import { mapGetters } from 'vuex';
 import { Stats } from '@/store/stats';
 import { SerializedStats } from '@/store/stats';
+import { Getter } from 'vuex-class';
 
 @Component({
   components: { GameLogo },
-  computed: { ...mapGetters(['stats']) },
 })
 export default class HeaderContainer extends Vue {
-  private stats!: SerializedStats;
+  @Getter stats!: SerializedStats;
 
   get money() {
     if (this.stats.finance) {
