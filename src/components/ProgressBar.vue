@@ -11,13 +11,16 @@ import Decimal from 'decimal.js';
 @Component
 export default class ProgressBar extends Vue {
   @Prop({ required: true })
-  private max!: Decimal;
+  private max!: Decimal | number | string;
 
   @Prop({ required: true })
-  private current!: Decimal;
+  private current!: Decimal | number | string;
 
   get width(): Decimal {
-    return this.current.div(this.max).mul(100);
+    const current = new Decimal(this.current);
+    const max = new Decimal(this.max);
+
+    return current.div(max).mul(100);
   }
 }
 </script>

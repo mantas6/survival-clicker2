@@ -14,13 +14,14 @@ import { Formatter } from 'swarm-numberformat';
 export default class NumberFormat extends Vue {
 
   get formatted(): string {
-    return this.formatter.format(this.value);
+    const value = new Decimal(this.value);
+    return this.formatter.format(value);
   }
 
   public formatter = new Formatter();
 
   @Prop({ required: true })
-  private value!: Decimal;
+  private value!: Decimal | number | string;
 
   @Prop()
   private postFix?: string;
