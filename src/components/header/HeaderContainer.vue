@@ -29,3 +29,12 @@ export default class HeaderContainer extends Vue {
 }
 </script>
 
+<style lang="scss" scoped>
+  header {
+    display: flex;
+    flex-direction: column;
+    min-width: 20%;
+    height: 100%;
+    padding: 1rem;
+  }
+</style>
