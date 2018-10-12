@@ -29,9 +29,15 @@ export default class App extends Vue {
 }
 </script>
 
-
 <style lang="scss">
   #app > div {
     display: flex;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 6rem;
   }
 </style>
