@@ -30,6 +30,10 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+
   #app > div {
     display: flex;
   }
