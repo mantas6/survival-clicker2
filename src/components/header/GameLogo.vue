@@ -17,11 +17,14 @@ export default class GameLogo extends Vue {
 
 <style lang="scss" scoped>
   .logo {
-    display: flex;
+    width: 100%;
+    padding: 0 1.5vw;
+    font-size: 3.75vw;
 
     img {
-      width: 32px;
-      height: 32px;
+      height: 4.9875vw;
+      margin: 0 -1.1vw 0 -0.75vw;
+      transform: translateY(12.5%);
     }
   }
 </style>
