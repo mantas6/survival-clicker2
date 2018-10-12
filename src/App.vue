@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HeaderContainer from '@/components/header/HeaderContainer.vue';
+import HeaderContainer from '@/components/layout/HeaderContainer.vue';
 
 @Component({
   components: { HeaderContainer },
