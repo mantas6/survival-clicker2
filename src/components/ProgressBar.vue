@@ -1,6 +1,6 @@
 <template>
-  <div class="progress-bar">
-    <div class="progress" :style="{ width: this.width + '%' }"></div>
+  <div class="progress">
+    <div class="bar" :style="{ width: this.width + '%' }"></div>
   </div>
 </template>
 
@@ -23,18 +23,15 @@ export default class ProgressBar extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .progress-bar {
-    height: 24px;
+  .progress {
     width: 100%;
-    background: #e0e0e0;
-    border: 1px solid #444444;
-    border-radius: 5px;
-    position: relative;
+    border-radius: 0.75rem;
+    background-color: hsl(3, 100%, 42%);
 
-    .progress {
-      position: absolute;
+    .bar {
       height: 100%;
-      background: #ef5c5c;
+      border-radius: 0.75rem;
+      background-color: hsl(3, 100%, 57%);
     }
   }
 </style>
