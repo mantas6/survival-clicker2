@@ -17,11 +17,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
-import { mapGetters } from 'vuex';
-import { Stats } from '@/store/stats';
 import { SerializedStats } from '@/store/stats';
 import { Getter } from 'vuex-class';
-import Decimal from 'decimal.js';
 
 @Component({
   components: { GameLogo, ProgressBar },
