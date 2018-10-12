@@ -1,12 +1,14 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-import { SerializedMap } from '@/store/types';
+import { Actions as StateActions } from '@/classes/game/actions';
+
+export type SerializedActions = StateActions;
 
 @Module
 export class Actions extends VuexModule {
-  public list: SerializedMap = {};
+  public list: SerializedActions = {} as any;
 
   @Mutation
-  public updateActions(actions: SerializedMap) {
+  public updateActions(actions: SerializedActions) {
     this.list = actions;
   }
 

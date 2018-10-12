@@ -6,14 +6,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
+import { Getter } from 'vuex-class';
+import { SerializedActions } from '@/store/actions';
 
-@Component({
-  computed: {
-    ...mapGetters(['processes', 'stats']),
-  },
-})
 export default class Actions extends Vue {
-
+  @Getter public actions!: SerializedActions;
 }
 </script>
