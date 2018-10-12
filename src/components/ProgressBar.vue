@@ -14,13 +14,13 @@ export default class ProgressBar extends Vue {
   private max!: Decimal | number | string;
 
   @Prop({ required: true })
-  private current!: Decimal | number | string;
+  private value!: Decimal | number | string;
 
   get width(): Decimal {
-    const current = new Decimal(this.current);
+    const value = new Decimal(this.value);
     const max = new Decimal(this.max);
 
-    return current.div(max).mul(100);
+    return value.div(max).mul(100);
   }
 }
 </script>

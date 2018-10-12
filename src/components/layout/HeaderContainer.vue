@@ -7,7 +7,7 @@
       </div>
       <div class="stats">
         <span>Health</span>
-        <progress-bar :current="health.value" :max="health.max"></progress-bar>
+        <progress-bar :value="health.value" :max="health.max"></progress-bar>
       </div>
     </div>
   </header>
