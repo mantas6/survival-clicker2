@@ -1,7 +1,7 @@
 <template>
   <header>
     <game-logo></game-logo>
-    <div class="info">
+    <div class="info" v-if="stats.finance">
       <div class="money">
         <number-format :value="money"></number-format>
       </div>
@@ -30,11 +30,7 @@ export default class HeaderContainer extends Vue {
   @Getter public stats!: SerializedStats;
 
   get money() {
-    if (this.stats.finance) {
-      return this.stats.finance.money.value;
-    }
-
-    return 0;
+    return this.stats.finance.money.value;
   }
 
   get currentHealth() {
