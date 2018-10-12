@@ -10,6 +10,7 @@ export class Actions extends VuexModule {
     this.list = actions;
   }
 
+  // Can not names this 'actions' since it collides with vuex-module-decorators package
   get processes() {
     return this.list;
   }
