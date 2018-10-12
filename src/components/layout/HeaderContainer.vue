@@ -7,7 +7,7 @@
       </div>
       <div class="stats">
         <span>Health</span>
-        <progress-bar :current="currentHealth" :max="maxHealth"></progress-bar>
+        <progress-bar :current="health.value" :max="health.max"></progress-bar>
       </div>
     </div>
   </header>
@@ -33,12 +33,9 @@ export default class HeaderContainer extends Vue {
     return this.stats.finance.money.value;
   }
 
-  get currentHealth() {
-    return new Decimal(this.stats.character.health.value);
-  }
-
-  get maxHealth() {
-    return new Decimal(this.stats.character.health.max);
+  get health() {
+    const { value, max } = this.stats.character.health;
+    return { value, max };
   }
 }
 </script>
