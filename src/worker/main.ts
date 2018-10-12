@@ -7,9 +7,5 @@ const relay = new Relay(ctx);
 
 const state = new State();
 
-const mySave = JSON.parse('{"character":{"health":{}},"finance":{"money":{"current":"150"}}}');
-
-state.stats.unserialize(mySave);
-
 relay.emit('stats', state.stats.serialize('emit'));
 relay.emit('actions', state.actions.serialize('emit'));
