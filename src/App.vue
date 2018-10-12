@@ -3,10 +3,7 @@
     <div>
       <header-container></header-container>
       <main>
-        <nav>
-          <router-link to="/actions/consumables">Consumables</router-link>
-          <router-link to="/actions/jobs">Jobs</router-link>
-        </nav>
+        <navigation></navigation>
         <article>
           <router-view/>
         </article>
@@ -22,9 +19,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HeaderContainer from '@/components/layout/HeaderContainer.vue';
+import Navigation from '@/components/layout/Navigation.vue';
 
 @Component({
-  components: { HeaderContainer },
+  components: { HeaderContainer, Navigation },
 })
 export default class App extends Vue {
   public buildTime: number = process.env.BUILD_TIME;
@@ -35,18 +33,5 @@ export default class App extends Vue {
 <style lang="scss">
   #app > div {
     display: flex;
-  }
-
-  nav {
-    margin-bottom: 4rem;
-
-    a {
-      text-transform: uppercase;
-      text-decoration: none;
-      color: grey;
-      &.router-link-exact-active {
-        color: lightblue;
-      }
-    }
   }
 </style>
