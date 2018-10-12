@@ -9,6 +9,10 @@ class ChildClass extends Serializable {
   @UnserializeAs(input => input)
   public someText: string = 'someValue';
 
+  @SerializeOn('store')
+  @SerializeAs((input: string) => input)
+  public someTextOnlyToStore: string = 'toStoreValue';
+
   @SerializeOn('emit')
   get someGetter() {
     return this.someText + 'FromGetter';
@@ -16,7 +20,7 @@ class ChildClass extends Serializable {
 }
 
 class ParentClass extends Serializable {
-  @SerializeOn('emit')
+  @SerializeOn('emit', 'store')
   public someProperty = new ChildClass();
 }
 
@@ -28,6 +32,17 @@ describe('serializable.ts', () => {
     const serialized = serializable.serialize('emit');
     expect(serialized).to.be.not.null;
     expect(serialized).has.property('someProperty');
+  });
+
+  // Redo these tests without nested prop?
+  it('does not serialize property from other group', () => {
+    const serialized = serializable.serialize('emit');
+    expect(serialized.someProperty).to.not.have.property('someTextOnlyToStore');
+  });
+
+  it('does serialize property from store group', () => {
+    const serialized = serializable.serialize('store');
+    expect(serialized.someProperty).to.have.property('someTextOnlyToStore').and.be.equal('toStoreValue');
   });
 
   it('serializes children property correctly', () => {
