@@ -1,5 +1,6 @@
 import { Decimal } from 'decimal.js';
 import { Value, MutationFunction } from './value';
+import { SerializeOn } from '../serialization';
 
 export abstract class Container extends Value {
   abstract get maximum(): Decimal;
@@ -14,5 +15,10 @@ export abstract class Container extends Value {
     } else {
       this.current = mutated;
     }
+  }
+
+  @SerializeOn('emit')
+  get max() {
+    return this.maximum;
   }
 }

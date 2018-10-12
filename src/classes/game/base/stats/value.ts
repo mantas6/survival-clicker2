@@ -10,11 +10,11 @@ export abstract class Value extends Serializable {
    */
   public minimum: number | string = 0;
 
-  @SerializeOn('emit')
-  @SerializeAs((value: Decimal) => value.toString())
+  @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input))
   public current?: Decimal;
 
+  @SerializeOn('emit')
   get value(): Decimal {
     if (this.current === undefined) {
       this.current = new Decimal(this.default);
