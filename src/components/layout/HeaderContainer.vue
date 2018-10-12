@@ -1,30 +1,48 @@
 <template>
   <header>
     <game-logo></game-logo>
-    <number-format :value="money"></number-format>
+    <div class="info">
+      <div class="money">
+        <number-format :value="money"></number-format>
+      </div>
+      <div class="stats">
+        <span>Health</span>
+        <progress-bar :current="currentHealth" :max="maxHealth"></progress-bar>
+      </div>
+    </div>
   </header>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
+import ProgressBar from '@/components/ProgressBar.vue';
 import { mapGetters } from 'vuex';
 import { Stats } from '@/store/stats';
 import { SerializedStats } from '@/store/stats';
 import { Getter } from 'vuex-class';
+import Decimal from 'decimal.js';
 
 @Component({
-  components: { GameLogo },
+  components: { GameLogo, ProgressBar },
 })
 export default class HeaderContainer extends Vue {
   @Getter public stats!: SerializedStats;
 
   get money() {
     if (this.stats.finance) {
-      return this.stats.finance.money.current;
+      return this.stats.finance.money.value;
     }
 
     return 0;
+  }
+
+  get currentHealth() {
+    return new Decimal(this.stats.character.health.value);
+  }
+
+  get maxHealth() {
+    return new Decimal(this.stats.character.health.max);
   }
 }
 </script>
@@ -36,5 +54,21 @@ export default class HeaderContainer extends Vue {
     min-width: 20%;
     height: 100%;
     padding: 1rem;
+
+    .info > * {
+      margin-top: 2rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 66%;
+      grid-template-rows: 1fr;
+      grid-gap: 0.5rem;
+    }
+
+    .money {
+      width: 100%;
+      padding-right: 1.5vw;
+    }
   }
 </style>
