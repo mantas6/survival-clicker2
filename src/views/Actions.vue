@@ -28,7 +28,7 @@ export default class Actions extends Vue {
     return this.processes[category];
   }
 
-  activate(path: string) {
+  public activate(path: string) {
     const relay = getRelay();
     relay.emit('action', { path });
   }
