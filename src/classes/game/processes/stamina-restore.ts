@@ -5,7 +5,7 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 
 export class StaminaRestore extends Process {
   @SerializeOn('emit')
-  public drain = new Effect(() => this.stats.character.health, () => {
+  public drain = new Effect(() => this.stats.character.stamina, () => {
     return new Decimal(1);
   });
 }
