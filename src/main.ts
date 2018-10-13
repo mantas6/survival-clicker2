@@ -32,6 +32,7 @@ relay.on('actions', processes => {
 
 if (localStorage.getItem('debug')) {
   enableLogging();
+  relay.emit('enableLogging');
 }
 
 log('Application was built on', process.env.BUILD_TIME);
