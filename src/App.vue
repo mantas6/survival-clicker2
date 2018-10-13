@@ -4,9 +4,7 @@
       <header-container></header-container>
       <main>
         <navigation></navigation>
-        <article>
-          <router-view/>
-        </article>
+        <router-view/>
       </main>
       <aside></aside>
     </div>
