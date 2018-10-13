@@ -8,6 +8,14 @@
       <div class="stats">
         <span>Health</span>
         <progress-bar :value="health.value" :max="health.max"></progress-bar>
+        <span>Energy</span>
+        <progress-bar :value="energy.value" :max="energy.max"></progress-bar>
+        <span>Stamina</span>
+        <progress-bar :value="stamina.value" :max="stamina.max"></progress-bar>
+        <span>Hydration</span>
+        <progress-bar :value="hydration.value" :max="hydration.max"></progress-bar>
+        <span>Stomach</span>
+        <progress-bar :value="stomach.value" :max="stomach.max"></progress-bar>
       </div>
     </div>
   </header>
@@ -31,8 +39,23 @@ export default class HeaderContainer extends Vue {
   }
 
   get health() {
-    const { value, max } = this.stats.character.health;
-    return { value, max };
+    return this.stats.character.health;
+  }
+
+  get energy() {
+    return this.stats.character.energy;
+  }
+
+  get stamina() {
+    return this.stats.character.stamina;
+  }
+
+  get hydration() {
+    return this.stats.character.hydration;
+  }
+
+  get stomach() {
+    return this.stats.character.stomach;
   }
 }
 </script>
