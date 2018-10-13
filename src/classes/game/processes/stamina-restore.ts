@@ -5,7 +5,12 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 
 export class StaminaRestore extends Process {
   @SerializeOn('emit')
-  public drain = new Effect(() => this.stats.character.stamina, () => {
+  public restoreStamina = new Effect(() => this.stats.character.stamina, () => {
     return new Decimal(1);
+  });
+
+  @SerializeOn('emit')
+  public drainEnergy = new Effect(() => this.stats.character.energy, () => {
+    return new Decimal(-2);
   });
 }
