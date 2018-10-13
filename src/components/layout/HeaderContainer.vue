@@ -26,7 +26,7 @@
         <progress-bar :value="stomach.value" :max="stomach.max"></progress-bar>
       </div>
     </div>
-    <a href="#" class="suicide">suicide</a>
+    <button class="suicide">suicide</button>
   </header>
 </template>
 
