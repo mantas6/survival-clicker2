@@ -3,7 +3,15 @@
     <game-logo></game-logo>
     <div class="info" v-if="stats.finance">
       <div class="money">
-        <number-format :value="money" post-fix="$"></number-format>
+        <div class="current">
+          <number-format :value="money" post-fix="$"></number-format>
+        </div>
+        <div class="income">
+          + <number-format :value="0" post-fix="$"></number-format> / s
+        </div>
+        <div class="tax">
+          @ <number-format :value="tax" post-fix="%"></number-format> tax
+        </div>
       </div>
       <div class="stats">
         <span>Health</span>
@@ -36,6 +44,10 @@ export default class HeaderContainer extends Vue {
 
   get money() {
     return this.stats.finance.money.value;
+  }
+
+  get tax() {
+    return this.stats.finance.taxes.value;
   }
 
   get health() {
@@ -82,6 +94,22 @@ export default class HeaderContainer extends Vue {
     .money {
       width: 100%;
       padding-right: 1.5vw;
+
+      .current {
+        font-size: 2.25rem;
+      }
+
+      .income {
+        font-size: 1.5rem;
+      }
+
+      .tax {
+        font-size: 1.25rem;
+      }
+
+      > * {
+        text-align: right;
+      }
     }
   }
 </style>
