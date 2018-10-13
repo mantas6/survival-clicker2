@@ -5,7 +5,7 @@ export class Action extends Process {
   public static type: ProcessType = ProcessType.Manual;
 
   @SerializeOn('emit')
-  get actionName() {
+  get fullPath() {
     return this.path;
   }
 }
