@@ -6,7 +6,9 @@ export class ProcessContainer extends Serializable implements Calculable {
   public calculate() {
     const filter = (entry: Calculable) => entry instanceof ProcessContainer || entry instanceof Process;
     for (const processChild of this.children(filter)) {
-      processChild.calculate();
+      if (processChild.validate()) {
+        processChild.calculate();
+      }
     }
   }
 
