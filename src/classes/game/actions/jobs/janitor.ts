@@ -1,9 +1,9 @@
-import { Process } from '@/classes/game/base/processes/process';
+import { Action } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 import { SerializeOn } from '@/classes/game/base/serialization';
 
-export class Janitor extends Process {
+export class Janitor extends Action {
   @SerializeOn('emit')
   public stamina = new Effect(() => this.stats.character.stamina, () => {
     return new Decimal(-5);
