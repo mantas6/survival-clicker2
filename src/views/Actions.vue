@@ -19,7 +19,9 @@ export default class Actions extends Vue {
   @Getter public processes!: SerializedActions;
 
   get availableActions() {
-    if (!this.processes) return;
+    if (!this.processes) {
+      return;
+    }
     const category = this.$route.params.name as 'jobs' | 'consumables';
 
     return this.processes[category];
