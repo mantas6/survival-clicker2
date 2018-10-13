@@ -24,7 +24,7 @@ git remote update && git status -uno | grep -q 'Your branch is behind' && change
 if [ $changed = 1 ]; then
     git checkout -- .
     git pull origin master
-    npm i
+    npm ci
 
     if ! npm run build; then
       echo "Build has failed"
