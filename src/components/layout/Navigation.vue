@@ -4,7 +4,6 @@
     <router-link to="/actions/jobs">Jobs</router-link>
     <router-link to="/actions/banking">Banking</router-link>
     <router-link to="/actions/government">Government</router-link>
-    <router-link to="/actions/extraterrestrials">Extraterrestrials</router-link>
   </nav>
 </template>
 
