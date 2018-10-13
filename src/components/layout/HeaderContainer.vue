@@ -3,7 +3,7 @@
     <game-logo></game-logo>
     <div class="info" v-if="stats.finance">
       <div class="money">
-        <number-format :value="money"></number-format>
+        <number-format :value="money" post-fix="$"></number-format>
       </div>
       <div class="stats">
         <span>Health</span>
