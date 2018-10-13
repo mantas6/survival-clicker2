@@ -28,6 +28,15 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
   body {
     font-family: 'Roboto', sans-serif;
   }
