@@ -51,4 +51,8 @@ export default class App extends Vue {
     flex-direction: column;
     padding: 3rem 6rem;
   }
+
+  aside {
+    min-width: 5rem;
+  }
 </style>
