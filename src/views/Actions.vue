@@ -1,7 +1,7 @@
 <template>
   <article>
     <section>
-      <div v-for="(action, actionName) of availableActions" :key="actionName" class="item">
+      <div v-for="(action, actionName) of availableActions" :key="actionName" @click="activate(action.fullPath)" class="item">
         <span class="name">{{ actionName }}</span>
         <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
       </div>
@@ -13,6 +13,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
+import { getRelay } from '@/global';
 
 @Component
 export default class Actions extends Vue {
@@ -25,6 +26,11 @@ export default class Actions extends Vue {
     const category = this.$route.params.name as 'jobs' | 'consumables';
 
     return this.processes[category];
+  }
+
+  activate(path: string) {
+    const relay = getRelay();
+    relay.emit('action', { path });
   }
 }
 </script>
@@ -39,6 +45,7 @@ export default class Actions extends Vue {
     grid-gap: 1rem;
 
     .item {
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       width: 50%;
