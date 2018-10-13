@@ -5,7 +5,7 @@ import router from './router';
 import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
-import { enableLogging } from '@/utils/log';
+import { log, enableLogging } from '@/utils/log';
 import { setRelay } from '@/global';
 import NumberFormat from '@/components/NumberFormat.vue';
 
@@ -33,3 +33,5 @@ relay.on('actions', processes => {
 if (localStorage.getItem('debug')) {
   enableLogging();
 }
+
+log('Application was built on', process.env.BUILD_TIME);
