@@ -35,7 +35,7 @@ export class Relay {
     this.events[name].push(cb);
   }
 
-  public emit(name: string, data: any): void {
+  public emit(name: string, data?: any): void {
     this.ctx.postMessage({ name, data });
   }
 }
