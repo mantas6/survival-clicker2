@@ -26,6 +26,7 @@
         <progress-bar :value="stomach.value" :max="stomach.max"></progress-bar>
       </div>
     </div>
+    <a href="#" class="suicide">suicide</a>
   </header>
 </template>
 
@@ -80,8 +81,11 @@ export default class HeaderContainer extends Vue {
     height: 100%;
     padding: 1rem;
 
-    .info > * {
-      margin-top: 2rem;
+    .info {
+      flex: 1;
+      > * {
+        margin-top: 2rem;
+      }
     }
 
     .stats {
@@ -110,6 +114,18 @@ export default class HeaderContainer extends Vue {
       > * {
         text-align: right;
       }
+    }
+
+    .suicide {
+      margin-right: 1.5vw;
+      padding: 0.25rem;
+      border: 0.25rem solid hsl(0, 100%, 50%);
+      border-radius: 1rem;
+      font-size: 2rem;
+      text-align: center;
+      text-decoration: none;
+      background-color: hsl(0, 100%, 50%);
+      color: white;
     }
   }
 </style>
