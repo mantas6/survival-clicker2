@@ -19,6 +19,12 @@ export abstract class Process extends SerializableWithReference {
   public 'constructor': typeof Process;
 
   public validate(): boolean {
+    for (const effect of this.effects()) {
+      if (!effect.validate()) {
+        return false;
+      }
+    }
+
     return true;
   }
 

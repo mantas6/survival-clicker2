@@ -1,5 +1,6 @@
 import { Decimal } from 'decimal.js';
 import { Serializable, SerializeAs, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
+import { ProbeFlag } from '.';
 
 export type MutationFunction = (value: Decimal) => Decimal;
 
@@ -26,10 +27,22 @@ export abstract class Value extends Serializable {
   public mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
 
-    if (mutated.lessThan(this.minimum)) {
+    const flag = this.probe(mutateFunc);
+
+    if (flag === 'lessThanMinimum') {
       this.current = new Decimal(this.minimum);
     } else {
       this.current = mutated;
     }
+  }
+
+  public probe(mutateFunc: MutationFunction): ProbeFlag {
+    const mutated = mutateFunc(this.value);
+
+    if (mutated.lessThan(this.minimum)) {
+      return 'lessThanMinimum';
+    }
+
+    return true;
   }
 }

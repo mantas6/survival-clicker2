@@ -9,4 +9,8 @@ export class ProcessContainer extends Serializable implements Calculable {
       processChild.calculate();
     }
   }
+
+  public validate() {
+    return true;
+  }
 }
