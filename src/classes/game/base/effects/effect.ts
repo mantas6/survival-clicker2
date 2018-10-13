@@ -24,7 +24,6 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
     this.diffFunc = diffFunc;
   }
 
-  // Rename this method to run?
   public calculate() {
     const diff = this.diffFunc();
     const stat = this.statFunc();
