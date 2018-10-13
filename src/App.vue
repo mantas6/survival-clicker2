@@ -1,16 +1,11 @@
 <template>
   <div id="app">
-    <div>
-      <header-container></header-container>
-      <main>
-        <navigation></navigation>
-        <router-view/>
-      </main>
-      <aside></aside>
-    </div>
-    <footer>
-      <span>Build time: {{ buildTime }}</span>
-    </footer>
+    <header-container></header-container>
+    <main>
+      <navigation></navigation>
+      <router-view/>
+    </main>
+    <aside></aside>
   </div>
 </template>
 
@@ -23,7 +18,7 @@ import Navigation from '@/components/layout/Navigation.vue';
   components: { HeaderContainer, Navigation },
 })
 export default class App extends Vue {
-  public buildTime: number = process.env.BUILD_TIME;
+
 }
 </script>
 
@@ -32,7 +27,7 @@ export default class App extends Vue {
     box-sizing: border-box;
   }
 
-  html, body {
+  html, body, #app {
     height: 100%;
     margin: 0;
   }
@@ -41,7 +36,7 @@ export default class App extends Vue {
     font-family: 'Roboto', sans-serif;
   }
 
-  #app > div {
+  #app {
     display: flex;
   }
 
