@@ -15,4 +15,5 @@ relay.emit('actions', state.actions.serialize('emit'));
 relay.on('action', ({ path }) => {
   const action = get(state, path) as Calculable;
   action.calculate();
+  relay.emit('stats', state.stats.serialize('emit'));
 });
