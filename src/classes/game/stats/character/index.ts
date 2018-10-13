@@ -2,6 +2,7 @@ import { Health } from './health';
 import { Energy } from './energy';
 import { Hydration } from './hydration';
 import { Stamina } from './stamina';
+import { Stomach } from './stomach';
 import { Serializable, SerializeOn } from '@/classes/game/base/serialization';
 
 export class Character extends Serializable {
@@ -16,4 +17,7 @@ export class Character extends Serializable {
 
   @SerializeOn('emit')
   public hydration = new Hydration();
+
+  @SerializeOn('emit')
+  public stomach = new Stomach();
 }
