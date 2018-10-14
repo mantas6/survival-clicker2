@@ -3,9 +3,9 @@ import { Effect } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 import { SerializeOn } from '@/classes/game/base/serialization';
 
-export class CheapFood extends Action {
+export class CheapWater extends Action {
   @SerializeOn('emit')
-  public stamina = new Effect(() => this.stats.character.energy, () => {
+  public hydration = new Effect(() => this.stats.character.hydration, () => {
     return new Decimal(1);
   });
 
