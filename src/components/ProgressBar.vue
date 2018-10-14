@@ -1,6 +1,6 @@
 <template>
   <div class="progress" :class="variant">
-    <div class="bar" :style="{ width: this.width + '%' }"></div>
+    <div class="bar" :class="isEmpty ? 'empty' : ''" :style="{ width: width + '%' }"></div>
   </div>
 </template>
 
@@ -19,6 +19,10 @@ export default class ProgressBar extends Vue {
   @Prop({ default: 'red' })
   private variant!: 'green' | 'red' | 'yellow' | 'blue' | 'cyan';
 
+  get isEmpty(): boolean {
+    return this.width.isZero();
+  }
+
   get width(): Decimal {
     const value = new Decimal(this.value);
     const max = new Decimal(this.max);
@@ -35,8 +39,11 @@ export default class ProgressBar extends Vue {
 
     .bar {
       height: 100%;
-      min-width: 0.75rem;
       border-radius: 0.75rem;
+
+      &:not(.empty) {
+        min-width: 0.75rem;
+      }
     }
 
     &.red {
