@@ -1,8 +1,7 @@
 import { Serializable, TagName, PropertyDescriptorMap } from './serializable';
 
 export function SerializeAllOn(...tagNames: TagName[]) {
-  return (serializableClass: Serializable) => {
-    const ctor = serializableClass.constructor;
+  return (ctor: typeof Serializable) => {
     ctor.defaultTagNames = [ ...ctor.defaultTagNames, ...tagNames ];
   };
 }

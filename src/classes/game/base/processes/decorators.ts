@@ -1,8 +1,8 @@
 import { ProcessType, Process, EffectDescriptorMap } from './process';
 import Decimal from 'decimal.js';
 
-export function Auto(processClass: Process) {
-  processClass.constructor.type = ProcessType.Auto;
+export function Auto(ctor: typeof Process) {
+  ctor.type = ProcessType.Auto;
 }
 
 export function Duration(duration: Decimal) {
