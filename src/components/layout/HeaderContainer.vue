@@ -17,13 +17,13 @@
         <span>Health</span>
         <progress-bar :value="health.value" :max="health.max"></progress-bar>
         <span>Energy</span>
-        <progress-bar :value="energy.value" :max="energy.max"></progress-bar>
+        <progress-bar :value="energy.value" :max="energy.max" variant="green"></progress-bar>
         <span>Stamina</span>
-        <progress-bar :value="stamina.value" :max="stamina.max"></progress-bar>
+        <progress-bar :value="stamina.value" :max="stamina.max" variant="blue"></progress-bar>
         <span>Hydration</span>
-        <progress-bar :value="hydration.value" :max="hydration.max"></progress-bar>
+        <progress-bar :value="hydration.value" :max="hydration.max" variant="cyan"></progress-bar>
         <span>Stomach</span>
-        <progress-bar :value="stomach.value" :max="stomach.max"></progress-bar>
+        <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
       </div>
     </div>
     <button class="suicide">suicide</button>
