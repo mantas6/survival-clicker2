@@ -8,4 +8,9 @@ export class Action extends Process {
   get fullPath() {
     return this.path;
   }
+
+  @SerializeOn('emit')
+  get isAvailable() {
+    return this.validate();
+  }
 }

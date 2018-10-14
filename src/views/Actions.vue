@@ -1,7 +1,11 @@
 <template>
   <article>
     <section>
-      <div v-for="(action, actionName) of availableActions" :key="actionName" @click="activate(action.fullPath)" class="item">
+      <div v-for="(action, actionName) of availableActions"
+        :key="actionName"
+        @click="activate(action.fullPath)"
+        class="item"
+        :class="!action.isAvailable ? 'unavailable' : ''">
         <span class="name">{{ actionName }}</span>
         <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
       </div>
@@ -52,6 +56,10 @@ export default class Actions extends Vue {
       padding: 0.75rem;
       padding-left: 0;
       text-transform: capitalize;
+
+      &.unavailable {
+        color: grey;
+      }
     }
   }
 </style>
