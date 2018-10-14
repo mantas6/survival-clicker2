@@ -1,11 +1,10 @@
-import { Serializable, SerializeOn } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 import { CheapFood } from './cheap-food';
 import { CheapWater } from './cheap-water';
 
+@SerializeAllOn('emit')
 export class Consumables extends Serializable {
-  @SerializeOn('emit')
   public cheapFood = new CheapFood();
 
-  @SerializeOn('emit')
   public cheapWater = new CheapWater();
 }

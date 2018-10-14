@@ -1,15 +1,13 @@
 import { Money } from './money';
 import { Investment } from './investment';
 import { Taxes } from './taxes';
-import { Serializable, SerializeOn } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
+@SerializeAllOn('emit')
 export class Finance extends Serializable {
-  @SerializeOn('emit')
   public money = new Money();
 
-  @SerializeOn('emit')
   public investment = new Investment();
 
-  @SerializeOn('emit')
   public taxes = new Taxes();
 }
