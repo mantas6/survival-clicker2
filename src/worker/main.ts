@@ -19,6 +19,7 @@ relay.on('action', ({ path }) => {
   if (action.validate()) {
     action.calculate();
     relay.emit('stats', state.stats.serialize('emit'));
+    relay.emit('actions', state.actions.serialize('emit'));
   }
 });
 
@@ -29,4 +30,5 @@ relay.on('enableLogging', () => {
 interval(1000).subscribe(() => {
   state.processes.calculate();
   relay.emit('stats', state.stats.serialize('emit'));
+  relay.emit('actions', state.actions.serialize('emit'));
 });
