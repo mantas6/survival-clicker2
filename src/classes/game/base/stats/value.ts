@@ -1,5 +1,5 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, SerializeAs, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
+import { Serializable, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
 import { ProbeFlag } from '.';
 
 export type MutationFunction = (value: Decimal) => Decimal;
