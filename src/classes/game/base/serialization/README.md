@@ -1,10 +1,10 @@
 # Serialization
 
-# Introduction
+## Introduction
 
 Serialization is used to convert the current game state from the object to string format (and back), then to be transferred to other environments (e.g., main thread or browser storage)
 
-# Usage
+## Usage
 
 - used by extending `Serializable` class
 - each property needs to be tagged as for when to serialize
@@ -13,7 +13,7 @@ Serialization is used to convert the current game state from the object to strin
     - `store` — when saving game state to the storage
 - properties that extend `Serializable` are serialized recursively
 
-# Decorators
+## Decorators
 
 - Class
   - `@SerializeAllOn` — sets default tag(s) for all class properties, unless property is configured otherwise
