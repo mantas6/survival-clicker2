@@ -19,4 +19,4 @@
 
 ## Usage
 
-Create an instance of either `Value` or `Container` classes, providing necessary constructor arguments.
+Create an instance of either `Value` or `Container` classes, providing necessary constructor arguments. Must be a child of `Process` or `Action` classes.
