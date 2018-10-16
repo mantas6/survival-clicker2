@@ -4,7 +4,7 @@ import { CheapWater } from './cheap-water';
 
 @SerializeAllOn('emit')
 export class Consumables extends Serializable {
-  public cheapFood = new CheapFood();
+  cheapFood = new CheapFood();
 
-  public cheapWater = new CheapWater();
+  cheapWater = new CheapWater();
 }

@@ -27,7 +27,7 @@ export class Relay {
     };
   }
 
-  public on(name: string, cb: RelayEvent): void {
+  on(name: string, cb: RelayEvent): void {
     if (!this.events[name]) {
       this.events[name] = [];
     }
@@ -35,7 +35,7 @@ export class Relay {
     this.events[name].push(cb);
   }
 
-  public emit(name: string, data?: any): void {
+  emit(name: string, data?: any): void {
     this.ctx.postMessage({ name, data });
   }
 }

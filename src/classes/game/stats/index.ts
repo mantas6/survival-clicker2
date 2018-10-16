@@ -4,7 +4,7 @@ import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization'
 
 @SerializeAllOn('emit')
 export class Stats extends Serializable {
-  public character = new Character();
+  character = new Character();
 
-  public finance = new Finance();
+  finance = new Finance();
 }

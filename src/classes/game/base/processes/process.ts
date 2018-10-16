@@ -14,11 +14,11 @@ export interface EffectDescriptor {
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;
 
 export abstract class Process extends SerializableWithReference {
-  public static type: ProcessType = ProcessType.Auto;
-  public static descriptorsOfEffects: EffectDescriptorMap = new Map();
-  public 'constructor': typeof Process;
+  static type: ProcessType = ProcessType.Auto;
+  static descriptorsOfEffects: EffectDescriptorMap = new Map();
+  'constructor': typeof Process;
 
-  public validate(): boolean {
+  validate(): boolean {
     for (const effect of this.effects()) {
       if (!effect.validate()) {
         return false;
@@ -28,14 +28,14 @@ export abstract class Process extends SerializableWithReference {
     return true;
   }
 
-  public calculate() {
+  calculate() {
     for (const effect of this.effects()) {
       effect.calculate();
     }
   }
 
   // Rename this method to match Process child classes
-  public *effects(): IterableIterator<Calculable> {
+  *effects(): IterableIterator<Calculable> {
     for (const child of this.children<Calculable>(entry => entry instanceof Effect)) {
       yield child;
     }

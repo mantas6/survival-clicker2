@@ -3,5 +3,5 @@ import { Janitor } from './janitor';
 
 @SerializeAllOn('emit')
 export class Jobs extends Serializable {
-  public janitor = new Janitor();
+  janitor = new Janitor();
 }

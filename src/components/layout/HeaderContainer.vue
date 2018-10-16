@@ -41,7 +41,7 @@ import { Getter } from 'vuex-class';
   components: { GameLogo, ProgressBar },
 })
 export default class HeaderContainer extends Vue {
-  @Getter public stats!: SerializedStats;
+  @Getter stats!: SerializedStats;
 
   get money() {
     return this.stats.finance.money.value;

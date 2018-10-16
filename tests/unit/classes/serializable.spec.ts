@@ -7,11 +7,11 @@ class ChildClass extends Serializable {
   @SerializeOn('emit')
   @SerializeAs((input: string) => input)
   @UnserializeAs(input => input)
-  public someText: string = 'someValue';
+  someText: string = 'someValue';
 
   @SerializeOn('store')
   @SerializeAs((input: string) => input)
-  public someTextOnlyToStore: string = 'toStoreValue';
+  someTextOnlyToStore: string = 'toStoreValue';
 
   @SerializeOn('emit')
   get someGetter() {
@@ -21,7 +21,7 @@ class ChildClass extends Serializable {
 
 class ParentClass extends Serializable {
   @SerializeOn('emit', 'store')
-  public someProperty = new ChildClass();
+  someProperty = new ChildClass();
 }
 
 describe('serializable.ts', () => {

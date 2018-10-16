@@ -46,25 +46,25 @@ declare module 'swarm-numberformat' {
     /**
      * Format a number.
      */
-    public format(val: Decimal, opts?: FormatterOptions): string;
+    format(val: Decimal, opts?: FormatterOptions): string;
 
     /**
      * Format a number with a specified flavor.
      * It's very common to call the formatter with different flavors, so it has its own shortcut.
      */
-    public formatFlavor(val: Decimal, flavor: string, opts: FormatterOptions): string;
+    formatFlavor(val: Decimal, flavor: string, opts: FormatterOptions): string;
 
-    public index(val: Decimal, opts: object): number;
+    index(val: Decimal, opts: object): number;
 
-    public listFormats(opts: FormatterOptions): string[];
+    listFormats(opts: FormatterOptions): string[];
 
-    public suffix(val: Decimal, opts: FormatterOptions): string;
+    suffix(val: Decimal, opts: FormatterOptions): string;
   }
 
   export class Parser {
     constructor(config: any)
 
-    public parse(text: any, config: any): any;
+    parse(text: any, config: any): any;
   }
 
   export const format: (val: Decimal, opts?: FormatterOptions) => string;

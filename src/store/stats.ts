@@ -5,10 +5,10 @@ export type SerializedStats = StateStats;
 
 @Module
 export class Stats extends VuexModule {
-  public list: SerializedStats = {} as any;
+  list: SerializedStats = {} as any;
 
   @Mutation
-  public updateStats(stats: SerializedStats) {
+  updateStats(stats: SerializedStats) {
     this.list = stats;
   }
 

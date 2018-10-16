@@ -6,7 +6,7 @@ import { ProbeFlag } from '.';
 export abstract class Container extends Value {
   abstract get maximum(): Decimal;
 
-  public mutate(mutateFunc: MutationFunction) {
+  mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
 
     if (mutated.lessThan(this.minimum)) {
@@ -18,7 +18,7 @@ export abstract class Container extends Value {
     }
   }
 
-  public probe(mutateFunc: MutationFunction): ProbeFlag {
+  probe(mutateFunc: MutationFunction): ProbeFlag {
     const mutated = mutateFunc(this.value);
 
     if (mutated.lessThan(this.minimum)) {

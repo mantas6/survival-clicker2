@@ -5,9 +5,9 @@ import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization'
 
 @SerializeAllOn('emit')
 export class Finance extends Serializable {
-  public money = new Money();
+  money = new Money();
 
-  public investment = new Investment();
+  investment = new Investment();
 
-  public taxes = new Taxes();
+  taxes = new Taxes();
 }

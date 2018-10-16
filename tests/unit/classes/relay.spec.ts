@@ -8,13 +8,13 @@ interface MessageEvent {
 }
 
 class StubWorker {
-  public onmessage?: (event: MessageEvent) => void;
+  onmessage?: (event: MessageEvent) => void;
 
-  public postMessage(data: any) {
+  postMessage(data: any) {
     return;
   }
 
-  public triggerMessage(data: RelayPayload) {
+  triggerMessage(data: RelayPayload) {
     if (this.onmessage) {
       this.onmessage({ data });
     }

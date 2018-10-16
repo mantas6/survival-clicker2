@@ -21,7 +21,7 @@ import { getRelay } from '@/global';
 
 @Component
 export default class Actions extends Vue {
-  @Getter public processes!: SerializedActions;
+  @Getter processes!: SerializedActions;
 
   get availableActions() {
     if (!this.processes) {
@@ -32,7 +32,7 @@ export default class Actions extends Vue {
     return this.processes[category];
   }
 
-  public activate(path: string) {
+  activate(path: string) {
     const relay = getRelay();
     relay.emit('action', { path });
   }

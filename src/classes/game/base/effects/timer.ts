@@ -10,7 +10,7 @@ export class Timer {
     this.durationLeft = duration;
   }
 
-  public calculate() {
+  calculate() {
     this.calculable.calculate();
   }
 }

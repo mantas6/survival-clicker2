@@ -1,11 +1,11 @@
 import { camelCase } from 'lodash';
 
 export abstract class StateNode {
-  public static nonChildrenNames: string[] = [];
-  public 'constructor': typeof StateNode;
+  static nonChildrenNames: string[] = [];
+  'constructor': typeof StateNode;
 
   @NonChild
-  public path!: string;
+  path!: string;
 
   @NonChild
   protected parent?: StateNode;
@@ -13,31 +13,31 @@ export abstract class StateNode {
   @NonChild
   protected root!: StateNode;
 
-  public setParent(parent: StateNode) {
+  setParent(parent: StateNode) {
     this.parent = parent;
     this.findRoot();
   }
 
-  public emitParent() {
+  emitParent() {
     for (const node of this.nodes()) {
       node.setParent(this);
       node.emitParent();
     }
   }
 
-  public *nodes(): IterableIterator<StateNode> {
+  *nodes(): IterableIterator<StateNode> {
     for (const node of this.children<StateNode>(entry => entry instanceof StateNode)) {
       yield node;
     }
   }
 
-  public *children<T>(filterFunc?: (entry: T) => boolean): IterableIterator<T> {
+  *children<T>(filterFunc?: (entry: T) => boolean): IterableIterator<T> {
     for (const { node } of this.childrenWithNames<T>(filterFunc)) {
       yield node;
     }
   }
 
-  public *childrenWithNames<T>(filterFunc?: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
+  *childrenWithNames<T>(filterFunc?: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const node = (this as any)[propertyName];
 
@@ -51,7 +51,7 @@ export abstract class StateNode {
     }
   }
 
-  public isChild<PropertyName extends keyof this>(propertyName: PropertyName): boolean {
+  isChild<PropertyName extends keyof this>(propertyName: PropertyName): boolean {
     return this.constructor.nonChildrenNames.includes(propertyName as string);
   }
 

@@ -7,13 +7,13 @@ import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization'
 
 @SerializeAllOn('emit')
 export class Character extends Serializable {
-  public health = new Health();
+  health = new Health();
 
-  public stamina = new Stamina();
+  stamina = new Stamina();
 
-  public energy = new Energy();
+  energy = new Energy();
 
-  public hydration = new Hydration();
+  hydration = new Hydration();
 
-  public stomach = new Stomach();
+  stomach = new Stomach();
 }

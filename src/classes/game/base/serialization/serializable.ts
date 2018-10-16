@@ -24,11 +24,11 @@ export type PropertyTagIterator = IterableIterator<{
 
 export abstract class Serializable extends StateNode {
   // Rename this to be more serializable specific?
-  public static descriptorsOfProperties: PropertyDescriptorMap = new Map();
-  public static defaultTagNames: string[] = [];
-  public 'constructor': typeof Serializable;
+  static descriptorsOfProperties: PropertyDescriptorMap = new Map();
+  static defaultTagNames: string[] = [];
+  'constructor': typeof Serializable;
 
-  public serialize(tagName: TagName) {
+  serialize(tagName: TagName) {
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.serializableProperties(tagName)) {
@@ -46,7 +46,7 @@ export abstract class Serializable extends StateNode {
     return serialized;
   }
 
-  public unserialize(serialized: SerializedNode) {
+  unserialize(serialized: SerializedNode) {
     for (const [ name, serializedValue ] of Object.entries(serialized)) {
       const node = this.getPropertyByName(name);
 

@@ -3,5 +3,5 @@ import { Investment } from './investment';
 
 @SerializeAllOn('emit')
 export class Banking extends Serializable {
-  public investment = new Investment();
+  investment = new Investment();
 }

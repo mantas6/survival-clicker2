@@ -3,7 +3,7 @@ import { Effect } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 
 export class Digestion extends Process {
-  public drainStomach = new Effect(() => this.stats.character.stomach, () => {
+  drainStomach = new Effect(() => this.stats.character.stomach, () => {
     return new Decimal(-3);
   });
 }

@@ -27,14 +27,14 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
     this.diffFunc = diffFunc;
   }
 
-  public calculate() {
+  calculate() {
     const diff = this.diffFunc();
     const stat = this.statFunc();
 
     stat.mutate(value => value.add(diff));
   }
 
-  public validate(): boolean {
+  validate(): boolean {
     const diff = this.diffFunc();
     const stat = this.statFunc();
 

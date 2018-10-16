@@ -4,9 +4,9 @@ import { StateNode } from '@/classes/game/base/state-node';
 import { Actions } from '@/classes/game/actions';
 
 export class State extends StateNode {
-  public stats = new Stats();
-  public processes = new Processes();
-  public actions = new Actions();
+  stats = new Stats();
+  processes = new Processes();
+  actions = new Actions();
 
   // For the time being
   constructor() {

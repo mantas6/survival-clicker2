@@ -5,10 +5,10 @@ export type SerializedActions = StateActions;
 
 @Module
 export class Actions extends VuexModule {
-  public list: SerializedActions = {} as any;
+  list: SerializedActions = {} as any;
 
   @Mutation
-  public updateActions(actions: SerializedActions) {
+  updateActions(actions: SerializedActions) {
     this.list = actions;
   }
 

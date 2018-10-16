@@ -5,15 +5,15 @@ import { ProbeFlag } from '.';
 export type MutationFunction = (value: Decimal) => Decimal;
 
 export abstract class Value extends Serializable {
-  public abstract default: number | string;
+  abstract default: number | string;
   /**
    * Standard value stat 99% of the time will default to zero as minimum value
    */
-  public minimum: number | string = 0;
+  minimum: number | string = 0;
 
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input))
-  public current?: Decimal;
+  current?: Decimal;
 
   @SerializeOn('emit')
   get value(): Decimal {
@@ -24,7 +24,7 @@ export abstract class Value extends Serializable {
     return this.current;
   }
 
-  public mutate(mutateFunc: MutationFunction) {
+  mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
 
     const flag = this.probe(mutateFunc);
@@ -36,7 +36,7 @@ export abstract class Value extends Serializable {
     }
   }
 
-  public probe(mutateFunc: MutationFunction): ProbeFlag {
+  probe(mutateFunc: MutationFunction): ProbeFlag {
     const mutated = mutateFunc(this.value);
 
     if (mutated.lessThan(this.minimum)) {
