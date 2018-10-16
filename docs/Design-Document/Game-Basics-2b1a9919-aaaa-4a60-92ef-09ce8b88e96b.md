@@ -48,8 +48,8 @@ Money can be exchanged for goods.
 
 - food
 - drinks
-  - alcoholic drinks
+    - alcoholic drinks
 - drugs
-  - medicine
-  - narcotics
-  - enhancers
+    - medicine
+    - narcotics
+    - enhancers

@@ -18,4 +18,4 @@
 - certain diseases develop the Hobo's immunity for further encounters, thus trigger the illness effect with significantly less likelihood
 - like [Addictions](https://www.notion.so/4d0e8971-af4f-42f2-b343-337729637c2a) may have a progress counter, which indicates how far Hobo has progressed into the disease; if not treated counter increases; if treated decreases [?]
 - Weather [Weather](https://www.notion.so/8679dce2-ba88-46f9-9e36-47f0bc9e6709) affects immunity levels
-  - how?
+    - how?

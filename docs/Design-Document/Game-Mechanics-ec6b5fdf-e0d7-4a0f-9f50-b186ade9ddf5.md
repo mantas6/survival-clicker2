@@ -8,6 +8,8 @@
 
 [Actions](./Actions-62423a76-375f-46bd-968f-56981fcf2fb7.md)
 
+[Serialization](./Serialization-43323e46-30b0-4cc1-85cf-77e702b2d10e.md)
+
 Defines how game works under the hood. Any other game element will use those mechanics to implement it's functionality. Game mechanics systems will be extended as needed arises.
 
 Must be implemented before adding base game functionality (see: [Game Basics](https://www.notion.so/2b1a9919-aaaa-4a60-92ef-09ce8b88e96b))

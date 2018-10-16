@@ -8,8 +8,8 @@ While struggle to survive is one of the main selling points of this game; once p
 
 - a form of defined day scheduling; Hobo plans out what routines he's going to carry out during the day; or hires workers to do tasks for him
 - player is offered to automate mundane actions such as:
-  - using consumables
-    - e.g., automatic food ingestion machinery
-  - working
-    - e.g., hiring other people or descendants
-  - investment (automatic investing)
+    - using consumables
+        - e.g., automatic food ingestion machinery
+    - working
+        - e.g., hiring other people or descendants
+    - investment (automatic investing)
