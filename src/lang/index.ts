@@ -7,7 +7,7 @@ interface TranslationParams {
 }
 
 export interface TranslationDictionary {
-  [ name: string ]: string;
+  [ name: string ]: TranslationDictionary | string;
 }
 
 export function translate(language: Language, name: string, params: TranslationParams) {
