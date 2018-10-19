@@ -1,4 +1,4 @@
-import { Serializable, TagName, PropertyDescriptorMap } from './serializable';
+import { Serializable, TagName, PropertyDescriptor } from './serializable';
 
 export function SerializeAllOn(...tagNames: TagName[]) {
   return (ctor: typeof Serializable) => {
@@ -8,53 +8,37 @@ export function SerializeAllOn(...tagNames: TagName[]) {
 
 export function DonNotSerialize() {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    const descriptor = descriptors.get(propertyName);
-
-    if (descriptor) {
-      descriptor.tagNames = [];
-    }
+    descriptor.tagNames = [];
   };
 }
 
 export function SerializeOn(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    const descriptor = descriptors.get(propertyName);
-
-    if (descriptor) {
-      descriptor.tagNames.push(...tagNames);
-    }
+    descriptor.tagNames.push(...tagNames);
   };
 }
 
 export function SerializeAs<Target>(serializeFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    const descriptor = descriptors.get(propertyName);
-
-    if (descriptor) {
-      descriptor.serializeFunc = serializeFunc;
-    }
+    descriptor.serializeFunc = serializeFunc;
   };
 }
 
 export function UnserializeAs<Target>(unserializeFunc: (input: number | string) => Target) {
   return (serializableClass: Serializable, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(serializableClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    const descriptor = descriptors.get(propertyName);
-
-    if (descriptor) {
-      descriptor.unserializeFunc = unserializeFunc;
-    }
+    descriptor.unserializeFunc = unserializeFunc;
   };
 }
 
-function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyName: string): PropertyDescriptorMap {
+function prepareDescriptorOfProperty(serializableClass: Serializable, propertyName: string): PropertyDescriptor {
   const ctor = serializableClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
   const descriptors = new Map(ctor.descriptorsOfProperties);
@@ -66,5 +50,5 @@ function prepareDescriptorsOfProperty(serializableClass: Serializable, propertyN
   // Forwarding the copy to the class
   ctor.descriptorsOfProperties = descriptors;
 
-  return descriptors;
+  return descriptors.get(propertyName)!;
 }

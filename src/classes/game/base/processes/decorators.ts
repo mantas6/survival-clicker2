@@ -1,4 +1,4 @@
-import { ProcessType, Process, EffectDescriptorMap } from './process';
+import { ProcessType, Process, EffectDescriptor } from './process';
 import Decimal from 'decimal.js';
 import { ProbeFlag } from '@/classes/game/base/stats';
 
@@ -8,27 +8,21 @@ export function Auto(ctor: typeof Process) {
 
 export function Duration(duration: Decimal) {
   return (processClass: Process, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(processClass, propertyName);
-    const descriptor = descriptors.get(propertyName);
+    const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
 
-    if (descriptor) {
-      descriptor.duration = duration;
-    }
+    descriptor.duration = duration;
   };
 }
 
 export function IgnoreLimits(...flags: ProbeFlag[]) {
   return (processClass: Process, propertyName: string) => {
-    const descriptors = prepareDescriptorsOfProperty(processClass, propertyName);
-    const descriptor = descriptors.get(propertyName);
+    const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
 
-    if (descriptor) {
-      descriptor.ignoreLimits.push(...flags);
-    }
+    descriptor.ignoreLimits.push(...flags);
   };
 }
 
-function prepareDescriptorsOfProperty(processClass: Process, propertyName: string): EffectDescriptorMap {
+function prepareDescriptorOfProperty(processClass: Process, propertyName: string): EffectDescriptor {
   const ctor = processClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
   const descriptors = new Map(ctor.descriptorsOfEffects);
@@ -42,5 +36,5 @@ function prepareDescriptorsOfProperty(processClass: Process, propertyName: strin
   // Forwarding the copy to the class
   ctor.descriptorsOfEffects = descriptors;
 
-  return descriptors;
+  return descriptors.get(propertyName)!;
 }
