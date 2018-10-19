@@ -12,11 +12,11 @@ export abstract class Container extends Value {
     if (mutated.lessThan(this.minimum)) {
       this.current = new Decimal(this.minimum);
 
-      this.onMinimum();
+      this.onLessThanMinimum();
     } else if (mutated.greaterThan(this.maximum)) {
       this.current = this.maximum;
 
-      this.onMaximum();
+      this.onGreaterThanMaximum();
     } else {
       this.current = mutated;
     }
@@ -45,7 +45,7 @@ export abstract class Container extends Value {
     }
   }
 
-  protected onMaximum() {
+  protected onGreaterThanMaximum() {
     //
   }
 

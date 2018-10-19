@@ -32,7 +32,7 @@ export abstract class Value extends SerializableWithReference {
     if (flag === 'lessThanMinimum') {
       this.current = new Decimal(this.minimum);
 
-      this.onMinimum();
+      this.onLessThanMinimum();
     } else {
       this.current = mutated;
     }
@@ -54,7 +54,7 @@ export abstract class Value extends SerializableWithReference {
     }
   }
 
-  protected onMinimum() {
+  protected onLessThanMinimum() {
     //
   }
 

@@ -8,7 +8,7 @@ export class Stamina extends Container {
     return new Decimal(100);
   }
 
-  protected onMinimum() {
+  protected onLessThanMinimum() {
     this.stats.character.health.mutate(value => value.minus(5));
   }
 }
