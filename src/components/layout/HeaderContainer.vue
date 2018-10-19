@@ -1,13 +1,13 @@
 <template>
   <header>
     <game-logo></game-logo>
-    <div class="info" v-if="stats.finance">
+    <div class="info" v-if="stats.finance && modifiers.finance">
       <div class="money">
         <div class="current">
           <number-format :value="money" post-fix="$"></number-format>
         </div>
         <div class="income">
-          + <number-format :value="0" post-fix="$"></number-format> / s
+          + <number-format :value="moneyGain" post-fix="$"></number-format> / s
         </div>
         <div class="tax">
           @ <number-format :value="tax" post-fix="%"></number-format> tax
@@ -35,6 +35,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import { SerializedStats } from '@/store/stats';
+import { SerializedModifiers } from '@/store/modifiers';
 import { Getter } from 'vuex-class';
 
 @Component({
@@ -42,6 +43,7 @@ import { Getter } from 'vuex-class';
 })
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
+  @Getter modifiers!: SerializedModifiers;
 
   get money() {
     return this.stats.finance.money.value;
@@ -69,6 +71,10 @@ export default class HeaderContainer extends Vue {
 
   get stomach() {
     return this.stats.character.stomach;
+  }
+
+  get moneyGain() {
+    return this.modifiers.finance.moneyGain.value;
   }
 }
 </script>
