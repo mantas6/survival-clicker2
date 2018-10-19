@@ -48,7 +48,17 @@ export abstract class Value extends SerializableWithReference {
     return true;
   }
 
+  triggerWhenMinimum() {
+    if (this.value.equals(this.minimum)) {
+      this.whenMinimum();
+    }
+  }
+
   protected onMinimum() {
+    //
+  }
+
+  protected whenMinimum() {
     //
   }
 }

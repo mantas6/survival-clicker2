@@ -39,7 +39,17 @@ export abstract class Container extends Value {
     return this.maximum;
   }
 
+  triggerWhenMaximum() {
+    if (this.value.equals(this.maximum)) {
+      this.whenMaximum();
+    }
+  }
+
   protected onMaximum() {
+    //
+  }
+
+  protected whenMaximum() {
     //
   }
 }
