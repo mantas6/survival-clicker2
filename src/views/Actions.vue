@@ -17,11 +17,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
-import { getRelay } from '@/global';
+import { Relay } from '@/classes/relay';
 
 @Component
 export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
+  @Getter relay!: Relay;
 
   get availableActions() {
     if (!this.processes) {
@@ -33,8 +34,7 @@ export default class Actions extends Vue {
   }
 
   activate(path: string) {
-    const relay = getRelay();
-    relay.emit('action', { path });
+    this.relay.emit('action', { path });
   }
 }
 </script>
