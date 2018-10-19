@@ -12,9 +12,13 @@ interface MutableStat {
 type DiffFunction = () => Decimal;
 type StatFunction<StatType> = () => StatType;
 
+export interface ValidationOptions {
+  ignoreLimits?: ProbeFlag[];
+}
+
 export interface Calculable {
   calculate: () => void;
-  validate: () => boolean;
+  validate: (options?: ValidationOptions) => boolean;
 }
 
 export class Effect<StatType extends MutableStat> extends Serializable implements Calculable {
@@ -34,11 +38,17 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
     stat.mutate(value => value.add(diff));
   }
 
-  validate(): boolean {
+  validate(opts?: ValidationOptions): boolean {
     const diff = this.diffFunc();
     const stat = this.statFunc();
 
     const probed = stat.probe(value => value.add(diff));
+
+    if (opts && opts.ignoreLimits) {
+      if (opts.ignoreLimits.includes(probed)) {
+        return true;
+      }
+    }
 
     return probed === true;
   }
