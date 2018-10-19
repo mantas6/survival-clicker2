@@ -26,6 +26,10 @@ relay.on('enableLogging', () => {
   enableLogging();
 });
 
+relay.on('reset', () => {
+  applyReset(state);
+});
+
 interval(1000).subscribe(() => {
   state.processes.calculate();
   applyLimitTriggers(state);

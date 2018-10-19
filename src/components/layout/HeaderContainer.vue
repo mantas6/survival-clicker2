@@ -26,7 +26,7 @@
         <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
       </div>
     </div>
-    <button class="suicide">suicide</button>
+    <button class="suicide" @click="reset">suicide</button>
   </header>
 </template>
 
@@ -37,6 +37,7 @@ import ProgressBar from '@/components/ProgressBar.vue';
 import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
 import { Getter } from 'vuex-class';
+import { Relay } from '@/classes/relay';
 
 @Component({
   components: { GameLogo, ProgressBar },
@@ -44,6 +45,7 @@ import { Getter } from 'vuex-class';
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter modifiers!: SerializedModifiers;
+  @Getter relay!: Relay;
 
   get money() {
     return this.stats.finance.money.value;
@@ -75,6 +77,10 @@ export default class HeaderContainer extends Vue {
 
   get moneyGain() {
     return this.modifiers.finance.moneyGain.value;
+  }
+
+  reset() {
+    this.relay.emit('reset');
   }
 }
 </script>
