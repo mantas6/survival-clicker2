@@ -48,17 +48,26 @@ export abstract class Value extends SerializableWithReference {
     return true;
   }
 
-  triggerWhenMinimum() {
+  /**
+   * Check and trigger whenMinimum if needed
+   */
+  triggerWhenMinimum(): void {
     if (this.value.equals(this.minimum)) {
       this.whenMinimum();
     }
   }
 
-  protected onLessThanMinimum() {
+  /**
+   * Is triggered when value floors to the minimum after mutation
+   */
+  protected onLessThanMinimum(): void {
     //
   }
 
-  protected whenMinimum() {
+  /**
+   * Is triggered when value stays at a minimum
+   */
+  protected whenMinimum(): void {
     //
   }
 }
