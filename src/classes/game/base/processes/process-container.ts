@@ -5,7 +5,7 @@ import { Calculable } from '@/classes/game/base/effects';
 export class ProcessContainer extends Serializable implements Calculable {
   calculate() {
     const filter = (entry: Calculable) => entry instanceof ProcessContainer || entry instanceof Process;
-    for (const processChild of this.children(filter)) {
+    for (const { node: processChild } of this.children(filter)) {
       if (processChild.validate()) {
         processChild.calculate();
       }

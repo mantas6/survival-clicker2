@@ -13,7 +13,7 @@ describe('Game State', function() {
     check(state);
 
     function check(parent: StateNode) {
-      for (const { name, node } of parent.childrenWithNames<StateNode>(entry => entry instanceof StateNode)) {
+      for (const { name, node } of parent.children<StateNode>(entry => entry instanceof StateNode)) {
         if (node instanceof Effect || node instanceof Modifier) {
           continue;
         }

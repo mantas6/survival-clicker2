@@ -26,18 +26,12 @@ export abstract class StateNode {
   }
 
   *nodes(): IterableIterator<StateNode> {
-    for (const node of this.children<StateNode>(entry => entry instanceof StateNode)) {
+    for (const { node } of this.children<StateNode>(entry => entry instanceof StateNode)) {
       yield node;
     }
   }
 
-  *children<T>(filterFunc?: (entry: T) => boolean): IterableIterator<T> {
-    for (const { node } of this.childrenWithNames<T>(filterFunc)) {
-      yield node;
-    }
-  }
-
-  *childrenWithNames<T>(filterFunc?: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
+  *children<T>(filterFunc?: (entry: T) => boolean): IterableIterator<{ node: T, name: string }> {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const node = (this as any)[propertyName];
 

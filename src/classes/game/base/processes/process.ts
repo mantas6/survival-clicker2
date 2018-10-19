@@ -45,7 +45,7 @@ export abstract class Process extends SerializableWithReference {
 
   // Rename this method to match Process child classes
   *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Calculable }> {
-    for (const { name, node } of this.childrenWithNames<Calculable>(entry => entry instanceof Effect)) {
+    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Effect)) {
       const descriptor = this.constructor.descriptorsOfEffects.get(name);
       yield { descriptor, effect: node };
     }

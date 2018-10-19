@@ -65,7 +65,7 @@ export abstract class Serializable extends StateNode {
   protected *serializableProperties(tagName: TagName): PropertyTagIterator {
     const ownPropertyNames = [];
     // Iterating through children of the class, that is its properties
-    for (const { name, node } of this.childrenWithNames<Serializable>()) {
+    for (const { name, node } of this.children<Serializable>()) {
       const descriptor = this.constructor.descriptorsOfProperties.get(name);
 
       const property = { name, node, descriptor };
