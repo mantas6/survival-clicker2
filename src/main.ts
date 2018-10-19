@@ -30,6 +30,10 @@ relay.on('actions', processes => {
   store.commit('updateActions', processes);
 });
 
+relay.on('modifiers', modifiers => {
+  store.commit('updateModifiers', modifiers);
+});
+
 if (localStorage.getItem('debug')) {
   enableLogging();
   relay.emit('enableLogging');

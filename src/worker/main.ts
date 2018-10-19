@@ -10,16 +10,14 @@ const relay = new Relay(ctx);
 
 const state = new State();
 
-relay.emit('stats', state.stats.serialize('emit'));
-relay.emit('actions', state.actions.serialize('emit'));
+emitAll();
 
 relay.on('action', ({ path }) => {
   log('Calculating action of path', path);
   const action = get(state, path) as Calculable;
   if (action.validate()) {
     action.calculate();
-    relay.emit('stats', state.stats.serialize('emit'));
-    relay.emit('actions', state.actions.serialize('emit'));
+    emitAll();
   }
 });
 
@@ -29,6 +27,11 @@ relay.on('enableLogging', () => {
 
 interval(1000).subscribe(() => {
   state.processes.calculate();
+  emitAll();
+});
+
+function emitAll() {
   relay.emit('stats', state.stats.serialize('emit'));
   relay.emit('actions', state.actions.serialize('emit'));
-});
+  relay.emit('modifiers', state.modifiers.serialize('emit'));
+}
