@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
-import { applyLimitTriggers } from '@/classes/game/base/stats/methods';
+import { applyLimitTriggers, applyReset } from '@/classes/game/base/stats/methods';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -30,6 +30,10 @@ interval(1000).subscribe(() => {
   state.processes.calculate();
   applyLimitTriggers(state);
   emitAll();
+
+  if (state.stats.character.health.value.isZero()) {
+    applyReset(state);
+  }
 });
 
 function emitAll() {

@@ -13,3 +13,11 @@ export function applyLimitTriggers(state: State) {
     }
   });
 }
+
+export function applyReset(state: State) {
+  apply<Value | Container>(state, node => {
+    if (node instanceof Value) {
+      node.current = undefined;
+    }
+  });
+}
