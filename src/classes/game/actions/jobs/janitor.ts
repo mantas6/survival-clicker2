@@ -1,10 +1,11 @@
-import { Action } from '@/classes/game/base/processes';
+import { Action, IgnoreLimits } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit')
 export class Janitor extends Action {
+  @IgnoreLimits('lessThanMinimum')
   stamina = new Effect(() => this.stats.character.stamina, () => {
     return new Decimal(-5);
   });
