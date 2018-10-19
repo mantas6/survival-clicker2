@@ -1,10 +1,10 @@
 import { Decimal } from 'decimal.js';
-import { Serializable, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
+import { SerializableWithReference, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
 import { ProbeFlag } from '.';
 
 export type MutationFunction = (value: Decimal) => Decimal;
 
-export abstract class Value extends Serializable {
+export abstract class Value extends SerializableWithReference {
   abstract default: number | string;
   /**
    * Standard value stat 99% of the time will default to zero as minimum value
@@ -31,6 +31,8 @@ export abstract class Value extends Serializable {
 
     if (flag === 'lessThanMinimum') {
       this.current = new Decimal(this.minimum);
+
+      this.onMinimum();
     } else {
       this.current = mutated;
     }
@@ -44,5 +46,9 @@ export abstract class Value extends Serializable {
     }
 
     return true;
+  }
+
+  protected onMinimum() {
+    //
   }
 }

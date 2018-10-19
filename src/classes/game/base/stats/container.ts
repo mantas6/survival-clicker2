@@ -11,8 +11,12 @@ export abstract class Container extends Value {
 
     if (mutated.lessThan(this.minimum)) {
       this.current = new Decimal(this.minimum);
+
+      this.onMinimum();
     } else if (mutated.greaterThan(this.maximum)) {
       this.current = this.maximum;
+
+      this.onMaximum();
     } else {
       this.current = mutated;
     }
@@ -33,5 +37,9 @@ export abstract class Container extends Value {
   @SerializeOn('emit')
   get max() {
     return this.maximum;
+  }
+
+  protected onMaximum() {
+    //
   }
 }
