@@ -11,6 +11,6 @@ export class Timer {
   }
 
   calculate() {
-    this.calculable.calculate();
+    // this.calculable.calculate();
   }
 }

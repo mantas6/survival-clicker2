@@ -1,8 +1,7 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
-import { Effect, Calculable } from '@/classes/game/base/effects';
+import { Effect, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
-import { ValidationOptions } from '../effects/effect';
 
 export enum ProcessType {
     Manual = 'manual',
@@ -16,20 +15,20 @@ export interface EffectDescriptor {
 
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;
 
-export abstract class Process extends SerializableWithReference {
+export abstract class Process extends SerializableWithReference implements Calculable {
   static type: ProcessType = ProcessType.Auto;
   static descriptorsOfEffects: EffectDescriptorMap = new Map();
   'constructor': typeof Process;
 
-  validate(): boolean {
+  validate(opts: ValidationOptions): boolean {
     for (const { effect, descriptor } of this.effects()) {
-      const opts: ValidationOptions = {};
+      const effectOpts: ValidationOptions = { multiplier: opts.multiplier };
 
       if (descriptor) {
-        opts.ignoreLimits = descriptor.ignoreLimits;
+        effectOpts.ignoreLimits = descriptor.ignoreLimits;
       }
 
-      if (!effect.validate(opts)) {
+      if (!effect.validate(effectOpts)) {
         return false;
       }
     }
@@ -37,9 +36,9 @@ export abstract class Process extends SerializableWithReference {
     return true;
   }
 
-  calculate() {
+  calculate(opts: CalculationOptions) {
     for (const { effect } of this.effects()) {
-      effect.calculate();
+      effect.calculate(opts);
     }
   }
 

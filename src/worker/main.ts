@@ -5,6 +5,7 @@ import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyLimitTriggers, applyReset } from '@/classes/game/base/stats/methods';
+import Decimal from 'decimal.js';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -16,8 +17,9 @@ emitAll();
 relay.on('action', ({ path }) => {
   log('Calculating action of path', path);
   const action = get(state, path) as Calculable;
-  if (action.validate()) {
-    action.calculate();
+  const multiplier = new Decimal(1);
+  if (action.validate({ multiplier })) {
+    action.calculate({ multiplier });
     emitAll();
   }
 });
