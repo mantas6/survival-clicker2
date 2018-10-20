@@ -6,11 +6,11 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 @SerializeAllOn('emit')
 export class Janitor extends Action {
   @IgnoreLimits('lessThanMinimum')
-  stamina = new Effect(() => this.stats.character.stamina, () => {
-    return new Decimal(-5);
+  stamina = new Effect(() => this.stats.character.stamina, value => {
+    return value.sub(5);
   });
 
-  money = new Effect(() => this.stats.finance.money, () => {
-    return new Decimal(1);
+  money = new Effect(() => this.stats.finance.money, value => {
+    return value.add(1);
   });
 }

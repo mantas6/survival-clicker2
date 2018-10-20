@@ -9,7 +9,6 @@ interface MutableStat {
 }
 
 export type MutationFunction = (value: Decimal) => Decimal;
-type DiffFunction = () => Decimal;
 type StatFunction<StatType> = () => StatType;
 
 export interface CalculationOptions {
@@ -27,26 +26,24 @@ export interface Calculable {
 
 export class Effect<StatType extends MutableStat> extends Serializable implements Calculable {
   protected statFunc: StatFunction<StatType>;
-  protected diffFunc: DiffFunction;
+  protected mutationFunc: MutationFunction;
 
-  constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
+  constructor(statFunc: StatFunction<StatType>, mutationFunc: MutationFunction) {
     super();
     this.statFunc = statFunc;
-    this.diffFunc = diffFunc;
+    this.mutationFunc = mutationFunc;
   }
 
   calculate(opts: CalculationOptions) {
-    const diff = this.diffFunc();
     const stat = this.statFunc();
 
-    stat.mutate(value => value.add(diff.times(opts.multiplier)));
+    stat.mutate(this.mutationFunc);
   }
 
   validate(opts: ValidationOptions): boolean {
-    const diff = this.diffFunc();
     const stat = this.statFunc();
 
-    const probed = stat.probe(value => value.add(diff));
+    const probed = stat.probe(this.mutationFunc);
 
     if (opts.ignoreLimits) {
       if (opts.ignoreLimits.includes(probed)) {
@@ -59,7 +56,8 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   @SerializeOn('emit')
   get diff() {
-    return this.diffFunc();
+    const value = new Decimal(0);
+    return this.mutationFunc(value);
   }
 
   @SerializeOn('emit')

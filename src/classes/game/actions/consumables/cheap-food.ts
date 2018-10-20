@@ -5,15 +5,15 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit')
 export class CheapFood extends Action {
-  stamina = new Effect(() => this.stats.character.energy, () => {
-    return new Decimal(1);
+  stamina = new Effect(() => this.stats.character.energy, value => {
+    return value.add(1);
   });
 
-  stomach = new Effect(() => this.stats.character.stomach, () => {
-    return new Decimal(1);
+  stomach = new Effect(() => this.stats.character.stomach, value => {
+    return value.add(1);
   });
 
-  money = new Effect(() => this.stats.finance.money, () => {
-    return new Decimal(-1);
+  money = new Effect(() => this.stats.finance.money, value => {
+    return value.sub(1);
   });
 }

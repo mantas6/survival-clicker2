@@ -5,11 +5,11 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit')
 export class Investment extends Action {
-  money = new Effect(() => this.stats.finance.money, () => {
-    return new Decimal(-1);
+  money = new Effect(() => this.stats.finance.money, value => {
+    return value.sub(1);
   });
 
-  investment = new Effect(() => this.stats.finance.investment, () => {
-    return new Decimal(1);
+  investment = new Effect(() => this.stats.finance.investment, value => {
+    return value.add(1);
   });
 }
