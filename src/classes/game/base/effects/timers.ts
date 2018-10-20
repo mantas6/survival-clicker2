@@ -17,6 +17,6 @@ export class Timers extends SerializableWithReference {
       item.calculate({ multiplier });
     }
 
-    this.items.filter(item => !item.hasTimedOut());
+    this.items = this.items.filter(item => !item.hasTimedOut());
   }
 }
