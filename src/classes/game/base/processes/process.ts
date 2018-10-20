@@ -1,7 +1,7 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Effect, Calculable } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
-import { ProbeFlag } from '@/classes/game/base/stats';
+import { LimitFlag } from '@/classes/game/base/stats';
 import { ValidationOptions } from '../effects/effect';
 
 export enum ProcessType {
@@ -11,7 +11,7 @@ export enum ProcessType {
 
 export interface EffectDescriptor {
   duration?: Decimal;
-  ignoreLimits: ProbeFlag[];
+  ignoreLimits: LimitFlag[];
 }
 
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;

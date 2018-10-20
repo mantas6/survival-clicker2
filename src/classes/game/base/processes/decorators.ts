@@ -1,6 +1,6 @@
 import { ProcessType, Process, EffectDescriptor } from './process';
 import Decimal from 'decimal.js';
-import { ProbeFlag } from '@/classes/game/base/stats';
+import { LimitFlag } from '@/classes/game/base/stats';
 
 export function Auto(ctor: typeof Process) {
   ctor.type = ProcessType.Auto;
@@ -14,7 +14,7 @@ export function Duration(duration: Decimal) {
   };
 }
 
-export function IgnoreLimits(...flags: ProbeFlag[]) {
+export function IgnoreLimits(...flags: LimitFlag[]) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
 

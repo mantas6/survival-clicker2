@@ -1,6 +1,6 @@
 import { Decimal } from 'decimal.js';
 import { SerializableWithReference, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
-import { ProbeFlag } from '.';
+import { LimitFlag } from '.';
 
 export type MutationFunction = (value: Decimal) => Decimal;
 
@@ -38,7 +38,7 @@ export abstract class Value extends SerializableWithReference {
     }
   }
 
-  probe(mutateFunc: MutationFunction): ProbeFlag {
+  probe(mutateFunc: MutationFunction): LimitFlag {
     const mutated = mutateFunc(this.value);
 
     if (mutated.lessThan(this.minimum)) {

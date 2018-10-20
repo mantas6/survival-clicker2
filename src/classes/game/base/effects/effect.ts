@@ -1,11 +1,11 @@
 import Decimal from 'decimal.js';
 import { MutationFunction } from '@/classes/game/base/stats/value';
 import { SerializeOn, Serializable, SerializeAs } from '@/classes/game/base/serialization';
-import { ProbeFlag } from '@/classes/game/base/stats';
+import { LimitFlag } from '@/classes/game/base/stats';
 
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
-  probe: (mutateFunc: MutationFunction) => ProbeFlag;
+  probe: (mutateFunc: MutationFunction) => LimitFlag;
   path: string;
 }
 
@@ -13,7 +13,7 @@ type DiffFunction = () => Decimal;
 type StatFunction<StatType> = () => StatType;
 
 export interface ValidationOptions {
-  ignoreLimits?: ProbeFlag[];
+  ignoreLimits?: LimitFlag[];
 }
 
 export interface Calculable {
