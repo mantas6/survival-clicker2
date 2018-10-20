@@ -32,4 +32,15 @@ if (localStorage.getItem('debug')) {
   relay.emit('enableLogging');
 }
 
+relay.on('save', serializedState => {
+  localStorage.setItem('save', JSON.stringify(serializedState));
+  log('Saving game state', serializedState);
+});
+
+const previousSave = localStorage.getItem('save');
+
+if (previousSave) {
+  relay.emit('load', JSON.parse(previousSave));
+}
+
 log('Application was built on', process.env.BUILD_TIME);

@@ -30,6 +30,16 @@ relay.on('enableLogging', () => {
 
 relay.on('reset', () => {
   applyReset(state);
+  emitStore();
+});
+
+relay.on('load', serializedState => {
+  state.unserialize(serializedState);
+  emitAll();
+});
+
+interval(3e3).subscribe(() => {
+  emitStore();
 });
 
 interval(1000).subscribe(() => {
@@ -44,4 +54,9 @@ interval(1000).subscribe(() => {
 
 function emitAll() {
   relay.emit('state', state.serialize('emit'));
+}
+
+function emitStore() {
+  const serializedState = state.serialize('store');
+  relay.emit('save', serializedState);
 }

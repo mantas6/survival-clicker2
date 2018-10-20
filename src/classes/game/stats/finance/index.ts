@@ -3,7 +3,7 @@ import { Investment } from './investment';
 import { Taxes } from './taxes';
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
-@SerializeAllOn('emit')
+@SerializeAllOn('emit', 'store')
 export class Finance extends Serializable {
   money = new Money();
 

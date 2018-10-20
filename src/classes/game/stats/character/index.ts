@@ -5,7 +5,7 @@ import { Stamina } from './stamina';
 import { Stomach } from './stomach';
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
-@SerializeAllOn('emit')
+@SerializeAllOn('emit', 'store')
 export class Character extends Serializable {
   health = new Health();
 
