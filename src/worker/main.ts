@@ -39,7 +39,7 @@ relay.on('load', serializedState => {
   emitAll();
 });
 
-interval(3e3).subscribe(() => {
+interval(30e3).subscribe(() => {
   emitStore();
 });
 
