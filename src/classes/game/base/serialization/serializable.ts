@@ -18,7 +18,7 @@ type ConstructorProperty = () => void;
 
 export type PropertyTagIterator = IterableIterator<{
   name: string,
-  node: Serializable | number | string | ConstructorProperty,
+  node: Serializable | number | string | ConstructorProperty | undefined,
   descriptor?: PropertyDescriptor,
 }>;
 
@@ -37,7 +37,7 @@ export abstract class Serializable extends StateNode {
       } else {
         if (node instanceof Serializable) {
           serialized[name] = node.serialize(tagName);
-        } else {
+        } else if (node) {
           serialized[name] = node.toString();
         }
       }
