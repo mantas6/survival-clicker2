@@ -12,6 +12,9 @@ Master branch is built every minute.
 
 [Latest build is available here](https://dev.sc2.7777.lt)
 
+## Contact
+Interested in helping this project? Or just want to discuss it in general? You can message me on [reddit](https://www.reddit.com/user/mantas6) or join this [discord](https://discord.gg/DMXvm7W) server.
+
 ## Development
 
 I'd recommend you use vue-cli tools for better experience. More info [here](https://cli.vuejs.org/guide/#cli).
