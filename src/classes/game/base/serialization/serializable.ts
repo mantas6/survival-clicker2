@@ -46,12 +46,9 @@ export abstract class Serializable extends StateNode {
     return serialized;
   }
 
-  // TODO: refactor
   unserialize(serialized: SerializedNode) {
-    for (const [ name, serializedValue ] of Object.entries(serialized)) {
-      const node = this.getPropertyByName(name);
-
-      const descriptor = this.constructor.descriptorsOfProperties.get(name);
+    for (const { name, node, descriptor } of this.serializableProperties('store')) {
+      const serializedValue = serialized[name];
 
       if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
         if (descriptor && descriptor.unserializeFunc) {
