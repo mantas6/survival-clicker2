@@ -15,8 +15,8 @@ This is a list of features that need to be implemented for the game to be consid
   - every calculation function should have a parameter for how much time has passed. Could also be reused for *BUY X* functionality
 - effects with timeouts *(Ongoing)*
   - allow processes to have effect that last a certain duration of time
-- ~~translations~~
-  - ~~all the items and text are translated though a global translation helper~~ *Skipping this for now*
+- ~~translations~~ *(Skipping this for now)*
+  - ~~all the items and text are translated though a global translation helper~~
 - ~~suicide functionality~~
     - ~~resets game progress~~
 - ~~node iterators~~
