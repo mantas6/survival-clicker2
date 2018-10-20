@@ -1,4 +1,4 @@
-import { Effect , Calculable, CalculationOptions, ValidationOptions } from './effect';
+import { Effect , Calculable, CalculationOptions, ValidationOptions, MutationFunction } from './effect';
 import { Timer } from './timer';
 
 export {
@@ -7,4 +7,5 @@ export {
   Timer,
   CalculationOptions,
   ValidationOptions,
+  MutationFunction,
 };

@@ -1,5 +1,4 @@
 import Decimal from 'decimal.js';
-import { MutationFunction } from '@/classes/game/base/stats/value';
 import { SerializeOn, Serializable, SerializeAs } from '@/classes/game/base/serialization';
 import { LimitFlag } from '@/classes/game/base/stats';
 
@@ -9,6 +8,7 @@ interface MutableStat {
   path: string;
 }
 
+export type MutationFunction = (value: Decimal) => Decimal;
 type DiffFunction = () => Decimal;
 type StatFunction<StatType> = () => StatType;
 
