@@ -1,6 +1,6 @@
 import { Effect , Calculable, CalculationOptions, ValidationOptions, MutationFunction } from './effect';
 import { Timer } from './timer';
-import { TimerHeap } from './timer-heap';
+import { Timers } from './timers';
 
 export {
   Effect,
@@ -9,5 +9,5 @@ export {
   ValidationOptions,
   MutationFunction,
   Timer,
-  TimerHeap,
+  Timers,
 };

@@ -3,7 +3,7 @@ import Decimal from 'decimal.js';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Timer } from './timer';
 
-export class TimerHeap extends SerializableWithReference {
+export class Timers extends SerializableWithReference {
   protected items: Timer[] = [];
 
   push(calculable: Calculable, size: Decimal) {
