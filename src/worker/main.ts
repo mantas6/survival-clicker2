@@ -30,6 +30,7 @@ relay.on('enableLogging', () => {
 
 relay.on('reset', () => {
   applyReset(state);
+  emitAll();
   emitStore();
 });
 
