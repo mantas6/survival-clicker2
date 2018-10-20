@@ -21,15 +21,9 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-relay.on('stats', stats => {
+relay.on('state', ({ stats, actions, modifiers }) => {
   store.commit('updateStats', stats);
-});
-
-relay.on('actions', processes => {
-  store.commit('updateActions', processes);
-});
-
-relay.on('modifiers', modifiers => {
+  store.commit('updateActions', actions);
   store.commit('updateModifiers', modifiers);
 });
 

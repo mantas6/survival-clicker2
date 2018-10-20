@@ -3,7 +3,7 @@ import { State } from '@/classes/game/state';
 import { get } from 'lodash';
 import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
-import { interval } from 'rxjs';
+import { interval, ReplaySubject } from 'rxjs';
 import { applyLimitTriggers, applyReset } from '@/classes/game/base/stats/methods';
 import Decimal from 'decimal.js';
 
@@ -43,7 +43,5 @@ interval(1000).subscribe(() => {
 });
 
 function emitAll() {
-  relay.emit('stats', state.stats.serialize('emit'));
-  relay.emit('actions', state.actions.serialize('emit'));
-  relay.emit('modifiers', state.modifiers.serialize('emit'));
+  relay.emit('state', state.serialize('emit'));
 }
