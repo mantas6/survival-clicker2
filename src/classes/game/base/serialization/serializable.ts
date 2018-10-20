@@ -46,6 +46,7 @@ export abstract class Serializable extends StateNode {
     return serialized;
   }
 
+  // TODO: refactor
   unserialize(serialized: SerializedNode) {
     for (const [ name, serializedValue ] of Object.entries(serialized)) {
       const node = this.getPropertyByName(name);
