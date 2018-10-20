@@ -6,7 +6,7 @@
         @click="activate(action.fullPath)"
         class="item"
         :class="!action.isAvailable ? 'unavailable' : ''">
-        <span class="name">{{ actionName }}</span>
+        <span class="name">{{ actionName | startCase }}</span>
         <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
       </div>
     </section>
@@ -18,8 +18,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import { Relay } from '@/classes/relay';
+import { startCase } from 'lodash';
 
-@Component
+@Component({ filters: { startCase } })
 export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
   @Getter relay!: Relay;
