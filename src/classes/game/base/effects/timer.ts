@@ -1,16 +1,24 @@
-import { Calculable } from '@/classes/game/base/effects';
+import { Calculable, CalculationOptions } from '@/classes/game/base/effects';
 import Decimal from 'decimal.js';
 
 export class Timer {
   private calculable: Calculable;
-  private durationLeft: Decimal;
+  private size: Decimal;
 
-  constructor(calculable: Calculable, duration: Decimal) {
+  constructor(calculable: Calculable, size: Decimal) {
     this.calculable = calculable;
-    this.durationLeft = duration;
+    this.size = size;
   }
 
-  calculate() {
-    // this.calculable.calculate();
+  calculate(opts: CalculationOptions) {
+    if (this.calculable.validate(opts)) {
+      this.calculable.calculate(opts);
+    }
+
+    this.size = this.size.sub(1);
+  }
+
+  hasTimedOut() {
+    return this.size.greaterThan(0);
   }
 }
