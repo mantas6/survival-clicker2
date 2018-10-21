@@ -37,8 +37,10 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   calculate(opts: CalculationOptions) {
     const stat = this.statFunc();
+    const mutated = this.mutationFunc(stat.value);
+    const diff = mutated.sub(stat.value).mul(opts.multiplier);
 
-    stat.mutate(this.mutationFunc);
+    stat.mutate(value => value.add(diff));
   }
 
   validate(opts: ValidationOptions): boolean {
