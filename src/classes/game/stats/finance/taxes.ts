@@ -1,5 +1,5 @@
 import { Value } from '@/classes/game/base/stats';
 
 export class Taxes extends Value {
-  readonly default = 0;
+  readonly default = 0.4;
 }

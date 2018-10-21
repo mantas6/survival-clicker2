@@ -14,6 +14,6 @@ export class CheapWater extends Action {
   });
 
   money = new Effect(() => this.stats.finance.money, value => {
-    return value.sub(1);
+    return value.sub(this.modifiers.finance.costAdd.value.mul(1));
   });
 }

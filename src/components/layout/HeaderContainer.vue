@@ -38,6 +38,7 @@ import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
+import Decimal from 'decimal.js';
 
 @Component({
   components: { GameLogo, ProgressBar },
@@ -52,7 +53,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get tax() {
-    return this.stats.finance.taxes.value;
+    return new Decimal(this.stats.finance.taxes.value).mul(100);
   }
 
   get health() {

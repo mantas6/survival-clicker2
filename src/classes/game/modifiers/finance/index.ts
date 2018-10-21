@@ -7,4 +7,7 @@ export class Finance extends SerializableWithReference {
   moneyGain = new Modifier(() => {
     return this.stats.finance.investment.value.times(0.1);
   });
+  costAdd = new Modifier(() => {
+    return this.stats.finance.taxes.value.add(1);
+  });
 }
