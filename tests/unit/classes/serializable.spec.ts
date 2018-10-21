@@ -61,4 +61,9 @@ describe('serializable.ts', () => {
     serializable.unserialize({ someProperty: { someText: 'unserializedValue' } });
     expect(serializable.someProperty.someText).to.be.equal('unserializedValue');
   });
+
+  it('does not serialize a constructor property of a different group', () => {
+    const serialized = serializable.serialize('store');
+    expect(serialized.someProperty).to.not.haveOwnProperty('someGetter');
+  });
 });
