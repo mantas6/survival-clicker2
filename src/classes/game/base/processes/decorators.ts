@@ -1,10 +1,6 @@
-import { ProcessType, Process, EffectDescriptor } from './process';
+import { Process, EffectDescriptor } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
-
-export function Auto(ctor: typeof Process) {
-  ctor.type = ProcessType.Auto;
-}
 
 export function Duration(duration: Decimal) {
   return (processClass: Process, propertyName: string) => {

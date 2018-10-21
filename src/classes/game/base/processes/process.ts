@@ -3,11 +3,6 @@ import { Effect, Calculable, ValidationOptions, CalculationOptions } from '@/cla
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 
-export enum ProcessType {
-    Manual = 'manual',
-    Auto = 'auto',
-}
-
 export interface EffectDescriptor {
   duration?: Decimal;
   ignoreLimits: LimitFlag[];
@@ -16,7 +11,6 @@ export interface EffectDescriptor {
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;
 
 export abstract class Process extends SerializableWithReference implements Calculable {
-  static type: ProcessType = ProcessType.Auto;
   static descriptorsOfEffects: EffectDescriptorMap = new Map();
   'constructor': typeof Process;
 
