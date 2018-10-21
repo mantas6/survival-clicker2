@@ -5,6 +5,7 @@ import { LimitFlag } from '@/classes/game/base/stats';
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
   probe: (mutateFunc: MutationFunction) => LimitFlag;
+  value: Decimal;
   path: string;
 }
 
@@ -56,8 +57,10 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   @SerializeOn('emit')
   get diff() {
-    const value = new Decimal(1);
-    return this.mutationFunc(value).sub(1);
+    const stat = this.statFunc();
+    const mutated = this.mutationFunc(stat.value);
+
+    return mutated.sub(stat.value);
   }
 
   @SerializeOn('emit')
