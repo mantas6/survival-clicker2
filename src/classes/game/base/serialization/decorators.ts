@@ -1,11 +1,18 @@
 import { Serializable, TagName, PropertyDescriptor } from './serializable';
 
+/**
+ * Serializes all children of the class
+ * @param tagNames tag names of serialization
+ */
 export function SerializeAllOn(...tagNames: TagName[]) {
   return (ctor: typeof Serializable) => {
     ctor.defaultTagNames = [ ...ctor.defaultTagNames, ...tagNames ];
   };
 }
 
+/**
+ * Will skip an individual child of the class. Used in conjunction with SerializeAllOn
+ */
 export function DonNotSerialize() {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
@@ -14,6 +21,10 @@ export function DonNotSerialize() {
   };
 }
 
+/**
+ * Marks child as serializable on a given serialization type (tag)
+ * @param tagNames tag names of serialization
+ */
 export function SerializeOn(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
@@ -22,6 +33,10 @@ export function SerializeOn(...tagNames: TagName[]) {
   };
 }
 
+/**
+ * Overrides the default way of serialization. Used for objects that do not extend Serializable
+ * @param serializeFunc serialization handler to use
+ */
 export function SerializeAs<Target>(serializeFunc: (input: Target) => string | number) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
@@ -30,6 +45,10 @@ export function SerializeAs<Target>(serializeFunc: (input: Target) => string | n
   };
 }
 
+/**
+ * Overrides the default way of unserialization. Used for objects that do not extend Serializable
+ * @param serializeFunc unserialization handler to use
+ */
 export function UnserializeAs<Target>(unserializeFunc: (input: number | string) => Target) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
