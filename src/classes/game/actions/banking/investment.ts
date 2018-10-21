@@ -10,6 +10,6 @@ export class Investment extends Action {
   });
 
   investment = new Effect(() => this.stats.finance.investment, value => {
-    return value.add(1);
+    return value.add(10);
   });
 }
