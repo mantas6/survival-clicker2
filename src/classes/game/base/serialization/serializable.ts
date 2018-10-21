@@ -91,8 +91,4 @@ export abstract class Serializable extends StateNode {
       }
     }
   }
-
-  protected getPropertyByName(propertyName: string): Serializable | number | string | undefined {
-    return (this as any)[propertyName];
-  }
 }
