@@ -4,7 +4,7 @@ import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes
 import { expect } from 'chai';
 
 class ChildClass extends Serializable {
-  @SerializeOn('emit')
+  @SerializeOn('emit', 'store')
   @SerializeAs((input: string) => input)
   @UnserializeAs(input => input)
   someText: string = 'someValue';
