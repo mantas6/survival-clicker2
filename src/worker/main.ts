@@ -35,6 +35,7 @@ relay.on('reset', () => {
 });
 
 relay.on('load', serializedState => {
+  applyReset(state);
   state.unserialize(serializedState);
   emitAll();
 });
