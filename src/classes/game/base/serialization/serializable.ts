@@ -38,6 +38,11 @@ export abstract class Serializable extends StateNode {
         if (node instanceof Serializable) {
           serialized[name] = node.serialize(tagName);
         } else if (node) {
+          /**
+           * Will no serialized property that is set to undefined,
+           * meaning that un-serialization won't reset this property.
+           * To solve this state needs to be reset before un-serializing
+           */
           serialized[name] = node.toString();
         }
       }
