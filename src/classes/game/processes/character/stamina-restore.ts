@@ -1,6 +1,5 @@
 import { Process } from '@/classes/game/base/processes/process';
 import { Effect } from '@/classes/game/base/effects';
-import Decimal from 'decimal.js';
 
 export class StaminaRestore extends Process {
   restoreStamina = new Effect(() => this.stats.character.stamina, value => {

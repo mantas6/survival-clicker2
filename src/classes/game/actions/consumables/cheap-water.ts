@@ -1,6 +1,5 @@
 import { Action } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
-import Decimal from 'decimal.js';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit')
