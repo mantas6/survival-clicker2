@@ -16,7 +16,6 @@ export default class Navigation extends Vue {
 }
 </script>
 
-
 <style lang="scss" scoped>
   nav {
     margin-bottom: 4rem;
