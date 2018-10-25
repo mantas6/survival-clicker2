@@ -46,6 +46,6 @@ npm run test:e2e
 ## Contact
 Interested in helping this project? Or just want to discuss it in general?
 
-[Reddit](https://www.reddit.com/user/mantas6)
+[Reddit](https://www.reddit.com/user/mantas6) (message me)
 
 [Discord](https://discord.gg/DMXvm7W)
