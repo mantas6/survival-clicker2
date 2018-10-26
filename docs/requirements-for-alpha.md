@@ -9,12 +9,12 @@ This is a list of features that need to be implemented for the game to be consid
   - have a content for at least 10-30min of game-play time
 - unlockable actions
   - add functionality for persistent action unlock checks
-- process conditionals
-  - allow adding conditional checks if process can be executed (pre-validation)
 - dynamic time calculation *(Ongoing)*
   - every calculation function should have a parameter for how much time has passed. Could also be reused for *BUY X* functionality
 - effects with timeouts *(Ongoing)*
   - allow processes to have effect that last a certain duration of time
+- ~~process conditionals~~
+  - ~~allow adding conditional checks if process can be executed (pre-validation)~~
 - ~~state saving~~
   - ~~serializes game for storage~~
   - ~~saves to `localStorage`~~
