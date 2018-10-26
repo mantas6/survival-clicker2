@@ -3,7 +3,7 @@ import { Processes } from '@/classes/game/processes';
 import { Actions } from '@/classes/game/actions';
 import { Modifiers } from '@/classes/game/modifiers';
 import { StateRoot } from '@/classes/game/base/state-root';
-import { Timers } from './base/effects';
+import { Timers } from '@/classes/game/base/effects';
 import { SerializeOn } from '@/classes/game/base/serialization';
 
 export class State extends StateRoot {
