@@ -7,8 +7,4 @@ export class Hydration extends Container {
   get maximum() {
     return new Decimal(100);
   }
-
-  protected whenMinimum() {
-    // this.stats.character.health.mutate(value => value.minus(3));
-  }
 }

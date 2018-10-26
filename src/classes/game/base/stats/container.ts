@@ -41,25 +41,9 @@ export abstract class Container extends Value {
   }
 
   /**
-   * Check and trigger whenMaximum if needed
-   */
-  triggerWhenMaximum(): void {
-    if (this.value.equals(this.maximum)) {
-      this.whenMaximum();
-    }
-  }
-
-  /**
    * Is triggered when value ceils to the maximum after mutation
    */
   protected onGreaterThanMaximum(): void {
-    //
-  }
-
-  /**
-   * Is triggered when value stays at a maximum
-   */
-  protected whenMaximum(): void {
     //
   }
 }

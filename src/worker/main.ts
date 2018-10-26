@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
 import { interval, ReplaySubject } from 'rxjs';
-import { applyLimitTriggers, applyReset } from '@/classes/game/base/stats/methods';
+import { applyReset } from '@/classes/game/base/stats/methods';
 import Decimal from 'decimal.js';
 
 const ctx: Worker = self as any;
@@ -46,7 +46,6 @@ interval(30e3).subscribe(() => {
 
 interval(1000).subscribe(() => {
   state.processes.calculate();
-  applyLimitTriggers(state);
   emitAll();
 
   if (state.stats.character.health.value.isZero()) {
