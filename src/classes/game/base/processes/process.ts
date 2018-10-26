@@ -10,6 +10,7 @@ export interface EffectDescriptor {
 
 export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
 
+// Rename to Conditional?
 export interface Condition {
   conditionFunc: ConditionFunction;
 }
