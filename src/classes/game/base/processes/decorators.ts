@@ -8,11 +8,11 @@ export function When(conditionFunc: ConditionFunction) {
   };
 }
 
-export function Duration(duration: Decimal) {
+export function Duration(durationFunc: () => Decimal | number | string) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
 
-    descriptor.duration = duration;
+    descriptor.durationFunc = durationFunc;
   };
 }
 

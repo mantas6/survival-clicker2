@@ -15,10 +15,10 @@ export class Timer {
       this.calculable.calculate(opts);
     }
 
-    this.duration = this.duration.sub(1);
+    this.duration = this.duration.sub(opts.multiplier);
   }
 
   hasTimedOut() {
-    return this.duration.greaterThan(0);
+    return this.duration.lessThanOrEqualTo(0);
   }
 }

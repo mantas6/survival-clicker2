@@ -46,6 +46,7 @@ interval(30e3).subscribe(() => {
 
 interval(1000).subscribe(() => {
   state.processes.calculate();
+  state.timers.calculate();
   emitAll();
 
   if (state.stats.character.health.value.isZero()) {
