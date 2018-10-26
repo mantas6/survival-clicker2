@@ -9,6 +9,6 @@ export class Hydration extends Container {
   }
 
   protected whenMinimum() {
-    this.stats.character.health.mutate(value => value.minus(3));
+    // this.stats.character.health.mutate(value => value.minus(3));
   }
 }
