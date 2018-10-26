@@ -3,11 +3,12 @@ import Decimal from 'decimal.js';
 
 export class Timer {
   private calculable: Calculable;
-  private duration: Decimal;
+  private durationFunc: () => Decimal;
+  private timePassed = new Decimal(0);
 
-  constructor(calculable: Calculable, duration: Decimal) {
+  constructor(calculable: Calculable, durationFunc: () => Decimal) {
     this.calculable = calculable;
-    this.duration = duration;
+    this.durationFunc = durationFunc;
   }
 
   calculate(opts: CalculationOptions) {
@@ -15,10 +16,11 @@ export class Timer {
       this.calculable.calculate(opts);
     }
 
-    this.duration = this.duration.sub(opts.multiplier);
+    this.timePassed = this.timePassed.add(opts.multiplier);
   }
 
   hasTimedOut() {
-    return this.duration.lessThanOrEqualTo(0);
+    const duration = this.durationFunc();
+    return this.timePassed.greaterThan(duration);
   }
 }

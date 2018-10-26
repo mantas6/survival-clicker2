@@ -4,7 +4,7 @@ import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 
 export interface EffectDescriptor {
-  durationFunc?: () => Decimal | number | string;
+  durationFunc?: () => Decimal;
   ignoreLimits: LimitFlag[];
 }
 
@@ -38,8 +38,7 @@ export abstract class Process extends SerializableWithReference implements Calcu
   calculate(opts: CalculationOptions) {
     for (const { effect, descriptor } of this.effects()) {
       if (descriptor && descriptor.durationFunc) {
-        const duration = new Decimal(descriptor.durationFunc());
-        this.state.timers.push(effect, duration);
+        this.state.timers.push(effect, descriptor.durationFunc);
       } else {
         effect.calculate(opts);
       }

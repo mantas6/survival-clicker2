@@ -12,7 +12,11 @@ export function Duration(durationFunc: () => Decimal | number | string) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
 
-    descriptor.durationFunc = durationFunc;
+    descriptor.durationFunc = () => {
+      const duration = durationFunc();
+
+      return new Decimal(duration);
+    };
   };
 }
 

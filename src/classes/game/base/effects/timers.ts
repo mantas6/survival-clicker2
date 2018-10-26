@@ -6,8 +6,8 @@ import { Timer } from './timer';
 export class Timers extends SerializableWithReference {
   protected items: Timer[] = [];
 
-  push(calculable: Calculable, duration: Decimal) {
-    this.items.push(new Timer(calculable, duration));
+  push(calculable: Calculable, durationFunc: () => Decimal) {
+    this.items.push(new Timer(calculable, durationFunc));
   }
 
   calculate() {
