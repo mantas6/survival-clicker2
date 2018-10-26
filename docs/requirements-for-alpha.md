@@ -11,10 +11,10 @@ This is a list of features that need to be implemented for the game to be consid
   - add functionality for persistent action unlock checks
 - buy max
   - game engine to support auto max qty calculation
-- dynamic time calculation *(Ongoing)*
-  - every calculation function should have a parameter for how much time has passed. Could also be reused for *BUY X* functionality
 - effects with timeouts *(Ongoing)*
   - allow processes to have effect that last a certain duration of time
+- ~~dynamic time calculation~~
+  - ~~every calculation function should have a parameter for how much time has passed. Could also be reused for *BUY X* functionality~~
 - ~~process conditionals~~
   - ~~allow adding conditional checks if process can be executed (pre-validation)~~
 - ~~state saving~~
