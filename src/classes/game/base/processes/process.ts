@@ -8,23 +8,27 @@ export interface EffectDescriptor {
   ignoreLimits: LimitFlag[];
 }
 
+export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
+
+export interface Condition {
+  conditionFunc: ConditionFunction;
+}
+
 export type EffectDescriptorMap = Map<string, EffectDescriptor>;
 
 export abstract class Process extends SerializableWithReference implements Calculable {
   static descriptorsOfEffects: EffectDescriptorMap = new Map();
+  static conditions: Condition[] = [];
+
   'constructor': typeof Process;
 
   validate(opts: ValidationOptions): boolean {
-    for (const { effect, descriptor } of this.effects()) {
-      const effectOpts: ValidationOptions = { multiplier: opts.multiplier };
+    if (!this.validateConditions(opts)) {
+      return false;
+    }
 
-      if (descriptor) {
-        effectOpts.ignoreLimits = descriptor.ignoreLimits;
-      }
-
-      if (!effect.validate(effectOpts)) {
-        return false;
-      }
+    if (!this.validateEffects(opts)) {
+      return false;
     }
 
     return true;
@@ -42,5 +46,31 @@ export abstract class Process extends SerializableWithReference implements Calcu
       const descriptor = this.constructor.descriptorsOfEffects.get(name);
       yield { descriptor, effect: node };
     }
+  }
+
+  protected validateEffects(opts: ValidationOptions): boolean {
+    for (const { effect, descriptor } of this.effects()) {
+      const effectOpts: ValidationOptions = { multiplier: opts.multiplier };
+
+      if (descriptor) {
+        effectOpts.ignoreLimits = descriptor.ignoreLimits;
+      }
+
+      if (!effect.validate(effectOpts)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  protected validateConditions(opts: ValidationOptions): boolean {
+    for (const condition of this.constructor.conditions) {
+      if (!condition.conditionFunc(this, opts)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }

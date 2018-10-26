@@ -1,6 +1,12 @@
-import { Process, EffectDescriptor } from './process';
+import { Process, EffectDescriptor, ConditionFunction } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
+
+export function When(conditionFunc: ConditionFunction) {
+  return (ctor: typeof Process) => {
+    ctor.conditions = [ ...ctor.conditions, { conditionFunc } ];
+  };
+}
 
 export function Duration(duration: Decimal) {
   return (processClass: Process, propertyName: string) => {
