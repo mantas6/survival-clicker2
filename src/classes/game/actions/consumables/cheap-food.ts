@@ -5,7 +5,7 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 @SerializeAllOn('emit')
 export class CheapFood extends Action {
   @Duration(() => 5)
-  stamina = new Effect(() => this.stats.character.energy, value => {
+  energy = new Effect(() => this.stats.character.energy, value => {
     return value.add(1);
   });
 
