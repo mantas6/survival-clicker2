@@ -3,7 +3,7 @@ import { State } from '@/classes/game/state';
 import { get } from 'lodash';
 import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
-import { interval, ReplaySubject } from 'rxjs';
+import { interval } from 'rxjs';
 import { applyReset } from '@/classes/game/base/stats/methods';
 import Decimal from 'decimal.js';
 
