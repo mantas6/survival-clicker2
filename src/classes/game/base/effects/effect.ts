@@ -37,16 +37,16 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   calculate(opts: CalculationOptions) {
     const stat = this.statFunc();
-    const mutated = this.mutationFunc(stat.value);
-    const diff = mutated.sub(stat.value).mul(opts.multiplier);
+    const diff = this.getStatDiff(opts);
 
     stat.mutate(value => value.add(diff));
   }
 
   validate(opts: ValidationOptions): boolean {
     const stat = this.statFunc();
+    const diff = this.getStatDiff(opts);
 
-    const probed = stat.probe(this.mutationFunc);
+    const probed = stat.probe(value => value.add(diff));
 
     if (opts.ignoreLimits) {
       if (opts.ignoreLimits.includes(probed)) {
@@ -68,5 +68,13 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
   @SerializeOn('emit')
   get stat() {
     return this.statFunc().path;
+  }
+
+  private getStatDiff(opts: CalculationOptions): Decimal {
+    const stat = this.statFunc();
+    const mutated = this.mutationFunc(stat.value);
+    const diff = mutated.sub(stat.value).mul(opts.multiplier);
+
+    return diff;
   }
 }
