@@ -3,7 +3,7 @@ import { Jobs } from '@/classes/game/actions/jobs';
 import { Consumables } from '@/classes/game/actions/consumables';
 import { Banking } from '@/classes/game/actions/banking';
 
-@SerializeAllOn('emit')
+@SerializeAllOn('emit', 'store')
 export class Actions extends Serializable {
   jobs = new Jobs();
 

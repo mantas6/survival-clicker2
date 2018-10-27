@@ -1,4 +1,4 @@
-import { Action, Duration } from '@/classes/game/base/processes';
+import { Action, Duration, Required } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 
@@ -13,6 +13,7 @@ export class CheapFood extends Action {
     return value.add(1);
   });
 
+  @Required
   money = new Effect(() => this.stats.finance.money, value => {
     return value.sub(this.modifiers.finance.costAdd.value.mul(1));
   });

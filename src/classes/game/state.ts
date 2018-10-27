@@ -12,7 +12,7 @@ export class State extends StateRoot {
 
   processes = new Processes();
 
-  @SerializeOn('emit')
+  @SerializeOn('emit', 'store')
   actions = new Actions();
 
   @SerializeOn('emit')
