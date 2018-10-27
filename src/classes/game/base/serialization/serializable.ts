@@ -18,7 +18,7 @@ type ConstructorProperty = () => void;
 
 export type PropertyTagIterator = IterableIterator<{
   name: string,
-  node: Serializable | number | string | ConstructorProperty | undefined,
+  node: Serializable | ConstructorProperty | string | number | undefined,
   descriptor?: PropertyDescriptor,
 }>;
 
