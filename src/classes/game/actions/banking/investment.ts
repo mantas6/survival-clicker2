@@ -5,7 +5,8 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 @SerializeAllOn('emit')
 export class Investment extends Action {
   money = new Effect(() => this.stats.finance.money, value => {
-    return value.sub(this.modifiers.finance.costAdd.value.mul(10));
+    const base = this.stats.finance.investment.value.add(10);
+    return value.sub(this.modifiers.finance.costAdd.value.mul(base));
   });
 
   investment = new Effect(() => this.stats.finance.investment, value => {
