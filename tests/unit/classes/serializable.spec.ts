@@ -36,23 +36,23 @@ describe('serializable.ts', () => {
 
   // Redo these tests without nested prop?
   it('does not serialize property from other group', () => {
-    const serialized = serializable.serialize('emit');
+    const serialized = serializable.serialize('emit')!;
     expect(serialized.someProperty).to.not.have.property('someTextOnlyToStore');
   });
 
   it('does serialize property from store group', () => {
-    const serialized = serializable.serialize('store');
+    const serialized = serializable.serialize('store')!;
     expect(serialized.someProperty).to.have.property('someTextOnlyToStore').and.be.equal('toStoreValue');
   });
 
   it('serializes children property correctly', () => {
-    const serialized = serializable.serialize('emit');
+    const serialized = serializable.serialize('emit')!;
     expect(serialized.someProperty).property('someText').exist;
     expect(serialized.someProperty).property('someText').equals('someValue');
   });
 
   it('serializes a defined getter correctly', () => {
-    const serialized = serializable.serialize('emit');
+    const serialized = serializable.serialize('emit')!;
     expect(serialized.someProperty).property('someGetter').exist;
     expect(serialized.someProperty).property('someGetter').equals('someValueFromGetter');
   });
@@ -63,7 +63,7 @@ describe('serializable.ts', () => {
   });
 
   it('does not serialize a constructor property of a different group', () => {
-    const serialized = serializable.serialize('store');
+    const serialized = serializable.serialize('store')!;
     expect(serialized.someProperty).to.not.haveOwnProperty('someGetter');
   });
 });

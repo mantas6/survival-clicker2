@@ -1,7 +1,7 @@
 import { StateNode } from '@/classes/game/base/state-node';
 
 export interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | string | number;
+  [ propertyName: string ]: SerializedNode | string | number | undefined;
 }
 
 export interface PropertyDescriptor {
@@ -28,7 +28,7 @@ export abstract class Serializable extends StateNode {
   static defaultTagNames: string[] = [];
   'constructor': typeof Serializable;
 
-  serialize(tagName: TagName) {
+  serialize(tagName: TagName): SerializedNode | undefined {
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.serializableProperties(tagName)) {
@@ -36,7 +36,11 @@ export abstract class Serializable extends StateNode {
         serialized[name] = descriptor.serializeFunc(node);
       } else {
         if (node instanceof Serializable) {
-          serialized[name] = node.serialize(tagName);
+          const serializedNode = node.serialize(tagName);
+
+          if (serializedNode !== undefined) {
+            serialized[name] = serializedNode;
+          }
         } else if (node) {
           /**
            * Will no serialized property that is set to undefined,
@@ -59,7 +63,7 @@ export abstract class Serializable extends StateNode {
         if (descriptor && descriptor.unserializeFunc) {
           (this as any)[name] = descriptor.unserializeFunc(serializedValue);
         }
-      } else if (node instanceof Serializable) {
+      } else if (node instanceof Serializable && serializedValue) {
         node.unserialize(serializedValue);
       }
     }
