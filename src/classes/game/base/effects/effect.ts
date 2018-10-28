@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { SerializeOn, Serializable, SerializeAs } from '@/classes/game/base/serialization';
+import { SerializeOn, Serializable } from '@/classes/game/base/serialization';
 import { LimitFlag } from '@/classes/game/base/stats';
 
 interface MutableStat {
