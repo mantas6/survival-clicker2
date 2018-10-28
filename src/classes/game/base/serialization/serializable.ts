@@ -1,13 +1,16 @@
 import { StateNode } from '@/classes/game/base/state-node';
+import { isPrimitive } from '@/utils/guard';
+
+type BasicValue = string | number | boolean;
 
 export interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | string | number;
+  [ propertyName: string ]: SerializedNode | BasicValue | undefined;
 }
 
 export interface PropertyDescriptor {
   tagNames: string[];
-  serializeFunc?: (input: any) => string | number;
-  unserializeFunc?: (input: string | number) => any;
+  serializeFunc?: (input: any) => BasicValue;
+  unserializeFunc?: (input: BasicValue) => any;
 }
 
 export type PropertyDescriptorMap = Map<string, PropertyDescriptor>;
@@ -18,7 +21,7 @@ type ConstructorProperty = () => void;
 
 export type PropertyTagIterator = IterableIterator<{
   name: string,
-  node: Serializable | ConstructorProperty | string | number | undefined,
+  node: Serializable | ConstructorProperty | BasicValue | undefined,
   descriptor?: PropertyDescriptor,
 }>;
 
@@ -33,20 +36,23 @@ export abstract class Serializable extends StateNode {
 
     for (const { name, node, descriptor } of this.serializableProperties(tagName)) {
       if (descriptor && descriptor.serializeFunc) {
+        // If it has a serialization override function, it will use it first
         serialized[name] = descriptor.serializeFunc(node);
-      } else {
+      } else if (node !== undefined) {
+        // However if it does not, then it will check if it's a standard serializable child
         if (node instanceof Serializable) {
           const serializedNode = node.serialize(tagName);
 
+          // Skipping undefined values
+          // This is used when serialize function is overridden in the child class
           if (serializedNode !== undefined) {
             serialized[name] = serializedNode;
           }
-        } else if (node) {
-          /**
-           * Will no serialized property that is set to undefined,
-           * meaning that un-serialization won't reset this property.
-           * To solve this state needs to be reset before un-serializing
-           */
+        } else if (isPrimitive(node)) {
+          // If node is a primitive
+          serialized[name] = node;
+        } else {
+          // If it's other object
           serialized[name] = node.toString();
         }
       }
@@ -59,9 +65,15 @@ export abstract class Serializable extends StateNode {
     for (const { name, node, descriptor } of this.serializableProperties('store')) {
       const serializedValue = serialized[name];
 
-      if (typeof serializedValue === 'string' || typeof serializedValue === 'number') {
+      if (serializedValue === undefined) {
+        continue;
+      }
+
+      if (isPrimitive(serializedValue)) {
         if (descriptor && descriptor.unserializeFunc) {
           (this as any)[name] = descriptor.unserializeFunc(serializedValue);
+        } else {
+          (this as any)[name] = serializedValue;
         }
       } else if (node instanceof Serializable) {
         node.unserialize(serializedValue);

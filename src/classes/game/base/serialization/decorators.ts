@@ -49,7 +49,7 @@ export function SerializeAs<Target>(serializeFunc: (input: Target) => string | n
  * Overrides the default way of unserialization. Used for objects that do not extend Serializable
  * @param serializeFunc unserialization handler to use
  */
-export function UnserializeAs<Target>(unserializeFunc: (input: number | string) => Target) {
+export function UnserializeAs<Target>(unserializeFunc: (input: string | number | boolean) => Target) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
