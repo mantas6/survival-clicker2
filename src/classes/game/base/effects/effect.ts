@@ -10,6 +10,7 @@ interface MutableStat {
 }
 
 export type MutationFunction = (value: Decimal) => Decimal;
+export type DiffFunction = (opts: CalculationOptions) => Decimal;
 type StatFunction<StatType> = () => StatType;
 
 export interface CalculationOptions {
@@ -27,24 +28,24 @@ export interface Calculable {
 
 export class Effect<StatType extends MutableStat> extends Serializable implements Calculable {
   protected statFunc: StatFunction<StatType>;
-  protected mutationFunc: MutationFunction;
+  protected diffFunc: DiffFunction;
 
-  constructor(statFunc: StatFunction<StatType>, mutationFunc: MutationFunction) {
+  constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
     super();
     this.statFunc = statFunc;
-    this.mutationFunc = mutationFunc;
+    this.diffFunc = diffFunc;
   }
 
   calculate(opts: CalculationOptions) {
     const stat = this.statFunc();
-    const diff = this.getStatDiff(opts);
+    const diff = this.diffFunc(opts);
 
     stat.mutate(value => value.add(diff));
   }
 
   validate(opts: ValidationOptions): boolean {
     const stat = this.statFunc();
-    const diff = this.getStatDiff(opts);
+    const diff = this.diffFunc(opts);
 
     const probed = stat.probe(value => value.add(diff));
 
@@ -59,22 +60,14 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   @SerializeOn('emit')
   get diff() {
-    const stat = this.statFunc();
-    const mutated = this.mutationFunc(stat.value);
+    const multiplier = new Decimal(1);
+    const mutated = this.diffFunc({ multiplier });
 
-    return mutated.sub(stat.value);
+    return mutated;
   }
 
   @SerializeOn('emit')
   get stat() {
     return this.statFunc().path;
-  }
-
-  private getStatDiff(opts: CalculationOptions): Decimal {
-    const stat = this.statFunc();
-    const mutated = this.mutationFunc(stat.value);
-    const diff = mutated.sub(stat.value).mul(opts.multiplier);
-
-    return diff;
   }
 }
