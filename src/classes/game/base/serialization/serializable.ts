@@ -1,7 +1,7 @@
 import { StateNode } from '@/classes/game/base/state-node';
 
 export interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | string | number | undefined;
+  [ propertyName: string ]: SerializedNode | string | number;
 }
 
 export interface PropertyDescriptor {
@@ -63,7 +63,7 @@ export abstract class Serializable extends StateNode {
         if (descriptor && descriptor.unserializeFunc) {
           (this as any)[name] = descriptor.unserializeFunc(serializedValue);
         }
-      } else if (node instanceof Serializable && serializedValue) {
+      } else if (node instanceof Serializable) {
         node.unserialize(serializedValue);
       }
     }
