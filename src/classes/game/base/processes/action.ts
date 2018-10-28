@@ -1,5 +1,5 @@
 import { Process } from './process';
-import { SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
+import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable } from '../effects';
@@ -10,9 +10,7 @@ export class Action extends Process {
   'constructor': typeof Action;
 
   @SerializeOn('store')
-  @SerializeAs(input => input ? 1 : 0)
-  @UnserializeAs(input => input ? true : false)
-  protected isUnlocked: boolean = false;
+  isUnlocked: boolean = false;
 
   @SerializeOn('emit')
   get fullPath() {

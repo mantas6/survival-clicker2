@@ -11,7 +11,7 @@ export abstract class Value extends SerializableWithReference {
   minimum: number | string = 0;
 
   @SerializeOn('store')
-  @UnserializeAs(input => new Decimal(input))
+  @UnserializeAs(input => new Decimal(input.toString()))
   current?: Decimal;
 
   @SerializeOn('emit')
