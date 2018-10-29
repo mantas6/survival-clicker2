@@ -1,4 +1,5 @@
-import { Action, Duration, Required } from '@/classes/game/base/processes';
+import { Action, Required } from '@/classes/game/base/actions';
+import { Duration } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';

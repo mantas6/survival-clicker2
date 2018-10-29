@@ -1,4 +1,4 @@
-import { Process } from './process';
+import { Process } from '../processes/process';
 import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';

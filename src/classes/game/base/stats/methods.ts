@@ -1,7 +1,7 @@
 import { Value, Container } from '.';
 import { State } from '@/classes/game/state';
 import { apply } from '@/utils/node';
-import { Action } from '../processes';
+import { Action } from '../actions';
 
 export function applyReset(state: State) {
   apply<Value | Container | Action>(state, node => {

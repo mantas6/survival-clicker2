@@ -1,13 +1,6 @@
 import { Process, EffectDescriptor, ConditionFunction } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
-import { Action } from '.';
-
-export function Required(actionClass: Action, propertyName: string) {
-  const ctor = actionClass.constructor;
-
-  ctor.requiredEffects = [ ...ctor.requiredEffects, propertyName ];
-}
 
 export function When(conditionFunc: ConditionFunction) {
   return (ctor: typeof Process) => {

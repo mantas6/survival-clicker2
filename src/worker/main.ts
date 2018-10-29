@@ -5,7 +5,7 @@ import { Calculable } from '@/classes/game/base/effects';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyReset } from '@/classes/game/base/stats/methods';
-import { applyUnlocked } from '@/classes/game/base/processes/methods';
+import { applyUnlocked } from '@/classes/game/base/actions/methods';
 import Decimal from 'decimal.js';
 
 const ctx: Worker = self as any;

@@ -1,4 +1,4 @@
-import { Action } from '@/classes/game/base/processes';
+import { Action } from '@/classes/game/base/actions';
 import { Effect } from '@/classes/game/base/effects';
 
 export class Investment extends Action {
