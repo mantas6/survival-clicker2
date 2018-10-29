@@ -1,8 +1,8 @@
-import { Process } from '../processes/process';
+import { Process } from '@/classes/game/base/processes';
 import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
-import { Calculable } from '../effects';
+import { Calculable } from '@/classes/game/base/effects';
 import { log } from '@/utils/log';
 
 export class Action extends Process {
