@@ -1,7 +1,7 @@
-import { Required } from './decorators';
+import { Unlocks } from './decorators';
 import { Action } from './action';
 
 export {
   Action,
-  Required,
+  Unlocks,
 };

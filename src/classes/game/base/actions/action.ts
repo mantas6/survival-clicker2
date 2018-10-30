@@ -6,7 +6,7 @@ import { Calculable } from '@/classes/game/base/effects';
 import { log } from '@/utils/log';
 
 export class Action extends Process {
-  static requiredEffects: string[] = [];
+  static unlockingEffects: string[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
@@ -31,9 +31,9 @@ export class Action extends Process {
 
   triggerUnlocked() {
     if (!this.isUnlocked) {
-      const { requiredEffects } = this.constructor;
-      if (requiredEffects.length) {
-        for (const name of this.constructor.requiredEffects) {
+      const { unlockingEffects } = this.constructor;
+      if (unlockingEffects.length) {
+        for (const name of this.constructor.unlockingEffects) {
           const effect = (this as any)[name] as Calculable;
 
           const multiplier = new Decimal(1);

@@ -1,4 +1,4 @@
-import { Action, Required } from '@/classes/game/base/actions';
+import { Action, Unlocks } from '@/classes/game/base/actions';
 import { Duration } from '@/classes/game/base/processes';
 import { Effect } from '@/classes/game/base/effects';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
@@ -15,7 +15,7 @@ export class CheapWater extends Action {
     return new Decimal(5);
   });
 
-  @Required
+  @Unlocks
   money = new Effect(() => this.stats.finance.money, () => {
     return this.modifiers.finance.costAdd.value.mul(1).negated();
   });
