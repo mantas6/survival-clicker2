@@ -7,7 +7,7 @@ import Decimal from 'decimal.js';
 export class Investment extends Action {
   money = new Effect(() => this.stats.finance.money, () => {
     const base = this.stats.finance.investment.value.add(10);
-    return this.modifiers.finance.costAdd.value.mul(base).negated();
+    return this.modifiers.finance.costAdd.value.mul(base).ceil().negated();
   });
 
   investment = new Effect(() => this.stats.finance.investment, () => {

@@ -17,6 +17,6 @@ export class CheapFood extends Action {
 
   @Unlocks
   money = new Effect(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(1).negated();
+    return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
   });
 }
