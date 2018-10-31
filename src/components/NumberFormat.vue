@@ -18,7 +18,7 @@ export default class NumberFormat extends Vue {
     return this.formatter.format(value);
   }
 
-  formatter = new Formatter({ maxSmall: 2, sigfigs: 3, flavor: 'short' });
+  formatter = new Formatter({ flavor: 'short' });
 
   @Prop({ required: true })
   private value!: Decimal | number | string;
