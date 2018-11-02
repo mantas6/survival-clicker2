@@ -15,12 +15,11 @@ const state = new State();
 
 emitAll();
 
-relay.on('action', ({ path }) => {
+relay.on('action', ({ path, multiplier }) => {
   log('Calculating action of path', path);
   const action = get(state, path) as Calculable;
-  const multiplier = new Decimal(1);
-  if (action.validate({ multiplier })) {
-    action.calculate({ multiplier });
+  if (action.validate({ multiplier: new Decimal(multiplier) })) {
+    action.calculate({ multiplier: new Decimal(multiplier) });
     emitAll();
   }
 });

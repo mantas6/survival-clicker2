@@ -35,7 +35,8 @@ export default class Actions extends Vue {
   }
 
   activate(path: string) {
-    this.relay.emit('action', { path });
+    const multiplier = 1;
+    this.relay.emit('action', { path, multiplier });
   }
 }
 </script>
