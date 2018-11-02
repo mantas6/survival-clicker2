@@ -5,6 +5,7 @@ import { LimitFlag } from '@/classes/game/base/stats';
 interface MutableStat {
   mutate: (mutateFunc: MutationFunction) => void;
   probe: (mutateFunc: MutationFunction) => LimitFlag;
+  getMaxMultiplier: (diff: Decimal) => Decimal;
   value: Decimal;
   path: string;
 }
@@ -29,11 +30,13 @@ export interface Calculable {
 export class Effect<StatType extends MutableStat> extends Serializable implements Calculable {
   protected statFunc: StatFunction<StatType>;
   protected diffFunc: DiffFunction;
+  protected maxFunc?: () => Decimal;
 
-  constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction) {
+  constructor(statFunc: StatFunction<StatType>, diffFunc: DiffFunction, maxFunc?: () => Decimal) {
     super();
     this.statFunc = statFunc;
     this.diffFunc = diffFunc;
+    this.maxFunc = maxFunc;
   }
 
   calculate(opts: CalculationOptions) {
@@ -69,5 +72,16 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
   @SerializeOn('emit')
   get stat() {
     return this.statFunc().path;
+  }
+
+  @SerializeOn('emit')
+  get maxMultiplier(): Decimal {
+    if (this.maxFunc) {
+      return this.maxFunc();
+    } else {
+      const multiplier = new Decimal(1);
+      const diff = this.diffFunc({ multiplier });
+      return this.statFunc().getMaxMultiplier(diff).floor();
+    }
   }
 }

@@ -35,6 +35,14 @@ export abstract class Container extends Value {
     return true;
   }
 
+  getMaxMultiplier(diff: Decimal): Decimal {
+    if (diff.isNeg()) {
+      return this.value.minus(this.minimum).div(diff.negated());
+    } else {
+      return this.maximum.minus(this.value).div(diff);
+    }
+  }
+
   @SerializeOn('emit')
   get max() {
     return this.maximum;

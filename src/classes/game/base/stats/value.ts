@@ -47,6 +47,14 @@ export abstract class Value extends SerializableWithReference {
     return true;
   }
 
+  getMaxMultiplier(diff: Decimal): Decimal {
+    if (diff.isNeg()) {
+      return this.value.minus(this.minimum).div(diff.negated());
+    } else {
+      return new Decimal(Infinity);
+    }
+  }
+
   /**
    * Is triggered when value floors to the minimum after mutation
    */
