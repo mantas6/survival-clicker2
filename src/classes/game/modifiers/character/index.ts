@@ -7,4 +7,7 @@ export class Character extends SerializableWithReference {
   digestionSpeed = new Modifier(() => {
     return new Decimal(2);
   });
+  staminaRestoreSpeed = new Modifier(() => {
+    return new Decimal(1);
+  });
 }

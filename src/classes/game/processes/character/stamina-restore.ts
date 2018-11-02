@@ -4,7 +4,7 @@ import Decimal from 'decimal.js';
 
 export class StaminaRestore extends Process {
   restoreStamina = new Effect(() => this.stats.character.stamina, () => {
-    return new Decimal(1);
+    return this.modifiers.character.staminaRestoreSpeed.value;
   });
 
   drainEnergy = new Effect(() => this.stats.character.energy, () => {
