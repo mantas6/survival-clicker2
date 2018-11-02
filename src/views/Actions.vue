@@ -1,5 +1,8 @@
 <template>
   <article>
+    <button @click="setMultiplier(1)">x1</button>
+    <button @click="setMultiplier(5)">x5</button>
+    <button @click="setMultiplier(10)">x10</button>
     <section>
       <div v-for="(action, actionName) of availableActions"
         :key="actionName"
@@ -25,6 +28,8 @@ export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
   @Getter relay!: Relay;
 
+  multiplier: number = 1;
+
   get availableActions() {
     if (!this.processes) {
       return;
@@ -35,8 +40,11 @@ export default class Actions extends Vue {
   }
 
   activate(path: string) {
-    const multiplier = 1;
-    this.relay.emit('action', { path, multiplier });
+    this.relay.emit('action', { path, multiplier: this.multiplier });
+  }
+
+  setMultiplier(multiplier: number) {
+    this.multiplier = multiplier;
   }
 }
 </script>
