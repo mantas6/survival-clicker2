@@ -41,7 +41,11 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
 
   calculate(opts: CalculationOptions) {
     const stat = this.statFunc();
-    const diff = this.diffFunc(opts);
+    let diff = this.diffFunc(opts);
+
+    if (!this.maxFunc) {
+      diff = diff.times(opts.multiplier);
+    }
 
     stat.mutate(value => value.add(diff));
   }
