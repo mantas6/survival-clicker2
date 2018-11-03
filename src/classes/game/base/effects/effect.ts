@@ -70,6 +70,14 @@ export class Effect<StatType extends MutableStat> extends Serializable implement
   }
 
   @SerializeOn('emit')
+  get diffMax() {
+    const multiplier = this.maxMultiplier;
+    const mutated = this.diffFunc({ multiplier });
+
+    return mutated;
+  }
+
+  @SerializeOn('emit')
   get stat() {
     return this.statFunc().path;
   }

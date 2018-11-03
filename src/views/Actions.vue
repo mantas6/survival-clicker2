@@ -1,15 +1,13 @@
 <template>
   <article>
-    <button @click="setMultiplier(1)">x1</button>
-    <button @click="setMultiplier(5)">x5</button>
-    <button @click="setMultiplier(10)">x10</button>
     <section>
       <div v-for="(action, actionName) of availableActions"
         :key="actionName"
-        @click="activate(action.fullPath)"
+        @click="activate(action.fullPath, 1)"
         class="item"
         :class="!action.isAvailable ? 'unavailable' : ''">
         <span class="name">{{ actionName | startCase }}</span>
+        <span @click="activate(action.fullPath, action.maxMultiplier)">[MAX]</span>
         <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
       </div>
     </section>
@@ -28,8 +26,6 @@ export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
   @Getter relay!: Relay;
 
-  multiplier: number = 1;
-
   get availableActions() {
     if (!this.processes) {
       return;
@@ -39,12 +35,8 @@ export default class Actions extends Vue {
     return this.processes[category];
   }
 
-  activate(path: string) {
-    this.relay.emit('action', { path, multiplier: this.multiplier });
-  }
-
-  setMultiplier(multiplier: number) {
-    this.multiplier = multiplier;
+  activate(path: string, multiplier: string) {
+    this.relay.emit('action', { path, multiplier });
   }
 }
 </script>
@@ -66,6 +58,10 @@ export default class Actions extends Vue {
       padding: 0.75rem;
       padding-left: 0;
       text-transform: capitalize;
+
+      .name {
+        flex: 1;
+      }
 
       &.unavailable {
         color: grey;
