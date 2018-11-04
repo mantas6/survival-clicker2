@@ -6,7 +6,6 @@ import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 export class CheapFood extends Action {
-  @Duration(() => 5)
   energy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(1);
   });

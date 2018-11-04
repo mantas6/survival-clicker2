@@ -1,21 +1,18 @@
 import { Calculable, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
+import { Effect } from '@/classes/game/base/modifiers';
 
 export class Timer {
-  private calculable: Calculable;
+  effect: Effect;
   private durationFunc: () => Decimal;
   private timePassed = new Decimal(0);
 
-  constructor(calculable: Calculable, durationFunc: () => Decimal) {
-    this.calculable = calculable;
+  constructor(effect: Effect, durationFunc: () => Decimal) {
+    this.effect = effect;
     this.durationFunc = durationFunc;
   }
 
   calculate(opts: CalculationOptions) {
-    if (this.calculable.validate(opts)) {
-      this.calculable.calculate(opts);
-    }
-
     this.timePassed = this.timePassed.add(opts.multiplier);
   }
 

@@ -6,7 +6,6 @@ import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 export class CheapWater extends Action {
-  @Duration(() => 5)
   hydration = new Mutation(() => this.stats.character.hydration, () => {
     return new Decimal(1);
   });

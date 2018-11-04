@@ -1,4 +1,4 @@
-import { Process, MutationDescriptor, ConditionFunction } from './process';
+import { Process, MutationDescriptor, ConditionFunction, ProcessableDescriptorType, EffectDescriptor } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 
@@ -10,7 +10,7 @@ export function When(conditionFunc: ConditionFunction) {
 
 export function Duration(durationFunc: () => Decimal | number | string) {
   return (processClass: Process, propertyName: string) => {
-    const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty('effect', processClass, propertyName) as EffectDescriptor;
 
     descriptor.durationFunc = () => {
       const duration = durationFunc();
@@ -22,25 +22,35 @@ export function Duration(durationFunc: () => Decimal | number | string) {
 
 export function IgnoreLimits(...flags: LimitFlag[]) {
   return (processClass: Process, propertyName: string) => {
-    const descriptor = prepareDescriptorOfProperty(processClass, propertyName);
+    const descriptor = prepareDescriptorOfProperty('mutation', processClass, propertyName) as MutationDescriptor;
 
     descriptor.ignoreLimits.push(...flags);
   };
 }
 
-function prepareDescriptorOfProperty(processClass: Process, propertyName: string): MutationDescriptor {
+function prepareDescriptorOfProperty(
+  type: ProcessableDescriptorType,
+  processClass: Process,
+  propertyName: string): MutationDescriptor | EffectDescriptor {
   const ctor = processClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
-  const descriptors = new Map(ctor.descriptorsOfMutations);
+  const descriptors = new Map(ctor.descriptorsOfProcessables);
 
   if (!descriptors.has(propertyName)) {
-    descriptors.set(propertyName, {
-      ignoreLimits: [],
-    });
+    if (type === 'mutation') {
+      descriptors.set(propertyName, {
+        type: 'mutation' ,
+        ignoreLimits: [],
+      });
+    } else {
+      descriptors.set(propertyName, {
+        type: 'effect' ,
+      });
+    }
   }
 
   // Forwarding the copy to the class
-  ctor.descriptorsOfMutations = descriptors;
+  ctor.descriptorsOfProcessables = descriptors;
 
   return descriptors.get(propertyName)!;
 }

@@ -2,10 +2,18 @@ import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
+import { Effect } from '@/classes/game/base/modifiers';
+
+export type ProcessableDescriptorType = 'mutation' | 'effect';
 
 export interface MutationDescriptor {
-  durationFunc?: () => Decimal;
+  type: 'mutation';
   ignoreLimits: LimitFlag[];
+}
+
+export interface EffectDescriptor {
+  type: 'effect';
+  durationFunc?: () => Decimal;
 }
 
 export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
@@ -15,10 +23,10 @@ export interface Condition {
   conditionFunc: ConditionFunction;
 }
 
-export type MutationDescriptorMap = Map<string, MutationDescriptor>;
+export type ProcessableDescriptorMap = Map<string, MutationDescriptor | EffectDescriptor>;
 
 export abstract class Process extends SerializableWithReference implements Calculable {
-  static descriptorsOfMutations: MutationDescriptorMap = new Map();
+  static descriptorsOfProcessables: ProcessableDescriptorMap = new Map();
   static conditions: Condition[] = [];
 
   'constructor': typeof Process;
@@ -36,19 +44,23 @@ export abstract class Process extends SerializableWithReference implements Calcu
   }
 
   calculate(opts: CalculationOptions) {
-    for (const { mutation, descriptor } of this.mutations()) {
-      if (descriptor && descriptor.durationFunc) {
-        this.state.timers.push(mutation, descriptor.durationFunc);
-      } else {
-        mutation.calculate(opts);
-      }
+    for (const { mutation } of this.mutations()) {
+      mutation.calculate(opts);
     }
   }
 
-  // Rename this method to match Process child classes
   *mutations(): IterableIterator<{ descriptor: MutationDescriptor | undefined, mutation: Calculable }> {
     for (const { name, node } of this.children<Calculable>(entry => entry instanceof Mutation)) {
-      const descriptor = this.constructor.descriptorsOfMutations.get(name);
+      // Will always be a MutationDescriptor, since we filtering only instanceof Mutation
+      const descriptor = this.constructor.descriptorsOfProcessables.get(name) as MutationDescriptor | undefined;
+      yield { descriptor, mutation: node };
+    }
+  }
+
+  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, mutation: Calculable }> {
+    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Effect)) {
+      // Will always be a MutationDescriptor, since we filtering only instanceof Effect
+      const descriptor = this.constructor.descriptorsOfProcessables.get(name) as EffectDescriptor | undefined;
       yield { descriptor, mutation: node };
     }
   }
