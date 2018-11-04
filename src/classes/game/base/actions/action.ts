@@ -6,7 +6,7 @@ import { Calculable, Mutation } from '@/classes/game/base/mutations';
 import { log } from '@/utils/log';
 
 export class Action extends Process {
-  static unlockingEffects: string[] = [];
+  static unlockingMutations: string[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
@@ -44,14 +44,14 @@ export class Action extends Process {
 
   triggerUnlocked() {
     if (!this.isUnlocked) {
-      const { unlockingEffects } = this.constructor;
-      if (unlockingEffects.length) {
-        for (const name of this.constructor.unlockingEffects) {
-          const effect = (this as any)[name] as Calculable;
+      const { unlockingMutations } = this.constructor;
+      if (unlockingMutations.length) {
+        for (const name of this.constructor.unlockingMutations) {
+          const mutation = (this as any)[name] as Calculable;
 
           const multiplier = new Decimal(1);
 
-          if (effect.validate({ multiplier })) {
+          if (mutation.validate({ multiplier })) {
             log('Unlocking action', this.path);
             this.isUnlocked = true;
           }

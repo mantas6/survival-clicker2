@@ -28,7 +28,7 @@ export abstract class Process extends SerializableWithReference implements Calcu
       return false;
     }
 
-    if (!this.validateEffects(opts)) {
+    if (!this.validateMutations(opts)) {
       return false;
     }
 
@@ -36,32 +36,32 @@ export abstract class Process extends SerializableWithReference implements Calcu
   }
 
   calculate(opts: CalculationOptions) {
-    for (const { effect, descriptor } of this.mutations()) {
+    for (const { mutation, descriptor } of this.mutations()) {
       if (descriptor && descriptor.durationFunc) {
-        this.state.timers.push(effect, descriptor.durationFunc);
+        this.state.timers.push(mutation, descriptor.durationFunc);
       } else {
-        effect.calculate(opts);
+        mutation.calculate(opts);
       }
     }
   }
 
   // Rename this method to match Process child classes
-  *mutations(): IterableIterator<{ descriptor: MutationDescriptor | undefined, effect: Calculable }> {
+  *mutations(): IterableIterator<{ descriptor: MutationDescriptor | undefined, mutation: Calculable }> {
     for (const { name, node } of this.children<Calculable>(entry => entry instanceof Mutation)) {
       const descriptor = this.constructor.descriptorsOfMutations.get(name);
-      yield { descriptor, effect: node };
+      yield { descriptor, mutation: node };
     }
   }
 
-  protected validateEffects(opts: ValidationOptions): boolean {
-    for (const { effect, descriptor } of this.mutations()) {
-      const effectOpts: ValidationOptions = { multiplier: opts.multiplier };
+  protected validateMutations(opts: ValidationOptions): boolean {
+    for (const { mutation, descriptor } of this.mutations()) {
+      const mutationOpts: ValidationOptions = { multiplier: opts.multiplier };
 
       if (descriptor) {
-        effectOpts.ignoreLimits = descriptor.ignoreLimits;
+        mutationOpts.ignoreLimits = descriptor.ignoreLimits;
       }
 
-      if (!effect.validate(effectOpts)) {
+      if (!mutation.validate(mutationOpts)) {
         return false;
       }
     }
