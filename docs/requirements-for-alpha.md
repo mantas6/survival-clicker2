@@ -7,10 +7,10 @@ This is a list of features that need to be implemented for the game to be consid
   - ~~when health goes to zero, game resets~~
 - minimal game content
   - have a content for at least 10-30min of game-play time
-- buy max
-  - game engine to support auto max qty calculation
 - effects with timeouts *(Ongoing)*
   - allow processes to have effect that last a certain duration of time
+- ~~buy max~~
+  - ~~game engine to support auto max qty calculation~~
 - ~~unlockable actions~~
   - ~~add functionality for persistent action unlock checks~~
 - ~~dynamic time calculation~~
