@@ -47,6 +47,12 @@ export abstract class Process extends SerializableWithReference implements Calcu
     for (const { mutation } of this.mutations()) {
       mutation.calculate(opts);
     }
+
+    for (const { effect, descriptor } of this.effects()) {
+      if (descriptor && descriptor.durationFunc) {
+        this.state.timers.push(effect, descriptor.durationFunc);
+      }
+    }
   }
 
   *mutations(): IterableIterator<{ descriptor: MutationDescriptor | undefined, mutation: Calculable }> {
@@ -57,11 +63,11 @@ export abstract class Process extends SerializableWithReference implements Calcu
     }
   }
 
-  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, mutation: Calculable }> {
-    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Effect)) {
+  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Effect }> {
+    for (const { name, node } of this.children<Effect>(entry => entry instanceof Effect)) {
       // Will always be a MutationDescriptor, since we filtering only instanceof Effect
       const descriptor = this.constructor.descriptorsOfProcessables.get(name) as EffectDescriptor | undefined;
-      yield { descriptor, mutation: node };
+      yield { descriptor, effect: node };
     }
   }
 
