@@ -1,4 +1,4 @@
-import { Process, EffectDescriptor, ConditionFunction } from './process';
+import { Process, MutationDescriptor, ConditionFunction } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 
@@ -28,10 +28,10 @@ export function IgnoreLimits(...flags: LimitFlag[]) {
   };
 }
 
-function prepareDescriptorOfProperty(processClass: Process, propertyName: string): EffectDescriptor {
+function prepareDescriptorOfProperty(processClass: Process, propertyName: string): MutationDescriptor {
   const ctor = processClass.constructor;
   // Copying the variable so that it doesn't mutate the prototype class
-  const descriptors = new Map(ctor.descriptorsOfEffects);
+  const descriptors = new Map(ctor.descriptorsOfMutations);
 
   if (!descriptors.has(propertyName)) {
     descriptors.set(propertyName, {
@@ -40,7 +40,7 @@ function prepareDescriptorOfProperty(processClass: Process, propertyName: string
   }
 
   // Forwarding the copy to the class
-  ctor.descriptorsOfEffects = descriptors;
+  ctor.descriptorsOfMutations = descriptors;
 
   return descriptors.get(propertyName)!;
 }
