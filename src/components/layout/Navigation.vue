@@ -1,9 +1,9 @@
 <template>
   <nav>
     <router-link to="/actions/consumables">Consumables</router-link>
+    <router-link to="/actions/drugs">Drugs</router-link>
     <router-link to="/actions/jobs">Jobs</router-link>
     <router-link to="/actions/banking">Banking</router-link>
-    <router-link to="/actions/government">Government</router-link>
   </nav>
 </template>
 
