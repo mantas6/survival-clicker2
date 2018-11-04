@@ -1,4 +1,4 @@
-import { Calculable } from '@/classes/game/base/effects';
+import { Calculable } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Timer } from './timer';

@@ -1,5 +1,4 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-import {  } from '@/classes/game/base/effects/timers';
 import Decimal from 'decimal.js';
 
 interface Timer {

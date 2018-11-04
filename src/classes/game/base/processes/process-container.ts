@@ -1,6 +1,6 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Process } from './process';
-import { Calculable } from '@/classes/game/base/effects';
+import { Calculable } from '@/classes/game/base/mutations';
 
 export class ProcessContainer extends SerializableWithReference implements Calculable {
   calculate() {

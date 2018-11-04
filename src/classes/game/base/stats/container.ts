@@ -1,7 +1,7 @@
 import { Decimal } from 'decimal.js';
 import { Value } from './value';
 import { SerializeOn } from '../serialization';
-import { MutationFunction } from '@/classes/game/base/effects';
+import { MutationFunction } from '@/classes/game/base/mutations';
 import { LimitFlag } from '.';
 
 export abstract class Container extends Value {

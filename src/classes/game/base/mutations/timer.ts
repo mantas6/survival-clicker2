@@ -1,4 +1,4 @@
-import { Calculable, CalculationOptions } from '@/classes/game/base/effects';
+import { Calculable, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
 export class Timer {

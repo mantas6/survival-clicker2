@@ -1,5 +1,5 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
-import { Effect, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/effects';
+import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 
@@ -47,7 +47,7 @@ export abstract class Process extends SerializableWithReference implements Calcu
 
   // Rename this method to match Process child classes
   *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Calculable }> {
-    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Effect)) {
+    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Mutation)) {
       const descriptor = this.constructor.descriptorsOfEffects.get(name);
       yield { descriptor, effect: node };
     }

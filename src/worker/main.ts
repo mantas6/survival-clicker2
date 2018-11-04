@@ -1,7 +1,7 @@
 import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
 import { get } from 'lodash';
-import { Calculable } from '@/classes/game/base/effects';
+import { Calculable } from '@/classes/game/base/mutations';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyReset } from '@/classes/game/base/stats/methods';

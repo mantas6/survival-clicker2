@@ -1,8 +1,8 @@
 import { Action } from '@/classes/game/base/actions';
-import { Effect } from '@/classes/game/base/effects';
+import { Mutation } from '@/classes/game/base/mutations';
 
 export class Investment extends Action {
-  money = new Effect(() => this.stats.finance.money, () => {
+  money = new Mutation(() => this.stats.finance.money, () => {
     return this.modifiers.finance.moneyGain.value;
   });
 }

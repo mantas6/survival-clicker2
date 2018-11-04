@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 import { State } from '@/classes/game/state';
 import { StateNode } from '@/classes/game/base/state-node';
-import { Effect } from '@/classes/game/base/effects';
+import { Mutation } from '@/classes/game/base/mutations';
 import { Modifier } from '@/classes/game/base/modifiers';
 
 describe('Game State', function() {
@@ -14,7 +14,7 @@ describe('Game State', function() {
 
     function check(parent: StateNode) {
       for (const { name, node } of parent.children<StateNode>(entry => entry instanceof StateNode)) {
-        if (node instanceof Effect || node instanceof Modifier) {
+        if (node instanceof Mutation || node instanceof Modifier) {
           continue;
         }
 

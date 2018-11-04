@@ -2,7 +2,7 @@ import { Process } from '@/classes/game/base/processes';
 import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
-import { Calculable, Effect } from '@/classes/game/base/effects';
+import { Calculable, Mutation } from '@/classes/game/base/mutations';
 import { log } from '@/utils/log';
 
 export class Action extends Process {
@@ -26,7 +26,7 @@ export class Action extends Process {
   @SerializeOn('emit')
   get maxMultiplier(): Decimal {
     let max = new Decimal(0);
-    for (const { node } of this.children<Effect<any>>(entry => entry instanceof Effect)) {
+    for (const { node } of this.children<Mutation<any>>(entry => entry instanceof Mutation)) {
       const { maxMultiplier } = node;
       if (maxMultiplier.isFinite() && maxMultiplier.greaterThan(max)) {
         max = node.maxMultiplier;

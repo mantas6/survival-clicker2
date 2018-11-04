@@ -1,17 +1,17 @@
 import { Process } from '@/classes/game/base/processes/process';
-import { Effect } from '@/classes/game/base/effects';
+import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
 export class StaminaRestore extends Process {
-  restoreStamina = new Effect(() => this.stats.character.stamina, () => {
+  restoreStamina = new Mutation(() => this.stats.character.stamina, () => {
     return this.modifiers.character.staminaRestoreSpeed.value;
   });
 
-  drainEnergy = new Effect(() => this.stats.character.energy, () => {
+  drainEnergy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(-1);
   });
 
-  drainHydration = new Effect(() => this.stats.character.hydration, () => {
+  drainHydration = new Mutation(() => this.stats.character.hydration, () => {
     return new Decimal(-2);
   });
 }

@@ -1,7 +1,7 @@
 import { Decimal } from 'decimal.js';
 import { SerializableWithReference, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
 import { LimitFlag } from '.';
-import { MutationFunction } from '@/classes/game/base/effects';
+import { MutationFunction } from '@/classes/game/base/mutations';
 
 export abstract class Value extends SerializableWithReference {
   abstract default: number | string;

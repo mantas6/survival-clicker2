@@ -1,22 +1,22 @@
 import { Action, Unlocks } from '@/classes/game/base/actions';
 import { Duration } from '@/classes/game/base/processes';
-import { Effect } from '@/classes/game/base/effects';
+import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 export class CheapFood extends Action {
   @Duration(() => 5)
-  energy = new Effect(() => this.stats.character.energy, () => {
+  energy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(1);
   });
 
-  stomach = new Effect(() => this.stats.character.stomach, () => {
+  stomach = new Mutation(() => this.stats.character.stomach, () => {
     return new Decimal(5);
   });
 
   @Unlocks
-  money = new Effect(() => this.stats.finance.money, () => {
+  money = new Mutation(() => this.stats.finance.money, () => {
     return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
   });
 }
