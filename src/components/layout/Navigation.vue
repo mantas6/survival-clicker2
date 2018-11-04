@@ -1,18 +1,36 @@
 <template>
   <nav>
-    <router-link to="/actions/consumables">Consumables</router-link>
-    <router-link to="/actions/drugs">Drugs</router-link>
-    <router-link to="/actions/jobs">Jobs</router-link>
-    <router-link to="/actions/banking">Banking</router-link>
+    <router-link v-for="category in categories" 
+      :key="category"
+      :to="{ name: 'actions', params: { name: category } }"
+      v-show="isUnlocked(category)">{{ category }}
+    </router-link>
   </nav>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { SerializedActions } from '@/store/actions';
+import { Getter } from 'vuex-class';
 
 @Component
 export default class Navigation extends Vue {
+  @Getter processes!: SerializedActions;
 
+  categories = [
+    'consumables',
+    'drugs',
+    'jobs',
+    'banking',
+  ];
+
+  isUnlocked(name: keyof SerializedActions): boolean {
+    if (this.processes[name] && Object.keys(this.processes[name]).length) {
+      return true;
+    }
+
+    return false;
+  }
 }
 </script>
 
