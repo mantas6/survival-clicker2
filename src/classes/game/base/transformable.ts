@@ -1,3 +1,5 @@
+import { SerializableWithReference } from '@/classes/game/base/serialization';
+
 export interface TransformationDescriptor {
   tagName: string;
   propertyName: string;
@@ -15,7 +17,7 @@ export function Transform<Target>(tagName: string, valueFunc: () => Target, cond
   };
 }
 
-export class Transformable {
+export class Transformable extends SerializableWithReference {
   static transformations: TransformationDescriptor[] = [];
   'constructor': typeof Transformable;
 
