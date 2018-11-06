@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Modifier (MD) defines a base or final value for any stat in the game
+Modifier (MD) defines a base or final value for any stat in the game. Can be increased or decreased temporarily by effects.
 
 ## Usage
 
