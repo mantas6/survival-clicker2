@@ -1,5 +1,4 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
-import { State } from '@/classes/game/state';
 
 export interface TransformationDescriptor {
   tagName: string;
