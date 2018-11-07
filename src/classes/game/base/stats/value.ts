@@ -1,9 +1,10 @@
 import { Decimal } from 'decimal.js';
-import { SerializableWithReference, UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
+import { UnserializeAs, SerializeOn } from '@/classes/game/base/serialization';
 import { LimitFlag } from '.';
 import { MutationFunction } from '@/classes/game/base/mutations';
+import { Transformable, Transform } from '@/classes/game/base/transformable';
 
-export abstract class Value extends SerializableWithReference {
+export abstract class Value extends Transformable {
   abstract default: number | string;
   /**
    * Standard value stat 99% of the time will default to zero as minimum value
@@ -12,6 +13,7 @@ export abstract class Value extends SerializableWithReference {
 
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input.toString()))
+  @Transform('reset', () => undefined)
   current?: Decimal;
 
   @SerializeOn('emit')

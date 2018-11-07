@@ -4,12 +4,14 @@ import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation } from '@/classes/game/base/mutations';
 import { log } from '@/utils/log';
+import { Transform } from '@/classes/game/base/transformable';
 
 export class Action extends Process {
   static unlockingMutations: string[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
+  @Transform('reset', () => false)
   isUnlocked: boolean = false;
 
   @SerializeOn('emit')

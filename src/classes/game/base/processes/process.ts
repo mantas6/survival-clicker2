@@ -1,8 +1,8 @@
-import { SerializableWithReference } from '@/classes/game/base/serialization';
 import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 import { Effect } from '@/classes/game/base/modifiers';
+import { Transformable } from '@/classes/game/base/transformable';
 
 export type ProcessableDescriptorType = 'mutation' | 'effect';
 
@@ -25,7 +25,7 @@ export interface Condition {
 
 export type ProcessableDescriptorMap = Map<string, MutationDescriptor | EffectDescriptor>;
 
-export abstract class Process extends SerializableWithReference implements Calculable {
+export abstract class Process extends Transformable implements Calculable {
   static descriptorsOfProcessables: ProcessableDescriptorMap = new Map();
   static conditions: Condition[] = [];
 

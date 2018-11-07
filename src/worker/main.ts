@@ -4,9 +4,10 @@ import { get } from 'lodash';
 import { Calculable } from '@/classes/game/base/mutations';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
-import { applyReset } from '@/classes/game/base/stats/methods';
 import { applyUnlocked } from '@/classes/game/base/actions/methods';
 import Decimal from 'decimal.js';
+import { apply } from '@/utils/node';
+import { Transformable } from '@/classes/game/base/transformable';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -62,4 +63,12 @@ function emitAll() {
 function emitStore() {
   const serializedState = state.serialize('store');
   relay.emit('save', serializedState);
+}
+
+export function applyReset(currentState: State) {
+  apply<Transformable>(currentState, node => {
+    if (node instanceof Transformable) {
+      node.transform('reset');
+    }
+  });
 }
