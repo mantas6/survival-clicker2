@@ -30,13 +30,13 @@ relay.on('enableLogging', () => {
 });
 
 relay.on('reset', () => {
-  applyReset(state);
+  applyReset();
   emitAll();
   emitStore();
 });
 
 relay.on('load', serializedState => {
-  applyReset(state);
+  applyReset();
   state.unserialize(serializedState);
   emitAll();
 });
@@ -52,7 +52,7 @@ interval(1000).subscribe(() => {
   emitAll();
 
   if (state.stats.character.health.value.isZero()) {
-    applyReset(state);
+    applyReset();
   }
 });
 
@@ -65,8 +65,8 @@ function emitStore() {
   relay.emit('save', serializedState);
 }
 
-export function applyReset(currentState: State) {
-  apply<Transformable>(currentState, node => {
+export function applyReset() {
+  apply<Transformable>(state, node => {
     if (node instanceof Transformable) {
       node.transform('reset');
     }
