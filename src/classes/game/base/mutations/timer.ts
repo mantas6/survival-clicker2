@@ -1,4 +1,4 @@
-import { Calculable, CalculationOptions } from '@/classes/game/base/mutations';
+import { CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 
