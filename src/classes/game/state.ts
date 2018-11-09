@@ -18,7 +18,7 @@ export class State extends StateRoot {
   @SerializeOn('emit')
   modifiers = new Modifiers();
 
-  @SerializeOn('emit')
+  @SerializeOn('emit', 'store')
   timers = new Timers();
 
   // For the time being
