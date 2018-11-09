@@ -48,6 +48,10 @@ export abstract class Container extends Value {
     return this.maximum;
   }
 
+  get level(): Decimal {
+    return this.value.div(this.maximum);
+  }
+
   /**
    * Is triggered when value ceils to the maximum after mutation
    */
