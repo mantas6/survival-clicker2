@@ -16,10 +16,15 @@ export class Timer extends Serializable {
   @UnserializeAs(input => new Decimal(input.toString()))
   private timePassed = new Decimal(0);
 
-  constructor(effect: Effect, duration: Decimal) {
+  constructor(effect: Effect, duration: Decimal, timePassed?: Decimal) {
     super();
     this.effect = effect;
     this.duration = duration;
+
+    // When un-serializing
+    if (timePassed) {
+      this.timePassed = timePassed;
+    }
   }
 
   calculate(opts: CalculationOptions) {
