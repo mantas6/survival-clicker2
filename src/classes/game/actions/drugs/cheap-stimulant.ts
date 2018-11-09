@@ -12,6 +12,10 @@ export class CheapStimulant extends Action {
     return new Decimal(5);
   });
 
+  stomach = new Mutation(() => this.stats.character.stomach, () => {
+    return new Decimal(1);
+  });
+
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.modifiers.finance.costAdd.value.mul(10).ceil().negated();
