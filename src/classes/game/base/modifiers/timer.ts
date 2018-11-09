@@ -1,15 +1,25 @@
 import { CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
+import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
 
-export class Timer {
+export class Timer extends Serializable {
+  @SerializeOn('emit', 'store')
+  @SerializeAs<Effect>(input => input.path)
   effect: Effect;
-  private durationFunc: () => Decimal;
+
+  @SerializeOn('emit', 'store')
+  @UnserializeAs(input => new Decimal(input.toString()))
+  private duration: Decimal;
+
+  @SerializeOn('emit', 'store')
+  @UnserializeAs(input => new Decimal(input.toString()))
   private timePassed = new Decimal(0);
 
-  constructor(effect: Effect, durationFunc: () => Decimal) {
+  constructor(effect: Effect, duration: Decimal) {
+    super();
     this.effect = effect;
-    this.durationFunc = durationFunc;
+    this.duration = duration;
   }
 
   calculate(opts: CalculationOptions) {
@@ -17,7 +27,6 @@ export class Timer {
   }
 
   hasTimedOut() {
-    const duration = this.durationFunc();
-    return this.timePassed.greaterThan(duration);
+    return this.timePassed.greaterThan(this.duration);
   }
 }

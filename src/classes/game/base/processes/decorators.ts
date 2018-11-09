@@ -1,6 +1,7 @@
 import { Process, MutationDescriptor, ConditionFunction, ProcessableDescriptorType, EffectDescriptor } from './process';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
+import { State } from '@/classes/game/state';
 
 export function When(conditionFunc: ConditionFunction) {
   return (ctor: typeof Process) => {
@@ -8,12 +9,12 @@ export function When(conditionFunc: ConditionFunction) {
   };
 }
 
-export function Duration(durationFunc: () => Decimal | number | string) {
+export function Duration(durationFunc: (state: State) => Decimal | number | string) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty('effect', processClass, propertyName) as EffectDescriptor;
 
-    descriptor.durationFunc = () => {
-      const duration = durationFunc();
+    descriptor.durationFunc = (state: State) => {
+      const duration = durationFunc(state);
 
       return new Decimal(duration);
     };

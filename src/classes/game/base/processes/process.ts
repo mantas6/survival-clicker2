@@ -3,6 +3,7 @@ import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 import { Effect } from '@/classes/game/base/modifiers';
 import { Transformable } from '@/classes/game/base/transformable';
+import { State } from '@/classes/game/state';
 
 export type ProcessableDescriptorType = 'mutation' | 'effect';
 
@@ -13,7 +14,7 @@ export interface MutationDescriptor {
 
 export interface EffectDescriptor {
   type: 'effect';
-  durationFunc?: () => Decimal;
+  durationFunc?: (state: State) => Decimal;
 }
 
 export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
@@ -50,7 +51,7 @@ export abstract class Process extends Transformable implements Calculable {
 
     for (const { effect, descriptor } of this.effects()) {
       if (descriptor && descriptor.durationFunc) {
-        this.state.timers.push(effect, descriptor.durationFunc);
+        this.state.timers.push(effect, descriptor.durationFunc(this.state));
       }
     }
   }
