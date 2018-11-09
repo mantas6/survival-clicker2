@@ -1,5 +1,3 @@
-import { camelCase } from 'lodash';
-
 export abstract class StateNode {
   static nonChildrenNames: string[] = [];
   'constructor': typeof StateNode;
@@ -8,26 +6,30 @@ export abstract class StateNode {
   path!: string;
 
   @NonChild
+  name!: string;
+
+  @NonChild
   protected parent?: StateNode;
 
   @NonChild
   protected root!: StateNode;
 
-  setParent(parent: StateNode) {
+  setParent(parent: StateNode, name: string) {
     this.parent = parent;
+    this.name = name;
     this.findRoot();
   }
 
   emitParent() {
-    for (const node of this.nodes()) {
-      node.setParent(this);
+    for (const { node, name } of this.nodes()) {
+      node.setParent(this, name);
       node.emitParent();
     }
   }
 
-  *nodes(): IterableIterator<StateNode> {
-    for (const { node } of this.children<StateNode>(entry => entry instanceof StateNode)) {
-      yield node;
+  *nodes(): IterableIterator<{ node: StateNode, name: string }> {
+    for (const { node, name } of this.children<StateNode>(entry => entry instanceof StateNode)) {
+      yield { node, name };
     }
   }
 
@@ -47,10 +49,6 @@ export abstract class StateNode {
 
   isChild<PropertyName extends keyof this>(propertyName: PropertyName): boolean {
     return this.constructor.nonChildrenNames.includes(propertyName as string);
-  }
-
-  get name(): string {
-    return camelCase(this.constructor.name);
   }
 
   private findRoot(): void {
