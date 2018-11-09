@@ -3,6 +3,7 @@ import { Digestion } from './digestion';
 import { Dehydration } from './dehydration';
 import { Starvation } from './starvation';
 import { KeepAlive } from './keep-alive';
+import { Healing } from './healing';
 import { ProcessContainer } from '@/classes/game/base/processes';
 
 export class Character extends ProcessContainer {
@@ -11,4 +12,5 @@ export class Character extends ProcessContainer {
   dehydration = new Dehydration();
   starvation = new Starvation();
   keepAlive = new KeepAlive();
+  healing = new Healing();
 }
