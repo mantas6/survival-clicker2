@@ -48,7 +48,7 @@ export class Mutation<StatType extends MutableStat> extends Serializable impleme
 
   validate(opts: ValidationOptions): boolean {
     const stat = this.statFunc();
-    const diff = this.diffFunc(opts);
+    const diff = this.diffFunc(opts).times(opts.multiplier);
 
     const probed = stat.probe(value => value.add(diff));
 
