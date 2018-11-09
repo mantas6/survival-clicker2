@@ -14,7 +14,7 @@ export interface MutationDescriptor {
 
 export interface EffectDescriptor {
   type: 'effect';
-  durationFunc?: (state: State) => Decimal;
+  durationFunc?: (effect: Effect) => Decimal;
 }
 
 export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
@@ -51,7 +51,7 @@ export abstract class Process extends Transformable implements Calculable {
 
     for (const { effect, descriptor } of this.effects()) {
       if (descriptor && descriptor.durationFunc) {
-        this.state.timers.push(effect, descriptor.durationFunc(this.state));
+        this.state.timers.push(effect, descriptor.durationFunc(effect));
       }
     }
   }
