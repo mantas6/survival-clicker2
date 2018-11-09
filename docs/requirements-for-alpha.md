@@ -2,13 +2,13 @@
 
 This is a list of features that need to be implemented for the game to be considered as alpha. List will be appended to if some features are found out to be missing, also the implemented ones will be marked as done.
 
-- death functionality
-  - health decreases when needs are not met
-  - ~~when health goes to zero, game resets~~
 - minimal game content
   - have a content for at least 10-30min of game-play time
-- effects with timeouts *(Ongoing)*
-  - allow processes to have effect that last a certain duration of time
+- ~~death functionality~~
+  - ~~health decreases when needs are not met~~
+  - ~~when health goes to zero, game resets~~
+- ~~effects with timeouts~~
+  - ~~allow processes to have effect that last a certain duration of time~~
 - ~~buy max~~
   - ~~game engine to support auto max qty calculation~~
 - ~~unlockable actions~~
