@@ -8,6 +8,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
       redirect: { name: 'actions', params: { name: 'jobs' } },
     },
     {
