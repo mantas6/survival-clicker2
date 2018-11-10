@@ -7,9 +7,7 @@ import { Banking } from '@/classes/game/actions/banking';
 @SerializeAllOn('emit', 'store')
 export class Actions extends Serializable {
   jobs = new Jobs();
-
   consumables = new Consumables();
   drugs = new Drugs();
-
   banking = new Banking();
 }
