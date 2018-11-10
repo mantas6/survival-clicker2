@@ -2,16 +2,16 @@ import Decimal from 'decimal.js';
 import { SerializableWithReference, SerializeOn } from '@/classes/game/base/serialization';
 
 export class Modifier extends SerializableWithReference {
-  private computeFunc: () => Decimal;
+  private computeFunc: (cumulated: Decimal) => Decimal;
 
-  constructor(computeFunc: () => Decimal) {
+  constructor(computeFunc: (cumulated: Decimal) => Decimal) {
     super();
     this.computeFunc = computeFunc;
   }
 
   @SerializeOn('emit')
   get value() {
-    let cumulated = this.computeFunc();
+    let cumulated = new Decimal(0);
 
     for (const timer of this.state.timers) {
       if (timer.effect.modifier === this) {
@@ -19,6 +19,6 @@ export class Modifier extends SerializableWithReference {
       }
     }
 
-    return cumulated;
+    return this.computeFunc(cumulated);
   }
 }

@@ -4,10 +4,10 @@ import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 export class Character extends SerializableWithReference {
-  digestionSpeed = new Modifier(() => {
-    return new Decimal(2);
+  digestionSpeed = new Modifier(cumulated => {
+    return new Decimal(2).add(cumulated);
   });
-  staminaRestoreSpeed = new Modifier(() => {
-    return new Decimal(1);
+  staminaRestoreSpeed = new Modifier(cumulated => {
+    return new Decimal(1).add(cumulated);
   });
 }
