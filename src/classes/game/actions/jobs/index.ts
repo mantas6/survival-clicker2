@@ -1,7 +1,7 @@
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
-import { Janitor } from './janitor';
+import { Educationless } from './educationless';
 
 @SerializeAllOn('emit', 'store')
 export class Jobs extends Serializable {
-  janitor = new Janitor();
+  educationless = new Educationless();
 }

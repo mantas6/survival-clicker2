@@ -16,6 +16,7 @@ import { Getter } from 'vuex-class';
 @Component
 export default class Navigation extends Vue {
   @Getter processes!: SerializedActions;
+  @Getter availableCategories!: string[];
 
   categories = [
     'consumables',
@@ -25,11 +26,7 @@ export default class Navigation extends Vue {
   ];
 
   isUnlocked(name: keyof SerializedActions): boolean {
-    if (this.processes[name] && Object.keys(this.processes[name]).length) {
-      return true;
-    }
-
-    return false;
+    return this.availableCategories.includes(name);
   }
 }
 </script>

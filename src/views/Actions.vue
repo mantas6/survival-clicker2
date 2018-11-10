@@ -1,14 +1,16 @@
 <template>
   <article>
     <section>
-      <div v-for="(action, actionName) of availableActions"
-        :key="actionName"
-        @click="activate(action.fullPath, 1)"
-        class="item"
-        :class="!action.isAvailable ? 'unavailable' : ''">
-        <span class="name">{{ actionName | startCase }}</span>
-        <span @click="activate(action.fullPath, action.maxMultiplier)">[MAX]</span>
-        <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
+      <div v-for="(group, groupName) of availableGroups" :key="groupName">
+        <div v-for="(action, actionName) of group"
+          :key="actionName"
+          @click="activate(action.fullPath, 1)"
+          class="item"
+          :class="!action.isAvailable ? 'unavailable' : ''">
+          <span class="name">{{ actionName | startCase }}</span>
+          <span @click="activate(action.fullPath, action.maxMultiplier)">[MAX]</span>
+          <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
+        </div>
       </div>
     </section>
   </article>
@@ -24,7 +26,7 @@ import { startCase } from 'lodash';
 @Component({
   filters: { startCase },
   updated(this: Actions) {
-    if (this.availableActions && !Object.keys(this.availableActions).length) {
+    if (this.availableCategories && !this.availableCategories.includes(this.category)) {
       this.$router.push({ name: 'home' });
     }
   },
@@ -32,14 +34,18 @@ import { startCase } from 'lodash';
 export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
   @Getter relay!: Relay;
+  @Getter availableCategories!: string[];
 
-  get availableActions() {
+  get category() {
+    return this.$route.params.name as 'jobs' | 'consumables' | 'drugs' | 'banking';
+  }
+
+  get availableGroups() {
     if (!this.processes) {
       return;
     }
-    const category = this.$route.params.name as 'jobs' | 'consumables';
 
-    return this.processes[category];
+    return this.processes[this.category];
   }
 
   activate(path: string, multiplier: string) {

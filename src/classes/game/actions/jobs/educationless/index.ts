@@ -1,7 +1,7 @@
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
-import { Deposit } from './deposit';
+import { Janitor } from './janitor';
 
 @SerializeAllOn('emit', 'store')
-export class Banking extends Serializable {
-  deposit = new Deposit();
+export class Educationless extends Serializable {
+  janitor = new Janitor();
 }

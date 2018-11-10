@@ -16,4 +16,22 @@ export class Actions extends VuexModule {
   get processes() {
     return this.list;
   }
+
+  get availableCategories(): string[] {
+    const categories = [];
+
+    if (this.list) {
+      for (const [ categoryName, category ] of Object.entries(this.list)) {
+        for (const group of Object.values(category)) {
+          for (const action of Object.values(group)) {
+            if (Object.keys(action)) {
+              categories.push(categoryName);
+            }
+          }
+        }
+      }
+    }
+
+    return categories;
+  }
 }
