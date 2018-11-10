@@ -2,6 +2,7 @@
   <article>
     <section>
       <div v-for="(group, groupName) of availableGroups" :key="groupName">
+        <small>{{ groupName }}</small>
         <div v-for="(action, actionName) of group"
           :key="actionName"
           @click="activate(action.fullPath, 1)"
