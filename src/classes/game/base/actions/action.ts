@@ -27,15 +27,15 @@ export class Action extends Process {
 
   @SerializeOn('emit')
   get maxMultiplier(): Decimal {
-    let max = new Decimal(0);
+    let multiplier = new Decimal(Infinity);
     for (const { node } of this.children<Mutation<any>>(entry => entry instanceof Mutation)) {
       const { maxMultiplier } = node;
-      if (maxMultiplier.isFinite() && maxMultiplier.greaterThan(max)) {
-        max = node.maxMultiplier;
+      if (maxMultiplier.isFinite() && maxMultiplier.lessThan(multiplier)) {
+        multiplier = node.maxMultiplier;
       }
     }
 
-    return max;
+    return multiplier;
   }
 
   serialize(tagName: TagName) {
