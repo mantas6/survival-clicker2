@@ -7,6 +7,10 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      path: '/',
+      redirect: { name: 'actions', params: { name: 'jobs' } },
+    },
+    {
       path: '/actions/:name',
       name: 'actions',
       component: Actions,
