@@ -21,7 +21,14 @@ import { SerializedActions } from '@/store/actions';
 import { Relay } from '@/classes/relay';
 import { startCase } from 'lodash';
 
-@Component({ filters: { startCase } })
+@Component({
+  filters: { startCase },
+  updated(this: Actions) {
+    if (this.availableActions && !Object.keys(this.availableActions).length) {
+      this.$router.push({ name: 'home' });
+    }
+  },
+})
 export default class Actions extends Vue {
   @Getter processes!: SerializedActions;
   @Getter relay!: Relay;
