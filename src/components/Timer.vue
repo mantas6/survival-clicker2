@@ -24,15 +24,15 @@ export default class Timer extends Vue {
   }
 
   get value(): string {
-    const base = new Decimal(this.data.effect.value);
-
-    return base.times(this.data.multiplier).toString();
+    return new Decimal(this.data.effect.value)
+      .times(this.data.multiplier)
+      .toString();
   }
 
-  get timeLeft() {
-    const duration = new Decimal(this.data.duration);
-
-    return duration.minus(this.data.timePassed).toString();
+  get timeLeft(): string {
+    return new Decimal(this.data.duration)
+      .minus(this.data.timePassed)
+      .toString();
   }
 }
 </script>
