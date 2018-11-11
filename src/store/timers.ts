@@ -1,6 +1,5 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-import Decimal from 'decimal.js';
-import { SerializedTimer } from '@/classes/game/base/modifiers/timers';
+import { Timer as SerializedTimer } from '@/classes/game/base/modifiers/timer';
 
 @Module
 export class Timers extends VuexModule {
