@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { SerializedTimer } from '@/classes/game/base/modifiers/timers';
+import { Timer as SerializedTimer } from '@/classes/game/base/modifiers/timer';
 import Timer from '@/components/Timer.vue';
 
 @Component({ components: { Timer } })
