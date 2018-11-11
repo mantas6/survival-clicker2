@@ -1,9 +1,6 @@
 # Consumables
 
 - drinks
-  - drain water
-    - price: 0$
-    - drains health
   - water
     - price: 1$
   - energy drink
@@ -16,13 +13,15 @@
     - price: 7$
 
 - meals
-  - discarded food
-    - price: 0$
-    - drains health
+  - chocolate bar
+    - price: 1$
+    - slightly drains health
   - hamburger
     - price: 2$
     - slightly drains health
   - pizza
     - price: 4$
+    - provides energy for longer period of time
   - pork steak
     - price: 8$
+    - provides energy for longer period of time
