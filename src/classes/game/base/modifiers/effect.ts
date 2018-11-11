@@ -16,6 +16,11 @@ export class Effect extends SerializableWithReference {
   }
 
   @SerializeOn('emit')
+  get fullPath() {
+    return this.path;
+  }
+
+  @SerializeOn('emit')
   @SerializeAs<Modifier>(input => input.path)
   get modifier() {
     return this.modifierFunc();
