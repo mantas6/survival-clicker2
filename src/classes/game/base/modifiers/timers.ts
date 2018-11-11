@@ -5,8 +5,8 @@ import { TagName, SerializedNode } from '@/classes/game/base/serialization/seria
 import { Transform, Transformable } from '../transformable';
 import { get } from 'lodash';
 
-export interface SerializedTimer {
-  effect: string;
+interface SerializedTimer {
+  effect: { fullPath: string };
   duration: string;
   multiplier: string;
   timePassed: string;
@@ -43,7 +43,7 @@ export class Timers extends Transformable {
   unserialize(serialized: SerializedNode) {
     // Fix type-checking
     for (const serializedItem of Object.values(serialized) as any) {
-      const effect = get(this.state, serializedItem.effect) as Effect;
+      const effect = get(this.state, serializedItem.effect.fullPath) as Effect;
       const duration = new Decimal(serializedItem.duration);
       const timePassed = new Decimal(serializedItem.timePassed);
       const multiplier = new Decimal(serializedItem.multiplier);

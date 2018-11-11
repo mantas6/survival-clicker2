@@ -15,7 +15,7 @@ export class Effect extends SerializableWithReference {
     this.modifierFunc = modifierFunc;
   }
 
-  @SerializeOn('emit')
+  @SerializeOn('emit', 'store')
   get fullPath() {
     return this.path;
   }
