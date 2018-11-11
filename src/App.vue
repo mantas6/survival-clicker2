@@ -5,7 +5,7 @@
       <navigation></navigation>
       <router-view/>
     </main>
-    <aside></aside>
+    <sidebar></sidebar>
   </div>
 </template>
 
@@ -13,9 +13,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HeaderContainer from '@/components/layout/HeaderContainer.vue';
 import Navigation from '@/components/layout/Navigation.vue';
+import Sidebar from '@/components/layout/Sidebar.vue';
 
 @Component({
-  components: { HeaderContainer, Navigation },
+  components: { HeaderContainer, Navigation, Sidebar },
 })
 export default class App extends Vue {
 
