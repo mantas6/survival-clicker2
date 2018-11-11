@@ -5,11 +5,11 @@ import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 
 @SerializeAllOn('emit')
-export class CheapWater extends Action {
+export class MineralWater extends Action {
   hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
     duration: () => 10,
-    value: () => new Decimal(0.2),
+    value: () => new Decimal(0.4),
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {
@@ -18,6 +18,6 @@ export class CheapWater extends Action {
 
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
+    return this.modifiers.finance.costAdd.value.mul(5).ceil().negated();
   });
 }
