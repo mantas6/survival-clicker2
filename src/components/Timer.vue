@@ -2,7 +2,7 @@
   <div>
     <div>{{ title }}</div>
     <div>{{ value }}</div>
-    <span>{{ data.timePassed }} / {{ data.duration }}</span>
+    <span>{{ timeLeft }}</span>
   </div>
 </template>
 
@@ -27,6 +27,12 @@ export default class Timer extends Vue {
     const base = new Decimal(this.data.effect.value);
 
     return base.times(this.data.multiplier).toString();
+  }
+
+  get timeLeft() {
+    const duration = new Decimal(this.data.duration);
+
+    return duration.minus(this.data.timePassed).toString();
   }
 }
 </script>
