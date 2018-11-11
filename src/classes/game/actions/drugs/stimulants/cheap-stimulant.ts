@@ -6,6 +6,12 @@ import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 export class CheapStimulant extends Action {
+  drainEnergy = new Effect({
+    modifier: () => this.modifiers.character.intake.energy,
+    duration: () => 60,
+    value: () => new Decimal(-0.1),
+  });
+
   restoreStamina = new Effect({
     modifier: () => this.modifiers.character.staminaRestoreSpeed,
     duration: () => 5,
