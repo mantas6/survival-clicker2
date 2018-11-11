@@ -20,11 +20,11 @@ export class Timer extends Serializable {
 
   @SerializeOn('emit', 'store')
   @UnserializeAs(input => new Decimal(input.toString()))
-  private duration: Decimal;
+  duration: Decimal;
 
   @SerializeOn('emit', 'store')
   @UnserializeAs(input => new Decimal(input.toString()))
-  private timePassed = new Decimal(0);
+  timePassed = new Decimal(0);
 
   constructor(opts: TimerOptions) {
     super();
