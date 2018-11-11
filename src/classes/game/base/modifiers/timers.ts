@@ -41,8 +41,7 @@ export class Timers extends Transformable {
   }
 
   unserialize(serialized: SerializedNode) {
-    // Fix type-checking
-    for (const serializedItem of Object.values(serialized) as any) {
+    for (const serializedItem of Object.values<SerializedTimer>(serialized as any)) {
       const effect = get(this.state, serializedItem.effect.fullPath) as Effect;
       const duration = new Decimal(serializedItem.duration);
       const timePassed = new Decimal(serializedItem.timePassed);
