@@ -1,7 +1,9 @@
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
-import { CheapFood } from './cheap-food';
+import { ChocolateBar } from './chocolate-bar';
+import { Hamburger } from './hamburger';
 
 @SerializeAllOn('emit', 'store')
 export class Food extends Serializable {
-  cheapFood = new CheapFood();
+  chocolateBar = new ChocolateBar();
+  hamburger = new Hamburger();
 }

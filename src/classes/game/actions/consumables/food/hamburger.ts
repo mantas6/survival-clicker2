@@ -5,19 +5,19 @@ import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 
 @SerializeAllOn('emit')
-export class CheapFood extends Action {
+export class Hamburger extends Action {
   energy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
-    duration: () => 10,
-    value: () => new Decimal(0.2),
+    duration: () => 20,
+    value: () => new Decimal(0.3),
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {
-    return new Decimal(5);
+    return new Decimal(6);
   });
 
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
+    return this.modifiers.finance.costAdd.value.mul(2).ceil().negated();
   });
 }
