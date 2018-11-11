@@ -5,14 +5,22 @@ import { CalculationOptions } from '../mutations';
 
 type ComputeFunction = () => Decimal;
 
+interface EffectOptions {
+  modifier: () => Modifier;
+  value: ComputeFunction;
+  duration: () => Decimal | number | string;
+}
+
 export class Effect extends SerializableWithReference {
   protected computeFunc: (opts: CalculationOptions) => Decimal;
   protected modifierFunc: () => Modifier;
+  protected durationFunc: () => Decimal;
 
-  constructor(modifierFunc: () => Modifier, computeFunc: ComputeFunction) {
+  constructor(opts: EffectOptions) {
     super();
-    this.computeFunc = computeFunc;
-    this.modifierFunc = modifierFunc;
+    this.computeFunc = opts.value;
+    this.modifierFunc = opts.modifier;
+    this.durationFunc = () => new Decimal(opts.duration());
   }
 
   @SerializeOn('emit', 'store')
@@ -24,6 +32,11 @@ export class Effect extends SerializableWithReference {
   @SerializeAs<Modifier>(input => input.path)
   get modifier() {
     return this.modifierFunc();
+  }
+
+  @SerializeOn('emit')
+  get duration() {
+    return this.durationFunc();
   }
 
   @SerializeOn('emit')

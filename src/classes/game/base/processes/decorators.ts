@@ -9,18 +9,6 @@ export function When(conditionFunc: ConditionFunction) {
   };
 }
 
-export function Duration(durationFunc: (effect: Effect) => Decimal | number | string) {
-  return (processClass: Process, propertyName: string) => {
-    const descriptor = prepareDescriptorOfProperty('effect', processClass, propertyName) as EffectDescriptor;
-
-    descriptor.durationFunc = (effect: Effect) => {
-      const duration = durationFunc(effect);
-
-      return new Decimal(duration);
-    };
-  };
-}
-
 export function IgnoreLimits(...flags: LimitFlag[]) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty('mutation', processClass, propertyName) as MutationDescriptor;
