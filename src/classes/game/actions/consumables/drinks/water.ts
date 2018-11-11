@@ -9,7 +9,7 @@ export class Water extends Action {
   hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
     duration: () => 10,
-    value: () => new Decimal(0.2),
+    value: () => new Decimal(0.4),
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {

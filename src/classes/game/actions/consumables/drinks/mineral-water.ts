@@ -9,7 +9,7 @@ export class MineralWater extends Action {
   hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
     duration: () => 10,
-    value: () => new Decimal(0.4),
+    value: () => new Decimal(0.8),
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {
