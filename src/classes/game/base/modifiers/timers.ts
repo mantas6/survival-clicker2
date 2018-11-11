@@ -1,13 +1,14 @@
 import Decimal from 'decimal.js';
-import { Timer } from './timer';
+import { Timer, TimerOptions } from './timer';
 import { Effect } from '@/classes/game/base/modifiers';
 import { TagName, SerializedNode } from '@/classes/game/base/serialization/serializable';
 import { Transform, Transformable } from '../transformable';
 import { get } from 'lodash';
 
-interface SerializedTimer {
+export interface SerializedTimer {
   effect: string;
   duration: string;
+  multiplier: string;
   timePassed: string;
 }
 
@@ -15,8 +16,8 @@ export class Timers extends Transformable {
   @Transform('reset', () => [])
   protected items: Timer[] = [];
 
-  push(effect: Effect, duration: Decimal, timePassed?: Decimal) {
-    this.items.push(new Timer(effect, duration, timePassed));
+  push(opts: TimerOptions) {
+    this.items.push(new Timer(opts));
   }
 
   calculate() {
@@ -43,7 +44,11 @@ export class Timers extends Transformable {
     // Fix type-checking
     for (const serializedItem of Object.values(serialized) as any) {
       const effect = get(this.state, serializedItem.effect) as Effect;
-      this.push(effect, new Decimal(serializedItem.duration), new Decimal(serializedItem.timePassed));
+      const duration = new Decimal(serializedItem.duration);
+      const timePassed = new Decimal(serializedItem.timePassed);
+      const multiplier = new Decimal(serializedItem.multiplier);
+
+      this.push({ effect, duration, timePassed, multiplier });
     }
   }
 

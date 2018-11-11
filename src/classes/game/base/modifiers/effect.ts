@@ -1,11 +1,12 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { Modifier } from '.';
+import { CalculationOptions } from '../mutations';
 
 type ComputeFunction = () => Decimal;
 
 export class Effect extends SerializableWithReference {
-  protected computeFunc: () => Decimal;
+  protected computeFunc: (opts: CalculationOptions) => Decimal;
   protected modifierFunc: () => Modifier;
 
   constructor(modifierFunc: () => Modifier, computeFunc: ComputeFunction) {
@@ -18,7 +19,7 @@ export class Effect extends SerializableWithReference {
     return this.modifierFunc();
   }
 
-  get value() {
-    return this.computeFunc();
+  compute(opts: CalculationOptions): Decimal {
+    return this.computeFunc(opts);
   }
 }

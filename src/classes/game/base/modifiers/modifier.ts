@@ -15,7 +15,8 @@ export class Modifier extends SerializableWithReference {
 
     for (const timer of this.state.timers) {
       if (timer.effect.modifier === this) {
-        cumulated = cumulated.add(timer.effect.value);
+        const multiplier = timer.multiplier;
+        cumulated = cumulated.add(timer.effect.compute({ multiplier }));
       }
     }
 

@@ -51,7 +51,8 @@ export abstract class Process extends Transformable implements Calculable {
 
     for (const { effect, descriptor } of this.effects()) {
       if (descriptor && descriptor.durationFunc) {
-        this.state.timers.push(effect, descriptor.durationFunc(effect));
+        const duration = descriptor.durationFunc(effect);
+        this.state.timers.push({ effect, duration, multiplier: opts.multiplier });
       }
     }
   }

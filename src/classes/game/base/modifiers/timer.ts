@@ -3,10 +3,21 @@ import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
 
+export interface TimerOptions {
+  effect: Effect;
+  duration: Decimal;
+  multiplier: Decimal;
+  timePassed?: Decimal;
+}
+
 export class Timer extends Serializable {
   @SerializeOn('emit', 'store')
   @SerializeAs<Effect>(input => input.path)
   effect: Effect;
+
+  @SerializeOn('emit', 'store')
+  @UnserializeAs(input => new Decimal(input.toString()))
+  multiplier: Decimal;
 
   @SerializeOn('emit', 'store')
   @UnserializeAs(input => new Decimal(input.toString()))
@@ -16,14 +27,15 @@ export class Timer extends Serializable {
   @UnserializeAs(input => new Decimal(input.toString()))
   private timePassed = new Decimal(0);
 
-  constructor(effect: Effect, duration: Decimal, timePassed?: Decimal) {
+  constructor(opts: TimerOptions) {
     super();
-    this.effect = effect;
-    this.duration = duration;
+    this.effect = opts.effect;
+    this.duration = opts.duration;
+    this.multiplier = opts.multiplier;
 
     // When un-serializing
-    if (timePassed) {
-      this.timePassed = timePassed;
+    if (opts.timePassed) {
+      this.timePassed = opts.timePassed;
     }
   }
 
