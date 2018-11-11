@@ -7,7 +7,7 @@ import Decimal from 'decimal.js';
 export class Investment extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    const base = this.stats.finance.investment.value.add(10);
+    const base = this.stats.finance.investment.value.add(100).times(100);
     return this.modifiers.finance.costAdd.value.mul(base).ceil().negated();
   });
 

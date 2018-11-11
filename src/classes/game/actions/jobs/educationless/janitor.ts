@@ -12,6 +12,6 @@ export class Janitor extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(1);
+    return new Decimal(5);
   });
 }
