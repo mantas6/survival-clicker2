@@ -1,8 +1,6 @@
 <template>
   <aside>
-    <div v-for="(timer, index) in timers" :key="index">
-      <span>{{ timer.timePassed }} / {{ timer.duration }}</span>
-    </div>
+    <timer v-for="(timer, index) in timers" :key="index" :data="timer"></timer>
   </aside>
 </template>
 
@@ -10,8 +8,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedTimer } from '@/classes/game/base/modifiers/timers';
+import Timer from '@/components/Timer.vue';
 
-@Component
+@Component({ components: { Timer } })
 export default class Sidebar extends Vue {
   @Getter timers!: { [ index: string ]: SerializedTimer };
 }
