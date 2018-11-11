@@ -12,7 +12,6 @@ export interface TimerOptions {
 
 export class Timer extends Serializable {
   @SerializeOn('emit', 'store')
-  @SerializeAs<Effect>(input => input.path)
   effect: Effect;
 
   @SerializeOn('emit', 'store')
