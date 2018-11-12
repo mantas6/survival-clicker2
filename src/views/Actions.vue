@@ -64,6 +64,10 @@ export default class Actions extends Vue {
     display: grid;
     grid-gap: 1rem;
 
+    small {
+      color: grey;
+    }
+
     .item {
       cursor: pointer;
       display: flex;
