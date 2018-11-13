@@ -8,8 +8,8 @@ import { Effect } from '@/classes/game/base/modifiers';
 export class ChocolateBar extends Action {
   energy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
-    duration: () => 10,
-    value: () => new Decimal(0.2),
+    duration: () => 5,
+    value: () => new Decimal(0.6),
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {
