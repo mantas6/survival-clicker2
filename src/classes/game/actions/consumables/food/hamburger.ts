@@ -18,6 +18,6 @@ export class Hamburger extends Action {
 
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(2).ceil().negated();
+    return this.modifiers.finance.costAdd.value.mul(8).ceil().negated();
   });
 }
