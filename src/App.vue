@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="isDarkModeEnabled ? ['dark-mode'] : []">
     <header-container></header-container>
     <main>
       <navigation></navigation>
@@ -14,12 +14,13 @@ import { Component, Vue } from 'vue-property-decorator';
 import HeaderContainer from '@/components/layout/HeaderContainer.vue';
 import Navigation from '@/components/layout/Navigation.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
+import { Getter } from 'vuex-class';
 
 @Component({
   components: { HeaderContainer, Navigation, Sidebar },
 })
 export default class App extends Vue {
-
+  @Getter isDarkModeEnabled!: boolean;
 }
 </script>
 

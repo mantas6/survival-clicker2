@@ -16,6 +16,11 @@ body {
 
 #app {
   display: flex;
+
+  &.dark-mode {
+    background-color: #232323;
+    color: white;
+  }
 }
 
 main {
