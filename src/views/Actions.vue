@@ -9,7 +9,6 @@
           class="item"
           :class="!action.isAvailable ? 'unavailable' : ''">
           <span class="name">{{ actionName | startCase }}</span>
-          <span @click="activate(action.fullPath, action.maxMultiplier)">[MAX]</span>
           <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
         </div>
       </div>
