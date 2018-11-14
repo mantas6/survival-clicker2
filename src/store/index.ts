@@ -6,11 +6,12 @@ import { Actions } from './actions';
 import { Modifiers } from './modifiers';
 import { Relay } from './relay';
 import { Timers } from './timers';
+import { Settings } from './settings';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {},
   strict: process.env.NODE_ENV !== 'production',
-  modules: { Stats, Actions, Modifiers, Relay, Timers },
+  modules: { Stats, Actions, Modifiers, Relay, Timers, Settings },
 });
