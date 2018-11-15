@@ -16,6 +16,16 @@ export function Transform<Target>(tagName: string, valueFunc: () => Target) {
   };
 }
 
+export function SkipTransform(...tagNames: string[]) {
+  return (transformableClass: Transformable, propertyName: string) => {
+    const ctor = transformableClass.constructor;
+
+    ctor.transformations = ctor.transformations.filter(descriptor => {
+      return descriptor.propertyName !== propertyName && tagNames.includes(descriptor.tagName);
+    });
+  };
+}
+
 export abstract class Transformable extends SerializableWithReference {
   static transformations: TransformationDescriptor[] = [];
   'constructor': typeof Transformable;
