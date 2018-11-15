@@ -1,8 +1,10 @@
 import { Process } from '@/classes/game/base/processes/process';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
+import { IgnoreLimits } from '@/classes/game/base/processes';
 
 export class StaminaRestore extends Process {
+  @IgnoreLimits('greaterThanMaximum')
   restoreStamina = new Mutation(() => this.stats.character.stamina, () => {
     return this.modifiers.character.staminaRestoreSpeed.value;
   });
