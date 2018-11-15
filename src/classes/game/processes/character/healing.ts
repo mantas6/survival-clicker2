@@ -4,6 +4,7 @@ import Decimal from 'decimal.js';
 
 @When(process => process.stats.character.energy.level.greaterThan(0.5))
 @When(process => process.stats.character.hydration.level.greaterThan(0.5))
+@When(process => process.stats.character.health.level.lessThan(1))
 export class Healing extends Process {
   @IgnoreLimits('greaterThanMaximum')
   restoreHealth = new Mutation(() => this.stats.character.health, () => {
