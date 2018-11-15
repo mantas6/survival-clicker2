@@ -10,6 +10,6 @@ export class SellBlood extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(100);
+    return new Decimal(100).times(this.stats.character.health.level).floor();
   });
 }
