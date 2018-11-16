@@ -1,10 +1,11 @@
-import { Action, Unlocks } from '@/classes/game/base/actions';
+import { Action, Unlocks, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 
 @SerializeAllOn('emit')
+@UnlocksWhen(action => action.stats.education.school.value.greaterThan(2))
 export class Hamburger extends Action {
   energy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
