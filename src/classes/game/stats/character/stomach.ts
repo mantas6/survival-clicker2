@@ -7,12 +7,4 @@ export class Stomach extends Container {
   get maximum() {
     return new Decimal(100);
   }
-
-  /**
-   * Converts into a soft container
-   * This means that any mutation is allowed and will not prevent from action/process execution
-   */
-  probe(): LimitFlag {
-    return true;
-  }
 }

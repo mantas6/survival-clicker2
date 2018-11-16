@@ -6,7 +6,6 @@ import { KeepAlive } from './keep-alive';
 import { Healing } from './healing';
 import { ProcessContainer } from '@/classes/game/base/processes';
 import { Intake } from './intake';
-import { Vomiting } from './vomiting';
 
 export class Character extends ProcessContainer {
   intake = new Intake();
@@ -16,5 +15,4 @@ export class Character extends ProcessContainer {
   starvation = new Starvation();
   keepAlive = new KeepAlive();
   healing = new Healing();
-  vomiting = new Vomiting();
 }
