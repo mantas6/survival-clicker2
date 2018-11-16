@@ -1,9 +1,7 @@
-import { School } from './school';
-import { DriversLicense } from './drivers-license';
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
+import { DriversLicense } from './drivers-license';
 
 @SerializeAllOn('emit', 'store')
-export class Education extends Serializable {
-  school = new School();
+export class Courses extends Serializable {
   driversLicense = new DriversLicense();
 }
