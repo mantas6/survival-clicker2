@@ -1,4 +1,4 @@
-import { Container } from '@/classes/game/base/stats';
+import { Container, LimitFlag } from '@/classes/game/base/stats';
 import Decimal from 'decimal.js';
 
 export class Stomach extends Container {
@@ -6,5 +6,13 @@ export class Stomach extends Container {
 
   get maximum() {
     return new Decimal(100);
+  }
+
+  /**
+   * Converts into a soft container
+   * This means that any mutation is allowed and will not prevent from action/process execution
+   */
+  probe(): LimitFlag {
+    return true;
   }
 }
