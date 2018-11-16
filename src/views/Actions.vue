@@ -69,6 +69,7 @@ export default class Actions extends Vue {
 
     .item {
       cursor: pointer;
+      user-select: none;
       display: flex;
       justify-content: space-between;
       width: 50%;
