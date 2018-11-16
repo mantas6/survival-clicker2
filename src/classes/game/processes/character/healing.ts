@@ -8,7 +8,7 @@ import Decimal from 'decimal.js';
 export class Healing extends Process {
   @IgnoreLimits('greaterThanMaximum')
   restoreHealth = new Mutation(() => this.stats.character.health, () => {
-    return new Decimal(0.5);
+    return this.modifiers.character.healingSpeed.value;
   });
 
   drainEnergy = new Mutation(() => this.stats.character.energy, () => {
