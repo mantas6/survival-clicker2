@@ -6,7 +6,7 @@ import Decimal from 'decimal.js';
 export class Vomiting extends Process {
   @IgnoreLimits('lessThanMinimum')
   health = new Mutation(() => this.stats.character.health, () => {
-    return new Decimal(-10);
+    return new Decimal(-10).div(this.modifiers.character.healthPreservationMultiplier.value);
   });
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {

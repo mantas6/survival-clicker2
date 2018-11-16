@@ -9,6 +9,7 @@ export class Stamina extends Container {
   }
 
   protected onLessThanMinimum() {
-    this.stats.character.health.mutate(value => value.minus(5));
+    const loss = new Decimal(5).div(this.modifiers.character.healthPreservationMultiplier.value);
+    this.stats.character.health.mutate(value => value.minus(loss));
   }
 }

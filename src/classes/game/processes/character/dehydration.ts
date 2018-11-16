@@ -5,6 +5,6 @@ import Decimal from 'decimal.js';
 @When(process => process.stats.character.hydration.value.isZero())
 export class Dehydration extends Process {
   drainHealth = new Mutation(() => this.stats.character.health, () => {
-    return new Decimal(-1);
+    return new Decimal(-3).div(this.modifiers.character.healthPreservationMultiplier.value);
   });
 }

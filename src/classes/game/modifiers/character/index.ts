@@ -14,4 +14,8 @@ export class Character extends SerializableWithReference {
   staminaRestoreSpeed = new Modifier(cumulated => {
     return new Decimal(1).add(cumulated);
   });
+
+  healthPreservationMultiplier = new Modifier(cumulated => {
+    return new Decimal(1).add(cumulated);
+  });
 }
