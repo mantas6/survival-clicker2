@@ -11,21 +11,21 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Timer as SerializedTimer } from '@/classes/game/base/modifiers/timer';
 import { last } from 'lodash';
 import Decimal from 'decimal.js';
+import { GroupedTimer } from '@/components/layout/Sidebar.vue';
 
 @Component
 export default class Timer extends Vue {
   @Prop({ required: true })
-  data!: SerializedTimer;
+  data!: GroupedTimer;
 
   get title() {
-    const name = this.data.effect.fullPath.split('.');
+    const name = this.data.name.split('.');
 
     return last(name);
   }
 
   get value(): string {
-    return new Decimal(this.data.effect.value)
-      .times(this.data.multiplier)
+    return new Decimal(this.data.value)
       .toString();
   }
 
