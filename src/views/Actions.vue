@@ -1,7 +1,7 @@
 <template>
   <article>
     <section>
-      <div v-for="(group, groupName) of availableGroups" :key="groupName">
+      <div v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length" :key="groupName">
         <small>{{ groupName }}</small>
         <div v-for="(action, actionName) of group"
           :key="actionName"
