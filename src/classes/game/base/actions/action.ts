@@ -2,12 +2,19 @@ import { Process } from '@/classes/game/base/processes';
 import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
-import { Calculable, Mutation } from '@/classes/game/base/mutations';
+import { Calculable, Mutation, ValidationOptions } from '@/classes/game/base/mutations';
 import { log } from '@/utils/log';
 import { Transform } from '@/classes/game/base/transformable';
 
+export type ConditionFunction = (action: Action, opts: ValidationOptions) => boolean;
+
+export interface Condition {
+  conditionFunc: ConditionFunction;
+}
+
 export class Action extends Process {
   static unlockingMutations: string[] = [];
+  static unlockingConditions: Condition[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
@@ -46,21 +53,27 @@ export class Action extends Process {
 
   triggerUnlocked() {
     if (!this.isUnlocked) {
-      const { unlockingMutations } = this.constructor;
-      if (unlockingMutations.length) {
-        for (const name of this.constructor.unlockingMutations) {
-          const mutation = (this as any)[name] as Calculable;
+      const { unlockingMutations, unlockingConditions } = this.constructor;
+      const multiplier = new Decimal(1);
 
-          const multiplier = new Decimal(1);
-
-          if (mutation.validate({ multiplier })) {
-            log('Unlocking action', this.path);
-            this.isUnlocked = true;
-          }
+      // Checks if all conditions are met
+      for (const condition of unlockingConditions) {
+        if (!condition.conditionFunc(this, { multiplier })) {
+          return;
         }
-      } else {
-        this.isUnlocked = true;
       }
+
+      // Checks if required mutations are do-able
+      for (const name of unlockingMutations) {
+        const mutation = (this as any)[name] as Calculable;
+
+        if (!mutation.validate({ multiplier })) {
+          return;
+        }
+      }
+
+      // Unlocks the action
+      this.isUnlocked = true;
     }
   }
 }
