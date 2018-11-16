@@ -12,3 +12,9 @@ export function UnlocksWhen(conditionFunc: ConditionFunction) {
     ctor.unlockingConditions = [ ...ctor.unlockingConditions, { conditionFunc } ];
   };
 }
+
+export function VisibleWhen(conditionFunc: ConditionFunction) {
+  return (ctor: typeof Action) => {
+    ctor.visibilityConditions = [ ...ctor.visibilityConditions, { conditionFunc } ];
+  };
+}

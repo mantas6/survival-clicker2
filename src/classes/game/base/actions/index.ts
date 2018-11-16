@@ -1,8 +1,9 @@
-import { Unlocks, UnlocksWhen } from './decorators';
+import { Unlocks, UnlocksWhen, VisibleWhen } from './decorators';
 import { Action } from './action';
 
 export {
   Action,
   Unlocks,
   UnlocksWhen,
+  VisibleWhen,
 };

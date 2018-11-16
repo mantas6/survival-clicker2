@@ -15,6 +15,7 @@ export interface Condition {
 export class Action extends Process {
   static unlockingMutations: string[] = [];
   static unlockingConditions: Condition[] = [];
+  static visibilityConditions: Condition[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
@@ -46,7 +47,7 @@ export class Action extends Process {
   }
 
   serialize(tagName: TagName) {
-    if (this.isUnlocked) {
+    if (this.isUnlocked && this.isVisible()) {
       return super.serialize(tagName);
     }
   }
@@ -75,5 +76,17 @@ export class Action extends Process {
       // Unlocks the action
       this.isUnlocked = true;
     }
+  }
+
+  private isVisible(): boolean {
+    const multiplier = new Decimal(1);
+
+    for (const { conditionFunc } of this.constructor.visibilityConditions) {
+      if (!conditionFunc(this, { multiplier })) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
