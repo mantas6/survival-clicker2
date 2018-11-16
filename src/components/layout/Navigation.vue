@@ -23,6 +23,7 @@ export default class Navigation extends Vue {
     'drugs',
     'jobs',
     'banking',
+    'education',
   ];
 
   isUnlocked(name: keyof SerializedActions): boolean {
