@@ -22,6 +22,7 @@ export interface GroupedTimer {
 export default class Sidebar extends Vue {
   @Getter timers!: { [ index: string ]: SerializedTimer };
 
+  // Move this code to back-end?
   get groupedTimers() {
     const grouped: { [effect: string]: GroupedTimer } = {};
 
