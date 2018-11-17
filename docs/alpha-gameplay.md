@@ -30,8 +30,6 @@
   - 2 stage
     - unlocks **mineral-water** and **hamburger** consumables
   - 3 stage
-  - 4 stage
-  - 5 stage (final)
     - unlocks **secondary** education purchases
 
 ### Courses

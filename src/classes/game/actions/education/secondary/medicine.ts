@@ -5,7 +5,7 @@ import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
-@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(5))
+@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(3))
 @VisibleWhen(action => action.stats.education.medicine.value.lessThan(10))
 export class Medicine extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
