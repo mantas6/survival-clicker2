@@ -4,7 +4,7 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
-@UnlocksWhen(action => action.stats.education.school.value.greaterThan(2))
+@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(3))
 export class SellBlood extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(100).times(this.stats.character.health.level).floor();

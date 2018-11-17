@@ -5,7 +5,7 @@ import Decimal from 'decimal.js';
 import { Effect } from '@/classes/game/base/modifiers';
 
 @SerializeAllOn('emit')
-@UnlocksWhen(action => action.stats.education.school.value.greaterThan(2))
+@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(2))
 export class MineralWater extends Action {
   hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
