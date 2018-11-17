@@ -25,7 +25,8 @@
 ### Primary
 - school (cost: `50 * 1.5^timeBought`)
   - 1 stage
-    - unlocks **drivers license**
+    - unlocks **drivers license** course
+    - unlocks **blood test** course
   - 2 stage
     - unlocks **mineral-water** and **hamburger** consumables
   - 3 stage

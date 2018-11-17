@@ -4,6 +4,7 @@ import { Construction } from './construction';
 import { InformationTechnology } from './information-technology';
 import { Medicine } from './medicine';
 import { Veterinary } from './veterinary';
+import { BloodTest } from './blood-test';
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit', 'store')
@@ -14,4 +15,5 @@ export class Education extends Serializable {
   informationTechnology = new InformationTechnology();
   medicine = new Medicine();
   veterinary = new Veterinary();
+  bloodTest = new BloodTest();
 }
