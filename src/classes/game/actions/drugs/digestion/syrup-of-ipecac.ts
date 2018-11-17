@@ -1,5 +1,5 @@
 import { IgnoreLimits } from '@/classes/game/base/processes';
-import { Action, Unlocks, UnlocksWhen } from '@/classes/game/base/actions';
+import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
@@ -16,7 +16,6 @@ export class SyrupOfIpecac extends Action {
     return this.stats.character.stomach.value.mul(0.5).negated();
   });
 
-  @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
   });

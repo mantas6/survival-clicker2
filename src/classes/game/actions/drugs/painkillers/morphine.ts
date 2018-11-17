@@ -1,4 +1,4 @@
-import { Action, Unlocks, UnlocksWhen } from '@/classes/game/base/actions';
+import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import { Effect } from '@/classes/game/base/modifiers';
@@ -29,7 +29,6 @@ export class Morphine extends Action {
     return new Decimal(1);
   });
 
-  @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.modifiers.finance.costAdd.value.mul(20).ceil().negated();
   });
