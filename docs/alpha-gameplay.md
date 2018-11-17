@@ -90,7 +90,7 @@
   - 4 stage
   - 5 stage
 
-- medicine (cost: `100 * 1.5^timeBought`)
+- medicine (cost: `200 * 2^timeBought`)
   - 1 stage
     - unlocks **digestion pills** drug
     - unlocks **syrup of ipecac** drug
