@@ -1,10 +1,11 @@
-import { Action, Unlocks } from '@/classes/game/base/actions';
+import { Action, Unlocks, VisibleWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
+@VisibleWhen(action => action.stats.education.school.value.lessThan(5))
 export class School extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
