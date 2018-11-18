@@ -1,7 +1,6 @@
 import { Action, VisibleWhen, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
-import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
@@ -12,10 +11,8 @@ export class BloodTest extends Action {
     return this.modifiers.finance.costAdd.value.mul(50).ceil().negated();
   });
 
-  energy = new Effect({
-    modifier: () => this.modifiers.character.intake.energy,
-    duration: () => 20,
-    value: () => new Decimal(-1),
+  energy = new Mutation(() => this.stats.character.energy, () => {
+    return new Decimal(-10);
   });
 
   bloodTest = new Mutation(() => this.stats.education.bloodTest, () => {

@@ -1,7 +1,6 @@
 import { Action, VisibleWhen, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
-import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
@@ -12,10 +11,8 @@ export class DriversLicense extends Action {
     return this.modifiers.finance.costAdd.value.mul(200).ceil().negated();
   });
 
-  energy = new Effect({
-    modifier: () => this.modifiers.character.intake.energy,
-    duration: () => 60,
-    value: () => new Decimal(-0.5),
+  energy = new Mutation(() => this.stats.character.energy, () => {
+    return new Decimal(-20);
   });
 
   driversLicense = new Mutation(() => this.stats.education.driversLicense, () => {
