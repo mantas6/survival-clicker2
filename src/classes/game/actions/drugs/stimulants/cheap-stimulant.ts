@@ -5,7 +5,7 @@ import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
-@UnlocksWhen(action => action.stats.education.medicine.value.greaterThanOrEqualTo(1))
+@UnlocksWhen(action => action.stats.education.medicine.value.greaterThanOrEqualTo(2))
 export class CheapStimulant extends Action {
   drainEnergy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,

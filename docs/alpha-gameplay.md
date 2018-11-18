@@ -27,6 +27,7 @@
   - 1 stage
     - unlocks **drivers license** course
     - unlocks **blood test** course
+    - unlocks **medicine lecture** course
   - 2 stage
     - unlocks **mineral-water** and **hamburger** consumables
   - 3 stage
@@ -41,6 +42,9 @@
   - unlocks **selling blood** job
     - `100 * healthLevel` money
     - `-30` health
+- medicine lecture (cost: `50`)
+  - unlocks **syrup of ipecac** drug
+  - unlocks **digestion pills** drug
 
 ### Secondary
 - information technology (cost: `150 * 2^timeBought`)
@@ -92,13 +96,13 @@
 
 - medicine (cost: `200 * 2^timeBought`)
   - 1 stage
-    - unlocks **digestion pills** drug
-    - unlocks **syrup of ipecac** drug
-    - unlocks **corticosteroid pills** drug
+    - same as **medicine lecture**
   - 2 stage
     - unlocks **morphine**
+    - unlocks **cheap stimulant**
     - unlocks **animal masturbator** job
   - 3 stage
+    - unlocks **corticosteroid pills** drug
     - doubles payout for **animal masturbator**
   - 4 stage
     - unlocks **gynaecologist assistant** job
