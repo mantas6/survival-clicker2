@@ -8,9 +8,7 @@ import Decimal from 'decimal.js';
 export class School extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    const timesBought = this.stats.education.school.value;
-    const base = new Decimal(50).mul(new Decimal(1.5).pow(timesBought));
-    return this.modifiers.finance.costAdd.value.mul(base).ceil().negated();
+    return this.helpers.growthMoneyCost(this.stats.education.school.value, 50, 1.5);
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {

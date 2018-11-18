@@ -30,6 +30,6 @@ export class Morphine extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(20).ceil().negated();
+    return this.helpers.moneyCost(20);
   });
 }

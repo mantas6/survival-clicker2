@@ -24,6 +24,6 @@ export class CheapStimulant extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(10).ceil().negated();
+    return this.helpers.moneyCost(10);
   });
 }

@@ -8,7 +8,7 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(1))
 export class DriversLicense extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(200).ceil().negated();
+    return this.helpers.moneyCost(200);
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {

@@ -8,9 +8,7 @@ import Decimal from 'decimal.js';
 @VisibleWhen(action => action.stats.education.medicine.value.lessThan(10))
 export class Medicine extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
-    const timesBought = this.stats.education.medicine.value;
-    const base = new Decimal(200).mul(new Decimal(2).pow(timesBought));
-    return this.modifiers.finance.costAdd.value.mul(base).ceil().negated();
+    return this.helpers.growthMoneyCost(this.stats.education.medicine.value, 200, 2);
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {

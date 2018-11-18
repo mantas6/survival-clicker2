@@ -17,6 +17,6 @@ export class SyrupOfIpecac extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(1).ceil().negated();
+    return this.helpers.moneyCost(1);
   });
 }

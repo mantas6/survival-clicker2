@@ -24,6 +24,6 @@ export class CorticosteroidPills extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(15).ceil().negated();
+    return this.helpers.moneyCost(15);
   });
 }

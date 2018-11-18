@@ -19,6 +19,6 @@ export class MineralWater extends Action {
 
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.modifiers.finance.costAdd.value.mul(6).ceil().negated();
+    return this.helpers.moneyCost(6);
   });
 }
