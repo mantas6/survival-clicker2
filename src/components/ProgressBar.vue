@@ -11,10 +11,10 @@ import Decimal from 'decimal.js';
 @Component
 export default class ProgressBar extends Vue {
   @Prop({ required: true })
-  private max!: Decimal | number | string;
+  private max!: Decimal.Value;
 
   @Prop({ required: true })
-  private value!: Decimal | number | string;
+  private value!: Decimal.Value;
 
   @Prop({ default: 'red' })
   private variant!: 'green' | 'red' | 'yellow' | 'blue' | 'cyan';

@@ -8,7 +8,7 @@ type ComputeFunction = () => Decimal;
 interface EffectOptions {
   modifier: () => Modifier;
   value: ComputeFunction;
-  duration: () => Decimal | number | string;
+  duration: () => Decimal.Value;
 }
 
 export class Effect extends SerializableWithReference {

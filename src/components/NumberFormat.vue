@@ -21,7 +21,7 @@ export default class NumberFormat extends Vue {
   formatter = new Formatter({ flavor: 'short' });
 
   @Prop({ required: true })
-  private value!: Decimal | number | string;
+  private value!: Decimal.Value;
 
   @Prop()
   private postFix?: string;
