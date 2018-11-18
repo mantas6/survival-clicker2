@@ -11,10 +11,10 @@ export class StaminaRestore extends Process {
   });
 
   drainEnergy = new Mutation(() => this.stats.character.energy, () => {
-    return new Decimal(-1);
+    return new Decimal(-0.5);
   });
 
   drainHydration = new Mutation(() => this.stats.character.hydration, () => {
-    return new Decimal(-2);
+    return new Decimal(-1);
   });
 }
