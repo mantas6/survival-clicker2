@@ -6,11 +6,11 @@ export class Helpers extends SerializableWithReference {
     return this.modifiers.finance.costAdd.value.mul(amount).ceil().negated();
   }
 
-  growth(timesBought: Decimal, baseValue: Decimal, growthAmount: Decimal = new Decimal(1.5)) {
+  growth(timesBought: Decimal.Value, baseValue: Decimal.Value, growthAmount: Decimal.Value) {
     return new Decimal(baseValue).mul(new Decimal(growthAmount).pow(timesBought));
   }
 
-  growthMoneyCost(timesBought: Decimal, baseValue: Decimal, growthAmount: Decimal = new Decimal(1.5)): Decimal {
+  growthMoneyCost(timesBought: Decimal.Value, baseValue: Decimal.Value, growthAmount: Decimal.Value): Decimal {
     const value = this.growth(timesBought, baseValue, growthAmount);
 
     return this.moneyCost(value);
