@@ -11,6 +11,10 @@
   - `-2` money
   - `3` restoreStamina for `5` duration
   - `2` stomach
+- cheap stimulant
+  - `-10` money
+  - `5` staminaRestoreSpeed for `5` duration
+  - `2` stomach
 - adderall
   - `-50` money
   - `1` concentration for `10` duration
