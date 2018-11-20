@@ -3,7 +3,6 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions } from '@/classes/game/base/mutations';
-import { log } from '@/utils/log';
 import { Transform } from '@/classes/game/base/transformable';
 
 export type ConditionFunction = (action: Action, opts: ValidationOptions) => boolean;
