@@ -12,7 +12,7 @@ export class Construction extends Action {
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {
-    return new Decimal(-20);
+    return new Decimal(-20).div(this.modifiers.character.concentration.value);
   });
 
   construction = new Mutation(() => this.stats.education.construction, () => {

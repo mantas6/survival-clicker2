@@ -22,4 +22,8 @@ export class Character extends SerializableWithReference {
   healingSpeed = new Modifier(cumulated => {
     return new Decimal(0.5).add(cumulated);
   });
+
+  concentration = new Modifier(cumulated => {
+    return new Decimal(1).add(cumulated);
+  });
 }

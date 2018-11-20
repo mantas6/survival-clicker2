@@ -12,7 +12,7 @@ export class MedicineLecture extends Action {
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {
-    return new Decimal(-10);
+    return new Decimal(-10).div(this.modifiers.character.concentration.value);
   });
 
   medicine = new Mutation(() => this.stats.education.medicine, () => {

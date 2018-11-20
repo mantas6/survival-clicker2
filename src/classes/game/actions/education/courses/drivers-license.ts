@@ -12,7 +12,7 @@ export class DriversLicense extends Action {
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {
-    return new Decimal(-10);
+    return new Decimal(-10).div(this.modifiers.character.concentration.value);
   });
 
   driversLicense = new Mutation(() => this.stats.education.driversLicense, () => {

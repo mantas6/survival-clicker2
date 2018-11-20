@@ -12,7 +12,7 @@ export class BloodTest extends Action {
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {
-    return new Decimal(-5);
+    return new Decimal(-5).div(this.modifiers.character.concentration.value);
   });
 
   bloodTest = new Mutation(() => this.stats.education.bloodTest, () => {
