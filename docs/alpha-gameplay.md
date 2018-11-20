@@ -13,15 +13,20 @@
   - `2` stomach
 - cheap stimulant
   - `-10` money
+  - `-0.1` energy for `60` duration
   - `5` staminaRestoreSpeed for `5` duration
   - `2` stomach
 - adderall
   - `-50` money
+  - `-0.1` health for `30` duration
   - `1` concentration for `10` duration
+  - `5` staminaRestoreSpeed for `5` duration
   - `1` stomach
 - crystal meth
   - `-25` money
+  - `-0.1` health for `120` duration
   - `1` concentration for `30` duration
+  - `5` staminaRestoreSpeed for `10` duration
   - `1` stomach
 
 ## Education
