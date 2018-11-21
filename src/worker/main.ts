@@ -46,14 +46,14 @@ interval(30e3).subscribe(() => {
 });
 
 interval(1000).subscribe(() => {
+  if (state.stats.character.health.value.isZero()) {
+    applyReset();
+  }
+
   state.processes.calculate();
   state.timers.calculate();
   applyUnlocked(state);
   emitAll();
-
-  if (state.stats.character.health.value.isZero()) {
-    applyReset();
-  }
 });
 
 function emitAll() {
