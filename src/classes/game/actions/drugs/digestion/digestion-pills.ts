@@ -1,10 +1,8 @@
 import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
-import { SerializeAllOn } from '@/classes/game/base/serialization';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
-@SerializeAllOn('emit')
 @UnlocksWhen(action => action.stats.education.medicine.value.greaterThanOrEqualTo(1))
 export class DigestionPills extends Action {
   drainEnergy = new Effect({

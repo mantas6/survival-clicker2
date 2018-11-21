@@ -1,9 +1,7 @@
 import { Action, Unlocks, VisibleWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
-import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 
-@SerializeAllOn('emit')
 @VisibleWhen(action => action.stats.education.school.value.lessThan(3))
 export class School extends Action {
   @Unlocks

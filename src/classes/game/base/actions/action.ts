@@ -1,5 +1,5 @@
 import { Process } from '@/classes/game/base/processes';
-import { SerializeOn } from '@/classes/game/base/serialization';
+import { SerializeOn, SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions } from '@/classes/game/base/mutations';
@@ -11,6 +11,7 @@ export interface Condition {
   conditionFunc: ConditionFunction;
 }
 
+@SerializeAllOn('emit')
 export class Action extends Process {
   static unlockingMutations: string[] = [];
   static unlockingConditions: Condition[] = [];

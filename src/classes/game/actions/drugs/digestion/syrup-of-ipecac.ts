@@ -2,9 +2,7 @@ import { IgnoreLimits } from '@/classes/game/base/processes';
 import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
-import { SerializeAllOn } from '@/classes/game/base/serialization';
 
-@SerializeAllOn('emit')
 @UnlocksWhen(action => action.stats.education.medicine.value.greaterThanOrEqualTo(1))
 export class SyrupOfIpecac extends Action {
   @IgnoreLimits('lessThanMinimum')
