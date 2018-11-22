@@ -16,7 +16,7 @@
   - `-0.1` energy for `60` duration
   - `5` staminaRestoreSpeed for `5` duration
   - `2` stomach
-- adderall
+- speed
   - `-50` money
   - `-0.1` health for `30` duration
   - `1` concentration for `10` duration
