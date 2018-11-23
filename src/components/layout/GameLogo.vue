@@ -19,10 +19,6 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class GameLogo extends Vue {
   content = '';
-
-  get img() {
-    return require('@/assets/logo.svg');
-  }
 }
 </script>
 
