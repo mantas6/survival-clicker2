@@ -7,7 +7,7 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.stats.education.informationTechnology.value.greaterThanOrEqualTo(2))
 export class CreateUnfairLotteryWebsite extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.growthMoneyCost(1, 1000, 5);
+    return this.helpers.growthMoneyCost(this.timesCalculated, 1000, 5);
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
