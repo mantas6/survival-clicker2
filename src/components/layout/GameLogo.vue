@@ -1,24 +1,18 @@
 <template>
   <div class="logo">
     <span>Survival</span>
-    <span v-html="content"></span>
+    <icon name="logo"></icon>
     <b>2</b>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Icon from '@/components/Icon.vue';
 
-@Component({
-  mounted(this: GameLogo) {
-    const url = require('@/assets/logo.svg');
-    fetch(url)
-      .then(res => res.text())
-      .then(text => this.content = text);
-  },
-})
+@Component({ components: { Icon } })
 export default class GameLogo extends Vue {
-  content = '';
+
 }
 </script>
 
