@@ -25,7 +25,7 @@ export class Action extends Process {
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input.toString()))
   @Transform('reset', () => new Decimal(0))
-  calculateCount: Decimal = new Decimal(0);
+  timesCalculated: Decimal = new Decimal(0);
 
   @SerializeOn('emit')
   get fullPath() {
@@ -53,7 +53,7 @@ export class Action extends Process {
 
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
-    this.calculateCount = this.calculateCount.add(opts.multiplier);
+    this.timesCalculated = this.timesCalculated.add(opts.multiplier);
   }
 
   serialize(tagName: TagName) {
