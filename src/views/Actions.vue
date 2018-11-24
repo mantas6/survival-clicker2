@@ -2,7 +2,7 @@
   <article>
     <section>
       <div v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length" :key="groupName">
-        <small>{{ groupName }}</small>
+        <small>{{ groupName | startCase }}</small>
         <div v-for="(action, actionName) of group"
           :key="actionName"
           @click="activate(action.fullPath, 1)"
