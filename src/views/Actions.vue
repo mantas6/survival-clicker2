@@ -37,7 +37,7 @@ export default class Actions extends Vue {
   @Getter availableCategories!: string[];
 
   get category() {
-    return this.$route.params.name as 'jobs' | 'consumables' | 'drugs' | 'banking';
+    return this.$route.params.name as 'jobs' | 'consumables' | 'drugs' | 'investment';
   }
 
   get availableGroups() {

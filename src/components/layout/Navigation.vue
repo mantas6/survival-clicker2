@@ -22,7 +22,7 @@ export default class Navigation extends Vue {
     'consumables',
     'drugs',
     'jobs',
-    'banking',
+    'investment',
     'education',
   ];
 

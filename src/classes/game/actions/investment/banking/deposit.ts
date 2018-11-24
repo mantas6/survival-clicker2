@@ -4,7 +4,7 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
-export class Investment extends Action {
+export class Deposit extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     const amount = this.stats.finance.investment.value.add(1).times(300);
