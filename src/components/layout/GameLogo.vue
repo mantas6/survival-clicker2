@@ -15,7 +15,7 @@ import { Component, Vue } from 'vue-property-decorator';
     fetch(url)
       .then(res => res.text())
       .then(text => this.content = text);
-  }
+  },
 })
 export default class GameLogo extends Vue {
   content = '';
