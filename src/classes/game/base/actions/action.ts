@@ -1,8 +1,8 @@
 import { Process } from '@/classes/game/base/processes';
-import { SerializeOn, SerializeAllOn } from '@/classes/game/base/serialization';
+import { SerializeOn, SerializeAllOn, UnserializeAs } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
-import { Calculable, Mutation, ValidationOptions } from '@/classes/game/base/mutations';
+import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import { Transform } from '@/classes/game/base/transformable';
 
 export type ConditionFunction = (action: Action, opts: ValidationOptions) => boolean;
@@ -21,6 +21,11 @@ export class Action extends Process {
   @SerializeOn('store')
   @Transform('reset', () => false)
   isUnlocked: boolean = false;
+
+  @SerializeOn('store')
+  @UnserializeAs(input => new Decimal(input.toString()))
+  @Transform('reset', () => new Decimal(0))
+  calculateCount: Decimal = new Decimal(0);
 
   @SerializeOn('emit')
   get fullPath() {
@@ -44,6 +49,11 @@ export class Action extends Process {
     }
 
     return multiplier;
+  }
+
+  calculate(opts: CalculationOptions) {
+    super.calculate(opts);
+    this.calculateCount = this.calculateCount.add(opts.multiplier);
   }
 
   serialize(tagName: TagName) {
