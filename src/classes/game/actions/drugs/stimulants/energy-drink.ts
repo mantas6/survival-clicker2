@@ -1,8 +1,9 @@
-import { Action, Unlocks } from '@/classes/game/base/actions';
+import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
+@UnlocksWhen(action => action.stats.education.school.value.greaterThan(0))
 export class EnergyDrink extends Action {
   drainEnergy = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
@@ -20,7 +21,6 @@ export class EnergyDrink extends Action {
     return new Decimal(2);
   });
 
-  @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.moneyCost(2);
   });

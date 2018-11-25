@@ -1,8 +1,9 @@
-import { Action } from '@/classes/game/base/actions';
+import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
+@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(2))
 export class Coffee extends Action {
   energyLoss = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
