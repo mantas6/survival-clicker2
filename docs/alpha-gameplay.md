@@ -7,6 +7,11 @@
 
 ## Drugs
 
+- coffee
+  - `-1` money
+  - `5` energy
+  - `-0.1` energy for `50` duration
+  - `3` stomach
 - energy drink
   - `-2` money
   - `3` restoreStamina for `5` duration
