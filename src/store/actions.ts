@@ -19,7 +19,7 @@ export class Actions extends VuexModule {
 
   get availableCategories(): string[] {
     if (this.list) {
-      return this.list.available;
+      return Object.keys(this.list);
     }
 
     return [];

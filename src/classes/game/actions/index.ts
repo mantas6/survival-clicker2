@@ -1,4 +1,4 @@
-import { Serializable, SerializeAllOn, SerializeOn, SerializeAs } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 import { Jobs } from '@/classes/game/actions/jobs';
 import { Consumables } from '@/classes/game/actions/consumables';
 import { Drugs } from '@/classes/game/actions/drugs';
@@ -12,17 +12,4 @@ export class Actions extends Serializable {
   drugs = new Drugs();
   investment = new Investment();
   education = new Education();
-
-  @SerializeOn('emit')
-  get available() {
-    const names: string[] = [];
-
-    for (const { node, name } of this.children<Serializable>(entry => entry instanceof Serializable)) {
-      if (node.serialize('emit')) {
-        names.push(name);
-      }
-    }
-
-    return names;
-  }
 }
