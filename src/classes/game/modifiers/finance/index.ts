@@ -1,13 +1,9 @@
-import { SerializableWithReference, SerializeAllOn, SerializeAs } from '@/classes/game/base/serialization';
-import { Modifier } from '@/classes/game/base/modifiers';
-import Decimal from 'decimal.js';
+import { SerializableWithReference, SerializeAllOn } from '@/classes/game/base/serialization';
+import { Income } from './income';
+import { Taxes } from './taxes';
 
 @SerializeAllOn('emit')
 export class Finance extends SerializableWithReference {
-  moneyGain = new Modifier(() => {
-    return this.stats.finance.investment.value.times(0.1);
-  });
-  costAdd = new Modifier(() => {
-    return this.stats.finance.taxes.value.add(1);
-  });
+  income = new Income();
+  taxes = new Taxes();
 }

@@ -77,7 +77,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get moneyGain() {
-    return this.modifiers.finance.moneyGain.value;
+    return this.modifiers.finance.income.value;
   }
 
   reset() {

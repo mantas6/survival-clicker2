@@ -3,7 +3,7 @@ import Decimal from 'decimal.js';
 
 export class Helpers extends SerializableWithReference {
   moneyCost(amount: Decimal.Value): Decimal {
-    return this.modifiers.finance.costAdd.value.mul(amount).ceil().negated();
+    return this.modifiers.finance.taxes.value.mul(amount).ceil().negated();
   }
 
   growth(timesBought: Decimal.Value, baseValue: Decimal.Value, growthAmount: Decimal.Value) {
