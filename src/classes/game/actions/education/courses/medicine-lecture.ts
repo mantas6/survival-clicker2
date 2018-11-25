@@ -14,6 +14,6 @@ export class MedicineLecture extends Action {
   });
 
   medicine = new Mutation(() => this.stats.education.medicine, () => {
-    return new Decimal(1);
+    return new Decimal(0.5);
   });
 }

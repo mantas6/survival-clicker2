@@ -109,7 +109,6 @@
 
 - medicine (cost: `200 * 2^timeBought`)
   - 1 stage
-    - same as **medicine lecture**
   - 2 stage
     - unlocks **morphine**
     - unlocks **cheap stimulant**
