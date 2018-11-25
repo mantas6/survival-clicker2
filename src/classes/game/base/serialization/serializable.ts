@@ -1,5 +1,6 @@
 import { StateNode } from '@/classes/game/base/state-node';
 import { isPrimitive } from '@/utils/guard';
+import { isEmpty } from 'lodash';
 
 type BasicValue = string | number | boolean;
 
@@ -58,7 +59,9 @@ export abstract class Serializable extends StateNode {
       }
     }
 
-    return serialized;
+    if (!isEmpty(serialized)) {
+      return serialized;
+    }
   }
 
   unserialize(serialized: SerializedNode) {
