@@ -16,6 +16,10 @@
   - `-0.1` energy for `60` duration
   - `5` staminaRestoreSpeed for `5` duration
   - `2` stomach
+- modafinil
+  - `-25` money
+  - `0.1` concentration for `5` duration
+  - `1` stomach
 - speed
   - `-50` money
   - `-0.1` health for `30` duration
