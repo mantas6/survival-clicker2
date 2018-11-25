@@ -7,6 +7,9 @@ import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
 import { log, enableLogging } from '@/utils/log';
 import NumberFormat from '@/components/NumberFormat.vue';
+import LocalForage from 'localforage';
+
+LocalForage.setDriver(LocalForage.LOCALSTORAGE);
 
 const worker = new Worker();
 const relay = new Relay(worker);
@@ -34,14 +37,12 @@ if (localStorage.getItem('debug')) {
 }
 
 relay.on('save', serializedState => {
-  localStorage.setItem('save', JSON.stringify(serializedState));
+  LocalForage.setItem('save', serializedState);
   log('Saving game state', serializedState);
 });
 
-const previousSave = localStorage.getItem('save');
-
-if (previousSave) {
-  relay.emit('load', JSON.parse(previousSave));
-}
+LocalForage.getItem('save').then(previousSave => {
+  relay.emit('load', previousSave);
+});
 
 log('Application was built on', process.env.BUILD_TIME);
