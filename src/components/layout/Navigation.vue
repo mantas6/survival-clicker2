@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <router-link v-for="category in categories" 
+    <router-link v-for="category in availableCategories" 
       :key="category"
-      :to="{ name: 'actions', params: { name: category } }"
-      v-show="isUnlocked(category)">{{ category }}
+      :to="{ name: 'actions', params: { name: category } }">
+      {{ category }}
     </router-link>
   </nav>
 </template>
@@ -17,18 +17,6 @@ import { Getter } from 'vuex-class';
 export default class Navigation extends Vue {
   @Getter processes!: SerializedActions;
   @Getter availableCategories!: string[];
-
-  categories = [
-    'consumables',
-    'drugs',
-    'jobs',
-    'investment',
-    'education',
-  ];
-
-  isUnlocked(name: keyof SerializedActions): boolean {
-    return this.availableCategories.includes(name);
-  }
 }
 </script>
 
