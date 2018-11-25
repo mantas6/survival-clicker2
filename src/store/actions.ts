@@ -1,6 +1,5 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
 import { Actions as StateActions } from '@/classes/game/actions';
-import { uniq } from 'lodash';
 
 export type SerializedActions = StateActions;
 
