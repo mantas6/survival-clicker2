@@ -18,22 +18,11 @@ export class Actions extends VuexModule {
     return this.list;
   }
 
-  // Move to back-end?
   get availableCategories(): string[] {
-    const categories = [];
-
     if (this.list) {
-      for (const [ categoryName, category ] of Object.entries(this.list)) {
-        for (const group of Object.values(category)) {
-          for (const action of Object.values(group)) {
-            if (Object.keys(action)) {
-              categories.push(categoryName);
-            }
-          }
-        }
-      }
+      return this.list.available;
     }
 
-    return uniq(categories);
+    return [];
   }
 }
