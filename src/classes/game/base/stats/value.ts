@@ -19,7 +19,7 @@ export abstract class Value extends Transformable {
   @SerializeOn('emit')
   get value(): Decimal {
     if (this.current === undefined) {
-      this.current = new Decimal(this.default);
+      return new Decimal(this.default);
     }
 
     return this.current;
