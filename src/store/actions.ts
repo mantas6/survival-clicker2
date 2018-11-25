@@ -1,5 +1,6 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
 import { Actions as StateActions } from '@/classes/game/actions';
+import { uniq } from 'lodash';
 
 export type SerializedActions = StateActions;
 
@@ -32,6 +33,6 @@ export class Actions extends VuexModule {
       }
     }
 
-    return categories;
+    return uniq(categories);
   }
 }
