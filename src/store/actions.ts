@@ -18,6 +18,7 @@ export class Actions extends VuexModule {
     return this.list;
   }
 
+  // Move to back-end?
   get availableCategories(): string[] {
     const categories = [];
 
