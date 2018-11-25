@@ -1,4 +1,4 @@
-import { Serializable, TagName, PropertyDescriptor } from './serializable';
+import { Serializable, TagName, PropertyDescriptor, BasicValue, ArrayValue } from './serializable';
 
 /**
  * Serializes all children of the class
@@ -37,7 +37,7 @@ export function SerializeOn(...tagNames: TagName[]) {
  * Overrides the default way of serialization. Used for objects that do not extend Serializable
  * @param serializeFunc serialization handler to use
  */
-export function SerializeAs<Target>(serializeFunc: (input: Target) => string | number) {
+export function SerializeAs<Target>(serializeFunc: (input: Target) => BasicValue | ArrayValue) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 

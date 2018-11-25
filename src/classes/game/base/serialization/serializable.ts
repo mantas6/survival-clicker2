@@ -2,15 +2,16 @@ import { StateNode } from '@/classes/game/base/state-node';
 import { isPrimitive } from '@/utils/guard';
 import { isEmpty } from 'lodash';
 
-type BasicValue = string | number | boolean;
+export type BasicValue = string | number | boolean;
+export type ArrayValue = string[] | number[];
 
 export interface SerializedNode {
-  [ propertyName: string ]: SerializedNode | BasicValue | undefined;
+  [ propertyName: string ]: SerializedNode | BasicValue | ArrayValue | undefined;
 }
 
 export interface PropertyDescriptor {
   tagNames: string[];
-  serializeFunc?: (input: any) => BasicValue;
+  serializeFunc?: (input: any) => BasicValue | ArrayValue;
   unserializeFunc?: (input: BasicValue) => any;
 }
 
@@ -49,6 +50,8 @@ export abstract class Serializable extends StateNode {
           if (serializedNode !== undefined) {
             serialized[name] = serializedNode;
           }
+        } else if (node instanceof Array) {
+          serialized[name] = node;
         } else if (isPrimitive(node)) {
           // If node is a primitive
           serialized[name] = node;
@@ -78,7 +81,7 @@ export abstract class Serializable extends StateNode {
         } else {
           (this as any)[name] = serializedValue;
         }
-      } else if (node instanceof Serializable) {
+      } else if (node instanceof Serializable && !(serializedValue instanceof Array)) {
         node.unserialize(serializedValue);
       }
     }
