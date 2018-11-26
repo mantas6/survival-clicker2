@@ -13,8 +13,7 @@ import Decimal from 'decimal.js';
 
 export interface GroupedTimer {
   name: string;
-  duration: Decimal;
-  timePassed: Decimal;
+  timeLeft: Decimal;
   value: Decimal;
 }
 
@@ -33,16 +32,16 @@ export default class Sidebar extends Vue {
 
       const value = new Decimal(timer.multiplier).mul(timer.effect.value);
 
+      const timeLeft = new Decimal(timer.duration).minus(timer.timePassed);
+
       if (!groupedTimer) {
         grouped[modifierName] = {
           value,
-          duration: new Decimal(timer.duration),
-          timePassed: new Decimal(timer.timePassed),
+          timeLeft,
           name: timer.effect.modifier.toString(),
         };
       } else {
-        groupedTimer.duration = Decimal.max(groupedTimer.duration, timer.duration);
-        groupedTimer.timePassed = Decimal.min(groupedTimer.timePassed, timer.timePassed);
+        groupedTimer.timeLeft = Decimal.max(groupedTimer.timeLeft, timeLeft);
         groupedTimer.value = groupedTimer.value.add(value);
       }
     }

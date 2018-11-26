@@ -30,8 +30,7 @@ export default class Timer extends Vue {
   }
 
   get timeLeft(): string {
-    return new Decimal(this.data.duration)
-      .minus(this.data.timePassed)
+    return new Decimal(this.data.timeLeft)
       .toString();
   }
 }
