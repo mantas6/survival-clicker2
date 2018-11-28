@@ -8,6 +8,7 @@ import Worker from 'worker-loader!./worker/main';
 import { log, enableLogging } from '@/utils/log';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
+import i18n from './i18n';
 
 LocalForage.setDriver(LocalForage.LOCALSTORAGE);
 
@@ -21,6 +22,7 @@ Vue.component('NumberFormat', NumberFormat);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App),
 }).$mount('#app');
 

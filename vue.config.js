@@ -27,6 +27,11 @@ module.exports = {
       patterns: [
         path.resolve(__dirname, 'src/styles/scope.scss'),
       ]
+    },
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'locales'
     }
   }
 };

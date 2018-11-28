@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <span>Survival</span>
+    <span>{{ $t('title') }}</span>
     <icon name="logo"></icon>
     <b>2</b>
   </div>
