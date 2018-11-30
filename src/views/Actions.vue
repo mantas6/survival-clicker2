@@ -2,13 +2,13 @@
   <article>
     <section>
       <div v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length" :key="groupName">
-        <small>{{ groupName | startCase }}</small>
+        <small>{{ $t(`actions.${category}.groups.${groupName}.title`) }}</small>
         <div v-for="(action, actionName) of group"
           :key="actionName"
           @click="activate(action.fullPath, 1)"
           class="item"
           :class="!action.isAvailable ? 'unavailable' : ''">
-          <span class="name">{{ actionName | startCase }}</span>
+          <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
           <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
         </div>
       </div>
@@ -75,7 +75,6 @@ export default class Actions extends Vue {
       width: 50%;
       padding: 0.75rem;
       padding-left: 0;
-      text-transform: capitalize;
 
       .name {
         flex: 1;

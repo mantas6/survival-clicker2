@@ -3,16 +3,86 @@
   "suicide": "Suicide",
   "actions": {
     "jobs": {
-      "title": "Jobs"
+      "title": "Jobs",
+      "groups": {
+        "educationless": {
+          "title": "Educationless",
+          "items": {
+            "janitor": {
+              "title": "Janitor"
+            }
+          }
+        }
+      }
     },
     "consumables": {
-      "title": "Consumables"
+      "title": "Consumables",
+      "groups": {
+        "food": {
+          "title": "Food",
+          "items": {
+            "chocolateBar": {
+              "title": "Chocolate Bar"
+            }
+          }
+        },
+        "drinks": {
+          "title": "Drinks",
+          "items": {
+            "water": {
+              "title": "Water"
+            }
+          }
+        }
+      }
     },
     "drugs": {
-      "title": "Drugs"
+      "title": "Drugs",
+      "groups": {
+        "stimulants": {
+          "title": "Stimulants",
+          "items": {
+            "energyDrink": {
+              "title": "Energy Drink"
+            }
+          }
+        }
+      }
     },
     "education": {
-      "title": "Education"
+      "title": "Education",
+      "groups": {
+        "primary": {
+          "title": "Primary",
+          "items": {
+            "school": {
+              "title": "School"
+            }
+          }
+        },
+        "secondary": {
+          "title": "Secondary",
+          "items": {
+            "medicine": {
+              "title": "Medicine"
+            }
+          }
+        },
+        "courses": {
+          "title": "Courses",
+          "items": {
+            "driversLicense": {
+              "title": "Drivers License"
+            },
+            "bloodTest": {
+              "title": "Blood Test"
+            },
+            "medicineLecture": {
+              "title": "Medicine Lecture"
+            }
+          }
+        }
+      }
     },
     "investment": {
       "title": "Investment"
