@@ -26,7 +26,7 @@
         <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
       </div>
     </div>
-    <button class="suicide" @click="reset">suicide</button>
+    <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
 </template>
 
@@ -130,6 +130,7 @@ export default class HeaderContainer extends Vue {
     }
 
     .suicide {
+      text-transform: lowercase;
       margin-right: 1.5vw;
       padding: 0.25rem;
       border: 0.25rem solid hsl(0, 100%, 50%);
