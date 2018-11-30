@@ -10,6 +10,8 @@ import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import i18n from './i18n';
 
+LocalForage.config({ name: 'store' });
+
 LocalForage.setDriver(LocalForage.LOCALSTORAGE);
 
 const worker = new Worker();
