@@ -3,7 +3,7 @@
     <router-link v-for="category in availableCategories" 
       :key="category"
       :to="{ name: 'actions', params: { name: category } }">
-      {{ $t(`categories.${category}.title`) }}
+      {{ $t(`actions.${category}.title`) }}
     </router-link>
   </nav>
 </template>
