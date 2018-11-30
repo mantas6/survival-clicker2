@@ -4,6 +4,7 @@ import { Serializable } from '@/classes/game/base/serialization/serializable';
 import { NonChild } from '@/classes/game/base/state-node';
 import { Modifiers } from '@/classes/game/modifiers';
 import { Helpers } from '@/classes/game/helpers';
+import { Actions } from '@/classes/game/actions';
 
 export abstract class SerializableWithReference extends Serializable {
   // Do we really need these NoChild exclusions, since it is not an instanceof StateNode
@@ -15,6 +16,11 @@ export abstract class SerializableWithReference extends Serializable {
   @NonChild
   get stats(): Stats {
     return this.state.stats;
+  }
+
+  @NonChild
+  get actions(): Actions {
+    return this.state.actions;
   }
 
   @NonChild
