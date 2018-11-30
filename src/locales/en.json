@@ -1,3 +1,20 @@
 {
-  "title": "Survival"
+  "title": "Survival",
+  "categories": {
+    "jobs": {
+      "title": "Jobs"
+    },
+    "consumables": {
+      "title": "Consumables"
+    },
+    "drugs": {
+      "title": "Drugs"
+    },
+    "education": {
+      "title": "Education"
+    },
+    "investment": {
+      "title": "Investment"
+    }
+  }
 }
