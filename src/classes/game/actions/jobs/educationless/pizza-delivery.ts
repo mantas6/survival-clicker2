@@ -4,7 +4,7 @@ import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
 @VisibleWhen(action => action.stats.education.driversLicense.value.greaterThan(0))
-export class PizzaDeliveryDriver extends Action {
+export class PizzaDelivery extends Action {
   @IgnoreLimits('lessThanMinimum')
   stamina = new Mutation(() => this.stats.character.stamina, () => {
     return new Decimal(-3);

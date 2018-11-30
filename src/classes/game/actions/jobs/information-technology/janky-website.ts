@@ -4,7 +4,7 @@ import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.stats.education.informationTechnology.value.greaterThan(0))
 @VisibleWhen(action => action.stats.education.informationTechnology.value.lessThan(3))
-export class CraftJankyWebsite extends Action {
+export class JankyWebsite extends Action {
   energy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(-5).div(this.modifiers.character.concentration.value);
   });

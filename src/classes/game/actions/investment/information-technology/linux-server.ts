@@ -5,7 +5,7 @@ import Decimal from 'decimal.js';
 
 @SerializeAllOn('emit')
 @UnlocksWhen(action => action.stats.education.informationTechnology.value.greaterThanOrEqualTo(4))
-export class RerentLinuxServer extends Action {
+export class LinuxServer extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.growthMoneyCost(this.timesCalculated, 2000, 1.5);
   });
