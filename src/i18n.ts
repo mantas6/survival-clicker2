@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueI18n, { LocaleMessages } from 'vue-i18n';
+import { startCase } from 'lodash';
 
 Vue.use(VueI18n);
 
@@ -20,4 +21,12 @@ export default new VueI18n({
   locale: 'en',
   fallbackLocale: 'en',
   messages: loadLocaleMessages(),
+  missing: (locale, key) => {
+    const segments = key.split('.');
+    const nameIndex = segments.indexOf('title');
+
+    if (nameIndex !== -1) {
+      return startCase(segments[nameIndex - 1]);
+    }
+  },
 });
