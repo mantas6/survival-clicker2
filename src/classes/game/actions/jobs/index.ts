@@ -7,4 +7,5 @@ import { InformationTechnology } from './information-technology';
 export class Jobs extends Serializable {
   educationless = new Educationless();
   informationTechnology = new InformationTechnology();
+  donor = new Donor();
 }
