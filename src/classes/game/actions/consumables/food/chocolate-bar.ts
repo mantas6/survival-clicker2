@@ -1,4 +1,4 @@
-import { Action, Unlocks } from '@/classes/game/base/actions';
+import { Action } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
@@ -16,7 +16,6 @@ export class ChocolateBar extends Action {
     return new Decimal(5);
   });
 
-  @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.moneyCost(1);
   });

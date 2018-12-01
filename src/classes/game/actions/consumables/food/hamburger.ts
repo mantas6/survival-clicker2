@@ -1,4 +1,4 @@
-import { Action, Unlocks, UnlocksWhen } from '@/classes/game/base/actions';
+import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
@@ -17,7 +17,6 @@ export class Hamburger extends Action {
     return new Decimal(6);
   });
 
-  @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.moneyCost(8);
   });
