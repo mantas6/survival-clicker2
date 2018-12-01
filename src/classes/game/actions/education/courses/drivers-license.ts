@@ -2,8 +2,8 @@ import { Action, VisibleWhen, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@VisibleWhen(action => action.stats.education.driversLicense.value.isZero())
-@UnlocksWhen(action => action.stats.education.school.value.greaterThanOrEqualTo(1))
+@VisibleWhen(action => action.modifiers.education.driversLicense.value.isZero())
+@UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(1))
 export class DriversLicense extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.moneyCost(200);
@@ -11,9 +11,5 @@ export class DriversLicense extends Action {
 
   energy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(-10).div(this.modifiers.character.concentration.value);
-  });
-
-  driversLicense = new Mutation(() => this.stats.education.driversLicense, () => {
-    return new Decimal(1);
   });
 }

@@ -2,7 +2,7 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => !action.stats.education.bloodTest.value.isZero())
+@UnlocksWhen(action => !action.modifiers.education.bloodTest.value.isZero())
 export class SellBlood extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(100).times(this.stats.character.health.level).floor();

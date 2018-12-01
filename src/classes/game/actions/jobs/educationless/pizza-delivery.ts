@@ -3,7 +3,7 @@ import { Action, VisibleWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@VisibleWhen(action => action.stats.education.driversLicense.value.greaterThan(0))
+@VisibleWhen(action => action.modifiers.education.driversLicense.value.greaterThan(0))
 export class PizzaDelivery extends Action {
   @IgnoreLimits('lessThanMinimum')
   stamina = new Mutation(() => this.stats.character.stamina, () => {

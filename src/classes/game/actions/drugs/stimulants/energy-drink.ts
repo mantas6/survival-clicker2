@@ -3,7 +3,7 @@ import { Mutation } from '@/classes/game/base/mutations';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => action.stats.education.school.value.greaterThan(0))
+@UnlocksWhen(action => action.modifiers.education.school.value.greaterThan(0))
 export class EnergyDrink extends Action {
   drainEnergy = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
