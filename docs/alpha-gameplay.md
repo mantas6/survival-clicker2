@@ -31,12 +31,6 @@
   - `1` concentration for `10` duration
   - `5` staminaRestoreSpeed for `5` duration
   - `1` stomach
-- crystal meth
-  - `-25` money
-  - `-0.1` health for `120` duration
-  - `1` concentration for `30` duration
-  - `5` staminaRestoreSpeed for `10` duration
-  - `1` stomach
 
 ## Education
 
@@ -111,17 +105,3 @@
       - `-30` stamina
   - 4 stage
   - 5 stage
-
-- medicine (cost: `200 * 2^timeBought`)
-  - 1 stage
-  - 2 stage
-    - unlocks **morphine**
-    - unlocks **cheap stimulant**
-    - unlocks **animal masturbator** job
-  - 3 stage
-    - unlocks **corticosteroid pills** drug
-    - doubles payout for **animal masturbator**
-  - 4 stage
-    - unlocks **gynaecologist assistant** job
-  - 5 stage
-    - unlocks **found a hospital** investment
