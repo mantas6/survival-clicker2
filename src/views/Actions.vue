@@ -21,10 +21,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import { Relay } from '@/classes/relay';
-import { startCase } from 'lodash';
 
 @Component({
-  filters: { startCase },
   updated(this: Actions) {
     if (this.availableCategories && !this.availableCategories.includes(this.category)) {
       this.$router.push({ name: 'home' });
