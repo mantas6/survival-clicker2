@@ -3,7 +3,8 @@ import { Mutation } from '@/classes/game/base/mutations';
 import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => action.modifiers.education.medicine.value.greaterThanOrEqualTo(2))
+@UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
+@UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(1))
 export class Modafinil extends Action {
   drainEnergy = new Effect({
     modifier: () => this.modifiers.character.concentration,
