@@ -3,7 +3,7 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => action.stats.education.medicine.knowsBasics())
+@UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
 export class SyrupOfIpecac extends Action {
   @IgnoreLimits('lessThanMinimum')
   health = new Mutation(() => this.stats.character.health, () => {
