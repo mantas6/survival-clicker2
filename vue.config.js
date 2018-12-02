@@ -1,4 +1,5 @@
 const path = require('path');
+const { set } = require('lodash');
 
 module.exports = {
   chainWebpack: config => {
@@ -9,14 +10,10 @@ module.exports = {
         .loader('worker-loader/loader')
         .end()
   },
-  configureWebpack: {
-    optimization: {
-      minimize: false,
-    },
-    output: {
-      // Fixes issue with script in the Web Worker crash while trying to get/set window global
-      globalObject: 'this',
-    },
+  configureWebpack: config => {
+    set(config, 'optimization.minimize', false);
+    // Fixes issue with script in the Web Worker crash while trying to get/set window global
+    set(config, 'output.globalObject', 'this');
   },
   pluginOptions:{
     env: {
