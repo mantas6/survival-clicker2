@@ -1,6 +1,6 @@
 import { StateNode } from '@/classes/game/base/state-node';
 import { isPrimitive } from '@/utils/guard';
-import { isEmpty } from 'lodash';
+import { isEmpty } from '@/utils/method';
 
 export type BasicValue = string | number | boolean;
 export type ArrayValue = string[] | number[];

@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Timer as SerializedTimer } from '@/classes/game/base/modifiers/timer';
-import { last } from 'lodash';
+import { last } from '@/utils/method';
 import Decimal from 'decimal.js';
 import { GroupedTimer } from '@/components/layout/Sidebar.vue';
 

@@ -3,7 +3,7 @@ import { Timer, TimerOptions } from './timer';
 import { Effect } from '@/classes/game/base/modifiers';
 import { TagName, SerializedNode } from '@/classes/game/base/serialization/serializable';
 import { Transform, Transformable } from '../transformable';
-import { get } from 'lodash';
+import { get } from '@/utils/method';
 
 interface SerializedTimer {
   effect: { fullPath: string };

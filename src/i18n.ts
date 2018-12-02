@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueI18n, { LocaleMessages } from 'vue-i18n';
-import { startCase } from 'lodash';
+import { startCase } from '@/utils/method';
 
 Vue.use(VueI18n);
 
