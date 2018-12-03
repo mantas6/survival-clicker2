@@ -6,7 +6,7 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
 export class CheapStimulant extends Action {
-  drainEnergy = new Effect({
+  energy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
     duration: () => 60,
     value: () => new Decimal(-0.1),

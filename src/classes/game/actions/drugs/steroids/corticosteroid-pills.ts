@@ -6,7 +6,7 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
 @UnlocksWhen(action => action.modifiers.education.bloodTest.value.greaterThan(0))
 export class CorticosteroidPills extends Action {
-  energy = new Effect({
+  hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
     duration: () => 60,
     value: () => new Decimal(-0.2),

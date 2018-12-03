@@ -6,7 +6,7 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
 @UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(1))
 export class Modafinil extends Action {
-  drainEnergy = new Effect({
+  concentration = new Effect({
     modifier: () => this.modifiers.character.concentration,
     duration: () => 10,
     value: () => new Decimal(0.1),

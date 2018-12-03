@@ -5,7 +5,7 @@ import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThan(0))
 export class EnergyDrink extends Action {
-  drainEnergy = new Effect({
+  hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
     duration: () => 60,
     value: () => new Decimal(-0.1),
