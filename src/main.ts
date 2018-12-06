@@ -46,7 +46,9 @@ relay.on('save', serializedState => {
 });
 
 LocalForage.getItem('save').then(previousSave => {
-  relay.emit('load', previousSave);
+  if (previousSave) {
+    relay.emit('load', previousSave);
+  }
 });
 
 log('Application was built on', process.env.BUILD_TIME);
