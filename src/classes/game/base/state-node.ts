@@ -1,3 +1,5 @@
+import { StateEmitter } from './state-emitter';
+
 export abstract class StateNode {
   static nonChildrenNames: string[] = [];
   'constructor': typeof StateNode;
@@ -9,7 +11,10 @@ export abstract class StateNode {
   name!: string;
 
   @NonChild
-  protected parent?: StateNode;
+  events = new StateEmitter(this);
+
+  @NonChild
+  parent?: StateNode;
 
   @NonChild
   protected root!: StateNode;
