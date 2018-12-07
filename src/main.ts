@@ -10,9 +10,10 @@ import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import i18n from './i18n';
 
-LocalForage.config({ name: 'store' });
-
-LocalForage.setDriver(LocalForage.LOCALSTORAGE);
+const storage = LocalForage.createInstance({
+  name: 'store',
+  driver: LocalForage.LOCALSTORAGE,
+});
 
 const worker = new Worker();
 const relay = new Relay(worker);
@@ -35,17 +36,19 @@ relay.on('state', ({ stats, actions, modifiers, timers }) => {
   store.commit('updateTimers', timers);
 });
 
-if (localStorage.getItem('debug')) {
-  enableLogging();
-  relay.emit('enableLogging');
-}
+storage.getItem('debug').then(isEnabled => {
+  if (isEnabled) {
+    enableLogging();
+    relay.emit('enableLogging');
+  }
+});
 
 relay.on('save', serializedState => {
-  LocalForage.setItem('save', serializedState);
+  storage.setItem('save', serializedState);
   log('Saving game state', serializedState);
 });
 
-LocalForage.getItem('save').then(previousSave => {
+storage.getItem('save').then(previousSave => {
   if (previousSave) {
     relay.emit('load', previousSave);
   }
