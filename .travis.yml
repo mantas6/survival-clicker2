@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "10"
-- script:
+script:
   - npm run test:unit
   - npm run test:src
   - npm run lint:check
