@@ -8,7 +8,7 @@ import Decimal from 'decimal.js';
 export class CheapStimulant extends Action {
   energy = new Effect({
     modifier: () => this.modifiers.character.intake.energy,
-    duration: () => 60,
+    duration: () => 30,
     value: () => new Decimal(-0.1),
   });
 

@@ -7,7 +7,7 @@ import Decimal from 'decimal.js';
 export class EnergyDrink extends Action {
   hydration = new Effect({
     modifier: () => this.modifiers.character.intake.hydration,
-    duration: () => 60,
+    duration: () => 30,
     value: () => new Decimal(-0.1),
   });
 
