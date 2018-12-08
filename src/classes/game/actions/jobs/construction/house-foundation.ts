@@ -3,7 +3,7 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(2))
+@UnlocksWhen(action => action.modifiers.education.construction.value.greaterThanOrEqualTo(2))
 export class HouseFoundation extends Action {
   @IgnoreLimits('lessThanMinimum')
   stamina = new Mutation(() => this.stats.character.stamina, () => {
@@ -11,6 +11,6 @@ export class HouseFoundation extends Action {
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(50).mul(this.modifiers.education.informationTechnology.value.minus(1));
+    return new Decimal(50).mul(this.modifiers.education.construction.value.minus(1));
   });
 }

@@ -3,7 +3,7 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(1))
+@UnlocksWhen(action => action.modifiers.education.construction.value.greaterThanOrEqualTo(1))
 export class Bricks extends Action {
   @IgnoreLimits('lessThanMinimum')
   stamina = new Mutation(() => this.stats.character.stamina, () => {
