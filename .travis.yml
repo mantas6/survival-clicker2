@@ -8,12 +8,7 @@ jobs:
   include:
     - stage: tests
     - script:
-      name: tests
       - npm run test:unit
       - npm run test:src
-    - script:
-      name: lint
       - npm run lint:check
-    - script:
-      name: build
       - npm run build
