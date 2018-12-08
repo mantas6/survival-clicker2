@@ -5,16 +5,19 @@ import { Transformable, Transform } from './transformable';
 
 class TestingClass extends Transformable {
   @Transform('reset', () => undefined)
-  valueToReset = true;
+  propToReset = true;
+
+  someOtherProp = 'someValue';
 }
 
 describe('transformable', function() {
-  it('transforms a value', function() {
+  it('transforms a correct value', function() {
     const item = new TestingClass();
 
     item.transform('reset');
 
-    expect(item.valueToReset).to.be.equal(undefined);
+    expect(item.propToReset).to.be.equal(undefined);
+    expect(item.someOtherProp).to.be.equal('someValue');
   });
 
   it('does not transform a different tag property', function() {
@@ -22,6 +25,7 @@ describe('transformable', function() {
 
     item.transform('test');
 
-    expect(item.valueToReset).to.be.equal(true);
+    expect(item.propToReset).to.be.equal(true);
+    expect(item.someOtherProp).to.be.equal('someValue');
   });
 });
