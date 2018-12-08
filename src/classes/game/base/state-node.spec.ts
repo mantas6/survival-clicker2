@@ -1,11 +1,14 @@
 /* tslint:disable:max-classes-per-file only-arrow-functions no-unused-expression */
 
 import { expect } from 'chai';
-import { StateNode } from './state-node';
+import { StateNode, NonChild } from './state-node';
 
 class ParentNode extends StateNode {
   firstChild = new ChildNode();
   secondChild = new ChildNode();
+
+  @NonChild
+  nonChild = 'value';
 }
 
 class ChildNode extends StateNode {
@@ -29,5 +32,14 @@ describe('state-node', function() {
     node.emitParent();
     expect(node.firstChild.path).to.be.equal('firstChild');
     expect(node.firstChild.nestedChild.path).to.be.equal('firstChild.nestedChild');
+  });
+
+  it('does ignore non-child properties', function() {
+    const root = new ParentNode();
+    root.emitParent();
+
+    for (const { node } of root.children(() => true)) {
+      expect(node).to.be.instanceOf(ChildNode);
+    }
   });
 });
