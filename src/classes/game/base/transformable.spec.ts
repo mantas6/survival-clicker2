@@ -16,4 +16,12 @@ describe('transformable', function() {
 
     expect(item.valueToReset).to.be.equal(undefined);
   });
+
+  it('does not transform a different tag property', function() {
+    const item = new TestingClass();
+
+    item.transform('test');
+
+    expect(item.valueToReset).to.be.equal(true);
+  });
 });
