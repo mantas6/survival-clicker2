@@ -11,6 +11,6 @@ export class UnfairLottery extends Action {
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
-    return new Decimal(10);
+    return new Decimal(1);
   });
 }

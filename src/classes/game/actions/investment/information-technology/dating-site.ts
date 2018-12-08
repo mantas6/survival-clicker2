@@ -11,6 +11,6 @@ export class DatingSite extends Action {
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
-    return new Decimal(100);
+    return new Decimal(10);
   });
 }

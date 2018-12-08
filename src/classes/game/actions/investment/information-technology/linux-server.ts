@@ -11,6 +11,6 @@ export class LinuxServer extends Action {
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
-    return new Decimal(50);
+    return new Decimal(5);
   });
 }
