@@ -4,7 +4,7 @@ import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
-export class SyrupOfIpecac extends Action {
+export class Ipecac extends Action {
   @IgnoreLimits('lessThanMinimum')
   health = new Mutation(() => this.stats.character.health, () => {
     return new Decimal(-10).div(this.modifiers.character.healthPreservationMultiplier.value);
