@@ -100,8 +100,13 @@
       - `50` money
       - `-20` stamina
   - 3 stage
+    - increase for **build house foundation**
     - unlocks **steal equipment** job
-      - `100` money
+      - `150` money
       - `-30` stamina
   - 4 stage
+    - increase for **build house foundation**
+    - increase for **steal equipment**
   - 5 stage
+    - increase for **build house foundation**
+    - increase for **steal equipment**
