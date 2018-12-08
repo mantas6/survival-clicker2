@@ -1,4 +1,9 @@
 language: node_js
 node_js:
   - "10"
-script: npm run test:unit
+script:
+ - npm run test:unit
+ - npm run test:src
+cache: npm
+install:
+  - npm ci
