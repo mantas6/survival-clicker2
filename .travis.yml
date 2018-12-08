@@ -1,11 +1,11 @@
 language: node_js
 node_js:
   - "10"
-cache: npm
-install:
-  - npm ci
 - script:
   - npm run test:unit
   - npm run test:src
   - npm run lint:check
   - npm run build
+cache: npm
+install:
+  - npm ci
