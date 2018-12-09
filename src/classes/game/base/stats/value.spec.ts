@@ -13,4 +13,12 @@ describe('stats/value', function() {
     const stat = new Stat();
     expect(stat.value.toString()).to.be.equal(new Decimal(100).toString());
   });
+
+  it('mutates value correctly', function() {
+    const stat = new Stat();
+
+    stat.mutate(value => value.add(100));
+
+    expect(stat.value.toString()).to.be.equal(new Decimal(200).toString());
+  });
 });
