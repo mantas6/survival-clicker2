@@ -1,6 +1,8 @@
 {
   "title": "Survival",
   "suicide": "Suicide",
+  "pause": "Pause",
+  "unpause": "Play",
   "actions": {
     "jobs": {
       "title": "Jobs",

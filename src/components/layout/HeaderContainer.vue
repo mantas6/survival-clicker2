@@ -26,6 +26,12 @@
         <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
       </div>
     </div>
+    <div class="controls">
+      <button @click="pause">
+        <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
+        <template v-else>{{ $t('pause') }}</template>
+      </button>
+    </div>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
 </template>
@@ -36,6 +42,7 @@ import GameLogo from './GameLogo.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
+import { SerializedGlobals } from '@/store/globals';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
@@ -46,6 +53,7 @@ import Decimal from 'decimal.js';
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter modifiers!: SerializedModifiers;
+  @Getter globals!: SerializedGlobals;
   @Getter relay!: Relay;
 
   get money() {
@@ -82,6 +90,10 @@ export default class HeaderContainer extends Vue {
 
   reset() {
     this.relay.emit('reset');
+  }
+
+  pause() {
+    this.relay.emit('pause');
   }
 }
 </script>
@@ -127,6 +139,10 @@ export default class HeaderContainer extends Vue {
       > * {
         text-align: right;
       }
+    }
+
+    .controls {
+      margin-bottom: 0.5rem;
     }
 
     .suicide {

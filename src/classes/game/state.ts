@@ -6,6 +6,7 @@ import { StateRoot } from '@/classes/game/base/state-root';
 import { Timers } from '@/classes/game/base/modifiers';
 import { Helpers } from './helpers';
 import { SerializeOn } from '@/classes/game/base/serialization';
+import { Globals } from './globals';
 
 export class State extends StateRoot {
   @SerializeOn('emit', 'store')
@@ -23,6 +24,9 @@ export class State extends StateRoot {
   timers = new Timers();
 
   helpers = new Helpers();
+
+  @SerializeOn('emit', 'store')
+  globals = new Globals();
 
   // For the time being
   constructor() {

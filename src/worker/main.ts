@@ -17,6 +17,10 @@ const state = new State();
 emitAll();
 
 relay.on('action', ({ path, multiplier }) => {
+  if (state.globals.isPaused) {
+    return;
+  }
+
   log('Calculating action of path', path);
   const action = get(state, path) as Calculable;
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
@@ -35,6 +39,11 @@ relay.on('reset', () => {
   emitStore();
 });
 
+relay.on('pause', () => {
+  state.globals.isPaused = !state.globals.isPaused;
+  emitAll();
+});
+
 relay.on('load', serializedState => {
   applyReset();
   state.unserialize(serializedState);
@@ -46,6 +55,10 @@ interval(30e3).subscribe(() => {
 });
 
 interval(1000).subscribe(() => {
+  if (state.globals.isPaused) {
+    return;
+  }
+
   if (state.stats.character.health.value.isZero()) {
     applyReset();
   }

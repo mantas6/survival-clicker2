@@ -29,11 +29,12 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-relay.on('state', ({ stats, actions, modifiers, timers }) => {
+relay.on('state', ({ stats, actions, modifiers, timers, globals }) => {
   store.commit('updateStats', stats);
   store.commit('updateActions', actions);
   store.commit('updateModifiers', modifiers);
   store.commit('updateTimers', timers);
+  store.commit('updateGlobals', globals);
 });
 
 storage.getItem('debug').then(isEnabled => {
