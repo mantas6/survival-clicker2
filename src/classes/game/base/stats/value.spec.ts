@@ -6,6 +6,8 @@ import Decimal from 'decimal.js';
 
 class Stat extends Value {
   readonly default = 100;
+
+  minimum = 0;
 }
 
 describe('stats/value', function() {
@@ -20,5 +22,13 @@ describe('stats/value', function() {
     stat.mutate(value => value.add(100));
 
     expect(stat.value.valueOf()).to.be.equal(new Decimal(200).valueOf());
+  });
+
+  it('does not exceed minimum constraint', function() {
+    const stat = new Stat();
+
+    stat.mutate(value => value.sub(200));
+
+    expect(stat.value.valueOf()).to.be.equal(new Decimal(0).valueOf());
   });
 });
