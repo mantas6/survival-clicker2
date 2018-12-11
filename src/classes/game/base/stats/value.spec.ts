@@ -11,7 +11,7 @@ class Stat extends Value {
 describe('stats/value', function() {
   it('sets default value correctly', function() {
     const stat = new Stat();
-    expect(stat.value.toString()).to.be.equal(new Decimal(100).toString());
+    expect(stat.value.valueOf()).to.be.equal(new Decimal(100).valueOf());
   });
 
   it('mutates value correctly', function() {
@@ -19,6 +19,6 @@ describe('stats/value', function() {
 
     stat.mutate(value => value.add(100));
 
-    expect(stat.value.toString()).to.be.equal(new Decimal(200).toString());
+    expect(stat.value.valueOf()).to.be.equal(new Decimal(200).valueOf());
   });
 });
