@@ -48,6 +48,14 @@
               "title": "Energy Drink"
             }
           }
+        },
+        "digestion": {
+          "title": "Digestion",
+          "items": {
+            "ipecac": {
+              "title": "Syrup of ipecac"
+            }
+          }
         }
       }
     },
