@@ -31,4 +31,16 @@ describe('stats/value', function() {
 
     expect(stat.value.valueOf()).to.be.equal(new Decimal(0).valueOf());
   });
+
+  it('does probe mutation correctly when less than minimum', function() {
+    const stat = new Stat();
+
+    expect(stat.probe(value => value.sub(200))).to.be.equal('lessThanMinimum');
+  });
+
+  it('does probe mutation correctly when more than minimum', function() {
+    const stat = new Stat();
+
+    expect(stat.probe(value => value.sub(50))).to.be.true;
+  });
 });
