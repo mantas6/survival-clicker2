@@ -36,10 +36,15 @@ describe('stats/container', function() {
     expect(stat.value.valueOf()).to.be.equal(new Decimal(100).valueOf());
   });
 
-  it('does probe mutation when out of bounds', function() {
+  it('does probe mutation correctly when out of bounds', function() {
     const stat = new Stat();
 
     expect(stat.probe(value => value.sub(100))).to.be.equal('lessThanMinimum');
     expect(stat.probe(value => value.add(100))).to.be.equal('greaterThanMaximum');
+  });
+
+  it('does probe mutation correctly when within bounds', function() {
+    const stat = new Stat();
+    expect(stat.probe(value => value.add(50))).to.be.true;
   });
 });
