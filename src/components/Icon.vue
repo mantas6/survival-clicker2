@@ -3,12 +3,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
 @Component({
-  async mounted(this: Icon) {
-    const response = await fetch(this.url);
-    this.content = await response.text();
+  mounted(this: Icon) {
+    this.updateContent();
   },
 })
 export default class Icon extends Vue {
@@ -22,6 +21,16 @@ export default class Icon extends Vue {
       case 'logo':
         return require('@/assets/logo.svg');
     }
+  }
+
+  @Watch('url')
+  onUrlChange() {
+    this.updateContent();
+  }
+
+  async updateContent() {
+    const response = await fetch(this.url);
+    this.content = await response.text();
   }
 }
 </script>
