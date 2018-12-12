@@ -15,10 +15,7 @@ module.exports = {
       globalObject: 'this',
     },
   },
-  pluginOptions:{
-    env: {
-      BUILD_TIME: Date.now(),
-    },
+  pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
       patterns: [
