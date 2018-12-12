@@ -1,8 +1,9 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
+describe('General', () => {
+  it('Application boots up fully', () => {
     cy.visit('/')
-    cy.contains('span', 'Build date')
+    cy.contains('span', 'Survival')
+    cy.contains('a', 'Jobs')
   })
 })
