@@ -7,10 +7,10 @@ import Decimal from 'decimal.js';
 @UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(4))
 export class LinuxServer extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.growthMoneyCost(this.timesCalculated, 2000, 1.05);
+    return this.helpers.growthMoneyCost(this.timesCalculated, 500, 1.2);
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
-    return new Decimal(5);
+    return new Decimal(6);
   });
 }
