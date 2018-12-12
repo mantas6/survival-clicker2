@@ -17,6 +17,11 @@ export abstract class Value extends Transformable {
   current?: Decimal;
 
   @SerializeOn('emit')
+  @Transform('reset', () => new Decimal(0))
+  @Transform('clock', () => new Decimal(0))
+  rate = new Decimal(0);
+
+  @SerializeOn('emit')
   get value(): Decimal {
     if (this.current === undefined) {
       return new Decimal(this.default);
@@ -27,6 +32,8 @@ export abstract class Value extends Transformable {
 
   mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
+
+    this.rate = this.rate.add(mutated.sub(this.value));
 
     const flag = this.probe(mutateFunc);
 

@@ -10,6 +10,8 @@ export abstract class Container extends Value {
   mutate(mutateFunc: MutationFunction) {
     const mutated = mutateFunc(this.value);
 
+    this.rate = this.rate.add(mutated.sub(this.value));
+
     if (mutated.lessThan(this.minimum)) {
       this.current = new Decimal(this.minimum);
 

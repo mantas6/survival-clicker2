@@ -63,6 +63,8 @@ interval(1000).subscribe(() => {
     applyReset();
   }
 
+  applyClock();
+
   state.processes.calculate();
   state.timers.calculate();
   applyUnlocked(state);
@@ -82,6 +84,14 @@ export function applyReset() {
   apply<Transformable>(state, node => {
     if (node instanceof Transformable) {
       node.transform('reset');
+    }
+  });
+}
+
+export function applyClock() {
+  apply<Transformable>(state, node => {
+    if (node instanceof Transformable) {
+      node.transform('clock');
     }
   });
 }
