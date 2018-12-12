@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('General', () => {
+describe('Application', () => {
   it('Application boots up fully', () => {
     cy.visit('/')
     cy.contains('span', 'Survival')
