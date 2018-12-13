@@ -21,8 +21,8 @@ class StubWorker {
   }
 }
 
-describe('classes/relay', () => {
-  it('delivers a message', done => {
+describe('classes/relay', function() {
+  it('delivers a message', function(done) {
     const worker = new StubWorker();
     const relay = new Relay(worker as any);
 
