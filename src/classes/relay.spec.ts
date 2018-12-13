@@ -7,11 +7,19 @@ interface MessageEvent {
   data: any;
 }
 
+interface PostMessageEvent {
+  name: string;
+  data: any;
+}
+
 class StubWorker {
   onmessage?: (event: MessageEvent) => void;
+  onPostMessage?: (event: PostMessageEvent) => void;
 
-  postMessage(data: any) {
-    return;
+  postMessage(event: PostMessageEvent) {
+    if (this.onPostMessage) {
+      this.onPostMessage(event);
+    }
   }
 
   triggerMessage(data: RelayPayload) {
@@ -32,5 +40,18 @@ describe('classes/relay', function() {
     });
 
     worker.triggerMessage({ name: 'testMessage', data: 'testPayload' });
+  });
+
+  it('receives a message', function(done) {
+    const worker = new StubWorker();
+    const relay = new Relay(worker as any);
+
+    worker.onPostMessage = ({ name, data }) => {
+      expect(name).to.equals('testMessage');
+      expect(data).to.equals('testPayload');
+      done();
+    };
+
+    relay.emit('testMessage', 'testPayload');
   });
 });
