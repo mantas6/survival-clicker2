@@ -1,52 +1,29 @@
 <template>
   <aside>
-    <timer v-for="(timer, key) in groupedTimers" :key="key" :data="timer"></timer>
+    <div v-for="process in filteredProcesses" :key="process.fullPath">{{ process.fullPath | split('.') | last }}</div>
   </aside>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { Timer as SerializedTimer } from '@/classes/game/base/modifiers/timer';
-import Timer from '@/components/Timer.vue';
+import { SerializedProcesses } from '@/store/processes';
 import Decimal from 'decimal.js';
+import { split, last } from '@/utils/method';
 
-export interface GroupedTimer {
-  name: string;
-  timeLeft: Decimal;
-  value: Decimal;
-}
-
-@Component({ components: { Timer } })
+@Component({ filters: { split, last } })
 export default class Sidebar extends Vue {
-  @Getter timers!: { [ index: string ]: SerializedTimer };
+  @Getter processes!: SerializedProcesses;
 
   // Move this code to back-end?
-  get groupedTimers() {
-    const grouped: { [effect: string]: GroupedTimer } = {};
+  get filteredProcesses() {
+    const processes = [];
 
-    for (const timer of Object.values(this.timers)) {
-      const modifierName = timer.effect.modifier.toString();
-
-      const groupedTimer = grouped[modifierName];
-
-      const value = new Decimal(timer.multiplier).mul(timer.effect.value);
-
-      const timeLeft = new Decimal(timer.duration).minus(timer.timePassed);
-
-      if (!groupedTimer) {
-        grouped[modifierName] = {
-          value,
-          timeLeft,
-          name: timer.effect.modifier.toString(),
-        };
-      } else {
-        groupedTimer.timeLeft = Decimal.max(groupedTimer.timeLeft, timeLeft);
-        groupedTimer.value = groupedTimer.value.add(value);
-      }
+    for (const process of Object.values(this.processes)) {
+      processes.push(process);
     }
 
-    return grouped;
+    return processes;
   }
 }
 </script>

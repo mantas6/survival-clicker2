@@ -1,7 +1,7 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
 import { Process } from '@/classes/game/base/processes';
 
-interface SerializedProcesses {
+export interface SerializedProcesses {
   [ index: string ]: Process;
 }
 

@@ -27,11 +27,6 @@ export class Action extends Process {
   timesCalculated: Decimal = new Decimal(0);
 
   @SerializeOn('emit')
-  get fullPath() {
-    return this.path;
-  }
-
-  @SerializeOn('emit')
   get isAvailable() {
     const multiplier = new Decimal(1);
     return this.validate({ multiplier });

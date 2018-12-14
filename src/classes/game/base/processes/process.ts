@@ -4,7 +4,7 @@ import { LimitFlag } from '@/classes/game/base/stats';
 import { Effect } from '@/classes/game/base/modifiers';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { State } from '@/classes/game/state';
-import { SerializeAllOn } from '@/classes/game/base/serialization';
+import { SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
 
 export type ProcessableDescriptorType = 'mutation' | 'effect';
 
@@ -33,6 +33,11 @@ export abstract class Process extends Transformable implements Calculable {
 
   @Transform('clock', () => false)
   isCalculated: boolean = false;
+
+  @SerializeOn('emit')
+  get fullPath() {
+    return this.path;
+  }
 
   'constructor': typeof Process;
 
