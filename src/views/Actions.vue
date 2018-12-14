@@ -30,7 +30,7 @@ import { Relay } from '@/classes/relay';
   },
 })
 export default class Actions extends Vue {
-  @Getter processes!: SerializedActions;
+  @Getter allActions!: SerializedActions;
   @Getter relay!: Relay;
   @Getter availableCategories!: string[];
 
@@ -39,11 +39,11 @@ export default class Actions extends Vue {
   }
 
   get availableGroups() {
-    if (!this.processes) {
+    if (!this.allActions) {
       return;
     }
 
-    return this.processes[this.category];
+    return this.allActions[this.category];
   }
 
   activate(path: string, multiplier: string) {

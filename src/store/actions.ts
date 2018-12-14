@@ -13,7 +13,7 @@ export class Actions extends VuexModule {
   }
 
   // Can not names this 'actions' since it collides with vuex-module-decorators package
-  get processes() {
+  get allActions() {
     return this.list;
   }
 
