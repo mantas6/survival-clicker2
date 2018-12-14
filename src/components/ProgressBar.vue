@@ -36,6 +36,7 @@ export default class ProgressBar extends Vue {
   .progress {
     width: 100%;
     border-radius: 0.75rem;
+    height: 1.2rem;
 
     .bar {
       height: 100%;

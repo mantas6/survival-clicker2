@@ -14,15 +14,30 @@
         </div>
       </div>
       <div class="stats">
-        <span>Health</span>
+        <div class="head">
+          <span>Health</span>
+          <number-format :value="health.rate"></number-format>
+        </div>
         <progress-bar :value="health.value" :max="health.max"></progress-bar>
-        <span>Energy</span>
+        <div class="head">
+          <span>Energy</span>
+          <number-format :value="energy.rate"></number-format>
+        </div>
         <progress-bar :value="energy.value" :max="energy.max" variant="green"></progress-bar>
-        <span>Stamina</span>
+        <div class="head">
+          <span>Stamina</span>
+          <number-format :value="stamina.rate"></number-format>
+        </div>
         <progress-bar :value="stamina.value" :max="stamina.max" variant="blue"></progress-bar>
-        <span>Hydration</span>
+        <div class="head">
+          <span>Hydration</span>
+          <number-format :value="hydration.rate"></number-format>
+        </div>
         <progress-bar :value="hydration.value" :max="hydration.max" variant="cyan"></progress-bar>
-        <span>Stomach</span>
+        <div class="head">
+          <span>Stomach</span>
+          <number-format :value="stomach.rate"></number-format>
+        </div>
         <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
       </div>
     </div>
@@ -115,9 +130,18 @@ export default class HeaderContainer extends Vue {
 
     .stats {
       display: grid;
-      grid-template-columns: 1fr 66%;
+      grid-template-columns: 100%;
       grid-template-rows: 1fr;
       grid-gap: 0.5rem;
+
+      .head {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        :last-child {
+          justify-self: right;
+        }
+      }
     }
 
     .money {
