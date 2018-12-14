@@ -4,7 +4,7 @@
       <span>{{ name }}</span>
       <div>
         <number-format :value="stat.value"></number-format>
-        <span>/</span>
+        <span> / </span>
         <number-format :value="stat.max"></number-format>
         (<number-format :value="stat.rate"></number-format> / s)
       </div>
