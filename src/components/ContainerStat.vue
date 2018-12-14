@@ -44,8 +44,7 @@ export default class ContainerStat extends Vue {
 <style lang="scss" scoped>
   .head {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1rem;
+    grid-template-columns: 1fr auto;
 
     :last-child {
       justify-self: right;
