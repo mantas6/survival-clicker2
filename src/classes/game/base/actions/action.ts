@@ -11,7 +11,6 @@ export interface Condition {
   conditionFunc: ConditionFunction;
 }
 
-@SerializeAllOn('emit')
 export class Action extends Process {
   static unlockingMutations: string[] = [];
   static unlockingConditions: Condition[] = [];

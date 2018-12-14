@@ -2,8 +2,9 @@ import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/c
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 import { Effect } from '@/classes/game/base/modifiers';
-import { Transformable } from '@/classes/game/base/transformable';
+import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { State } from '@/classes/game/state';
+import { SerializeAllOn } from '@/classes/game/base/serialization';
 
 export type ProcessableDescriptorType = 'mutation' | 'effect';
 
@@ -25,9 +26,13 @@ export interface Condition {
 
 export type ProcessableDescriptorMap = Map<string, MutationDescriptor | EffectDescriptor>;
 
+@SerializeAllOn('emit')
 export abstract class Process extends Transformable implements Calculable {
   static descriptorsOfProcessables: ProcessableDescriptorMap = new Map();
   static conditions: Condition[] = [];
+
+  @Transform('clock', () => false)
+  isCalculated: boolean = false;
 
   'constructor': typeof Process;
 
@@ -44,6 +49,8 @@ export abstract class Process extends Transformable implements Calculable {
   }
 
   calculate(opts: CalculationOptions) {
+    this.isCalculated = true;
+
     for (const { mutation } of this.mutations()) {
       mutation.calculate(opts);
     }
