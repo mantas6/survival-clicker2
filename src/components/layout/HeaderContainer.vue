@@ -14,31 +14,11 @@
         </div>
       </div>
       <div class="stats">
-        <div class="head">
-          <span>Health</span>
-          <number-format :value="health.rate"></number-format>
-        </div>
-        <progress-bar :value="health.value" :max="health.max"></progress-bar>
-        <div class="head">
-          <span>Energy</span>
-          <number-format :value="energy.rate"></number-format>
-        </div>
-        <progress-bar :value="energy.value" :max="energy.max" variant="green"></progress-bar>
-        <div class="head">
-          <span>Stamina</span>
-          <number-format :value="stamina.rate"></number-format>
-        </div>
-        <progress-bar :value="stamina.value" :max="stamina.max" variant="blue"></progress-bar>
-        <div class="head">
-          <span>Hydration</span>
-          <number-format :value="hydration.rate"></number-format>
-        </div>
-        <progress-bar :value="hydration.value" :max="hydration.max" variant="cyan"></progress-bar>
-        <div class="head">
-          <span>Stomach</span>
-          <number-format :value="stomach.rate"></number-format>
-        </div>
-        <progress-bar :value="stomach.value" :max="stomach.max" variant="yellow"></progress-bar>
+        <container-stat name="health" :stat="health"></container-stat>
+        <container-stat name="energy" :stat="energy"></container-stat>
+        <container-stat name="stamina" :stat="stamina"></container-stat>
+        <container-stat name="hydration" :stat="hydration"></container-stat>
+        <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
     </div>
     <div class="controls">
@@ -55,6 +35,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
+import ContainerStat from '@/components/ContainerStat.vue';
 import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
 import { SerializedGlobals } from '@/store/globals';
@@ -63,7 +44,7 @@ import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
 
 @Component({
-  components: { GameLogo, ProgressBar },
+  components: { GameLogo, ProgressBar, ContainerStat },
 })
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
@@ -130,18 +111,7 @@ export default class HeaderContainer extends Vue {
 
     .stats {
       display: grid;
-      grid-template-columns: 100%;
-      grid-template-rows: 1fr;
       grid-gap: 0.5rem;
-
-      .head {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
-        :last-child {
-          justify-self: right;
-        }
-      }
     }
 
     .money {
