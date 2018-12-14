@@ -9,7 +9,7 @@
     "lint:check": "vue-cli-service lint --no-fix",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e --headless",
-    "test:src": "vue-cli-service test:unit src/**/*.spec.ts"
+    "test:src": "vue-cli-service test:unit 'src/**/*.spec.ts'"
   },
   "vuePlugins": {
     "ui": [
