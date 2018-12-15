@@ -1,9 +1,9 @@
-import { Action, VisibleWhen, UnlocksWhen } from '@/classes/game/base/actions';
+import { Action, LocksWhen, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
-@VisibleWhen(action => action.modifiers.education.construction.value.lessThan(5))
+@LocksWhen(action => action.modifiers.education.construction.value.greaterThanOrEqualTo(5))
 export class Construction extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
     return this.helpers.growthMoneyCost(this.modifiers.education.construction.value, 100, 1.5);

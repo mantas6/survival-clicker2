@@ -1,8 +1,8 @@
-import { Action, VisibleWhen, UnlocksWhen } from '@/classes/game/base/actions';
+import { Action, LocksWhen, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@VisibleWhen(action => action.modifiers.education.driversLicense.value.isZero())
+@LocksWhen(action => !action.modifiers.education.driversLicense.value.isZero())
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(1))
 export class DriversLicense extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
