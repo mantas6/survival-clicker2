@@ -22,7 +22,7 @@ export default class Icon extends Vue {
 
   get url() {
     const icons: IconDictionary = {
-      logo: require('@/assets/logo.svg'),
+      logo: require('@/assets/icons/logo.svg'),
     };
 
     return icons[this.name];
