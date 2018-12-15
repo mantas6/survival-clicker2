@@ -13,6 +13,12 @@ export function UnlocksWhen(conditionFunc: ConditionFunction) {
   };
 }
 
+export function LocksWhen(conditionFunc: ConditionFunction) {
+  return (ctor: typeof Action) => {
+    ctor.lockingConditions = [ ...ctor.lockingConditions, { conditionFunc } ];
+  };
+}
+
 export function VisibleWhen(conditionFunc: ConditionFunction) {
   return (ctor: typeof Action) => {
     ctor.visibilityConditions = [ ...ctor.visibilityConditions, { conditionFunc } ];

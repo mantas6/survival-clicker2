@@ -14,12 +14,13 @@ export interface Condition {
 export class Action extends Process {
   static unlockingMutations: string[] = [];
   static unlockingConditions: Condition[] = [];
+  static lockingConditions: Condition[] = [];
   static visibilityConditions: Condition[] = [];
   'constructor': typeof Action;
 
   @SerializeOn('store')
-  @Transform('reset', () => false)
-  isUnlocked: boolean = false;
+  @Transform('reset', () => undefined)
+  isUnlocked?: boolean;
 
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input.toString()))
@@ -57,29 +58,58 @@ export class Action extends Process {
   }
 
   triggerUnlocked() {
-    if (!this.isUnlocked) {
-      const { unlockingMutations, unlockingConditions } = this.constructor;
-      const multiplier = new Decimal(1);
+    this.checkUnlock();
+    this.checkLock();
+  }
 
-      // Checks if all conditions are met
-      for (const condition of unlockingConditions) {
-        if (!condition.conditionFunc(this, { multiplier })) {
-          return;
-        }
-      }
-
-      // Checks if required mutations are do-able
-      for (const name of unlockingMutations) {
-        const mutation = (this as any)[name] as Calculable;
-
-        if (!mutation.validate({ multiplier })) {
-          return;
-        }
-      }
-
-      // Unlocks the action
-      this.isUnlocked = true;
+  private checkUnlock() {
+    if (this.isUnlocked !== undefined) {
+      // We're only checking for unlocks if action was never unlocked before (value of undefined)
+      return;
     }
+
+    const { unlockingMutations, unlockingConditions } = this.constructor;
+    const multiplier = new Decimal(1);
+
+    // Checks if all conditions are met
+    for (const condition of unlockingConditions) {
+      if (!condition.conditionFunc(this, { multiplier })) {
+        return;
+      }
+    }
+
+    // Checks if required mutations are do-able
+    for (const name of unlockingMutations) {
+      const mutation = (this as any)[name] as Calculable;
+
+      if (!mutation.validate({ multiplier })) {
+        return;
+      }
+    }
+
+    // Unlocks the action
+    this.isUnlocked = true;
+  }
+
+  private checkLock() {
+    const { lockingConditions } = this.constructor;
+
+    if (!this.isUnlocked || !lockingConditions.length) {
+      // We're only going to lock if action is already unlocked
+      return;
+    }
+
+    const multiplier = new Decimal(1);
+
+    // Checks if all conditions are met
+    for (const condition of lockingConditions) {
+      if (!condition.conditionFunc(this, { multiplier })) {
+        return;
+      }
+    }
+
+    // Locks the action
+    this.isUnlocked = false;
   }
 
   private isVisible(): boolean {
