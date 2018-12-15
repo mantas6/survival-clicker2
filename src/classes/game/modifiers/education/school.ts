@@ -7,6 +7,6 @@ export class School extends Modifier {
   }
 
   get hasFinished() {
-    return this.compute().greaterThanOrEqualTo(3);
+    return this.compute().greaterThanOrEqualTo(6);
   }
 }

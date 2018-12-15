@@ -4,7 +4,7 @@ import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
-@UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
+@UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(5))
 export class Morphine extends Action {
   staminaRestoreSpeed = new Effect({
     modifier: () => this.modifiers.character.staminaRestoreSpeed,
