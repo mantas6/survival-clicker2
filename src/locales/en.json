@@ -3,6 +3,23 @@
   "suicide": "Suicide",
   "pause": "Pause",
   "unpause": "Play",
+  "stats": {
+    "health": {
+      "title": "Health"
+    },
+    "energy": {
+      "title": "Energy"
+    },
+    "hydration": {
+      "title": "Hydration"
+    },
+    "stamina": {
+      "title": "Stamina"
+    },
+    "stomach": {
+      "title": "Stomach"
+    }
+  },
   "actions": {
     "jobs": {
       "title": "Jobs",

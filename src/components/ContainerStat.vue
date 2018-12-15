@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="head">
-      <span>{{ name }}</span>
+      <span>{{ $t(`stats.${name}.title`) }}</span>
       <div>
         <number-format :value="stat.value"></number-format>
         <span> / </span>
