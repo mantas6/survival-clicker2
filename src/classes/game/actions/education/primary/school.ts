@@ -2,7 +2,7 @@ import { Action, Unlocks, LocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
-@LocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
+@LocksWhen(action => action.modifiers.education.school.hasFinished)
 export class School extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
