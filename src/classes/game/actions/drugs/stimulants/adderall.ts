@@ -4,8 +4,20 @@ import { Effect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.medicine.knowsBasics())
-@UnlocksWhen(action => action.modifiers.education.informationTechnology.value.greaterThanOrEqualTo(1))
-export class Modafinil extends Action {
+@UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(4))
+export class Adderall extends Action {
+  energy = new Effect({
+    modifier: () => this.modifiers.character.intake.energy,
+    duration: () => 30,
+    value: () => new Decimal(-0.1),
+  });
+
+  restoreStamina = new Effect({
+    modifier: () => this.modifiers.character.staminaRestoreSpeed,
+    duration: () => 5,
+    value: () => new Decimal(5),
+  });
+
   concentration = new Effect({
     modifier: () => this.modifiers.character.concentration,
     duration: () => 10,
@@ -14,12 +26,6 @@ export class Modafinil extends Action {
 
   stomach = new Mutation(() => this.stats.character.stomach, () => {
     return new Decimal(1);
-  });
-
-  hydration = new Effect({
-    modifier: () => this.modifiers.character.intake.hydration,
-    duration: () => 30,
-    value: () => new Decimal(-0.1),
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
