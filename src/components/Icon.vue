@@ -5,6 +5,10 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
+interface IconDictionary {
+  [iconName: string]: string;
+}
+
 @Component({
   mounted(this: Icon) {
     this.updateContent();
@@ -17,10 +21,11 @@ export default class Icon extends Vue {
   name!: string;
 
   get url() {
-    switch (this.name) {
-      case 'logo':
-        return require('@/assets/logo.svg');
-    }
+    const icons: IconDictionary = {
+      logo: require('@/assets/logo.svg'),
+    };
+
+    return icons[this.name];
   }
 
   @Watch('url')
