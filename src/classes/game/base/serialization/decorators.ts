@@ -13,7 +13,7 @@ export function SerializeAllOn(...tagNames: TagName[]) {
 /**
  * Will skip an individual child of the class. Used in conjunction with SerializeAllOn
  */
-export function DonNotSerialize() {
+export function DoNotSerialize() {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 

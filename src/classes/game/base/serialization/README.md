@@ -21,4 +21,4 @@ Serialization is used to convert the current game state from the object to strin
   - `@SerializeOn` — sets tag(s) for a given property; overwrites `SerializeAllOn`
   - `@SerializeAs` — rewrites serialization process
   - `@UnserializeAs` — rewrites unserialization process
-  - `@DonNotSerialize` — ignores `SerializeAllOn` for a single property if used
+  - `@DoNotSerialize` — ignores `SerializeAllOn` for a single property if used
