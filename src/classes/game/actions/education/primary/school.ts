@@ -6,7 +6,7 @@ import Decimal from 'decimal.js';
 export class School extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.growthMoneyCost(this.modifiers.education.school.value, 50, 1.4);
+    return this.helpers.growthMoneyCost(this.modifiers.education.school.value, 50, 1.5);
   });
 
   energy = new Mutation(() => this.stats.character.energy, () => {
