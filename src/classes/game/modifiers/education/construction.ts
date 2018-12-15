@@ -5,4 +5,8 @@ export class Construction extends Modifier {
   compute() {
     return new Decimal(0).add(this.actions.education.secondary.construction.timesCalculated);
   }
+
+  get hasFinished() {
+    return this.compute().greaterThanOrEqualTo(5);
+  }
 }
