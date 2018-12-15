@@ -1,4 +1,4 @@
-import { Unlocks, UnlocksWhen, VisibleWhen, LocksWhen } from './decorators';
+import { Unlocks, UnlocksWhen, LocksWhen } from './decorators';
 import { Action } from './action';
 
 export {
@@ -6,5 +6,4 @@ export {
   Unlocks,
   UnlocksWhen,
   LocksWhen,
-  VisibleWhen,
 };
