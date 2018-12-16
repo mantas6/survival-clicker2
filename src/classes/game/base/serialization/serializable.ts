@@ -10,7 +10,7 @@ export interface SerializedNode {
 }
 
 export interface PropertyDescriptor {
-  tagNames: string[];
+  tagNames?: string[];
   serializeFunc?: (input: any) => BasicValue | ArrayValue;
   unserializeFunc?: (input: BasicValue) => any;
 }
@@ -97,9 +97,11 @@ export abstract class Serializable extends StateNode {
 
       ownPropertyNames.push(name);
 
-      if (descriptor && descriptor.tagNames.includes(tagName)) {
+      if (descriptor && descriptor.tagNames && descriptor.tagNames.includes(tagName)) {
+        // Is tagged using @SerializeOn decorator
         yield property;
-      } else if (this.constructor.defaultTagNames.includes(tagName)) {
+      } else if (this.constructor.defaultTagNames.includes(tagName) && (!descriptor || !descriptor.tagNames)) {
+        // Is tagged using @SerializeAllOn decorator and at the same time is not tagged with the @SerializeOn
         yield property;
       }
     }
@@ -113,7 +115,7 @@ export abstract class Serializable extends StateNode {
       const ctx = this as { [propertyName: string]: any };
       const node = ctx[name] as () => ConstructorProperty;
 
-      if (node && descriptor.tagNames.includes(tagName)) {
+      if (node && descriptor.tagNames && descriptor.tagNames.includes(tagName)) {
         yield { name, node, descriptor };
       }
     }

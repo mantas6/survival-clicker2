@@ -17,7 +17,7 @@ export function DoNotSerialize() {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    descriptor.tagNames = [];
+    descriptor.tagNames = undefined;
   };
 }
 
@@ -29,7 +29,7 @@ export function SerializeOn(...tagNames: TagName[]) {
   return (serializableClass: Serializable, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
 
-    descriptor.tagNames.push(...tagNames);
+    descriptor.tagNames = [ ...tagNames ];
   };
 }
 
@@ -63,7 +63,7 @@ function prepareDescriptorOfProperty(serializableClass: Serializable, propertyNa
   const descriptors = new Map(ctor.descriptorsOfProperties);
 
   if (!descriptors.has(propertyName)) {
-    descriptors.set(propertyName, { tagNames: [] });
+    descriptors.set(propertyName, {});
   }
 
   // Forwarding the copy to the class
