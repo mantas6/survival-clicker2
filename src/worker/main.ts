@@ -25,6 +25,7 @@ relay.on('action', ({ path, multiplier }) => {
   const action = get(state, path) as Calculable;
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
     action.calculate({ multiplier: new Decimal(multiplier) });
+    applyUnlocked(state);
     emitAll();
   }
 });
