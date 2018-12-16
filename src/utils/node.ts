@@ -6,3 +6,13 @@ export function apply<TargetNode extends StateNode>(parentNode: StateNode, apply
     apply(node, applyFunc);
   }
 }
+
+export function* traverse(parentNode: StateNode): IterableIterator<StateNode> {
+  for (const { node } of parentNode.nodes()) {
+    // parentNode own properties
+    yield node;
+
+    // properties of parentNode children
+    yield* traverse(node);
+  }
+}
