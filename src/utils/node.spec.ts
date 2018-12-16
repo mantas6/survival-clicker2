@@ -17,7 +17,7 @@ class NestedChildNode extends StateNode {
 }
 
 describe('Node utilities', () => {
-  it('renders value when passed', () => {
+  it('iterates though nodes correctly', () => {
     const parentNode = new ParentNode();
     parentNode.emitParent();
 
