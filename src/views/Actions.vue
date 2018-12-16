@@ -1,9 +1,8 @@
 <template>
   <article>
-    <section>
-      <div v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length" :key="groupName">
-        <small>{{ $t(`actions.${category}.groups.${groupName}.title`) }}</small>
-        <div v-for="(action, actionName) of group"
+    <section v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length" :key="groupName">
+      <small>{{ $t(`actions.${category}.groups.${groupName}.title`) }}</small>
+      <div v-for="(action, actionName) of group"
           :key="actionName"
           @click="activate(action.fullPath, 1)"
           @mouseenter="markAsSeen(action.fullPath)"
@@ -15,7 +14,6 @@
           </div>
           <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
         </div>
-      </div>
     </section>
   </article>
 </template>
@@ -62,10 +60,6 @@ export default class Actions extends Vue {
 
 <style lang="scss" scoped>
   article {
-    flex: 1;
-  }
-
-  section {
     display: grid;
     grid-gap: 1rem;
 
