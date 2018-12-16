@@ -1,11 +1,11 @@
 import { Action } from '.';
 import { State } from '@/classes/game/state';
-import { apply } from '@/utils/node';
+import { traverse } from '@/utils/node';
 
 export function applyUnlocked(state: State) {
-  apply<Action>(state, node => {
+  for (const node of traverse(state)) {
     if (node instanceof Action) {
       node.triggerUnlocked();
     }
-  });
+  }
 }

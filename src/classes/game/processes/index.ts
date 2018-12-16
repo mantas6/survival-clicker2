@@ -1,7 +1,7 @@
 import { Character } from './character';
 import { Finance } from './finance';
 import { ProcessContainer, Process } from '@/classes/game/base/processes';
-import { apply } from '@/utils/node';
+import { traverse } from '@/utils/node';
 import { SerializedNode, TagName } from '@/classes/game/base/serialization/serializable';
 import { Action } from '@/classes/game//base/actions';
 
@@ -12,13 +12,13 @@ export class Processes extends ProcessContainer {
   serialize(tagName: TagName): SerializedNode | undefined  {
     const processes: Process[] = [];
 
-    apply<Process>(this, node => {
+    for (const node of traverse(this)) {
       if (node instanceof Process && !(node instanceof Action)) {
         if (node.isCalculated) {
           processes.push(node);
         }
       }
-    });
+    }
 
     const serialized: SerializedNode = {};
 

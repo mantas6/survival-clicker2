@@ -6,7 +6,7 @@ import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyUnlocked } from '@/classes/game/base/actions/methods';
 import Decimal from 'decimal.js';
-import { apply } from '@/utils/node';
+import { traverse } from '@/utils/node';
 import { Transformable } from '@/classes/game/base/transformable';
 import { Action } from '@/classes/game/base/actions';
 
@@ -89,17 +89,17 @@ function emitStore() {
 }
 
 export function applyReset() {
-  apply<Transformable>(state, node => {
+  for (const node of traverse(state)) {
     if (node instanceof Transformable) {
       node.transform('reset');
     }
-  });
+  }
 }
 
 export function applyClock() {
-  apply<Transformable>(state, node => {
+  for (const node of traverse(state)) {
     if (node instanceof Transformable) {
       node.transform('clock');
     }
-  });
+  }
 }
