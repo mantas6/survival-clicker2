@@ -1,11 +1,10 @@
-import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
+import { Category } from '@/classes/game/base/actions';
 import { Educationless } from './educationless';
 import { Donor } from './donor';
 import { InformationTechnology } from './information-technology';
 import { Construction } from './construction';
 
-@SerializeAllOn('emit', 'store')
-export class Jobs extends Serializable {
+export class Jobs extends Category {
   educationless = new Educationless();
   informationTechnology = new InformationTechnology();
   construction = new Construction();

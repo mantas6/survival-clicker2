@@ -26,6 +26,10 @@ export class Action extends Process {
   @Transform('reset', () => new Decimal(0))
   timesCalculated: Decimal = new Decimal(0);
 
+  @SerializeOn('store', 'emit')
+  @Transform('reset', () => undefined)
+  isSeen?: boolean;
+
   @SerializeOn('emit')
   get isAvailable() {
     const multiplier = new Decimal(1);

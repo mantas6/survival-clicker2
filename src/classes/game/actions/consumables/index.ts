@@ -1,9 +1,8 @@
-import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
+import { Category } from '@/classes/game/base/actions';
 import { Food } from './food';
 import { Drinks } from './drinks';
 
-@SerializeAllOn('emit', 'store')
-export class Consumables extends Serializable {
+export class Consumables extends Category {
   food = new Food();
   drinks  = new Drinks();
 }

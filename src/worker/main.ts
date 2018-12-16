@@ -8,6 +8,7 @@ import { applyUnlocked } from '@/classes/game/base/actions/methods';
 import Decimal from 'decimal.js';
 import { apply } from '@/utils/node';
 import { Transformable } from '@/classes/game/base/transformable';
+import { Action } from '@/classes/game/base/actions';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -38,6 +39,12 @@ relay.on('reset', () => {
   applyReset();
   emitAll();
   emitStore();
+});
+
+relay.on('seen', ({ path }) => {
+  const action = get(state, path) as Action;
+  action.isSeen = true;
+  emitAll();
 });
 
 relay.on('pause', () => {

@@ -1,11 +1,10 @@
-import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
+import { Category } from '@/classes/game/base/actions';
 import { Stimulants } from './stimulants';
 import { Painkillers } from './painkillers';
 import { Steroids } from './steroids';
 import { Digestion } from './digestion';
 
-@SerializeAllOn('emit', 'store')
-export class Drugs extends Serializable {
+export class Drugs extends Category {
   stimulants = new Stimulants();
   painkillers = new Painkillers();
   steroids = new Steroids();

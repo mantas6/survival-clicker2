@@ -6,9 +6,13 @@
         <div v-for="(action, actionName) of group"
           :key="actionName"
           @click="activate(action.fullPath, 1)"
+          @mouseenter="markAsSeen(action.fullPath)"
           class="item"
           :class="!action.isAvailable ? 'unavailable' : ''">
-          <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
+          <div>
+            <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
+            <span class="unseen" v-show="!action.isSeen">*</span>
+          </div>
           <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
         </div>
       </div>
@@ -49,6 +53,10 @@ export default class Actions extends Vue {
   activate(path: string, multiplier: string) {
     this.relay.emit('action', { path, multiplier });
   }
+
+  markAsSeen(path: string) {
+    this.relay.emit('seen', { path });
+  }
 }
 </script>
 
@@ -76,6 +84,10 @@ export default class Actions extends Vue {
 
       .name {
         flex: 1;
+      }
+
+      .unseen {
+        color: red;
       }
 
       &.unavailable {

@@ -1,9 +1,8 @@
-import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 import { Banking } from './banking';
 import { InformationTechnology } from './information-technology';
+import { Category } from '@/classes/game/base/actions';
 
-@SerializeAllOn('emit', 'store')
-export class Investment extends Serializable {
+export class Investment extends Category {
   banking = new Banking();
   informationTechnology = new InformationTechnology();
 }

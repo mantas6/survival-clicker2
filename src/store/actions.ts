@@ -24,4 +24,18 @@ export class Actions extends VuexModule {
 
     return [];
   }
+
+  get unseenCategories(): string[] {
+    const categoriesNames = [];
+
+    if (this.list) {
+      for (const [ categoryName, { hasUnseen } ] of Object.entries(this.list)) {
+        if (hasUnseen) {
+          categoriesNames.push(categoryName);
+        }
+      }
+    }
+
+    return categoriesNames;
+  }
 }
