@@ -1,14 +1,6 @@
 <template>
-  <div>
-    <div class="head">
-      <span>{{ $t(`stats.${name}.title`) }}</span>
-      <div>
-        <span class="rate" v-show="hasRate">(<number-format :value="stat.rate"></number-format> / s)</span>
-        <number-format :value="stat.value"></number-format>
-        <span> / </span>
-        <number-format :value="stat.max"></number-format>
-      </div>
-    </div>
+  <div class="stat">
+    <span>{{ $t(`stats.${name}.title`) }}</span>
     <progress-bar :value="stat.value" :max="stat.max" :variant="progressVariant"></progress-bar>
   </div>
 </template>
@@ -38,25 +30,12 @@ export default class ContainerStat extends Vue {
 
     return variants[this.name];
   }
-
-  get hasRate() {
-    return !new Decimal(this.stat.rate).isZero();
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-  .head {
+  .stat {
     display: grid;
-    grid-template-columns: 1fr auto;
-
-    :last-child {
-      justify-self: right;
-    }
-
-    .rate {
-      margin-right: 0.25rem;
-      color: grey;
-    }
+    grid-template-columns: 1fr 2fr;
   }
 </style>
