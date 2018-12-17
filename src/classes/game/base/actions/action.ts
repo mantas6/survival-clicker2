@@ -1,5 +1,5 @@
 import { Process } from '@/classes/game/base/processes';
-import { SerializeOn, SerializeAllOn, UnserializeAs } from '@/classes/game/base/serialization';
+import { SerializeOn, UnserializeAs } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
