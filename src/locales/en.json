@@ -38,6 +38,15 @@
             }
           }
         },
+        "donor": {
+          "title": "Donor",
+          "items": {
+            "sellBlood": {
+              "title": "Sell Blood",
+              "info": "Don't forget to each vitamins after"
+            }
+          }
+        },
         "construction": {
           "title": "Construction",
           "items": {
@@ -144,6 +153,15 @@
             "morphine": {
               "title": "Morphine",
               "info": "Provides a relief from pain"
+            }
+          }
+        },
+        "steroids": {
+          "title": "Steroids",
+          "items": {
+            "corticosteroidPills": {
+              "title": "Corticosteroid Pills",
+              "info": "Helps body to regenerate cells faster"
             }
           }
         }
