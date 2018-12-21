@@ -26,6 +26,7 @@
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
         <template v-else>{{ $t('pause') }}</template>
       </button>
+      <button @click="save">{{ $t('save') }}</button>
     </div>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
@@ -90,6 +91,10 @@ export default class HeaderContainer extends Vue {
 
   pause() {
     this.relay.emit('pause');
+  }
+
+  save() {
+    this.relay.emit('save');
   }
 }
 </script>

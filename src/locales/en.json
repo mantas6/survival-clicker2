@@ -3,6 +3,7 @@
   "suicide": "Suicide",
   "pause": "Pause",
   "unpause": "Play",
+  "save": "Save",
   "stats": {
     "health": {
       "title": "Health"

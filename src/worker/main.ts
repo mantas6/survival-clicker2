@@ -52,6 +52,10 @@ relay.on('pause', () => {
   emitAll();
 });
 
+relay.on('save', () => {
+  emitStore();
+});
+
 relay.on('load', serializedState => {
   applyReset();
   state.unserialize(serializedState);
