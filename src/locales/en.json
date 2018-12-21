@@ -62,7 +62,8 @@
           "title": "Stimulants",
           "items": {
             "energyDrink": {
-              "title": "Energy Drink"
+              "title": "Energy Drink",
+              "info": "Helps to restore stamina faster"
             }
           }
         },
@@ -70,7 +71,8 @@
           "title": "Digestion",
           "items": {
             "ipecac": {
-              "title": "Syrup of ipecac"
+              "title": "Syrup of ipecac",
+              "info": "Rapidly induces forceful vomiting"
             }
           }
         }
@@ -102,7 +104,8 @@
               "title": "Drivers License"
             },
             "bloodTest": {
-              "title": "Blood Test"
+              "title": "Blood Test",
+              "info": "Get your blood tested here, become a donor immediately"
             },
             "medicineLecture": {
               "title": "Medicine Lecture"
