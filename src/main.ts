@@ -8,7 +8,7 @@ import Worker from 'worker-loader!./worker/main';
 import { log, enableLogging } from '@/utils/log';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
-import i18n from './i18n';
+import { i18n } from './i18n';
 import VTooltip from 'v-tooltip';
 
 const storage = LocalForage.createInstance({
