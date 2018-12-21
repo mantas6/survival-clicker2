@@ -29,7 +29,46 @@
           "title": "Educationless",
           "items": {
             "janitor": {
-              "title": "Janitor"
+              "title": "Janitor",
+              "info": "You have to start somewhere, right?"
+            },
+            "pizzaDelivery": {
+              "title": "Pizza Delivery Driver",
+              "info": "Payment includes costs of speeding tickets"
+            }
+          }
+        },
+        "construction": {
+          "title": "Construction",
+          "items": {
+            "carryBricks": {
+              "title": "Carry Bricks",
+              "info": "Red ones to be precise"
+            },
+            "houseFoundation": {
+              "title": "House Foundation",
+              "info": "An exhaustive process"
+            },
+            "stealEquipment": {
+              "title": "Steal Equipment",
+              "info": "Surprisingly productive in terms of income"
+            }
+          }
+        },
+        "informationTechnology": {
+          "title": "IT",
+          "items": {
+            "jankyWebsite": {
+              "title": "Janky Website",
+              "info": "Copy-paste mostly"
+            },
+            "responsiveWebsite": {
+              "title": "Responsive Website",
+              "info": "Use percentage values instead of pixels in element widths"
+            },
+            "reactApp": {
+              "title": "React App",
+              "info": "A steep learning curve ahead, or is it?"
             }
           }
         }
@@ -42,7 +81,12 @@
           "title": "Food",
           "items": {
             "chocolateBar": {
-              "title": "Chocolate Bar"
+              "title": "Chocolate Bar",
+              "info": "Has cheesy packaging with over-saturated colors"
+            },
+            "hamburger": {
+              "title": "Hamburger",
+              "info": "There is no way to bite it even with a wide open mouth"
             }
           }
         },
@@ -50,7 +94,12 @@
           "title": "Drinks",
           "items": {
             "water": {
-              "title": "Water"
+              "title": "Water",
+              "info": "It says it's a mineral water. But it's just tap water"
+            },
+            "mineralWater": {
+              "title": "Mineral Water",
+              "info": "That classic brand that nobody are about anymore"
             }
           }
         }
@@ -65,6 +114,14 @@
             "energyDrink": {
               "title": "Energy Drink",
               "info": "Helps to restore stamina faster"
+            },
+            "coffee": {
+              "title": "Coffee",
+              "info": "Gives a temporary rush of energy to the body"
+            },
+            "adderall": {
+              "title": "Speed",
+              "info": "Helps to stay focused on intensive tasks, gives stamina boost"
             }
           }
         },
@@ -72,8 +129,21 @@
           "title": "Digestion",
           "items": {
             "ipecac": {
-              "title": "Syrup of ipecac",
+              "title": "Syrup of Ipecac",
               "info": "Rapidly induces forceful vomiting"
+            },
+            "digestionPills": {
+              "title": "Digestion Pills",
+              "info": "Makes digestion faster"
+            }
+          }
+        },
+        "painkillers": {
+          "title": "Painkillers",
+          "items": {
+            "morphine": {
+              "title": "Morphine",
+              "info": "Provides a relief from pain"
             }
           }
         }
@@ -86,15 +156,21 @@
           "title": "Primary",
           "items": {
             "school": {
-              "title": "School"
+              "title": "School",
+              "info": "It sucks"
             }
           }
         },
         "secondary": {
           "title": "Secondary",
           "items": {
-            "medicine": {
-              "title": "Medicine"
+            "construction": {
+              "title": "Construction",
+              "info": "Resonates with one word: alcohol"
+            },
+            "informationTechnology": {
+              "title": "IT",
+              "info": "Ever growing area"
             }
           }
         },
@@ -102,21 +178,51 @@
           "title": "Courses",
           "items": {
             "driversLicense": {
-              "title": "Drivers License"
+              "title": "Drivers License",
+              "info": "May open up more job opportunities"
             },
             "bloodTest": {
               "title": "Blood Test",
               "info": "Get your blood tested here, become a donor immediately"
             },
             "medicineLecture": {
-              "title": "Medicine Lecture"
+              "title": "Medicine Lecture",
+              "info": "Learn how to use certain drugs here"
             }
           }
         }
       }
     },
     "investment": {
-      "title": "Investment"
+      "title": "Investment",
+      "groups": {
+        "banking": {
+          "title": "Banking",
+          "items": {
+            "deposit": {
+              "title": "Deposit",
+              "info": "Get a steady income with minimum efforts, just sign here, here and here"
+            }
+          }
+        },
+        "informationTechnology": {
+          "title": "IT",
+          "items": {
+            "unfairLottery": {
+              "title": "Unfair lottery",
+              "info": "Use your programming knowledge to scam people"
+            },
+            "linuxServer": {
+              "title": "Re-rent Linux server",
+              "info": "And sell some data of clients on top"
+            },
+            "datingSite": {
+              "title": "Dating Site for Transgenders",
+              "info": "Just another dating network"
+            }
+          }
+        }
+      }
     }
   }
 }
