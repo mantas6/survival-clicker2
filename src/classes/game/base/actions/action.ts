@@ -55,7 +55,9 @@ export class Action extends Process {
   }
 
   serialize(tagName: TagName) {
-    if (this.isUnlocked) {
+    if (tagName === 'store' && this.isUnlocked !== undefined) {
+      return super.serialize(tagName);
+    } else if (tagName === 'emit' && this.isUnlocked) {
       return super.serialize(tagName);
     }
   }
