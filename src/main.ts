@@ -9,6 +9,7 @@ import { log, enableLogging } from '@/utils/log';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import i18n from './i18n';
+import VTooltip from 'v-tooltip';
 
 const storage = LocalForage.createInstance({
   name: 'store',
@@ -21,6 +22,7 @@ const relay = new Relay(worker);
 store.commit('setRelay', relay);
 
 Vue.component('NumberFormat', NumberFormat);
+Vue.use(VTooltip);
 
 new Vue({
   router,

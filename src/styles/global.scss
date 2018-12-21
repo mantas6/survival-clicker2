@@ -1,6 +1,8 @@
 // Global style sheet of the project
 // Automatically injected into the app
 
+@import './components/tooltip';
+
 * {
   box-sizing: border-box;
 }
