@@ -7,7 +7,7 @@
           @click="activate(action.fullPath, 1)"
           @mouseenter="markAsSeen(action.fullPath)"
           class="item"
-          v-tooltip="$t(`actions.${category}.groups.${groupName}.items.${actionName}.info`)"
+          v-tooltip.right="$t(`actions.${category}.groups.${groupName}.items.${actionName}.info`)"
           :class="!action.isAvailable ? 'unavailable' : ''">
           <div>
             <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
