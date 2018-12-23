@@ -4,6 +4,6 @@ import Decimal from 'decimal.js';
 
 export class Taxes extends Action {
   taxes = new Mutation(() => this.stats.finance.taxes, () => {
-    return new Decimal(0.001);
+    return new Decimal(0.0005);
   });
 }
