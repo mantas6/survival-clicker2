@@ -7,7 +7,7 @@ import Decimal from 'decimal.js';
 export class BribeTaxes extends Action {
   @Unlocks
   money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(1000).mul(this.timesCalculated.add(1));
+    return new Decimal(-1000).mul(this.timesCalculated.add(1));
   });
 
   investment = new Mutation(() => this.stats.finance.taxes, () => {
