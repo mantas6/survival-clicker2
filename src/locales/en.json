@@ -239,6 +239,15 @@
               "info": "Just another dating network"
             }
           }
+        },
+        "government": {
+          "title": "Government",
+          "items": {
+            "bribeTaxes": {
+              "title": "Bribe for lower taxes",
+              "info": "10% lower taxes"
+            }
+          }
         }
       }
     }
