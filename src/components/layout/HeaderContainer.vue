@@ -142,6 +142,9 @@ export default class HeaderContainer extends Vue {
 
     .controls {
       margin-bottom: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 1rem;
     }
 
     .suicide {
