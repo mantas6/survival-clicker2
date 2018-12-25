@@ -145,14 +145,13 @@ export default class HeaderContainer extends Vue {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column-gap: 1rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
       margin-right: 1.5vw;
 
       button {
         background: transparent;
         color: black;
         border: 1px solid black;
+        border-radius: 0.25rem;
 
         .dark-mode & {
           color: white;
