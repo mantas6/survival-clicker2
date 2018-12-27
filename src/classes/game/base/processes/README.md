@@ -12,7 +12,10 @@
 ## Usage
 
 - automatic processes extend `Process` class;
-- user-initiated processes extend `Action`
 
 ## Decorators
-—
+
+- Class
+  - `@When` — only executes process when the condition is met. Multiple can be added
+- Property
+  - `@IgnoreLimits` — when mutating stat if stat value result is below minimum or above maximum, validation behavior can be tweaked to allow much mutation. 
