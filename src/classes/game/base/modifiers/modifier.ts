@@ -5,6 +5,11 @@ export abstract class Modifier extends SerializableWithReference {
   protected abstract compute(cumulated: Decimal): Decimal;
 
   @SerializeOn('emit')
+  get max() {
+    return new Decimal(Infinity);
+  }
+
+  @SerializeOn('emit')
   get value() {
     let cumulated = new Decimal(0);
 
@@ -15,6 +20,8 @@ export abstract class Modifier extends SerializableWithReference {
       }
     }
 
-    return this.compute(cumulated);
+    const computed = this.compute(cumulated);
+
+    return Decimal.min(computed, this.max);
   }
 }
