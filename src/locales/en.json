@@ -4,6 +4,7 @@
   "pause": "Pause",
   "unpause": "Play",
   "save": "Save",
+  "source": "Visit Github",
   "stats": {
     "health": {
       "title": "Health"
