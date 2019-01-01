@@ -17,6 +17,10 @@ const state = new State();
 
 emitAll();
 
+ctx.addEventListener('error', error => {
+  //
+});
+
 relay.on('action', ({ path, multiplier }) => {
   if (state.globals.isPaused) {
     return;

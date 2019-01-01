@@ -24,6 +24,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import { Relay } from '@/classes/relay';
+import { collect } from '@/utils/collect';
 
 @Component({
   updated(this: Actions) {
@@ -51,6 +52,7 @@ export default class Actions extends Vue {
 
   activate(path: string, multiplier: string) {
     this.relay.emit('action', { path, multiplier });
+    collect({ name: 'action', titles: { path } });
   }
 
   markAsSeen(path: string) {

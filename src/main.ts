@@ -11,6 +11,9 @@ import LocalForage from 'localforage';
 import { i18n } from './i18n';
 import VTooltip from 'v-tooltip';
 
+import { collect, send } from '@/utils/collect';
+import { timer } from 'rxjs';
+
 const storage = LocalForage.createInstance({
   name: 'store',
   driver: LocalForage.LOCALSTORAGE,
@@ -57,3 +60,9 @@ storage.getItem('save').then(previousSave => {
     relay.emit('load', previousSave);
   }
 });
+
+timer(0, 10e3).subscribe(() => {
+  collect();
+});
+
+send([]);
