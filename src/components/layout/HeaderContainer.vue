@@ -21,6 +21,7 @@
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
     </div>
+    <small class="version">0.1.2</small>
     <div class="controls">
       <button @click="pause">
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
@@ -139,6 +140,11 @@ export default class HeaderContainer extends Vue {
       > * {
         text-align: right;
       }
+    }
+
+    .version {
+      text-align: right;
+      margin-right: 1.5vw;
     }
 
     .controls {
