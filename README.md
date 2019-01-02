@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.com/MantasPauliukonis/survival-clicker2.svg?branch=master)](https://travis-ci.com/MantasPauliukonis/survival-clicker2)
 
+## Releases
+
+The latest stable release is [available here](https://sc2.7777.lt).
+
 ## Intro
 
 The original *Survival Clicker* was inspired by the survival/crafting video game genre. Although crafting mechanics never made sense to be in the game (obvious reasons). Rather it was meant to highlight the struggle of survival, the feeling that player gets when he just barely makes thought the harsh stages, the immersive experience the player has while simultaneously growing in with the in-game character.
@@ -21,11 +25,13 @@ The base functionality is currently being implemented for the game. Once it's do
 
 You can find the whole design document [here](docs/Design-Document/Design-Document-e000f04c-b05b-4dfc-83b0-3770f478d276.md).
 
-## Releases
+## Development releases
 
-Master branch is built every minute.
+Want to test out latest features?
 
-[Development build is available here](https://dev.sc2.7777.lt)
+The most up-to-date and unstable release (master) is [available here](https://dev.sc2.7777.lt)
+
+**Warning:** due to constantly rolling changes save games might or will get corrupted, so do not rely on this branch for a long term play.
 
 ## Development
 
