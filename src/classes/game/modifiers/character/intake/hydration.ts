@@ -5,4 +5,10 @@ export class Hydration extends Modifier {
   compute(cumulated: Decimal) {
     return new Decimal(0).add(cumulated);
   }
+
+  get max() {
+    const { value, max } = this.stats.character.hydration;
+
+    return max.sub(value);
+  }
 }
