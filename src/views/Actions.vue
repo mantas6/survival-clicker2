@@ -52,7 +52,6 @@ export default class Actions extends Vue {
 
   activate(path: string, multiplier: string) {
     this.relay.emit('action', { path, multiplier });
-    collect({ name: 'action', titles: { path } });
   }
 
   markAsSeen(path: string) {
