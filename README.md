@@ -4,7 +4,7 @@
 
 ## Releases
 
-The latest stable release is [available here](https://sc2.7777.lt).
+The latest stable release is [available here](https://sc2.7777.lt)
 
 ## Intro
 
