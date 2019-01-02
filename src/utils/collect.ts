@@ -21,11 +21,13 @@ interface Dictionary<Item> {
   [ name: string ]: Item;
 }
 
+type SerializableValue = string | number | boolean | undefined;
+
 interface CollectionData {
   name?: CollectionEvent;
-  tags?: Dictionary<string>;
-  attachments?: Dictionary<string>;
-  titles?: Dictionary<string>;
+  tags?: Dictionary<SerializableValue>;
+  attachments?: Dictionary<SerializableValue>;
+  titles?: Dictionary<SerializableValue>;
   properties?: Dictionary<string>;
   values?: Dictionary<{ value: string, e: string }>;
 }
