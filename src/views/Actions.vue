@@ -4,16 +4,20 @@
       <small>{{ $t(`actions.${category}.groups.${groupName}.title`) }}</small>
       <div v-for="(action, actionName) of group"
           :key="actionName"
-          @click="activate(action.fullPath, 1)"
           @mouseenter="markAsSeen(action.fullPath)"
-          class="item"
           v-tooltip.right="$t(`actions.${category}.groups.${groupName}.items.${actionName}.info`)"
+          class="item"
           :class="!action.isAvailable ? 'unavailable' : ''">
-          <div>
-            <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
-            <span class="unseen" v-show="!action.isSeen">*</span>
+          <div class="head" @click="activate(action.fullPath, 1)">
+            <div>
+              <span class="name">{{ $t(`actions.${category}.groups.${groupName}.items.${actionName}.title`) }}</span>
+              <span class="unseen" v-show="!action.isSeen">*</span>
+            </div>
+            <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
           </div>
-          <number-format class="cost" v-if="action.money" :value="action.money.diff" post-fix="$"></number-format>
+          <div class="options">
+            <span @click="activate(action.fullPath, action.maxMultiplier)">MAX</span>
+          </div>
         </div>
     </section>
   </article>
@@ -69,13 +73,24 @@ export default class Actions extends Vue {
     }
 
     .item {
-      cursor: pointer;
       user-select: none;
       display: flex;
       justify-content: space-between;
-      width: 50%;
       padding: 0.75rem;
       padding-left: 0;
+      width: 50%;
+
+      .head {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .options {
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
 
       .name {
         flex: 1;
