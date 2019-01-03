@@ -12,7 +12,7 @@
       <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
     </div>
     <div class="options">
-      <span @click="activate(item.fullPath, item.maxMultiplier)">MAX</span>
+      <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
     </div>
   </div>
 </template>
@@ -21,6 +21,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
+import Decimal from 'decimal.js';
+import { Action } from '@/classes/game/base/actions';
 
 @Component
 export default class ActionItem extends Vue {
@@ -36,7 +38,11 @@ export default class ActionItem extends Vue {
   actionName!: string;
 
   @Prop({ required: true })
-  item!: {};
+  item!: Action;
+
+  get isMaxAvailable(): boolean {
+    return new Decimal(this.item.maxMultiplier).greaterThan(1);
+  }
 
   activate(path: string, multiplier: string) {
     this.relay.emit('action', { path, multiplier });
