@@ -73,6 +73,14 @@ export default class ActionItem extends Vue {
     .options {
       margin-left: 0.5rem;
       cursor: pointer;
+
+      > span {
+        border-bottom: 1px solid black;
+
+        .dark-mode & {
+          border-color: white;
+        }
+      }
     }
 
     .name {
