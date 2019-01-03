@@ -15,6 +15,8 @@ export class Action extends Process {
   static unlockingMutations: string[] = [];
   static unlockingConditions: Condition[] = [];
   static lockingConditions: Condition[] = [];
+  static defaultMaxMultiplier = new Decimal(Infinity);
+
   'constructor': typeof Action;
 
   @SerializeOn('store')
@@ -38,7 +40,7 @@ export class Action extends Process {
 
   @SerializeOn('emit')
   get maxMultiplier(): Decimal {
-    let multiplier = new Decimal(Infinity);
+    let multiplier = new Decimal(this.constructor.defaultMaxMultiplier);
     for (const { node } of this.children<Mutation<any>>(entry => entry instanceof Mutation)) {
       const { maxMultiplier } = node;
       if (maxMultiplier.isFinite() && maxMultiplier.lessThan(multiplier)) {
