@@ -1,5 +1,6 @@
 import { Action } from '.';
 import { ConditionFunction } from './action';
+import Decimal from 'decimal.js';
 
 export function Unlocks(actionClass: Action, propertyName: string) {
   const ctor = actionClass.constructor;
@@ -17,4 +18,8 @@ export function LocksWhen(conditionFunc: ConditionFunction) {
   return (ctor: typeof Action) => {
     ctor.lockingConditions = [ ...ctor.lockingConditions, { conditionFunc } ];
   };
+}
+
+export function NoMultiplier(ctor: typeof Action) {
+  ctor.defaultMaxMultiplier = new Decimal(1);
 }
