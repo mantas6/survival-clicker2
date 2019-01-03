@@ -4,7 +4,8 @@
   "pause": "Pause",
   "unpause": "Play",
   "save": "Save",
-  "source": "Visit Github",
+  "source": "Github",
+  "community": "Discord",
   "stats": {
     "health": {
       "title": "Health"

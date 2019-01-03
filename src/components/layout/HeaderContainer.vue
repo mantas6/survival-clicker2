@@ -27,6 +27,7 @@
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
         <template v-else>{{ $t('pause') }}</template>
       </button>
+      <button @click="openCommunity">{{ $t('community') }}</button>
       <button @click="openSource">{{ $t('source') }}</button>
     </div>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
@@ -98,6 +99,10 @@ export default class HeaderContainer extends Vue {
   openSource() {
     window.open(process.env.VUE_APP_SOURCE_LINK, '_blank');
   }
+
+  openCommunity() {
+    window.open(process.env.VUE_APP_COMMUNITY_LINK, '_blank');
+  }
 }
 </script>
 
@@ -150,7 +155,7 @@ export default class HeaderContainer extends Vue {
     .controls {
       margin-bottom: 0.5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       grid-column-gap: 1rem;
       margin-right: 1.5vw;
 
