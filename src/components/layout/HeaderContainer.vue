@@ -27,8 +27,8 @@
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
         <template v-else>{{ $t('pause') }}</template>
       </button>
-      <button @click="openCommunity">{{ $t('community') }}</button>
-      <button @click="openSource">{{ $t('source') }}</button>
+      <a :href="communityLink" target="_blank">{{ $t('community') }}</a>
+      <a :href="sourceLink" target="_blank">{{ $t('source') }}</a>
     </div>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
@@ -87,6 +87,14 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
+  get sourceLink() {
+    return process.env.VUE_APP_SOURCE_LINK;
+  }
+
+  get communityLink() {
+    return process.env.VUE_APP_COMMUNITY_LINK;
+  }
+
   reset() {
     this.relay.emit('reset');
   }
@@ -94,14 +102,6 @@ export default class HeaderContainer extends Vue {
   pause() {
     this.relay.emit('pause');
     this.relay.emit('save');
-  }
-
-  openSource() {
-    window.open(process.env.VUE_APP_SOURCE_LINK, '_blank');
-  }
-
-  openCommunity() {
-    window.open(process.env.VUE_APP_COMMUNITY_LINK, '_blank');
   }
 }
 </script>
@@ -159,11 +159,18 @@ export default class HeaderContainer extends Vue {
       grid-column-gap: 1rem;
       margin-right: 1.5vw;
 
-      button {
+      a {
+        text-decoration: none;
+        text-align: center;
+      }
+
+      button, a {
         background: transparent;
         color: black;
         border: 1px solid black;
         border-radius: 0.25rem;
+        font-size: 0.75rem;
+        padding: 1px 6px;
 
         .dark-mode & {
           color: white;
