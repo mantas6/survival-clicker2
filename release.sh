@@ -41,5 +41,5 @@ do
     echo "Already up-to-date $version"
   fi
 
-  sleep 30
+  sleep 60
 done
