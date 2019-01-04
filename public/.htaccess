@@ -1,0 +1,5 @@
+<FilesMatch "\.(htm|html)$">
+  ExpiresActive On
+  ExpiresDefault A1
+  Header append Cache-Control must-revalidate
+</FilesMatch>
