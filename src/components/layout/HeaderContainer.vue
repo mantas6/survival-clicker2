@@ -21,7 +21,7 @@
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
     </div>
-    <small class="version">0.1.2</small>
+    <small class="version">0.1.3</small>
     <div class="controls">
       <button @click="pause">
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
