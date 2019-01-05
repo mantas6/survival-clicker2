@@ -12,7 +12,7 @@ do
 
   echo "Remote version is $version"
 
-  if [ "$version" != "$previous_version" ]; then
+  if [ "$version" != "$previous_version" ] && [ ! -z "$url" ]; then
     echo "Version mismatch $version != $previous_version"
 
     rm $archive_name
