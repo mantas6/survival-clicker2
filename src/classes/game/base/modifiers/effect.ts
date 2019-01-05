@@ -3,7 +3,7 @@ import Decimal from 'decimal.js';
 import { Modifier } from '.';
 import { CalculationOptions } from '../mutations';
 
-type ComputeFunction = () => Decimal;
+type ComputeFunction = (opts: CalculationOptions) => Decimal;
 
 interface EffectOptions {
   modifier: () => Modifier;
@@ -12,7 +12,7 @@ interface EffectOptions {
 }
 
 export class Effect extends SerializableWithReference {
-  protected computeFunc: (opts: CalculationOptions) => Decimal;
+  protected computeFunc: ComputeFunction;
   protected modifierFunc: () => Modifier;
   protected durationFunc: () => Decimal;
 
