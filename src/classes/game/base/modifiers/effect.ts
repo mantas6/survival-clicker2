@@ -46,6 +46,6 @@ export class Effect extends SerializableWithReference {
   }
 
   compute(opts: CalculationOptions): Decimal {
-    return this.computeFunc(opts);
+    return this.computeFunc(opts).mul(opts.multiplier);
   }
 }
