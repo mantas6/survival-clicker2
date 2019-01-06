@@ -22,15 +22,7 @@
       </div>
     </div>
     <small class="version">0.1.4</small>
-    <div class="controls">
-      <button @click="pause">
-        <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
-        <template v-else>{{ $t('pause') }}</template>
-      </button>
-      <button @click="changeTheme">{{ $t('theme') }}</button>
-      <a :href="communityLink" target="_blank">{{ $t('community') }}</a>
-      <a :href="sourceLink" target="_blank">{{ $t('source') }}</a>
-    </div>
+    <controls></controls>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
 </template>
@@ -40,22 +32,20 @@ import { Component, Vue } from 'vue-property-decorator';
 import GameLogo from './GameLogo.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import ContainerStat from '@/components/ContainerStat.vue';
+import Controls from '@/components/layout/Controls.vue';
 import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
-import { SerializedGlobals } from '@/store/globals';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
 
 @Component({
-  components: { GameLogo, ProgressBar, ContainerStat },
+  components: { GameLogo, ProgressBar, ContainerStat, Controls },
 })
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter modifiers!: SerializedModifiers;
-  @Getter globals!: SerializedGlobals;
   @Getter relay!: Relay;
-  @Getter isDarkModeEnabled!: boolean;
 
   get money() {
     return this.stats.finance.money.value;
@@ -89,25 +79,8 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
-  get sourceLink() {
-    return process.env.VUE_APP_SOURCE_LINK;
-  }
-
-  get communityLink() {
-    return process.env.VUE_APP_COMMUNITY_LINK;
-  }
-
-  changeTheme() {
-    this.$store.commit('setDarkMode', !this.isDarkModeEnabled);
-  }
-
   reset() {
     this.relay.emit('reset');
-  }
-
-  pause() {
-    this.relay.emit('pause');
-    this.relay.emit('save');
   }
 }
 </script>
@@ -156,33 +129,6 @@ export default class HeaderContainer extends Vue {
     .version {
       text-align: right;
       margin-right: 1.5vw;
-    }
-
-    .controls {
-      margin-bottom: 0.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-column-gap: 0.5rem;
-      margin-right: 1.5vw;
-
-      a {
-        text-decoration: none;
-        text-align: center;
-      }
-
-      button, a {
-        background: transparent;
-        color: black;
-        border: 1px solid black;
-        border-radius: 0.25rem;
-        font-size: 0.75rem;
-        padding: 1px 6px;
-
-        .dark-mode & {
-          color: white;
-          border-color: white;
-        }
-      }
     }
 
     .suicide {
