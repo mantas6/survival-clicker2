@@ -55,6 +55,16 @@ storage.getItem('debug').then(isEnabled => {
   }
 });
 
+storage.getItem('darkMode').then(isEnabled => {
+  if (isEnabled) {
+    store.commit('setDarkMode', true);
+  }
+});
+
+store.watch(state => state.Settings.darkMode, value => {
+  storage.setItem('darkMode', value);
+});
+
 relay.on('save', serializedState => {
   storage.setItem('save', serializedState);
   log('Saving game state', serializedState);

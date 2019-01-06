@@ -27,6 +27,7 @@
         <template v-if="globals.isPaused">{{ $t('unpause') }}</template>
         <template v-else>{{ $t('pause') }}</template>
       </button>
+      <button @click="changeTheme">{{ $t('theme') }}</button>
       <a :href="communityLink" target="_blank">{{ $t('community') }}</a>
       <a :href="sourceLink" target="_blank">{{ $t('source') }}</a>
     </div>
@@ -54,6 +55,7 @@ export default class HeaderContainer extends Vue {
   @Getter modifiers!: SerializedModifiers;
   @Getter globals!: SerializedGlobals;
   @Getter relay!: Relay;
+  @Getter isDarkModeEnabled!: boolean;
 
   get money() {
     return this.stats.finance.money.value;
@@ -93,6 +95,10 @@ export default class HeaderContainer extends Vue {
 
   get communityLink() {
     return process.env.VUE_APP_COMMUNITY_LINK;
+  }
+
+  changeTheme() {
+    this.$store.commit('setDarkMode', !this.isDarkModeEnabled);
   }
 
   reset() {
@@ -155,8 +161,8 @@ export default class HeaderContainer extends Vue {
     .controls {
       margin-bottom: 0.5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-column-gap: 1rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-column-gap: 0.5rem;
       margin-right: 1.5vw;
 
       a {
