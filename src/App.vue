@@ -3,7 +3,9 @@
     <header-container></header-container>
     <main>
       <navigation></navigation>
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </main>
     <sidebar></sidebar>
   </div>
