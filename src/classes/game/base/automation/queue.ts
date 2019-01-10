@@ -1,9 +1,9 @@
-import { Item } from './item';
+import { QueuedAction } from './queued-action';
 
 export class Queue {
-  items: Item[] = [];
+  items: QueuedAction[] = [];
 
-  push(item: Item) {
+  push(item: QueuedAction) {
     this.items.push(item);
   }
 }

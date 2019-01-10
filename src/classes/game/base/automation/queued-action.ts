@@ -1,6 +1,6 @@
 import { Action } from '@/classes/game/base/actions';
 
-export class Item {
+export class QueuedAction {
   private action: Action;
 
   constructor(action: Action) {
