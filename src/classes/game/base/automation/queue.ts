@@ -4,6 +4,7 @@ import { TagName, SerializedNode } from '@/classes/game/base/serialization/seria
 import { get } from '@/utils/method';
 import { SerializableWithReference } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
+import { CalculationOptions } from '@/classes/game/base/mutations';
 
 interface SerializedQueuedAction {
   action: { fullPath: string };
@@ -36,6 +37,12 @@ export class Queue extends SerializableWithReference {
       const action = get(this.state, serializedItem.action.fullPath) as Action;
 
       this.push(new QueuedAction(action, { interval: new Decimal(serializedItem.interval) }));
+    }
+  }
+
+  calculate(opts: CalculationOptions) {
+    for (const item of this.items) {
+      item.calculate(opts);
     }
   }
 }
