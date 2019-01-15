@@ -17,7 +17,7 @@
     ]
   },
   "dependencies": {
-    "@sentry/browser": "^4.5.0",
+    "@sentry/browser": "^4.5.1",
     "decimal.js": "^10.0.2",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
