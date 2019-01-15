@@ -40,9 +40,11 @@ export class Queue extends SerializableWithReference {
     }
   }
 
-  calculate(opts: CalculationOptions) {
+  calculate() {
+    const multiplier = this.state.timeMultiplier;
+
     for (const item of this.items) {
-      item.calculate(opts);
+      item.calculate({ multiplier });
     }
   }
 }
