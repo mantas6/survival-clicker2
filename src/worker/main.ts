@@ -79,6 +79,7 @@ interval(1000).subscribe(() => {
 
   state.processes.calculate();
   state.timers.calculate();
+  state.queue.calculate();
   applyUnlocked(state);
   emitAll();
 });
