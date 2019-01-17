@@ -80,7 +80,7 @@ export default class HeaderContainer extends Vue {
   }
 
   reset() {
-    this.relay.emit('reset');
+    this.relay.emit('action', { path: 'actions.other.character.suicide', multiplier: 1 });
   }
 }
 </script>
