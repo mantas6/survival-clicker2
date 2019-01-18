@@ -1,6 +1,6 @@
 <template>
   <article>
-    <action-group v-for="(group, groupName) of availableGroups" v-if="Object.keys(group).length"
+    <action-group v-for="(group, groupName) of availableGroups"
       :key="groupName"
       :groupName="groupName"
       :categoryName="categoryName"
@@ -14,6 +14,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import ActionGroup from '@/components/layout/Actions/ActionGroup.vue';
+import { pickBy } from '@/utils/method';
 
 @Component({
   components: { ActionGroup },
@@ -37,7 +38,9 @@ export default class Actions extends Vue {
       return;
     }
 
-    return this.allActions[this.categoryName];
+    const groups = this.allActions[this.categoryName];
+
+    return pickBy<{}>(groups, group => Object.keys(group).length);
   }
 }
 </script>
