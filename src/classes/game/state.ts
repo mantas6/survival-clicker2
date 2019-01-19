@@ -4,7 +4,6 @@ import { Actions } from '@/classes/game/actions';
 import { Modifiers } from '@/classes/game/modifiers';
 import { StateRoot } from '@/classes/game/base/state-root';
 import { Timers } from '@/classes/game/base/modifiers';
-import { Queue } from '@/classes/game/base/automation';
 import { Helpers } from './helpers';
 import { SerializeOn } from '@/classes/game/base/serialization';
 import { Globals } from './globals';
@@ -24,9 +23,6 @@ export class State extends StateRoot {
 
   @SerializeOn('emit', 'store')
   timers = new Timers();
-
-  @SerializeOn('emit', 'store')
-  queue = new Queue();
 
   helpers = new Helpers();
 

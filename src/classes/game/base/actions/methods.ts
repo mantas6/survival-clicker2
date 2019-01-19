@@ -9,3 +9,15 @@ export function applyUnlocked(state: State) {
     }
   }
 }
+
+export function applyQueued(state: State) {
+  const multiplier = state.timeMultiplier;
+
+  for (const node of traverse(state)) {
+    if (node instanceof Action) {
+      if (node.queued && node.queued.shouldCalculate({ multiplier })) {
+        node.calculate({ multiplier });
+      }
+    }
+  }
+}

@@ -4,12 +4,12 @@ import { get } from '@/utils/method';
 import { Calculable } from '@/classes/game/base/mutations';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
-import { applyUnlocked } from '@/classes/game/base/actions/methods';
+import { applyUnlocked, applyQueued } from '@/classes/game/base/actions/methods';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
 import { Transformable } from '@/classes/game/base/transformable';
 import { Action } from '@/classes/game/base/actions';
-import { QueuedAction } from '@/classes/game/base/automation';
+import { Queued } from '@/classes/game/base/automation';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -35,13 +35,13 @@ relay.on('action', ({ path, multiplier }) => {
 relay.on('auto', ({ path }) => {
   const action = get(state, path) as Action;
 
-  const queued = state.queue.find(action);
-
-  if (queued) {
-    state.queue.remove(action);
+  if (action.queued) {
+    action.queued = undefined;
   } else {
-    state.queue.push(new QueuedAction(action, { interval: new Decimal(1) }));
+    action.queued = new Queued({ interval: new Decimal(1) });
   }
+
+  emitAll();
 });
 
 relay.on('enableLogging', () => {
@@ -86,8 +86,8 @@ interval(1000).subscribe(() => {
 
   state.processes.calculate();
   state.timers.calculate();
-  state.queue.calculate();
   applyUnlocked(state);
+  applyQueued(state);
   emitAll();
 });
 

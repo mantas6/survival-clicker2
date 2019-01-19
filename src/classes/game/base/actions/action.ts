@@ -3,7 +3,8 @@ import { SerializeOn, UnserializeAs } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
-import { Transform } from '@/classes/game/base/transformable';
+import { Transform, Touch } from '@/classes/game/base/transformable';
+import { Queued } from '@/classes/game/base/automation';
 
 export type ConditionFunction = (action: Action, opts: ValidationOptions) => boolean;
 
@@ -31,6 +32,9 @@ export class Action extends Process {
   @SerializeOn('store', 'emit')
   @Transform('reset', () => undefined)
   isSeen?: boolean;
+
+  @SerializeOn('store', 'emit')
+  queued?: Queued;
 
   @SerializeOn('emit')
   get isAvailable() {

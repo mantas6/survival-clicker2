@@ -7,7 +7,10 @@
   "source": "Github",
   "community": "Discord",
   "theme": "Theme",
-  "auto": "Auto",
+  "auto": {
+    "on": "Auto (On)",
+    "off": "Auto (Off)"
+  },
   "stats": {
     "health": {
       "title": "Health"

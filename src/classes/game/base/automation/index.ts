@@ -1,4 +1,3 @@
-import { Queue } from './queue';
-import { QueuedAction } from './queued-action';
+import { Queued } from './queued';
 
-export { Queue, QueuedAction };
+export { Queued };

@@ -13,7 +13,10 @@
     </div>
     <div class="options">
       <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
-      <span @click="setAuto">{{ $t('auto') }}</span>
+      <span @click="setAuto">
+        <span v-show="!item.queued">{{ $t('auto.off') }}</span>
+        <span v-show="item.queued">{{ $t('auto.on') }}</span>
+      </span>
     </div>
   </div>
 </template>
