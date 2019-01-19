@@ -13,6 +13,7 @@
     </div>
     <div class="options">
       <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
+      <span @click="setAuto">{{ $t('auto') }}</span>
     </div>
   </div>
 </template>
@@ -48,6 +49,10 @@ export default class ActionItem extends Vue {
     this.relay.emit('action', { path, multiplier });
   }
 
+  setAuto() {
+    this.relay.emit('auto', { path: this.item.fullPath });
+  }
+
   markAsSeen(path: string) {
     this.relay.emit('seen', { path });
   }
@@ -72,10 +77,14 @@ export default class ActionItem extends Vue {
 
     .options {
       margin-left: 0.5rem;
-      cursor: pointer;
 
       > span {
         border-bottom: 1px solid black;
+        cursor: pointer;
+
+        &:not(:first-child) {
+          margin-left: 0.25rem;
+        }
 
         .dark-mode & {
           border-color: white;

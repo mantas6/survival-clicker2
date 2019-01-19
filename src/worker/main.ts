@@ -9,6 +9,7 @@ import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
 import { Transformable } from '@/classes/game/base/transformable';
 import { Action } from '@/classes/game/base/actions';
+import { QueuedAction } from '@/classes/game/base/automation';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -28,6 +29,18 @@ relay.on('action', ({ path, multiplier }) => {
     action.calculate({ multiplier: new Decimal(multiplier) });
     applyUnlocked(state);
     emitAll();
+  }
+});
+
+relay.on('auto', ({ path }) => {
+  const action = get(state, path) as Action;
+
+  const queued = state.queue.find(action);
+
+  if (queued) {
+    state.queue.remove(action);
+  } else {
+    state.queue.push(new QueuedAction(action, { interval: new Decimal(1) }));
   }
 });
 
