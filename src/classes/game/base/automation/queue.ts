@@ -21,6 +21,10 @@ export class Queue extends SerializableWithReference {
     return this.items.find(item => item.action.fullPath === action.fullPath);
   }
 
+  remove(action: Action) {
+    this.items = this.items.filter(item => item.action.fullPath !== action.fullPath);
+  }
+
   serialize(tagName: TagName): SerializedNode | undefined {
     const serialized: SerializedNode = {};
 
