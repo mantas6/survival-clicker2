@@ -35,12 +35,6 @@ relay.on('enableLogging', () => {
   enableLogging();
 });
 
-relay.on('reset', () => {
-  applyReset();
-  emitAll();
-  emitStore();
-});
-
 relay.on('seen', ({ path }) => {
   const action = get(state, path) as Action;
   action.isSeen = true;
