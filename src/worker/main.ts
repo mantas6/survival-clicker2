@@ -1,7 +1,6 @@
 import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
 import { get } from '@/utils/method';
-import { Calculable } from '@/classes/game/base/mutations';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyUnlocked, applyQueued } from '@/classes/game/base/actions/methods';
@@ -24,7 +23,7 @@ relay.on('action', ({ path, multiplier }) => {
   }
 
   log('Calculating action of path', path);
-  const action = get(state, path) as Calculable;
+  const action = get(state, path) as Action;
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
     action.calculate({ multiplier: new Decimal(multiplier) });
     applyUnlocked(state);
