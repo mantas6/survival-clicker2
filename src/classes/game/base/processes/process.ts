@@ -26,6 +26,12 @@ export interface Condition {
 
 export type ProcessableDescriptorMap = Map<string, MutationDescriptor | EffectDescriptor>;
 
+interface MutationEntry {
+  name: string;
+  descriptor: MutationDescriptor | undefined;
+  mutation: Mutation<any>;
+}
+
 @SerializeAllOn('emit')
 export abstract class Process extends Transformable implements Calculable {
   static descriptorsOfProcessables: ProcessableDescriptorMap = new Map();
@@ -69,19 +75,19 @@ export abstract class Process extends Transformable implements Calculable {
     }
   }
 
-  *mutations(): IterableIterator<{ descriptor: MutationDescriptor | undefined, mutation: Calculable }> {
-    for (const { name, node } of this.children<Calculable>(entry => entry instanceof Mutation)) {
+  *mutations(): IterableIterator<MutationEntry> {
+    for (const { name, node } of this.children<Mutation<any>>(entry => entry instanceof Mutation)) {
       // Will always be a MutationDescriptor, since we filtering only instanceof Mutation
       const descriptor = this.constructor.descriptorsOfProcessables.get(name) as MutationDescriptor | undefined;
-      yield { descriptor, mutation: node };
+      yield { descriptor, mutation: node, name };
     }
   }
 
-  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Effect }> {
+  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Effect, name: string }> {
     for (const { name, node } of this.children<Effect>(entry => entry instanceof Effect)) {
       // Will always be a MutationDescriptor, since we filtering only instanceof Effect
       const descriptor = this.constructor.descriptorsOfProcessables.get(name) as EffectDescriptor | undefined;
-      yield { descriptor, effect: node };
+      yield { descriptor, effect: node, name };
     }
   }
 
