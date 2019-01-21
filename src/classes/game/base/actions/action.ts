@@ -55,6 +55,11 @@ export class Action extends Process {
     return multiplier;
   }
 
+  @SerializeOn('emit')
+  get hasWarning(): boolean {
+    return false;
+  }
+
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);

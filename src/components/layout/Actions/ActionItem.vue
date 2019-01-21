@@ -3,7 +3,7 @@
     @mouseenter="markAsSeen(item.fullPath)"
     v-tooltip.right="$t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`)"
     class="item"
-    :class="!item.isAvailable ? 'unavailable' : ''">
+    :class="itemClasses">
     <div class="head" @click="activate(item.fullPath, 1)">
       <div>
         <span class="name">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.title`) }}</span>
@@ -48,6 +48,20 @@ export default class ActionItem extends Vue {
     return new Decimal(this.item.maxMultiplier).greaterThan(1);
   }
 
+  get itemClasses() {
+    const list = [];
+
+    if (!this.item.isAvailable) {
+      list.push('unavailable');
+    }
+
+    if (this.item.hasWarning) {
+      list.push('warning');
+    }
+
+    return list;
+  }
+
   activate(path: string, multiplier: string) {
     this.relay.emit('action', { path, multiplier });
   }
@@ -70,6 +84,10 @@ export default class ActionItem extends Vue {
     padding: 0.75rem;
     padding-left: 0;
     width: 50%;
+
+    &.warning .head {
+      color: yellow;
+    }
 
     .head {
       display: flex;
