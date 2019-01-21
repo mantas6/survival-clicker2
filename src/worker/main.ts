@@ -77,7 +77,7 @@ interval(1000).subscribe(() => {
     return;
   }
 
-  if (state.globals.isAlive) {
+  if (!state.globals.isAlive) {
     return;
   }
 
