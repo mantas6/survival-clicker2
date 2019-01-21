@@ -2,7 +2,7 @@
   <div id="app" :class="isDarkModeEnabled ? ['dark-mode'] : []">
     <header-container></header-container>
     <main>
-      <navigation></navigation>
+      <navigation v-show="!isDead"></navigation>
       <div v-show="!isDead">
         <keep-alive>
           <router-view/>
