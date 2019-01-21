@@ -1,4 +1,6 @@
 import { SerializableWithReference } from '@/classes/game/base/serialization';
+import { traverse } from '@/utils/node';
+import { State } from '@/classes/game/state';
 
 export interface TransformationDescriptor {
   tagName: string;
@@ -45,6 +47,14 @@ export abstract class Transformable extends SerializableWithReference {
       if (transformation.tagName === tagName) {
         (this as any)[transformation.propertyName] = transformation.valueFunc();
       }
+    }
+  }
+}
+
+export function applyReset(state: State) {
+  for (const node of traverse(state)) {
+    if (node instanceof Transformable) {
+      node.transform('reset');
     }
   }
 }

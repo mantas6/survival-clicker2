@@ -7,7 +7,7 @@ import { applyUnlocked } from '@/classes/game/base/actions/methods';
 import { applyQueued } from '@/classes/game/base/automation/methods';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
-import { Transformable } from '@/classes/game/base/transformable';
+import { Transformable, applyReset } from '@/classes/game/base/transformable';
 import { Action } from '@/classes/game/base/actions';
 import { Queued } from '@/classes/game/base/automation';
 
@@ -64,7 +64,7 @@ relay.on('save', () => {
 });
 
 relay.on('load', serializedState => {
-  applyReset();
+  applyReset(state);
   state.unserialize(serializedState);
   emitAll();
 });
@@ -98,14 +98,6 @@ function emitAll() {
 function emitStore() {
   const serializedState = state.serialize('store');
   relay.emit('save', serializedState);
-}
-
-export function applyReset() {
-  for (const node of traverse(state)) {
-    if (node instanceof Transformable) {
-      node.transform('reset');
-    }
-  }
 }
 
 export function applyClock() {
