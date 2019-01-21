@@ -77,8 +77,8 @@ interval(1000).subscribe(() => {
     return;
   }
 
-  if (state.stats.character.health.value.isZero()) {
-    applyReset();
+  if (state.globals.isDead) {
+    return;
   }
 
   applyClock();

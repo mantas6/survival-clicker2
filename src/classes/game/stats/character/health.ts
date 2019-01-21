@@ -7,4 +7,8 @@ export class Health extends Container {
   get maximum() {
     return new Decimal(100);
   }
+
+  protected onLessThanMinimum(): void {
+    this.state.globals.isDead = true;
+  }
 }

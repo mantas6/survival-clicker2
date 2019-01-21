@@ -5,4 +5,7 @@ import { Transformable, Transform } from '@/classes/game/base/transformable';
 export class Globals extends Transformable {
   @Transform('reset', () => false)
   isPaused: boolean = false;
+
+  @Transform('reset', () => false)
+  isDead: boolean = false;
 }
