@@ -100,7 +100,7 @@ function emitStore() {
   relay.emit('save', serializedState);
 }
 
-export function applyClock() {
+function applyClock() {
   for (const node of traverse(state)) {
     if (node instanceof Transformable) {
       node.transform('clock');
