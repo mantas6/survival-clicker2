@@ -1,5 +1,7 @@
 <template>
-  <div><button @click="reset">{{ $t('reincarnate') }}</button></div>
+  <div>
+    <button @click="reset">{{ $t('reincarnate') }}</button>
+  </div>
 </template>
 
 <script lang="ts">
