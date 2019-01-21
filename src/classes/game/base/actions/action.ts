@@ -34,6 +34,7 @@ export class Action extends Process {
   isSeen?: boolean;
 
   @SerializeOn('store', 'emit')
+  @Transform('reset', () => undefined)
   queued?: Queued;
 
   @SerializeOn('emit')
