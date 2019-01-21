@@ -2,13 +2,13 @@
   <div id="app" :class="isDarkModeEnabled ? ['dark-mode'] : []">
     <header-container></header-container>
     <main>
-      <navigation v-show="!isDead"></navigation>
-      <div v-show="!isDead">
+      <navigation v-show="isAlive"></navigation>
+      <div v-show="isAlive">
         <keep-alive>
           <router-view/>
         </keep-alive>
       </div>
-      <death v-show="isDead"></death>
+      <death v-show="!isAlive"></death>
     </main>
     <sidebar></sidebar>
   </div>
@@ -30,8 +30,8 @@ export default class App extends Vue {
   @Getter isDarkModeEnabled!: boolean;
   @Getter globals!: SerializedGlobals;
 
-  get isDead() {
-    return this.globals.isDead;
+  get isAlive() {
+    return this.globals.isAlive;
   }
 }
 </script>
