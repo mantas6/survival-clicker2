@@ -1,5 +1,5 @@
 <template>
-  <div><button @click="reset">Reset</button></div>
+  <div><button @click="reset">{{ $t('reincarnate') }}</button></div>
 </template>
 
 <script lang="ts">
