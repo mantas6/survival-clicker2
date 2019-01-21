@@ -16,7 +16,9 @@ export function applyQueued(state: State) {
   for (const node of traverse(state)) {
     if (node instanceof Action) {
       if (node.queued && node.queued.shouldCalculate({ multiplier })) {
-        node.calculate({ multiplier });
+        if (node.validate({ multiplier })) {
+          node.calculate({ multiplier });
+        }
       }
     }
   }
