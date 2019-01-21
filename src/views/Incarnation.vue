@@ -10,7 +10,7 @@ import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 
 @Component
-export default class Death extends Vue {
+export default class Incarnation extends Vue {
   @Getter relay!: Relay;
 
   reset() {

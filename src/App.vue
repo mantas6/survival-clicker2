@@ -8,7 +8,7 @@
           <router-view/>
         </keep-alive>
       </div>
-      <death v-show="!isAlive"></death>
+      <incarnation v-show="!isAlive"></incarnation>
     </main>
     <sidebar></sidebar>
   </div>
@@ -21,10 +21,10 @@ import Navigation from '@/components/layout/Navigation.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { Getter } from 'vuex-class';
 import { SerializedGlobals } from '@/store/globals';
-import Death from './views/Death.vue';
+import Incarnation from './views/Incarnation.vue';
 
 @Component({
-  components: { HeaderContainer, Navigation, Sidebar, Death },
+  components: { HeaderContainer, Navigation, Sidebar, Incarnation },
 })
 export default class App extends Vue {
   @Getter isDarkModeEnabled!: boolean;
