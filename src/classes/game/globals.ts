@@ -7,5 +7,5 @@ export class Globals extends Transformable {
   isPaused: boolean = false;
 
   @Transform('reset', () => true)
-  isAlive: boolean = false;
+  isAlive: boolean = true;
 }
