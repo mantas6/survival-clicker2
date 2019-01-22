@@ -1,7 +1,7 @@
 /* tslint:disable:max-classes-per-file only-arrow-functions no-unused-expression */
 
 import { expect } from 'chai';
-import { Transformable, Transform } from './transformable';
+import { Transformable, Transform } from '.';
 
 class TestingClass extends Transformable {
   @Transform('reset', () => undefined)

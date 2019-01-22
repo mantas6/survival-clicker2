@@ -1,12 +1,4 @@
-import { SerializableWithReference } from '@/classes/game/base/serialization';
-import { traverse } from '@/utils/node';
-import { State } from '@/classes/game/state';
-
-export interface TransformationDescriptor {
-  tagName: string;
-  propertyName: string;
-  valueFunc: () => any;
-}
+import { Transformable } from './transformable';
 
 /**
  * Sets property value when transformation is called
@@ -36,25 +28,4 @@ export function SkipTransform(...tagNames: string[]) {
       return descriptor.propertyName !== propertyName && tagNames.includes(descriptor.tagName);
     });
   };
-}
-
-export abstract class Transformable extends SerializableWithReference {
-  static transformations: TransformationDescriptor[] = [];
-  'constructor': typeof Transformable;
-
-  transform(tagName: string) {
-    for (const transformation of this.constructor.transformations) {
-      if (transformation.tagName === tagName) {
-        (this as any)[transformation.propertyName] = transformation.valueFunc();
-      }
-    }
-  }
-}
-
-export function applyReset(state: State) {
-  for (const node of traverse(state)) {
-    if (node instanceof Transformable) {
-      node.transform('reset');
-    }
-  }
 }
