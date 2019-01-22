@@ -1,7 +1,6 @@
 <template>
   <div
     @mouseenter="markAsSeen(item.fullPath)"
-    v-tooltip.right="$t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`)"
     class="item"
     :class="itemClasses">
     <div class="head" @click="activate(item.fullPath, 1)">
@@ -72,6 +71,13 @@ export default class ActionItem extends Vue {
 
   markAsSeen(path: string) {
     this.relay.emit('seen', { path });
+
+    this.$store.commit('selectAction', {
+      categoryName: this.categoryName,
+      groupName: this.groupName,
+      actionName: this.actionName,
+      item: this.item,
+    });
   }
 }
 </script>
@@ -83,7 +89,6 @@ export default class ActionItem extends Vue {
     justify-content: space-between;
     padding: 0.75rem;
     padding-left: 0;
-    width: 50%;
 
     &.warning .head {
       color: yellow;
