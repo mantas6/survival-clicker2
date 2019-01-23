@@ -1,6 +1,7 @@
 <template>
   <div
-    @mouseenter="markAsSeen(item.fullPath)"
+    @mouseenter="enter(item.fullPath)"
+    @mouseleave="leave"
     class="item"
     :class="itemClasses">
     <div class="head" @click="activate(item.fullPath, 1)">
@@ -65,11 +66,7 @@ export default class ActionItem extends Vue {
     this.relay.emit('action', { path, multiplier });
   }
 
-  setAuto() {
-    this.relay.emit('auto', { path: this.item.fullPath });
-  }
-
-  markAsSeen(path: string) {
+  enter(path: string) {
     this.relay.emit('seen', { path });
 
     this.$store.commit('selectAction', {
@@ -78,6 +75,14 @@ export default class ActionItem extends Vue {
       actionName: this.actionName,
       item: this.item,
     });
+  }
+
+  leave() {
+    this.$store.commit('deselectAction');
+  }
+
+  setAuto() {
+    this.relay.emit('auto', { path: this.item.fullPath });
   }
 }
 </script>
