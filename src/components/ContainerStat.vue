@@ -1,6 +1,9 @@
 <template>
   <div class="stat">
-    <span>{{ $t(`stats.${name}.title`) }}</span>
+    <div class="head">
+      <span>{{ $t(`stats.${name}.title`) }}</span>
+      <small>{{ stat.value }} / {{ stat.max }}</small>
+    </div>
     <progress-bar :value="stat.value" :max="stat.max" :variant="progressVariant"></progress-bar>
   </div>
 </template>
@@ -34,8 +37,8 @@ export default class ContainerStat extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .stat {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  .head {
+   display: flex;
+   justify-content: space-between; 
   }
 </style>
