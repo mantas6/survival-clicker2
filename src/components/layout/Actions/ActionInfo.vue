@@ -20,10 +20,6 @@ export default class ActionInfo extends Vue {
 
   @Prop({ required: true })
   item!: Action;
-
-  get info() {
-    return JSON.stringify(this.item);
-  }
 }
 </script>
 
