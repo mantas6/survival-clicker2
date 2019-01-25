@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="isDarkModeEnabled ? ['dark-mode'] : []">
+  <div id="app" :class="classes">
     <header-container></header-container>
     <main>
       <navigation v-show="isAlive"></navigation>
@@ -32,6 +32,20 @@ export default class App extends Vue {
 
   get isAlive() {
     return this.globals.isAlive;
+  }
+
+  get classes() {
+    const list = [];
+
+    if (this.isDarkModeEnabled) {
+      list.push('dark-mode');
+    }
+
+    if (this.isAlive) {
+      list.push('is-alive');
+    }
+
+    return list;
   }
 }
 </script>
