@@ -81,15 +81,3 @@ worker.addEventListener('error', error => {
   const { message, lineno, filename } = error;
   Sentry.captureException(new Error(`${message} at line ${lineno} in ${filename}`));
 });
-
-relay.watch((name, data) => {
-  const time = new Date().getTime().toString();
-  collect({
-    name: 'relay',
-    titles: { name },
-    attachments: { data },
-    values: {
-      time: { value: time, e: '1' },
-    },
-  });
-});
