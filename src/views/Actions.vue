@@ -8,12 +8,6 @@
         :group="group">
       </action-group>
     </article>
-    <action-info v-if="activeAction" 
-      :category-name="activeAction.categoryName"
-      :group-name="activeAction.groupName"
-      :action-name="activeAction.actionName"
-      :item="activeAction.item">
-    </action-info>
   </div>
 </template>
 
@@ -22,12 +16,10 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import ActionGroup from '@/components/layout/Actions/ActionGroup.vue';
-import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
 import { pickBy } from '@/utils/method';
-import { ActionMeta } from '@/store/action-info';
 
 @Component({
-  components: { ActionGroup, ActionInfo },
+  components: { ActionGroup },
 
   updated(this: Actions) {
     if (this.availableCategories && !this.availableCategories.includes(this.categoryName)) {
@@ -38,7 +30,6 @@ import { ActionMeta } from '@/store/action-info';
 export default class Actions extends Vue {
   @Getter availableCategories!: string[];
   @Getter allActions!: SerializedActions;
-  @Getter activeAction?: ActionMeta;
 
   get categoryName() {
     return this.$route.params.name as 'jobs' | 'consumables' | 'drugs' | 'investment';
