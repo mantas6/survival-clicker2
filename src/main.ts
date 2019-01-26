@@ -6,7 +6,7 @@ import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
 import { log, enableLogging } from '@/utils/log';
-import { collect } from '@/utils/collect';
+import '@/utils/collect';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import { i18n } from './i18n';
