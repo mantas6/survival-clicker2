@@ -27,10 +27,6 @@ export class Relay {
           cb(event.data);
         }
       }
-
-      if (this.watchFunc) {
-        this.watchFunc(event.name, event.data);
-      }
     };
   }
 
@@ -48,5 +44,9 @@ export class Relay {
 
   emit(name: string, data?: any): void {
     this.ctx.postMessage({ name, data });
+
+    if (this.watchFunc) {
+      this.watchFunc(name, data);
+    }
   }
 }
