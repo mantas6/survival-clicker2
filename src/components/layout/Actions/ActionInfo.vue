@@ -17,10 +17,9 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import ActionItem from '@/components/layout/Actions/ActionItem.vue';
 import { Action } from '@/classes/game/base/actions';
 
-@Component({ components: { ActionItem } })
+@Component
 export default class ActionInfo extends Vue {
   @Prop({ required: true })
   categoryName!: string;
