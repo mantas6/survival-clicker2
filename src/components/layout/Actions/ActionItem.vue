@@ -104,6 +104,10 @@ export default class ActionItem extends Vue {
     background: black;
     right: 0;
     z-index: 10;
+    min-width: 10rem;
+
+    padding: 0.5rem;
+    border-radius: 0.75rem;
   }
 
   .item {
