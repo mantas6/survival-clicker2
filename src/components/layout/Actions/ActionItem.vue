@@ -13,20 +13,20 @@
       </div>
       <div class="options">
         <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
-        <span @click="setAuto">
-          <span v-show="!item.queued">{{ $t('auto.off') }}</span>
-          <span v-show="item.queued">{{ $t('auto.on') }}</span>
-        </span>
       </div>
     </div>
-    <action-info
-      class="info"
-      v-show="isHovering"
-      :category-name="categoryName"
-      :group-name="groupName"
-      :action-name="actionName"
-      :item="item">
-    </action-info>
+    <div class="info" v-show="isHovering">
+      <action-info
+        :category-name="categoryName"
+        :group-name="groupName"
+        :action-name="actionName"
+        :item="item">
+      </action-info>
+      <span class="auto" @click="setAuto">
+        <span v-show="!item.queued">{{ $t('auto.off') }}</span>
+        <span v-show="item.queued">{{ $t('auto.on') }}</span>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -108,6 +108,15 @@ export default class ActionItem extends Vue {
 
     padding: 0.5rem;
     border-radius: 0.75rem;
+
+    .auto {
+      border-bottom: 1px solid black;
+      cursor: pointer;
+
+      .dark-mode & {
+        border-color: white;
+      }
+    }
   }
 
   .item {
