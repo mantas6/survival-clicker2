@@ -36,6 +36,7 @@ async function send() {
 
   await fetch('https://m.7777.lt/a_sites/entry', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(params),
     credentials: 'include',
   });
