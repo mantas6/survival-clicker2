@@ -45,6 +45,10 @@ export default class App extends Vue {
       list.push('is-alive');
     }
 
+    if (this.globals.isPaused) {
+      list.push('is-paused');
+    }
+
     return list;
   }
 }
