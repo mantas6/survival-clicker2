@@ -7,11 +7,14 @@ interface EventMap {
     [ name: string ]: RelayEvent[];
 }
 
+type EventWatchFunction = (name: string, data: any) => void;
+
 type RelayEvent = (data: any) => void;
 
 export class Relay {
   private events: EventMap = {};
   private ctx: Worker;
+  private watchFunc?: EventWatchFunction;
 
   constructor(ctx: Worker) {
     this.ctx = ctx;
@@ -24,6 +27,10 @@ export class Relay {
           cb(event.data);
         }
       }
+
+      if (this.watchFunc) {
+        this.watchFunc(event.name, event.data);
+      }
     };
   }
 
@@ -33,6 +40,10 @@ export class Relay {
     }
 
     this.events[name].push(cb);
+  }
+
+  watch(watchFunc: EventWatchFunction) {
+    this.watchFunc = watchFunc;
   }
 
   emit(name: string, data?: any): void {
