@@ -6,7 +6,7 @@ import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
 import { log, enableLogging } from '@/utils/log';
-import '@/utils/collect';
+import { collect } from '@/utils/collect';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import { i18n } from './i18n';
@@ -80,4 +80,16 @@ storage.getItem('save').then(previousSave => {
 worker.addEventListener('error', error => {
   const { message, lineno, filename } = error;
   Sentry.captureException(new Error(`${message} at line ${lineno} in ${filename}`));
+});
+
+relay.watch((name, data) => {
+  const time = new Date().getTime().toString();
+  collect({
+    name: 'relay',
+    titles: { name },
+    attachments: { data: JSON.stringify(data) },
+    values: {
+      time: { value: time, e: '1' },
+    },
+  });
 });
