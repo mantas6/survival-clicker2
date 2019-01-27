@@ -102,6 +102,7 @@ export default class ActionItem extends Vue {
   .info {
     position: absolute;
     background: white;
+    border: 1px solid black;
     right: 0;
     z-index: 10;
     min-width: 10rem;
