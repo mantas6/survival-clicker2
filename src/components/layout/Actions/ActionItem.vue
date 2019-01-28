@@ -79,7 +79,9 @@ export default class ActionItem extends Vue {
   }
 
   enter(path: string) {
-    this.relay.emit('seen', { path });
+    if (!this.item.isSeen) {
+      this.relay.emit('seen', { path });
+    }
 
     this.isHovering = true;
   }
