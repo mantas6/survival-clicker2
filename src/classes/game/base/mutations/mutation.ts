@@ -62,7 +62,7 @@ export class Mutation<StatType extends MutableStat> extends Serializable impleme
   }
 
   @SerializeOn('emit')
-  get isValid(): boolean {
+  get isAvailable(): boolean {
     const multiplier = new Decimal(1);
     return this.validate({ multiplier });
   }

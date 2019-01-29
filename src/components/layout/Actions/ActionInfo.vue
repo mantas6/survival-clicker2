@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="info">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`) }}</span>
-    <div v-for="(mutation, name) of mutations" :key="name" :class="!mutation.isValid ? 'invalid' : ''">
+    <div v-for="(mutation, name) of mutations" :key="name" :class="!mutation.isAvailable ? 'unavailable' : ''">
       <div><b>{{ name }}</b></div>
       <span>{{ mutation.diff }}</span>
     </div>
@@ -60,7 +60,7 @@ export default class ActionInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .invalid {
+  .unavailable {
     color: red;
   }
 </style>
