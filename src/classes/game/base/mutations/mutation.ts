@@ -62,6 +62,12 @@ export class Mutation<StatType extends MutableStat> extends Serializable impleme
   }
 
   @SerializeOn('emit')
+  get isValid(): boolean {
+    const multiplier = new Decimal(1);
+    return this.validate({ multiplier });
+  }
+
+  @SerializeOn('emit')
   get diff() {
     const multiplier = new Decimal(1);
     const mutated = this.diffFunc({ multiplier });
