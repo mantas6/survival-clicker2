@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="info">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`) }}</span>
-    <div v-for="(mutation, name) of mutations" :key="name" :class="!mutation.isAvailable ? 'unavailable' : ''">
+    <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ name }}</b></div>
       <span>{{ mutation.diff }}</span>
     </div>
@@ -18,6 +18,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Action } from '@/classes/game/base/actions';
+import { Mutation } from '@/classes/game/base/mutations';
 
 @Component
 export default class ActionInfo extends Vue {
@@ -56,11 +57,25 @@ export default class ActionInfo extends Vue {
 
     return list;
   }
+
+  mutationClass(mutation: Mutation<any>) {
+    if (!mutation.isAvailable) {
+      if (this.item.isAvailable) {
+        return 'warning';
+      } else {
+        return 'unavailable';
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
   .unavailable {
     color: red;
+  }
+
+  .warning {
+    color: yellow;
   }
 </style>
