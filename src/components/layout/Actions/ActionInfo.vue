@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="info">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`) }}</span>
+    <div class="info">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`) }}</div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ name }}</b></div>
       <span>{{ mutation.diff }}</span>
@@ -71,6 +71,10 @@ export default class ActionInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
+  .info {
+    margin-bottom: 0.5rem;
+  }
+
   .unavailable {
     color: red;
   }
