@@ -120,6 +120,7 @@ export default class ActionItem extends Vue {
     .auto {
       border-bottom: 1px solid black;
       cursor: pointer;
+      display: none;
 
       .dark-mode & {
         border-color: white;
