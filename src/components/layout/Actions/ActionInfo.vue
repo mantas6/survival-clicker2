@@ -8,9 +8,9 @@
     <div v-for="(effect, name) of effects" :key="name">
       <div><b>{{ name }}</b></div>
       <span>{{ effect.value }}</span>
-      <span> for </span>
+      <span> {{ $t('for') }} </span>
       <span>{{ effect.duration }}</span>
-      <span> seconds</span>
+      <span> {{ $t('seconds') }}</span>
     </div>
   </div>
 </template>
