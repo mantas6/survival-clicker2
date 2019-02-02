@@ -11,6 +11,14 @@ export abstract class Modifier extends SerializableWithReference {
 
   @SerializeOn('emit')
   get value() {
+    const cumulated = new Decimal(0).add(this.sumTimers());
+
+    const computed = this.compute(cumulated);
+
+    return Decimal.min(computed, this.max);
+  }
+
+  protected sumTimers(): Decimal {
     let cumulated = new Decimal(0);
 
     for (const timer of this.state.timers) {
@@ -20,8 +28,6 @@ export abstract class Modifier extends SerializableWithReference {
       }
     }
 
-    const computed = this.compute(cumulated);
-
-    return Decimal.min(computed, this.max);
+    return cumulated;
   }
 }
