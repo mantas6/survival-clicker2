@@ -26,7 +26,7 @@ if [ $changed = 1 ]; then
     git pull origin master
     npm ci
 
-    if ! npm run build; then
+    if ! npm run build:staging; then
       echo "Build has failed"
       exit 1
     fi
