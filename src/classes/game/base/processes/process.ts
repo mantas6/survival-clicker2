@@ -97,7 +97,6 @@ export abstract class Process extends Transformable implements Calculable {
     }
   }
 
-
   protected validateMutations(opts: ValidationOptions): boolean {
     for (const { mutation, descriptor } of this.mutations()) {
       const mutationOpts: ValidationOptions = { multiplier: opts.multiplier };
