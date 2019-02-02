@@ -21,7 +21,7 @@
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
     </div>
-    <small class="version">0.1.4</small>
+    <small class="version">0.2.0</small>
     <controls></controls>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
