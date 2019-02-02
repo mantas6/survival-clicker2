@@ -79,27 +79,11 @@ export default class App extends Vue {
 
   #app {
     > .staging {
-      background: #c72424;
-      color: white;
-      position: absolute;
-      width: 100%;
-      padding: 0.2rem;
-
-      a {
-        color: white;
-      }
+      @include top-message(#c72424, white);
     }
 
     > .update {
-      background: #ffea31;
-      color: black;
-      position: absolute;
-      width: 100%;
-      padding: 0.2rem;
-
-      a {
-        color: black;
-      }
+      @include top-message(#ffea31, black);
     }
   }
 </style>
