@@ -1,9 +1,7 @@
 import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
-import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
 import { TimerEffect, Effect } from '@/classes/game/base/modifiers';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
-import { State } from '@/classes/game/state';
 import { SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
 
 export type ProcessableDescriptorType = 'mutation' | 'effect';
