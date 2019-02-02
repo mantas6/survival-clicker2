@@ -60,7 +60,7 @@ export default class Controls extends Vue {
       border: 1px solid black;
       border-radius: 0.25rem;
       font-size: 0.75rem;
-      padding: 1px 6px;
+      padding: 0.1rem;
 
       .dark-mode & {
         color: white;
