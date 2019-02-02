@@ -1,5 +1,7 @@
 const path = require('path');
 
+process.env.VUE_APP_BUILD_TIME = Date.now();
+
 module.exports = {
   chainWebpack: config => {
     config.module

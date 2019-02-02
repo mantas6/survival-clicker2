@@ -1,6 +1,7 @@
 <template>
   <div id="app" :class="classes">
-    <div v-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
+    <div v-if="isUpdateAvailable" class="update">Update is available. <a href="#" @click.prevent="reload">Reload to update</a></div>
+    <div v-else-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
     <header-container></header-container>
     <main>
       <navigation v-show="isAlive"></navigation>
@@ -22,14 +23,20 @@ import Navigation from '@/components/layout/Navigation.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { Getter } from 'vuex-class';
 import { SerializedGlobals } from '@/store/globals';
+import { isUpdateAvailable } from '@/utils/version';
 import Incarnation from './views/Incarnation.vue';
 
 @Component({
   components: { HeaderContainer, Navigation, Sidebar, Incarnation },
+  async created(this: App) {
+    this.isUpdateAvailable = await isUpdateAvailable();
+  },
 })
 export default class App extends Vue {
   @Getter isDarkModeEnabled!: boolean;
   @Getter globals!: SerializedGlobals;
+
+  isUpdateAvailable: boolean = false;
 
   get isAlive() {
     return this.globals.isAlive;
@@ -60,21 +67,39 @@ export default class App extends Vue {
 
     return list;
   }
+
+  reload() {
+    location.reload();
+  }
 }
 </script>
 
 <style lang="scss">
   @import '@/styles/global.scss';
 
-  #app > .staging {
-    background: #c72424;
-    color: white;
-    position: absolute;
-    width: 100%;
-    padding: 0.2rem;
-
-    a {
+  #app {
+    > .staging {
+      background: #c72424;
       color: white;
+      position: absolute;
+      width: 100%;
+      padding: 0.2rem;
+
+      a {
+        color: white;
+      }
+    }
+
+    > .update {
+      background: #ffea31;
+      color: black;
+      position: absolute;
+      width: 100%;
+      padding: 0.2rem;
+
+      a {
+        color: black;
+      }
     }
   }
 </style>
