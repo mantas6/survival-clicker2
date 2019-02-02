@@ -15,6 +15,16 @@ export class Equipable extends Action {
     this.onUnequip();
   }
 
+  @SerializeOn('emit')
+  get canEquip(): boolean {
+    return true;
+  }
+
+  @SerializeOn('emit')
+  get canUnequip(): boolean {
+    return true;
+  }
+
   protected onEquip(): void {
     //
   }
