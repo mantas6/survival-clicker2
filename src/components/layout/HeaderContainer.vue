@@ -21,7 +21,7 @@
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
     </div>
-    <small class="version">0.2.0</small>
+    <small class="version">{{ version }}</small>
     <controls></controls>
     <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
   </header>
@@ -46,6 +46,10 @@ export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter modifiers!: SerializedModifiers;
   @Getter relay!: Relay;
+
+  get version() {
+    return process.env.VUE_APP_VERSION;
+  }
 
   get money() {
     return this.stats.finance.money.value;
