@@ -18,3 +18,19 @@ export default class Incarnation extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  button {
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 1rem;
+
+    .dark-mode & {
+      color: white;
+      border-color: white;
+    }
+  }
+</style>
