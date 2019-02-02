@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="classes">
+    <div v-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
     <header-container></header-container>
     <main>
       <navigation v-show="isAlive"></navigation>
@@ -34,6 +35,14 @@ export default class App extends Vue {
     return this.globals.isAlive;
   }
 
+  get isStaging() {
+    return process.env.VUE_APP_STAGING_WARNING;
+  }
+
+  get stableBuildUrl() {
+    return process.env.VUE_APP_STABLE_URL;
+  }
+
   get classes() {
     const list = [];
 
@@ -56,4 +65,16 @@ export default class App extends Vue {
 
 <style lang="scss">
   @import '@/styles/global.scss';
+
+  #app > .staging {
+    background: #c72424;
+    color: white;
+    position: absolute;
+    width: 100%;
+    padding: 0.2rem;
+
+    a {
+      color: white;
+    }
+  }
 </style>
