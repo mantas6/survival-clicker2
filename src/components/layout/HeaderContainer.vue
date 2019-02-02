@@ -147,6 +147,7 @@ export default class HeaderContainer extends Vue {
       background-color: hsl(0, 100%, 50%);
       color: white;
       outline: none;
+      cursor: pointer;
     }
   }
 </style>

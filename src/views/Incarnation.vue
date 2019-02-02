@@ -27,6 +27,7 @@ export default class Incarnation extends Vue {
     border-radius: 0.25rem;
     font-size: 0.75rem;
     padding: 0.25rem 1rem;
+    cursor: pointer;
 
     .dark-mode & {
       color: white;
