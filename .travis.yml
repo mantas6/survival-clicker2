@@ -6,6 +6,7 @@ script:
   - npm run test:src
   - npm run test:e2e
   - npm run lint:check
+  - npm run build:staging
   - npm run build
 cache: npm
 install:
