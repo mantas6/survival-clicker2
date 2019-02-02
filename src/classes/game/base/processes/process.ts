@@ -1,7 +1,7 @@
 import { Mutation, Calculable, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { LimitFlag } from '@/classes/game/base/stats';
-import { TimerEffect } from '@/classes/game/base/modifiers';
+import { TimerEffect, Effect } from '@/classes/game/base/modifiers';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { State } from '@/classes/game/state';
 import { SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
@@ -90,6 +90,15 @@ export abstract class Process extends Transformable implements Calculable {
       yield { descriptor, effect: node, name };
     }
   }
+
+  *effects(): IterableIterator<{ descriptor: EffectDescriptor | undefined, effect: Effect, name: string }> {
+    for (const { name, node } of this.children<Effect>(entry => entry instanceof Effect)) {
+      // Will always be a MutationDescriptor, since we filtering only instanceof Effect
+      const descriptor = this.constructor.descriptorsOfProcessables.get(name) as EffectDescriptor | undefined;
+      yield { descriptor, effect: node, name };
+    }
+  }
+
 
   protected validateMutations(opts: ValidationOptions): boolean {
     for (const { mutation, descriptor } of this.mutations()) {
