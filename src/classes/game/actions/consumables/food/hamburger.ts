@@ -2,12 +2,12 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
-import { Effect } from '@/classes/game/base/modifiers';
+import { TimerEffect } from '@/classes/game/base/modifiers';
 
 @SerializeAllOn('emit')
 @UnlocksWhen(action => action.modifiers.education.school.hasFinished)
 export class Hamburger extends Action {
-  energy = new Effect({
+  energy = new TimerEffect({
     modifier: () => this.modifiers.character.intake.energy,
     duration: () => 20,
     value: () => new Decimal(0.3),

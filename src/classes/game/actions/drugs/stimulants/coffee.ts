@@ -1,11 +1,11 @@
 import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
-import { Effect } from '@/classes/game/base/modifiers';
+import { TimerEffect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
 export class Coffee extends Action {
-  energyLoss = new Effect({
+  energyLoss = new TimerEffect({
     modifier: () => this.modifiers.character.intake.energy,
     duration: () => 50,
     value: () => new Decimal(-0.1),

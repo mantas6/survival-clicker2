@@ -14,13 +14,11 @@ interface EffectOptions {
 export class Effect extends SerializableWithReference {
   protected computeFunc: ComputeFunction;
   protected modifierFunc: () => Modifier;
-  protected durationFunc: () => Decimal;
 
   constructor(opts: EffectOptions) {
     super();
     this.computeFunc = opts.value;
     this.modifierFunc = opts.modifier;
-    this.durationFunc = () => new Decimal(opts.duration());
   }
 
   @SerializeOn('emit', 'store')
@@ -32,11 +30,6 @@ export class Effect extends SerializableWithReference {
   @SerializeAs<Modifier>(input => input.path)
   get modifier() {
     return this.modifierFunc();
-  }
-
-  @SerializeOn('emit')
-  get duration() {
-    return this.durationFunc();
   }
 
   @SerializeOn('emit')
