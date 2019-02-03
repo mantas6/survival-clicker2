@@ -1,6 +1,8 @@
 import { ProcessContainer } from '@/classes/game/base/processes';
-import { TemperatureDiff } from './temperature-diff';
+import { Heating } from './heating';
+import { Cooling } from './cooling';
 
 export class Thermoregulation extends ProcessContainer {
-  temperatureDiff = new TemperatureDiff();
+  heating = new Heating();
+  cooling = new Cooling();
 }

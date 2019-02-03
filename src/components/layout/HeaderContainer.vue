@@ -70,7 +70,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get temperatureDiff() {
-    return new Decimal(this.modifiers.character.thermoregulation.temperatureDiff.value)
+    return new Decimal(this.stats.character.temperature.rate)
       .toSignificantDigits(2)
       .toString();
   }
