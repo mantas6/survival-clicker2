@@ -27,12 +27,11 @@ export abstract class Modifier extends SerializableWithReference {
     let cumulated = new Decimal(0);
 
     for (const node of traverse(this.actions)) {
-      if (node instanceof ToggleAction) {
-        if (node.isToggledOn) {
-          for (const { effect } of node.effects()) {
-            if (effect.modifier === this) {
-              cumulated = cumulated.add(effect.compute({ multiplier }));
-            }
+      // Should be instanceof ToggleAction check
+      if ((node as any).isToggledOn) {
+        for (const { effect } of (node as any).effects()) {
+          if (effect.modifier === this) {
+            cumulated = cumulated.add(effect.compute({ multiplier }));
           }
         }
       }
