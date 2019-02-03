@@ -1,20 +1,16 @@
 import { SerializeOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
-import { Modifier, Effect } from '.';
-import { CalculationOptions } from '../mutations';
+import { Effect } from '.';
+import { EffectOptions } from './effect';
 
-type ComputeFunction = (opts: CalculationOptions) => Decimal;
-
-interface EffectOptions {
-  modifier: () => Modifier;
-  value: ComputeFunction;
+interface TimerEffectOptions extends EffectOptions {
   duration: () => Decimal.Value;
 }
 
 export class TimerEffect extends Effect {
   protected durationFunc: () => Decimal;
 
-  constructor(opts: EffectOptions) {
+  constructor(opts: TimerEffectOptions) {
     super(opts);
     this.durationFunc = () => new Decimal(opts.duration());
   }

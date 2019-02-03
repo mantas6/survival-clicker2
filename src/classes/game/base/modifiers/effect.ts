@@ -5,7 +5,7 @@ import { CalculationOptions } from '../mutations';
 
 type ComputeFunction = (opts: CalculationOptions) => Decimal;
 
-interface EffectOptions {
+export interface EffectOptions {
   modifier: () => Modifier;
   value: ComputeFunction;
   duration: () => Decimal.Value;
