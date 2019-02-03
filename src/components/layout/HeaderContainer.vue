@@ -12,6 +12,12 @@
         <div class="tax">
           @ <number-format :value="tax" post-fix="%"></number-format> tax
         </div>
+        <div class="temperature">
+          <number-format :value="temperature" post-fix="C"></number-format>
+        </div>
+        <div class="temperature-gain">
+          <number-format :value="temperatureGain" post-fix="C"></number-format>
+        </div>
       </div>
       <div class="stats">
         <container-stat name="health" :stat="health"></container-stat>
@@ -57,6 +63,14 @@ export default class HeaderContainer extends Vue {
 
   get tax() {
     return new Decimal(this.stats.finance.taxes.value).mul(100);
+  }
+
+  get temperature() {
+    return this.stats.character.temperature.value;
+  }
+
+  get temperatureGain() {
+    return this.modifiers.character.temperatureGain.value;
   }
 
   get health() {

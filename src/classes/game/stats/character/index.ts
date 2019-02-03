@@ -3,6 +3,7 @@ import { Energy } from './energy';
 import { Hydration } from './hydration';
 import { Stamina } from './stamina';
 import { Stomach } from './stomach';
+import { Temperature } from './temperature';
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
 @SerializeAllOn('emit', 'store')
@@ -12,4 +13,5 @@ export class Character extends Serializable {
   energy = new Energy();
   hydration = new Hydration();
   stomach = new Stomach();
+  temperature = new Temperature();
 }
