@@ -8,12 +8,8 @@ import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization'
 @SerializeAllOn('emit', 'store')
 export class Character extends Serializable {
   health = new Health();
-
   stamina = new Stamina();
-
   energy = new Energy();
-
   hydration = new Hydration();
-
   stomach = new Stomach();
 }
