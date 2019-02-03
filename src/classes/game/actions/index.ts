@@ -14,7 +14,7 @@ export class Actions extends Serializable {
   drugs = new Drugs();
   investment = new Investment();
   education = new Education();
-  clothing = new Clothing();
+  // clothing = new Clothing();
 
   @SerializeOn('store')
   other = new Other();
