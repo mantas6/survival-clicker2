@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
 import { Timer, TimerOptions } from './timer';
-import { Effect } from '@/classes/game/base/modifiers';
+import { TimerEffect } from '@/classes/game/base/modifiers';
 import { TagName, SerializedNode } from '@/classes/game/base/serialization/serializable';
 import { Transform, Transformable } from '../transformable';
 import { get } from '@/utils/method';
@@ -42,7 +42,7 @@ export class Timers extends Transformable {
 
   unserialize(serialized: SerializedNode) {
     for (const serializedItem of Object.values<SerializedTimer>(serialized as any)) {
-      const effect = get(this.state, serializedItem.effect.fullPath) as Effect;
+      const effect = get(this.state, serializedItem.effect.fullPath) as TimerEffect;
       const duration = new Decimal(serializedItem.duration);
       const timePassed = new Decimal(serializedItem.timePassed);
       const multiplier = new Decimal(serializedItem.multiplier);

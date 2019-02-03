@@ -1,5 +1,7 @@
 import Decimal from 'decimal.js';
 import { SerializableWithReference, SerializeOn } from '@/classes/game/base/serialization';
+import { traverse } from '@/utils/node';
+import { ToggleAction } from '@/classes/game/base/actions/toggle-action';
 
 export abstract class Modifier extends SerializableWithReference {
   protected abstract compute(cumulated: Decimal): Decimal;
@@ -11,6 +13,34 @@ export abstract class Modifier extends SerializableWithReference {
 
   @SerializeOn('emit')
   get value() {
+    const cumulated = new Decimal(0)
+      .add(this.sumTimers())
+      .add(this.sumToggledActions());
+
+    const computed = this.compute(cumulated);
+
+    return Decimal.min(computed, this.max);
+  }
+
+  protected sumToggledActions(): Decimal {
+    const multiplier = new Decimal(1);
+    let cumulated = new Decimal(0);
+
+    for (const node of traverse(this.actions)) {
+      // Should be instanceof ToggleAction check
+      if ((node as any).isToggledOn) {
+        for (const { effect } of (node as any).effects()) {
+          if (effect.modifier === this) {
+            cumulated = cumulated.add(effect.compute({ multiplier }));
+          }
+        }
+      }
+    }
+
+    return cumulated;
+  }
+
+  protected sumTimers(): Decimal {
     let cumulated = new Decimal(0);
 
     for (const timer of this.state.timers) {
@@ -20,8 +50,6 @@ export abstract class Modifier extends SerializableWithReference {
       }
     }
 
-    const computed = this.compute(cumulated);
-
-    return Decimal.min(computed, this.max);
+    return cumulated;
   }
 }

@@ -1,10 +1,10 @@
 import { CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
-import { Effect } from '@/classes/game/base/modifiers';
+import { TimerEffect } from '@/classes/game/base/modifiers';
 import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
 
 export interface TimerOptions {
-  effect: Effect;
+  effect: TimerEffect;
   duration: Decimal;
   multiplier: Decimal;
   timePassed?: Decimal;
@@ -12,7 +12,7 @@ export interface TimerOptions {
 
 export class Timer extends Serializable {
   @SerializeOn('emit', 'store')
-  effect: Effect;
+  effect: TimerEffect;
 
   @SerializeOn('emit', 'store')
   @UnserializeAs(input => new Decimal(input.toString()))
