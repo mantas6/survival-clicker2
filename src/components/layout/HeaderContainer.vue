@@ -16,7 +16,7 @@
           <number-format :value="temperature" post-fix="C"></number-format>
         </div>
         <div class="temperature-gain">
-          <number-format :value="temperatureGain" post-fix="C"></number-format>
+          <number-format :value="temperatureDiff" post-fix="C"></number-format>
         </div>
       </div>
       <div class="stats">
@@ -69,8 +69,8 @@ export default class HeaderContainer extends Vue {
     return this.stats.character.temperature.value;
   }
 
-  get temperatureGain() {
-    return this.modifiers.character.temperatureGain.value;
+  get temperatureDiff() {
+    return this.modifiers.character.thermoregulation.temperatureDiff.value;
   }
 
   get health() {
