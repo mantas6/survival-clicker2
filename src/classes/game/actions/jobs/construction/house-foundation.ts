@@ -10,6 +10,10 @@ export class HouseFoundation extends StaminaAction {
     return new Decimal(-20);
   });
 
+  temperature = new Mutation(() => this.stats.character.temperature, () => {
+    return new Decimal(0.1);
+  });
+
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(50).mul(this.modifiers.education.construction.value.minus(1));
   });

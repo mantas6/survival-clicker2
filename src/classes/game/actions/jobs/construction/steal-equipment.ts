@@ -10,6 +10,10 @@ export class StealEquipment extends StaminaAction {
     return new Decimal(-30);
   });
 
+  temperature = new Mutation(() => this.stats.character.temperature, () => {
+    return new Decimal(0.1);
+  });
+
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(150).mul(this.modifiers.education.construction.value.minus(2));
   });
