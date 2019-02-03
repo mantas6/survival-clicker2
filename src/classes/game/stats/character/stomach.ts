@@ -1,4 +1,4 @@
-import { Container, LimitFlag } from '@/classes/game/base/stats';
+import { Container } from '@/classes/game/base/stats';
 import Decimal from 'decimal.js';
 
 export class Stomach extends Container {
