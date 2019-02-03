@@ -1,4 +1,4 @@
-import { Serializable, SerializeAllOn, SerializeOn, DoNotSerialize } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
 import { Jobs } from '@/classes/game/actions/jobs';
 import { Consumables } from '@/classes/game/actions/consumables';
 import { Drugs } from '@/classes/game/actions/drugs';
@@ -14,8 +14,6 @@ export class Actions extends Serializable {
   drugs = new Drugs();
   investment = new Investment();
   education = new Education();
-
-  @DoNotSerialize()
   clothing = new Clothing();
 
   @SerializeOn('store')
