@@ -15,7 +15,7 @@
         <div class="temperature">
           <span>{{ temperature }}C</span>
         </div>
-        <div class="temperature-gain">
+        <div class="temperature-diff">
           <span>{{ temperatureDiff }}</span>
         </div>
       </div>
