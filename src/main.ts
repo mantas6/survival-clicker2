@@ -10,7 +10,6 @@ import { collect } from '@/utils/collect';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
 import { i18n } from './i18n';
-import VTooltip from 'v-tooltip';
 import * as Sentry from '@sentry/browser';
 
 const storage = LocalForage.createInstance({
@@ -24,7 +23,6 @@ const relay = new Relay(worker);
 store.commit('setRelay', relay);
 
 Vue.component('NumberFormat', NumberFormat);
-Vue.use(VTooltip);
 
 Sentry.init({
   dsn: process.env.VUE_APP_SENTRY_KEY,

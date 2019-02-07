@@ -24,7 +24,6 @@
     "lodash": "^4.17.11",
     "rxjs": "^6.4.0",
     "swarm-numberformat": "^0.4.0",
-    "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.6.3",
     "vue-class-component": "^6.3.2",
     "vue-i18n": "^8.8.0",
