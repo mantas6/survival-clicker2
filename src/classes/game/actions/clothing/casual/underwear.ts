@@ -1,8 +1,8 @@
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
-import { ToggleAction } from '@/classes/game/base/actions';
+import { ClothingAction } from '@/classes/game/base/actions/clothing-action';
 
-export class Underwear extends ToggleAction {
+export class Underwear extends ClothingAction {
   money = new Mutation(() => this.stats.finance.money, () => {
     if (this.timesCalculated.greaterThan(0)) {
       return new Decimal(0);
