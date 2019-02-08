@@ -17,12 +17,12 @@ export class ToggleAction extends Action {
 
   @SerializeOn('emit')
   get canToggleOn(): boolean {
-    return true;
+    return !this.isToggledOn;
   }
 
   @SerializeOn('emit')
   get canToggleOff(): boolean {
-    return true;
+    return this.isToggledOn;
   }
 
   protected onToggleOn(): void {
