@@ -35,7 +35,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
-import { Action } from '@/classes/game/base/actions';
+import { Action, ToggleAction } from '@/classes/game/base/actions';
 import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
 
 @Component({ components: { ActionInfo } })
@@ -52,7 +52,7 @@ export default class ActionItem extends Vue {
   actionName!: string;
 
   @Prop({ required: true })
-  item!: Action;
+  item!: Action | ToggleAction;
 
   isHovering: boolean = false;
 
@@ -71,7 +71,19 @@ export default class ActionItem extends Vue {
       list.push('warning');
     }
 
+    if (this.isToggable) {
+      list.push('togglable');
+
+      if ((this.item as ToggleAction).isToggledOn) {
+        list.push('toggled-on');
+      }
+    }
+
     return list;
+  }
+
+  get isToggable(): boolean {
+    return (this.item as ToggleAction).canToggleOn || (this.item as ToggleAction).canToggleOff;
   }
 
   activate(path: string, multiplier: string) {
