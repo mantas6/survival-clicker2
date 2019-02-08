@@ -4,7 +4,7 @@
       @mouseenter="enter(item.fullPath)"
       class="item"
       :class="itemClasses">
-      <div class="head" @click="activate(item.fullPath, 1)">
+      <div class="head" @click="activateOrToggle(item.fullPath)">
         <div>
           <span class="name">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.title`) }}</span>
           <span class="unseen" v-show="!item.isSeen">*</span>
@@ -84,6 +84,14 @@ export default class ActionItem extends Vue {
 
   get isToggable(): boolean {
     return (this.item as ToggleAction).canToggleOn || (this.item as ToggleAction).canToggleOff;
+  }
+
+  activateOrToggle(path: string) {
+    if (this.isToggable) {
+      this.relay.emit('toggle', { path });
+    } else {
+      this.activate(path, '1');
+    }
   }
 
   activate(path: string, multiplier: string) {

@@ -8,7 +8,7 @@ import { applyQueued } from '@/classes/game/base/automation/methods';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
 import { Transformable, applyReset } from '@/classes/game/base/transformable';
-import { Action } from '@/classes/game/base/actions';
+import { Action, ToggleAction } from '@/classes/game/base/actions';
 import { Queued } from '@/classes/game/base/automation';
 
 const ctx: Worker = self as any;
@@ -30,6 +30,17 @@ relay.on('action', ({ path, multiplier }) => {
     applyUnlocked(state);
     emitAll();
   }
+});
+
+relay.on('toggle', ({ path }) => {
+  const action = get(state, path) as ToggleAction;
+  if (!action.isToggledOn && action.canToggleOn) {
+    action.toggleOn();
+  } else if (action.isToggledOn && action.canToggleOff) {
+    action.toggleOff();
+  }
+
+  emitAll();
 });
 
 relay.on('auto', ({ path }) => {
