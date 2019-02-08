@@ -155,6 +155,10 @@ export default class ActionItem extends Vue {
     padding: 0.75rem;
     padding-left: 0;
 
+    &.toggled-on {
+      border: 1px solid;
+    }
+
     &.warning .head {
       color: yellow;
     }
