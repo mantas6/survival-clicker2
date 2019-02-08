@@ -1,4 +1,4 @@
-import { ToggleAction } from '@/classes/game/base/actions/toggle-action';
+import { ToggleAction } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 
