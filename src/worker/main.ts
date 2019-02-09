@@ -28,6 +28,14 @@ relay.on('action', ({ path, multiplier }) => {
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
     action.calculate({ multiplier: new Decimal(multiplier) });
     applyUnlocked(state);
+
+    // Toggle on item right after purchase
+    if (action instanceof ToggleAction) {
+      if (!action.isToggledOn && action.canToggleOn) {
+        action.toggleOn();
+      }
+    }
+
     emitAll();
   }
 });
