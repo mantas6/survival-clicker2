@@ -12,7 +12,7 @@
         <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
       </div>
       <div class="options">
-        <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable && item.maxMultiplier !== 'Infinity'">x{{ item.maxMultiplier }}</span>
+        <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
       </div>
     </div>
     <div class="info" v-show="isHovering">
