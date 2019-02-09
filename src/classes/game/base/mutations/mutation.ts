@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { SerializeOn, Serializable } from '@/classes/game/base/serialization';
+import { SerializeOn, SerializableWithReference } from '@/classes/game/base/serialization';
 import { LimitFlag } from '@/classes/game/base/stats';
 
 interface MutableStat {
@@ -27,7 +27,7 @@ export interface Calculable {
   validate: (opts: ValidationOptions) => boolean;
 }
 
-export class Mutation<StatType extends MutableStat> extends Serializable implements Calculable {
+export class Mutation<StatType extends MutableStat> extends SerializableWithReference implements Calculable {
   protected statFunc: StatFunction<StatType>;
   protected diffFunc: DiffFunction;
   protected maxFunc?: () => Decimal;
