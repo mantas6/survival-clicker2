@@ -5,23 +5,20 @@ import { DiffFunction } from '@/classes/game/base/mutations/mutation';
 interface MutationOptions {
   stat: () => Temperature;
   value: DiffFunction;
-  type?: 'increase' | 'decrease';
 }
 
 export class TemperatureMutation extends Mutation<Temperature> {
   constructor(opts: MutationOptions) {
-    if (!opts.type) {
-      opts.type = 'increase';
-    }
-
     super(opts.stat, calcOpts => {
       const multiplyBy = this.modifiers.character.thermoregulation.insulation.value
         .div(100);
 
-      if (opts.type === 'increase') {
-        return opts.value(calcOpts).mul(multiplyBy);
+      const diff = opts.value(calcOpts);
+
+      if (diff.greaterThan(0)) {
+        return diff.mul(multiplyBy);
       } else {
-        return opts.value(calcOpts).div(multiplyBy);
+        return diff.div(multiplyBy);
       }
     });
   }
