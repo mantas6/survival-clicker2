@@ -24,6 +24,10 @@ window.addEventListener('focus', () => setup());
 setup();
 
 async function send() {
+  if (process.env.NODE_ENV === 'development') {
+    return;
+  }
+
   const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
   const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
