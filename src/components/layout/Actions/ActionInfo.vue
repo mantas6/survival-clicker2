@@ -8,6 +8,10 @@
     <div v-for="(effect, name) of effects" :key="name">
       <div><b>{{ name }}</b></div>
       <span>{{ effect.value }}</span>
+    </div>
+    <div v-for="(effect, name) of timerEffects" :key="name">
+      <div><b>{{ name }}</b></div>
+      <span>{{ effect.value }}</span>
       <span> {{ $t('for') }} </span>
       <span>{{ effect.duration }}</span>
       <span> {{ $t('seconds') }}</span>
@@ -46,11 +50,23 @@ export default class ActionInfo extends Vue {
     return list;
   }
 
+  get timerEffects() {
+    const list: { [name: string]: any } = {};
+
+    for (const [ name, value ] of Object.entries(this.item)) {
+      if (typeof value === 'object' && value.modifier && value.duration) {
+        list[name] = value;
+      }
+    }
+
+    return list;
+  }
+
   get effects() {
     const list: { [name: string]: any } = {};
 
     for (const [ name, value ] of Object.entries(this.item)) {
-      if (typeof value === 'object' && value.modifier) {
+      if (typeof value === 'object' && value.modifier && !value.duration) {
         list[name] = value;
       }
     }
