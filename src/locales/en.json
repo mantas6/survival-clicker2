@@ -260,6 +260,24 @@
           }
         }
       }
+    },
+    "clothing": {
+      "title": "Clothing",
+      "groups": {
+        "casual": {
+          "title": "Casual",
+          "items": {
+            "underwear": {
+              "title": "Underwear",
+              "info": "Just the underwear! And in the public."
+            },
+            "warmClothing": {
+              "title": "Warm Clothing",
+              "info": "And you wondered why you look down on people that wear popular cheap clothes"
+            }
+          }
+        }
+      }
     }
   }
 }
