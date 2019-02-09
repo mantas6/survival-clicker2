@@ -1,6 +1,8 @@
 import { ToggleAction } from '.';
 import { traverse } from '@/utils/node';
+import { NoMultiplier } from './decorators';
 
+@NoMultiplier
 export class ClothingAction extends ToggleAction {
   onToggleOn() {
     for (const action of this.clothingActions()) {
