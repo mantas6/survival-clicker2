@@ -2,6 +2,7 @@ import { IgnoreLimits } from '@/classes/game/base/processes';
 import { StaminaAction, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
+import { TemperatureIncreaseMutation } from '@/classes/game/base/templates/mutations/temperature-increase-mutation';
 
 @UnlocksWhen(action => action.modifiers.education.construction.value.greaterThanOrEqualTo(1))
 export class Bricks extends StaminaAction {
@@ -10,7 +11,7 @@ export class Bricks extends StaminaAction {
     return new Decimal(-10);
   });
 
-  temperature = new Mutation(() => this.stats.character.temperature, () => {
+  temperature = new TemperatureIncreaseMutation(() => this.stats.character.temperature, () => {
     return new Decimal(0.1);
   });
 
