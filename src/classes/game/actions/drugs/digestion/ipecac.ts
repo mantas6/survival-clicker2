@@ -2,6 +2,7 @@ import { IgnoreLimits } from '@/classes/game/base/processes';
 import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
+import { MoneyCostMutation } from '@/classes/game/base/templates/mutations/money-cost-mutation';
 
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
 export class Ipecac extends Action {
@@ -14,7 +15,7 @@ export class Ipecac extends Action {
     return this.stats.character.stomach.value.mul(0.5).negated();
   });
 
-  money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.moneyCost(1);
+  money = new MoneyCostMutation(() => this.stats.finance.money, () => {
+    return new Decimal(1);
   });
 }

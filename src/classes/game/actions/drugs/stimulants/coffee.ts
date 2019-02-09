@@ -2,6 +2,7 @@ import { Action, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { TimerEffect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
+import { MoneyCostMutation } from '@/classes/game/base/templates/mutations/money-cost-mutation';
 
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(3))
 export class Coffee extends Action {
@@ -19,7 +20,7 @@ export class Coffee extends Action {
     return new Decimal(3);
   });
 
-  money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.moneyCost(2);
+  money = new MoneyCostMutation(() => this.stats.finance.money, () => {
+    return new Decimal(2);
   });
 }

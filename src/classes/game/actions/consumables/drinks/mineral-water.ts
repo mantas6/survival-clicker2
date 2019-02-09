@@ -3,6 +3,7 @@ import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
 import { TimerEffect } from '@/classes/game/base/modifiers';
+import { MoneyCostMutation } from '@/classes/game/base/templates/mutations/money-cost-mutation';
 
 @SerializeAllOn('emit')
 @UnlocksWhen(action => action.modifiers.education.school.hasFinished)
@@ -18,7 +19,7 @@ export class MineralWater extends Action {
   });
 
   @Unlocks
-  money = new Mutation(() => this.stats.finance.money, () => {
-    return this.helpers.moneyCost(6);
+  money = new MoneyCostMutation(() => this.stats.finance.money, () => {
+    return new Decimal(6);
   });
 }
