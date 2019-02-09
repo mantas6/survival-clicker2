@@ -24,7 +24,7 @@ window.addEventListener('focus', () => setup());
 setup();
 
 async function send() {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.VUE_APP_DISABLE_COLLECT) {
     return;
   }
 
