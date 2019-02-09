@@ -11,9 +11,8 @@ export class PizzaDelivery extends StaminaAction {
     return new Decimal(-3);
   });
 
-  temperature = new TemperatureMutation({
-    stat: () => this.stats.character.temperature,
-    value: () => new Decimal(0.1),
+  temperature = new TemperatureMutation(() => this.stats.character.temperature, () => {
+    return new Decimal(0.1);
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
