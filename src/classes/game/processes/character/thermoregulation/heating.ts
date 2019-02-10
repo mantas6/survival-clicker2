@@ -1,4 +1,4 @@
-import { Process, When } from '@/classes/game/base/processes';
+import { Process, When, IgnoreLimits } from '@/classes/game/base/processes';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { TemperatureMutation } from '@/classes/game/base/templates/mutations/temperature-mutation';
@@ -9,6 +9,7 @@ export class Heating extends Process {
     return new Decimal(0.1);
   });
 
+  @IgnoreLimits('lessThanMinimum')
   energy = new Mutation(() => this.stats.character.energy, () => {
     return new Decimal(-0.5);
   });
