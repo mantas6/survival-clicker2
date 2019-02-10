@@ -2,24 +2,28 @@
   <header>
     <game-logo></game-logo>
     <div class="info" v-if="stats.finance && modifiers.finance">
-      <div class="money">
-        <div class="current">
-          <number-format :value="money" post-fix="$"></number-format>
-        </div>
-        <div class="income">
-          + <number-format :value="moneyGain" post-fix="$"></number-format> / s
-        </div>
-        <div class="tax">
-          @ <number-format :value="tax" post-fix="%"></number-format> tax
-        </div>
+      <div class="stats">
         <div class="temperature">
-          <span>{{ temperature }}C</span>
+          <div class="current">
+            <span>{{ temperature }}C</span>
+          </div>
+          <div class="diff">
+            <span>{{ temperatureDiff }}</span>
+          </div>
         </div>
-        <div class="temperature-diff">
-          <span>{{ temperatureDiff }}</span>
+        <div class="money">
+          <div class="current">
+            <number-format :value="money" post-fix="$"></number-format>
+          </div>
+          <div class="income">
+            + <number-format :value="moneyGain" post-fix="$"></number-format> / s
+          </div>
+          <div class="tax">
+            @ <number-format :value="tax" post-fix="%"></number-format> tax
+          </div>
         </div>
       </div>
-      <div class="stats">
+      <div class="containers">
         <container-stat name="health" :stat="health"></container-stat>
         <container-stat name="energy" :stat="energy"></container-stat>
         <container-stat name="stamina" :stat="stamina"></container-stat>
@@ -120,29 +124,47 @@ export default class HeaderContainer extends Vue {
       }
     }
 
-    .stats {
+    .containers {
       display: grid;
       grid-gap: 0.5rem;
     }
 
-    .money {
+    .stats {
       width: 100%;
-      padding-right: 1.5vw;
+      padding: {
+        right: 1.5vw;
+        left: 1.5vw;
+      };
 
-      .current {
-        font-size: 2.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .temperature {
+        .current {
+          font-size: 2.25rem;
+        }
+
+        .diff {
+          font-size: 1.5rem;
+        }
       }
 
-      .income {
-        font-size: 1.5rem;
-      }
+      .money {
+        .current {
+          font-size: 2.25rem;
+        }
 
-      .tax {
-        font-size: 1.25rem;
-      }
+        .income {
+          font-size: 1.5rem;
+        }
 
-      > * {
-        text-align: right;
+        .tax {
+          font-size: 1.25rem;
+        }
+
+        > * {
+          text-align: right;
+        }
       }
     }
 
