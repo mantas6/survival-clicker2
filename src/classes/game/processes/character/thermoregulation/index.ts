@@ -4,6 +4,7 @@ import { Cooling } from './cooling';
 import { Dissipation } from './dissipation';
 import { Hyperthermia } from './hyperthermia';
 import { Hypothermia } from './hypothermia';
+import { Hyperpyrexia } from './hyperpyrexia';
 
 export class Thermoregulation extends ProcessContainer {
   heating = new Heating();
@@ -13,4 +14,5 @@ export class Thermoregulation extends ProcessContainer {
 
   hyperthermia = new Hyperthermia();
   hypothermia = new Hypothermia();
+  hyperpyrexia = new Hyperpyrexia();
 }
