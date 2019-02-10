@@ -14,7 +14,7 @@ export class Processes extends ProcessContainer {
 
     for (const node of traverse(this)) {
       if (node instanceof Process && !(node instanceof Action)) {
-        if (node.isCalculated) {
+        if (node.isCalculated && node.constructor.displayWhenCalculated) {
           processes.push(node);
         }
       }

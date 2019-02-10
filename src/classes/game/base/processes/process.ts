@@ -34,6 +34,7 @@ interface MutationEntry {
 export abstract class Process extends Transformable implements Calculable {
   static descriptorsOfProcessables: ProcessableDescriptorMap = new Map();
   static conditions: Condition[] = [];
+  static displayWhenCalculated: boolean = false;
 
   @Transform('clock', () => false)
   isCalculated: boolean = false;

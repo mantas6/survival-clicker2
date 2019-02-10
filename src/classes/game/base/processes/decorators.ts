@@ -7,6 +7,10 @@ export function When(conditionFunc: ConditionFunction) {
   };
 }
 
+export function DisplayWhenCalculated(ctor: typeof Process) {
+  ctor.displayWhenCalculated = true;
+}
+
 export function IgnoreLimits(...flags: LimitFlag[]) {
   return (processClass: Process, propertyName: string) => {
     const descriptor = prepareDescriptorOfProperty('mutation', processClass, propertyName) as MutationDescriptor;
