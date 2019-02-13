@@ -1,7 +1,6 @@
 import Decimal from 'decimal.js';
 import { SerializableWithReference, SerializeOn } from '@/classes/game/base/serialization';
 import { traverse } from '@/utils/node';
-import { ToggleAction } from '@/classes/game/base/actions/toggle-action';
 
 export abstract class Modifier extends SerializableWithReference {
   protected abstract compute(cumulated: Decimal): Decimal;

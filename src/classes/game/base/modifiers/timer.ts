@@ -1,7 +1,7 @@
 import { CalculationOptions } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { TimerEffect } from '@/classes/game/base/modifiers';
-import { Serializable, SerializeOn, SerializeAs, UnserializeAs } from '@/classes/game/base/serialization';
+import { Serializable, SerializeOn, UnserializeAs } from '@/classes/game/base/serialization';
 
 export interface TimerOptions {
   effect: TimerEffect;
