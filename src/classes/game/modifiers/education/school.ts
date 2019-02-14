@@ -9,4 +9,8 @@ export class School extends Modifier {
   get hasFinished() {
     return this.compute().greaterThanOrEqualTo(6);
   }
+
+  get hasStarted() {
+    return this.compute().greaterThanOrEqualTo(1);
+  }
 }
