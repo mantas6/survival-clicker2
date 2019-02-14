@@ -1,4 +1,4 @@
-import { Action, Unlocks, NoMultiplier } from '@/classes/game/base/actions';
+import { Action, NoMultiplier, UnlocksWhen } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializeAllOn } from '@/classes/game/base/serialization';
 import Decimal from 'decimal.js';
@@ -7,8 +7,9 @@ import { growth } from '@/utils/math';
 
 @SerializeAllOn('emit')
 @NoMultiplier
+@UnlocksWhen(action => action.modifiers.education.school.hasStarted)
+@UnlocksWhen(action => action.stats.finance.money.value.greaterThanOrEqualTo(100))
 export class Deposit extends Action {
-  @Unlocks
   money = new MoneyCostMutation(() => this.stats.finance.money, () => {
     return new Decimal(growth(this.timesCalculated, 200, 1.3));
   });
