@@ -4,7 +4,7 @@ import { TimerEffect } from '@/classes/game/base/modifiers';
 import Decimal from 'decimal.js';
 import { MoneyCostMutation } from '@/classes/game/base/templates/mutations/money-cost-mutation';
 
-@UnlocksWhen(action => action.modifiers.education.school.value.greaterThan(0))
+@UnlocksWhen(action => action.modifiers.education.school.hasStarted)
 export class EnergyDrink extends Action {
   hydration = new TimerEffect({
     modifier: () => this.modifiers.character.intake.hydration,
