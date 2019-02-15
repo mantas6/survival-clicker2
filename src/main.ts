@@ -82,9 +82,11 @@ worker.addEventListener('error', error => {
 
 relay.watch((name, data) => {
   const time = new Date().getTime().toString();
+  const version = process.env.VUE_APP_VERSION;
+
   collect({
     name: 'relay',
-    titles: { name },
+    titles: { name, version },
     attachments: { data: JSON.stringify(data) },
     values: {
       time: { value: time, e: '1' },
