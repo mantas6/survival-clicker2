@@ -124,6 +124,12 @@ export default class HeaderContainer extends Vue {
       }
     }
 
+    .stats, .containers {
+      .is-dead & {
+        display: none;
+      }
+    }
+
     .containers {
       display: grid;
       grid-gap: 0.5rem;
