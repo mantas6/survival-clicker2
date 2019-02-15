@@ -1,5 +1,6 @@
 import { Character } from './character';
 import { Finance } from './finance';
+import { Incarnation } from './incarnation';
 import { ProcessContainer, Process } from '@/classes/game/base/processes';
 import { traverse } from '@/utils/node';
 import { SerializedNode, TagName } from '@/classes/game/base/serialization/serializable';
@@ -8,6 +9,7 @@ import { Action } from '@/classes/game//base/actions';
 export class Processes extends ProcessContainer {
   character = new Character();
   finance = new Finance();
+  incarnation = new Incarnation();
 
   serialize(tagName: TagName): SerializedNode | undefined  {
     const processes: Process[] = [];
