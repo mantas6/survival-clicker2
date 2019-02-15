@@ -19,7 +19,7 @@ export class ClothingAction extends ToggleAction {
   }
 
   private *clothingActions(): IterableIterator<ClothingAction> {
-    for (const node of traverse(this.actions.clothing)) {
+    for (const node of traverse(this.actions.mundane.clothing)) {
       if (node instanceof ClothingAction) {
         yield node;
       }

@@ -3,7 +3,7 @@ import Decimal from 'decimal.js';
 
 export class Medicine extends Modifier {
   compute() {
-    return new Decimal(0).add(this.actions.education.courses.medicineLecture.timesCalculated);
+    return new Decimal(0).add(this.actions.mundane.education.courses.medicineLecture.timesCalculated);
   }
 
   knowsBasics() {

@@ -3,7 +3,7 @@ import Decimal from 'decimal.js';
 
 export class School extends Modifier {
   compute() {
-    return new Decimal(0).add(this.actions.education.primary.school.timesCalculated);
+    return new Decimal(0).add(this.actions.mundane.education.primary.school.timesCalculated);
   }
 
   get hasFinished() {

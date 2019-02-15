@@ -38,11 +38,11 @@ export default class Actions extends Vue {
   }
 
   get availableGroups() {
-    if (!this.allActions) {
+    if (!this.allActions || !this.allActions.mundane) {
       return;
     }
 
-    const groups = this.allActions[this.categoryName];
+    const groups = this.allActions.mundane[this.categoryName];
 
     return pickBy<{}>(groups, group => Object.keys(group).length);
   }

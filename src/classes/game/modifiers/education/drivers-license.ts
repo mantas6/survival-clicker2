@@ -3,6 +3,6 @@ import Decimal from 'decimal.js';
 
 export class DriversLicense extends Modifier {
   compute() {
-    return new Decimal(0).add(this.actions.education.courses.driversLicense.timesCalculated);
+    return new Decimal(0).add(this.actions.mundane.education.courses.driversLicense.timesCalculated);
   }
 }

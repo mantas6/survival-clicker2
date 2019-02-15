@@ -18,8 +18,8 @@ export class Actions extends VuexModule {
   }
 
   get availableCategories(): string[] {
-    if (this.list) {
-      return Object.keys(this.list);
+    if (this.list && this.list.mundane) {
+      return Object.keys(this.list.mundane);
     }
 
     return [];
@@ -28,8 +28,8 @@ export class Actions extends VuexModule {
   get unseenCategories(): string[] {
     const categoriesNames = [];
 
-    if (this.list) {
-      for (const [ categoryName, { hasUnseen } ] of Object.entries(this.list)) {
+    if (this.list && this.list.mundane) {
+      for (const [ categoryName, { hasUnseen } ] of Object.entries(this.list.mundane)) {
         if (hasUnseen) {
           categoriesNames.push(categoryName);
         }
