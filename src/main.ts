@@ -24,12 +24,14 @@ store.commit('setRelay', relay);
 
 Vue.component('NumberFormat', NumberFormat);
 
-Sentry.init({
-  dsn: process.env.VUE_APP_SENTRY_KEY,
-  integrations: [new Sentry.Integrations.Vue({ Vue })],
-  environment: process.env.NODE_ENV,
-  enabled: process.env.NODE_ENV === 'production',
-});
+if (!process.env.VUE_APP_DISABLE_SENTRY) {
+  Sentry.init({
+    dsn: process.env.VUE_APP_SENTRY_KEY,
+    integrations: [new Sentry.Integrations.Vue({ Vue })],
+    environment: process.env.NODE_ENV,
+    enabled: process.env.NODE_ENV === 'production',
+  });
+}
 
 new Vue({
   router,
@@ -75,10 +77,12 @@ storage.getItem('save').then(previousSave => {
   }
 });
 
-worker.addEventListener('error', error => {
-  const { message, lineno, filename } = error;
-  Sentry.captureException(new Error(`${message} at line ${lineno} in ${filename}`));
-});
+if (!process.env.VUE_APP_DISABLE_SENTRY) {
+  worker.addEventListener('error', error => {
+    const { message, lineno, filename } = error;
+    Sentry.captureException(new Error(`${message} at line ${lineno} in ${filename}`));
+  });
+}
 
 relay.watch((name, data) => {
   const time = new Date().getTime().toString();
