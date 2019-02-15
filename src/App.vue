@@ -4,7 +4,6 @@
     <div v-else-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
     <header-container></header-container>
     <main>
-      <navigation v-show="isAlive"></navigation>
       <div v-show="isAlive">
         <keep-alive>
           <router-view/>
@@ -27,7 +26,7 @@ import { isUpdateAvailable } from '@/utils/version';
 import Incarnation from './views/Incarnation.vue';
 
 @Component({
-  components: { HeaderContainer, Navigation, Sidebar, Incarnation },
+  components: { HeaderContainer, Sidebar, Incarnation },
   async created(this: App) {
     this.isUpdateAvailable = await isUpdateAvailable();
   },

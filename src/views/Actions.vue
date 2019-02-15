@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div>
+    <navigation></navigation>
     <article>
       <action-group v-for="(group, groupName) of availableGroups"
         :key="groupName"
@@ -16,10 +17,11 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import ActionGroup from '@/components/layout/Actions/ActionGroup.vue';
+import Navigation from '@/components/layout/Navigation.vue';
 import { pickBy } from '@/utils/method';
 
 @Component({
-  components: { ActionGroup },
+  components: { ActionGroup, Navigation },
 
   updated(this: Actions) {
     if (this.availableCategories && !this.availableCategories.includes(this.categoryName)) {
@@ -48,13 +50,9 @@ export default class Actions extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
   article {
     display: grid;
     grid-gap: 1rem;
+    width: 50%;
   }
 </style>
