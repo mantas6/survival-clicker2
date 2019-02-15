@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+      <span>Incarnation points: </span>
+      <number-format :value="incarnationPoints"></number-format>
+    </div>
     <button @click="reset">{{ $t('reincarnate') }}</button>
   </div>
 </template>
@@ -8,10 +12,16 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
+import { SerializedStats } from '@/store/stats';
 
 @Component
 export default class Incarnation extends Vue {
   @Getter relay!: Relay;
+  @Getter stats!: SerializedStats;
+
+  get incarnationPoints() {
+    return this.stats.incarnation.points.value;
+  }
 
   reset() {
     this.relay.emit('action', { path: 'actions.other.character.reincarnate', multiplier: 1 });
