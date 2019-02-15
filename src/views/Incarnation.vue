@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="stats">
       <span>Incarnation points: </span>
       <number-format :value="incarnationPoints"></number-format>
     </div>
