@@ -1,6 +1,6 @@
 import { Category } from '@/classes/game/base/actions';
-import { Temperature } from './temperature';
+import { Character } from './character';
 
 export class Modules extends Category {
-  temperature = new Temperature();
+  character = new Character();
 }
