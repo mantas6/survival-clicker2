@@ -1,4 +1,3 @@
-import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { ClothingAction } from '@/classes/game/base/actions/clothing-action';
 import { Effect } from '@/classes/game/base/modifiers';
