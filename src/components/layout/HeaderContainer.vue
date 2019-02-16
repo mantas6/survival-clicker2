@@ -22,6 +22,12 @@
             @ <number-format :value="tax" post-fix="%"></number-format> tax
           </div>
         </div>
+        <div class="incarnation">
+          <div class="points">
+            <span>Incarnation points: </span>
+            <number-format :value="incarnationPoints"></number-format>
+          </div>
+        </div>
       </div>
       <div class="containers">
         <container-stat name="health" :stat="health"></container-stat>
@@ -106,6 +112,10 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
+  get incarnationPoints() {
+    return this.stats.incarnation.points.value;
+  }
+
   get isAlive() {
     return this.globals.isAlive;
   }
@@ -135,8 +145,14 @@ export default class HeaderContainer extends Vue {
       }
     }
 
-    .stats, .containers {
+    .temperature, .money, .containers {
       .is-dead & {
+        display: none;
+      }
+    }
+
+    .incarnation {
+      .is-alive & {
         display: none;
       }
     }
