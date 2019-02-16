@@ -1,6 +1,6 @@
 import { Serializable } from './serializable';
 import { SerializableWithReference } from '@/classes/game/base/serialization/serializable-with-reference';
-import { SerializeOn, SerializeAs, UnserializeAs, SerializeAllOn, DoNotSerialize, SerializeWhen } from './decorators';
+import { SerializeOn, SerializeAs, UnserializeAs, SerializeAllOn, DoNotSerialize } from './decorators';
 
 export {
   Serializable,
@@ -10,5 +10,4 @@ export {
   SerializableWithReference,
   SerializeAllOn,
   DoNotSerialize,
-  SerializeWhen,
 };
