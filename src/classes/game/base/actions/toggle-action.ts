@@ -1,6 +1,6 @@
 import { Action } from '.';
 import { SerializeOn } from '@/classes/game/base/serialization';
-import { Transform } from '../transformable';
+import { Transform } from '@/classes/game/base/transformable';
 
 export class ToggleAction extends Action {
   @SerializeOn('emit', 'store')
