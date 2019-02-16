@@ -9,10 +9,13 @@ export interface SerializedNode {
   [ propertyName: string ]: SerializedNode | BasicValue | ArrayValue | undefined;
 }
 
+export type ConditionFunction<Node extends Serializable> = (node: Node) => boolean;
+
 export interface PropertyDescriptor {
   tagNames?: string[];
   serializeFunc?: (input: any) => BasicValue | ArrayValue;
   unserializeFunc?: (input: BasicValue) => any;
+  conditions?: Array<{ tagName: string, conditionFunc: ConditionFunction<any> }>;
 }
 
 export type PropertyDescriptorMap = Map<string, PropertyDescriptor>;
@@ -97,6 +100,10 @@ export abstract class Serializable extends StateNode {
 
       ownPropertyNames.push(name);
 
+      if (!this.doesMeetConditions(tagName, name)) {
+        continue;
+      }
+
       if (descriptor && descriptor.tagNames && descriptor.tagNames.includes(tagName)) {
         // Is tagged using @SerializeOn decorator
         yield property;
@@ -112,6 +119,10 @@ export abstract class Serializable extends StateNode {
         continue;
       }
 
+      if (!this.doesMeetConditions(tagName, name)) {
+        continue;
+      }
+
       const ctx = this as { [propertyName: string]: any };
       const node = ctx[name] as () => ConstructorProperty;
 
@@ -119,5 +130,21 @@ export abstract class Serializable extends StateNode {
         yield { name, node, descriptor };
       }
     }
+  }
+
+  private doesMeetConditions(tagName: TagName, propertyName: string): boolean {
+    const descriptor = this.constructor.descriptorsOfProperties.get(propertyName);
+
+    if (descriptor && descriptor.conditions) {
+      for (const condition of descriptor.conditions) {
+        if (condition.tagName === tagName) {
+          if (!condition.conditionFunc(this)) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 }

@@ -1,4 +1,4 @@
-import { Serializable, TagName, PropertyDescriptor, BasicValue, ArrayValue } from './serializable';
+import { Serializable, TagName, PropertyDescriptor, BasicValue, ArrayValue, ConditionFunction } from './serializable';
 
 /**
  * Serializes all children of the class
@@ -7,6 +7,18 @@ import { Serializable, TagName, PropertyDescriptor, BasicValue, ArrayValue } fro
 export function SerializeAllOn(...tagNames: TagName[]) {
   return (ctor: typeof Serializable) => {
     ctor.defaultTagNames = [ ...ctor.defaultTagNames, ...tagNames ];
+  };
+}
+
+export function SerializeWhen<Node extends Serializable>(tagName: TagName, conditionFunc: ConditionFunction<Node>) {
+  return (serializableClass: Serializable, propertyName: string) => {
+    const descriptor = prepareDescriptorOfProperty(serializableClass, propertyName);
+
+    if (!descriptor.conditions) {
+      descriptor.conditions = [];
+    }
+
+    descriptor.conditions.push({ tagName, conditionFunc });
   };
 }
 
