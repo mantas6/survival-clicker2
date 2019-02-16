@@ -34,7 +34,7 @@
     <small class="version">{{ version }}</small>
     <controls></controls>
     <button v-show="isAlive" class="suicide" @click="suicide">{{ $t('suicide') }}</button>
-    <button v-show="!isAlive" class="suicide" @click="reincarnate">{{ $t('reincarnate') }}</button>
+    <button v-show="!isAlive" class="reincarnate" @click="reincarnate">{{ $t('reincarnate') }}</button>
   </header>
 </template>
 
@@ -190,19 +190,27 @@ export default class HeaderContainer extends Vue {
       margin-right: 1.5vw;
     }
 
-    .suicide {
+    .suicide, .reincarnate {
       text-transform: lowercase;
       margin-right: 1.5vw;
       padding: 0.25rem;
-      border: 0.25rem solid hsl(0, 100%, 50%);
       border-radius: 1rem;
       font-size: 2rem;
       text-align: center;
       text-decoration: none;
-      background-color: hsl(0, 100%, 50%);
       color: white;
       outline: none;
       cursor: pointer;
+    }
+
+    .suicide {
+      border: 0.25rem solid hsl(0, 100%, 50%);
+      background-color: hsl(0, 100%, 50%);
+    }
+
+    .reincarnate {
+      border: 0.25rem solid hsl(25%, 100%, 50%);
+      background-color: hsl(25%, 100%, 50%);
     }
   }
 </style>
