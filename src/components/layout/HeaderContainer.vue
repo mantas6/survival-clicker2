@@ -33,7 +33,8 @@
     </div>
     <small class="version">{{ version }}</small>
     <controls></controls>
-    <button class="suicide" @click="reset">{{ $t('suicide') }}</button>
+    <button v-show="isAlive" class="suicide" @click="suicide">{{ $t('suicide') }}</button>
+    <button v-show="!isAlive" class="suicide" @click="reincarnate">{{ $t('reincarnate') }}</button>
   </header>
 </template>
 
@@ -45,6 +46,7 @@ import ContainerStat from '@/components/ContainerStat.vue';
 import Controls from '@/components/layout/Controls.vue';
 import { SerializedStats } from '@/store/stats';
 import { SerializedModifiers } from '@/store/modifiers';
+import { SerializedGlobals } from '@/store/globals';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
@@ -56,6 +58,7 @@ export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter modifiers!: SerializedModifiers;
   @Getter relay!: Relay;
+  @Getter globals!: SerializedGlobals;
 
   get version() {
     return process.env.VUE_APP_VERSION;
@@ -103,8 +106,16 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
-  reset() {
+  get isAlive() {
+    return this.globals.isAlive;
+  }
+
+  suicide() {
     this.relay.emit('action', { path: 'actions.other.character.suicide', multiplier: 1 });
+  }
+
+  reincarnate() {
+    this.relay.emit('action', { path: 'actions.other.character.reincarnate', multiplier: 1 });
   }
 }
 </script>
