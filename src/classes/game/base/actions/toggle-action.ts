@@ -19,9 +19,7 @@ export class ToggleAction extends Action {
 
   @SerializeOn('emit')
   get canToggleOn(): boolean {
-    const isPurchased = !this.timesCalculated.isZero();
-
-    return isPurchased && !this.isToggledOn;
+    return this.isCalculatedOnce && !this.isToggledOn;
   }
 
   @SerializeOn('emit')
