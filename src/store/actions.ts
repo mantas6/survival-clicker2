@@ -16,26 +16,4 @@ export class Actions extends VuexModule {
   get allActions() {
     return this.list;
   }
-
-  get availableCategories(): string[] {
-    if (this.list && this.list.mundane) {
-      return Object.keys(this.list.mundane);
-    }
-
-    return [];
-  }
-
-  get unseenCategories(): string[] {
-    const categoriesNames = [];
-
-    if (this.list && this.list.mundane) {
-      for (const [ categoryName, { hasUnseen } ] of Object.entries(this.list.mundane)) {
-        if (hasUnseen) {
-          categoriesNames.push(categoryName);
-        }
-      }
-    }
-
-    return categoriesNames;
-  }
 }

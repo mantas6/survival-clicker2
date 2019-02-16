@@ -1,58 +1,25 @@
 <template>
   <div>
-    <navigation></navigation>
-    <article>
-      <action-group v-for="(group, groupName) of availableGroups"
-        :key="groupName"
-        :groupName="groupName"
-        :categoryName="categoryName"
-        :group="group">
-      </action-group>
-    </article>
+    <mundane v-if="isAlive"></mundane>
+    <incarnation v-else></incarnation>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { SerializedActions } from '@/store/actions';
-import ActionGroup from '@/components/layout/Actions/ActionGroup.vue';
-import Navigation from '@/components/layout/Navigation.vue';
-import { pickBy } from '@/utils/method';
+import { SerializedGlobals } from '@/store/globals';
+import Mundane from '@/components/subviews/Mundane.vue';
+import Incarnation from '@/components/subviews/Incarnation.vue';
 
 @Component({
-  components: { ActionGroup, Navigation },
-
-  updated(this: Actions) {
-    if (this.availableCategories && !this.availableCategories.includes(this.categoryName)) {
-      this.$router.push({ name: 'home' });
-    }
-  },
+  components: { Mundane, Incarnation },
 })
 export default class Actions extends Vue {
-  @Getter availableCategories!: string[];
-  @Getter allActions!: SerializedActions;
+  @Getter globals!: SerializedGlobals;
 
-  get categoryName() {
-    return this.$route.params.name as 'jobs' | 'consumables' | 'drugs' | 'investment';
-  }
-
-  get availableGroups() {
-    if (!this.allActions || !this.allActions.mundane) {
-      return;
-    }
-
-    const groups = this.allActions.mundane[this.categoryName];
-
-    return pickBy<{}>(groups, group => Object.keys(group).length);
+  get isAlive() {
+    return this.globals.isAlive;
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  article {
-    display: grid;
-    grid-gap: 1rem;
-    width: 50%;
-  }
-</style>

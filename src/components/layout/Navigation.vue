@@ -1,22 +1,32 @@
 <template>
   <nav>
-    <router-link v-for="category in availableCategories" 
+    <a v-for="category in availableCategories"
       :key="category"
-      :to="{ name: 'actions', params: { name: category } }">
+      :class="category == selectedCategory ? 'active' : ''"
+      @click.prevent="select(category)">
       <span>{{ $t(`actions.${category}.title`) }}</span>
       <span class="unseen" v-show="unseenCategories.includes(category)">*</span>
-    </router-link>
+    </a>
   </nav>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Getter } from 'vuex-class';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Navigation extends Vue {
-  @Getter availableCategories!: string[];
-  @Getter unseenCategories!: string[];
+  @Prop({ required: true })
+  availableCategories!: string[];
+
+  @Prop({ required: true })
+  unseenCategories!: string[];
+
+  selectedCategory: string = 'jobs';
+
+  select(categoryName: string) {
+    this.selectedCategory = categoryName;
+    this.$emit('selectCategory', categoryName);
+  }
 }
 </script>
 
@@ -25,11 +35,12 @@ export default class Navigation extends Vue {
     margin-bottom: 4rem;
 
     a {
+      cursor: pointer;
       text-transform: uppercase;
       text-decoration: none;
       color: grey;
 
-      &.router-link-exact-active {
+      &.active {
         color: lightblue;
       }
 

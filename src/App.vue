@@ -4,12 +4,9 @@
     <div v-else-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
     <header-container></header-container>
     <main>
-      <div v-show="isAlive">
-        <keep-alive>
-          <router-view/>
-        </keep-alive>
-      </div>
-      <incarnation v-show="!isAlive"></incarnation>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </main>
     <sidebar></sidebar>
   </div>
@@ -23,10 +20,8 @@ import Sidebar from '@/components/layout/Sidebar.vue';
 import { Getter } from 'vuex-class';
 import { SerializedGlobals } from '@/store/globals';
 import { isUpdateAvailable } from '@/utils/version';
-import Incarnation from './views/Incarnation.vue';
-
 @Component({
-  components: { HeaderContainer, Sidebar, Incarnation },
+  components: { HeaderContainer, Sidebar },
   async created(this: App) {
     this.isUpdateAvailable = await isUpdateAvailable();
   },
@@ -36,10 +31,6 @@ export default class App extends Vue {
   @Getter globals!: SerializedGlobals;
 
   isUpdateAvailable: boolean = false;
-
-  get isAlive() {
-    return this.globals.isAlive;
-  }
 
   get isStaging() {
     return process.env.VUE_APP_STAGING_WARNING;
@@ -56,7 +47,7 @@ export default class App extends Vue {
       list.push('dark-mode');
     }
 
-    if (this.isAlive) {
+    if (this.globals.isAlive) {
       list.push('is-alive');
     } else {
       list.push('is-dead');

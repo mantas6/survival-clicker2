@@ -9,10 +9,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      redirect: { name: 'actions', params: { name: 'jobs' } },
+      redirect: { name: 'actions' },
     },
     {
-      path: '/actions/:name',
+      path: '/actions',
       name: 'actions',
       component: Actions,
     },
