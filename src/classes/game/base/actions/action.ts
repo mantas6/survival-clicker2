@@ -61,6 +61,10 @@ export class Action extends Process {
     return false;
   }
 
+  get isCalculatedOnce() {
+    return this.timesCalculated.greaterThan(0);
+  }
+
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);
