@@ -6,7 +6,7 @@ export class Clothing extends Category {
   casual = new Casual();
 
   serialize(tagName: TagName) {
-    if (this.actions.incarnation.modules.character.temperature.isCalculatedOnce) {
+    if (this.actions.incarnation.modules.character.temperature.isToggledOn) {
       return super.serialize(tagName);
     }
   }

@@ -17,6 +17,6 @@ export class Thermoregulation extends ProcessContainer {
   hyperpyrexia = new Hyperpyrexia();
 
   validate() {
-    return this.actions.incarnation.modules.character.temperature.isCalculatedOnce;
+    return this.actions.incarnation.modules.character.temperature.isToggledOn || false;
   }
 }

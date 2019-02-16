@@ -123,7 +123,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get isTemperatureUnlocked() {
-    return this.allActions.incarnation.modules.character.temperature.isCalculatedOnce;
+    return this.allActions.incarnation.modules.character.temperature.isToggledOn;
   }
 
   suicide() {
