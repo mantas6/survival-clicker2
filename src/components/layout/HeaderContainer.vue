@@ -4,10 +4,10 @@
     <div class="info" v-if="stats.finance && modifiers.finance">
       <div class="stats">
         <div class="temperature">
-          <div class="current">
+          <div class="current" v-show="isTemperatureUnlocked">
             <span>{{ temperature }}C</span>
           </div>
-          <div class="diff">
+          <div class="diff" v-show="isTemperatureUnlocked">
             <span>{{ temperatureDiff }}</span>
           </div>
         </div>
@@ -56,12 +56,14 @@ import { SerializedGlobals } from '@/store/globals';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
+import { SerializedActions } from '@/store/actions';
 
 @Component({
   components: { GameLogo, ProgressBar, ContainerStat, Controls },
 })
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
+  @Getter allActions!: SerializedActions;
   @Getter modifiers!: SerializedModifiers;
   @Getter relay!: Relay;
   @Getter globals!: SerializedGlobals;
@@ -118,6 +120,10 @@ export default class HeaderContainer extends Vue {
 
   get isAlive() {
     return this.globals.isAlive;
+  }
+
+  get isTemperatureUnlocked() {
+    return this.allActions.incarnation.modules.character.temperature.isCalculatedOnce;
   }
 
   suicide() {

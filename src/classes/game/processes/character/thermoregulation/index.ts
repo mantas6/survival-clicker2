@@ -15,4 +15,8 @@ export class Thermoregulation extends ProcessContainer {
   hyperthermia = new Hyperthermia();
   hypothermia = new Hypothermia();
   hyperpyrexia = new Hyperpyrexia();
+
+  validate() {
+    return this.actions.incarnation.modules.character.temperature.isCalculatedOnce;
+  }
 }
