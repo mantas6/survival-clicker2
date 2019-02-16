@@ -61,6 +61,7 @@ export class Action extends Process {
     return false;
   }
 
+  @SerializeOn('emit')
   get isCalculatedOnce() {
     return this.timesCalculated.greaterThan(0);
   }
