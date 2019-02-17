@@ -161,7 +161,7 @@ export default class ActionItem extends Vue {
     }
 
     &.warning .head {
-      color: yellow;
+      color: #d0d02b;
     }
 
     .head {

@@ -96,6 +96,6 @@ export default class ActionInfo extends Vue {
   }
 
   .warning {
-    color: yellow;
+    color: #d0d02b;
   }
 </style>
