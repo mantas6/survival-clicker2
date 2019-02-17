@@ -17,24 +17,25 @@ export class Action extends Process {
   static unlockingConditions: Condition[] = [];
   static lockingConditions: Condition[] = [];
   static defaultMaxMultiplier = new Decimal(Infinity);
+  static isPersistent: boolean = false;
 
   'constructor': typeof Action;
 
   @SerializeOn('store')
-  @Transform('reset', () => undefined)
+  @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
   isUnlocked?: boolean;
 
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input.toString()))
-  @Transform('reset', () => new Decimal(0))
+  @Transform<Decimal, Action>('reset', () => new Decimal(0), action => !action.constructor.isPersistent)
   timesCalculated: Decimal = new Decimal(0);
 
   @SerializeOn('store', 'emit')
-  @Transform('reset', () => undefined)
+  @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
   isSeen?: boolean;
 
   @SerializeOn('store', 'emit')
-  @Transform('reset', () => undefined)
+  @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
   queued?: Queued;
 
   @SerializeOn('emit')

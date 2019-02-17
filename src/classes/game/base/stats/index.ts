@@ -1,5 +1,6 @@
 import { Value } from './value';
 import { Container } from './container';
+import { Persist } from './decorators';
 
 /**
  * Describes a limit that is reached after stat mutation
@@ -12,4 +13,4 @@ import { Container } from './container';
  */
 export type LimitFlag = true | 'lessThanMinimum' | 'greaterThanMaximum';
 
-export { Value, Container };
+export { Value, Container, Persist };

@@ -2,6 +2,10 @@ import { Action } from '.';
 import { ConditionFunction } from './action';
 import Decimal from 'decimal.js';
 
+export function Persist(ctor: typeof Action) {
+  ctor.isPersistent = true;
+}
+
 export function Unlocks(actionClass: Action, propertyName: string) {
   const ctor = actionClass.constructor;
 

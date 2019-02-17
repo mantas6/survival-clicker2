@@ -5,6 +5,10 @@ import { MutationFunction } from '@/classes/game/base/mutations';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
 
 export abstract class Value extends Transformable {
+  static isPersistent: boolean = false;
+
+  'constructor': typeof Value;
+
   abstract default: number | string;
   /**
    * Standard value stat 99% of the time will default to zero as minimum value
@@ -13,7 +17,7 @@ export abstract class Value extends Transformable {
 
   @SerializeOn('store')
   @UnserializeAs(input => new Decimal(input.toString()))
-  @Transform('reset', () => undefined)
+  @Transform<undefined, Value>('reset', () => undefined, stat => !stat.constructor.isPersistent)
   current?: Decimal;
 
   @SerializeOn('emit')
