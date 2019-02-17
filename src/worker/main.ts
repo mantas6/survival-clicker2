@@ -16,6 +16,7 @@ const relay = new Relay(ctx);
 
 const state = new State();
 
+runClock();
 emitAll();
 
 relay.on('action', ({ path, multiplier }) => {
@@ -93,6 +94,11 @@ interval(30e3).subscribe(() => {
 });
 
 interval(1000).subscribe(() => {
+  runClock();
+  emitAll();
+});
+
+function runClock() {
   if (state.globals.isPaused) {
     return;
   }
@@ -107,8 +113,7 @@ interval(1000).subscribe(() => {
   state.timers.calculate();
   applyUnlocked(state);
   applyQueued(state);
-  emitAll();
-});
+}
 
 function emitAll() {
   relay.emit('state', state.serialize('emit'));
