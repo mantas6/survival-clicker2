@@ -5,11 +5,14 @@ import { Transformable } from './transformable';
  * @param tagName transformation tag name
  * @param valueFunc value that will be set on transformation
  */
-export function Transform<Target>(tagName: string, valueFunc: () => Target) {
+export function Transform<Target, Node>(
+  tagName: string,
+  valueFunc: () => Target,
+  whenFunc?: (node: Node) => boolean) {
   return (transformableClass: Transformable, propertyName: string) => {
     const ctor = transformableClass.constructor;
 
-    const transformation = { tagName, propertyName, valueFunc };
+    const transformation = { tagName, propertyName, valueFunc, whenFunc };
 
     ctor.transformations = [ ...ctor.transformations, transformation ];
   };
