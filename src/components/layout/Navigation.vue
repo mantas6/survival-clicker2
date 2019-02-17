@@ -21,7 +21,10 @@ export default class Navigation extends Vue {
   @Prop({ required: true })
   unseenCategories!: string[];
 
-  selectedCategory: string = 'jobs';
+  @Prop({ required: true })
+  defaultCategory!: string;
+
+  selectedCategory: string = this.defaultCategory;
 
   select(categoryName: string) {
     this.selectedCategory = categoryName;

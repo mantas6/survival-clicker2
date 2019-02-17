@@ -1,6 +1,7 @@
 <template>
   <div>
     <navigation @selectCategory="activeCategory = $event"
+      default-category="modules"
       :unseen-categories="unseenCategoryNames"
       :available-categories="availableCategoryNames">
     </navigation>
