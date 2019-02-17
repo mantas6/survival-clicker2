@@ -1,6 +1,7 @@
-import { Category } from '@/classes/game/base/actions';
 import { Temperature } from './temperature';
+import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
 
-export class Character extends Category {
+@SerializeAllOn('emit', 'store')
+export class Character extends Serializable {
   temperature = new Temperature();
 }
