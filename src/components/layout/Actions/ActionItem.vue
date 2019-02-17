@@ -10,6 +10,7 @@
           <span class="unseen" v-show="!item.isSeen">*</span>
         </div>
         <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
+        <number-format class="cost" v-if="item.points" :value="item.points.diff" post-fix="P"></number-format>
       </div>
       <div class="options">
         <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
