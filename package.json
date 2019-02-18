@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "@sentry/browser": "^4.5.4",
+    "@sentry/browser": "^4.6.1",
     "decimal.js": "^10.0.2",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
@@ -26,7 +26,7 @@
     "swarm-numberformat": "^0.4.0",
     "vue": "^2.6.6",
     "vue-class-component": "^6.3.2",
-    "vue-i18n": "^8.8.1",
+    "vue-i18n": "^8.8.2",
     "vue-property-decorator": "^7.3.0",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",
@@ -36,8 +36,8 @@
     "@babel/polyfill": "^7.2.5",
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@types/chai": "^4.1.7",
-    "@types/lodash": "^4.14.120",
-    "@types/mocha": "^5.2.4",
+    "@types/lodash": "^4.14.121",
+    "@types/mocha": "^5.2.6",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-e2e-cypress": "^3.4.0",
     "@vue/cli-plugin-typescript": "^3.4.0",
