@@ -278,6 +278,20 @@
           }
         }
       }
+    },
+    "modules": {
+      "title": "Modules",
+      "groups": {
+        "character": {
+          "title": "Character",
+          "items": {
+            "temperature": {
+              "title": "Temperature",
+              "info": "Now I have to take care of my body's temperature"
+            }
+          }
+        }
+      }
     }
   }
 }
