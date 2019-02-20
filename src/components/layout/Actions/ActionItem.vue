@@ -12,7 +12,7 @@
         <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
         <number-format class="cost" v-else-if="item.points" :value="item.points.diff" post-fix="P"></number-format>
       </div>
-      <div class="options">
+      <div class="options" v-if="isMultiplierUnlocked">
         <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
       </div>
     </div>
@@ -35,6 +35,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
+import { SerializedActions } from '@/store/actions';
 import Decimal from 'decimal.js';
 import { Action, ToggleAction } from '@/classes/game/base/actions';
 import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
@@ -42,6 +43,7 @@ import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
 @Component({ components: { ActionInfo } })
 export default class ActionItem extends Vue {
   @Getter relay!: Relay;
+  @Getter allActions!: SerializedActions;
 
   @Prop({ required: true })
   categoryName!: string;
@@ -85,6 +87,10 @@ export default class ActionItem extends Vue {
 
   get isToggable(): boolean {
     return (this.item as ToggleAction).canToggleOn || (this.item as ToggleAction).canToggleOff;
+  }
+
+  get isMultiplierUnlocked() {
+    return this.allActions.incarnation.automation.interaction.multiplier.isToggledOn;
   }
 
   activateOrToggle(path: string) {
