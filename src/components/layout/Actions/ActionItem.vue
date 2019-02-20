@@ -153,8 +153,10 @@ export default class ActionItem extends Vue {
     user-select: none;
     display: flex;
     justify-content: space-between;
-    padding: 0.75rem;
-    padding-left: 0;
+    padding: {
+      top: 0.75rem;
+      bottom: 0.75rem;
+    };
 
     &.toggled-on {
       border: 1px solid;
