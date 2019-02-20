@@ -4,7 +4,7 @@ import { Transform } from '@/classes/game/base/transformable';
 
 export class ToggleAction extends Action {
   @SerializeOn('emit', 'store')
-  @Transform('reset', () => undefined)
+  @Transform<undefined, ToggleAction>('reset', () => undefined, action => !action.constructor.isPersistent)
   isToggledOn?: boolean;
 
   toggleOn() {
