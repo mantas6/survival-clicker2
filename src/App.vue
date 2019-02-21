@@ -40,7 +40,7 @@ export default class App extends Vue {
     }
 
     if (this.isLoaded) {
-      if (this.globals.alive && this.globals.alive.value) {
+      if (this.globals.alive.value) {
         list.push('is-alive');
       } else {
         list.push('is-dead');

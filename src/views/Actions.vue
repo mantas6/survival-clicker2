@@ -19,7 +19,7 @@ export default class Actions extends Vue {
   @Getter globals!: SerializedGlobals;
 
   get isAlive() {
-    return this.globals.alive && this.globals.alive.value;
+    return this.globals.alive.value;
   }
 }
 </script>
