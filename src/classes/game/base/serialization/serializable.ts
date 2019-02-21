@@ -115,7 +115,7 @@ export abstract class Serializable extends StateNode {
       const ctx = this as { [propertyName: string]: any };
       const node = ctx[name] as () => ConstructorProperty;
 
-      if (node !== undefined && descriptor.tagNames && descriptor.tagNames.includes(tagName)) {
+      if (descriptor.tagNames && descriptor.tagNames.includes(tagName)) {
         yield { name, node, descriptor };
       }
     }
