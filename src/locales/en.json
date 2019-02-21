@@ -292,6 +292,20 @@
           }
         }
       }
+    },
+    "automation": {
+      "title": "Automation",
+      "groups": {
+        "interaction": {
+          "title": "Interaction",
+          "items": {
+            "multiplier": {
+              "title": "Multiplier",
+              "info": "Automatically buy/execute maximum multiplier"
+            }
+          }
+        }
+      }
     }
   }
 }
