@@ -22,12 +22,6 @@
             @ <number-format :value="tax" post-fix="%"></number-format> tax
           </div>
         </div>
-        <div class="incarnation">
-          <div class="points">
-            <span>Incarnation points: </span>
-            <number-format :value="incarnationPoints"></number-format>
-          </div>
-        </div>
       </div>
       <div class="containers">
         <container-stat name="health" :stat="health"></container-stat>
@@ -35,6 +29,13 @@
         <container-stat name="stamina" :stat="stamina"></container-stat>
         <container-stat name="hydration" :stat="hydration"></container-stat>
         <container-stat name="stomach" :stat="stomach"></container-stat>
+      </div>
+      <div class="incarnation" v-show="incarnationCurrentPoints !== '0' || incarnationTotalPoints !== '0'">
+        <div class="points">
+          <number-format :value="incarnationCurrentPoints"></number-format>
+          <span> / </span>
+          <number-format :value="incarnationTotalPoints"></number-format>
+        </div>
       </div>
     </div>
     <small class="version">{{ version }}</small>
@@ -114,8 +115,12 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
-  get incarnationPoints() {
-    return this.stats.incarnation.points.value;
+  get incarnationCurrentPoints() {
+    return this.stats.incarnation.currentPoints.value;
+  }
+
+  get incarnationTotalPoints() {
+    return this.stats.incarnation.points.total;
   }
 
   get isAlive() {
@@ -153,12 +158,6 @@ export default class HeaderContainer extends Vue {
 
     .temperature, .money, .containers {
       .is-dead & {
-        display: none;
-      }
-    }
-
-    .incarnation {
-      .is-alive & {
         display: none;
       }
     }
