@@ -1,7 +1,7 @@
 <template>
   <header>
     <game-logo></game-logo>
-    <div class="info" v-if="stats.finance && modifiers.finance">
+    <div class="info">
       <div class="stats">
         <div class="temperature">
           <div class="current" v-show="isTemperatureUnlocked">
