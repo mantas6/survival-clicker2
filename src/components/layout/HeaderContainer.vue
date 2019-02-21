@@ -119,7 +119,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get isAlive() {
-    return this.globals.isAlive;
+    return this.globals.alive && this.globals.alive.value;
   }
 
   get isTemperatureUnlocked() {

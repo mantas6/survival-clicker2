@@ -47,7 +47,7 @@ export default class App extends Vue {
       list.push('dark-mode');
     }
 
-    if (this.globals.isAlive) {
+    if (this.globals.alive && this.globals.alive.value) {
       list.push('is-alive');
     } else {
       list.push('is-dead');

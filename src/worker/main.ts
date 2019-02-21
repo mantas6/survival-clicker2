@@ -103,7 +103,7 @@ function runClock() {
     return;
   }
 
-  if (!state.globals.isAlive) {
+  if (!state.globals.alive.value) {
     return;
   }
 

@@ -6,6 +6,6 @@ import { SerializeAllOn } from '@/classes/game/base/serialization';
 export class Suicide extends Action {
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
-    this.state.globals.isAlive = false;
+    this.state.globals.alive.value = false;
   }
 }
