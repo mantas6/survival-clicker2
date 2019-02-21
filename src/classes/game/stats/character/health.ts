@@ -9,6 +9,6 @@ export class Health extends Container {
   }
 
   protected onLessThanMinimum(): void {
-    this.state.globals.alive.value = false;
+    this.state.globals.alive.terminate();
   }
 }

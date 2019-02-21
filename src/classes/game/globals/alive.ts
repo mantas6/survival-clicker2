@@ -11,7 +11,10 @@ export class Alive extends Transformable {
     return this.isAlive;
   }
 
-  set value(value) {
-    this.isAlive = value;
+  terminate() {
+    const currentPoints = this.stats.incarnation.currentPoints;
+    this.stats.incarnation.points.mutate(value => value.add(currentPoints.value));
+    currentPoints.current = undefined;
+    this.isAlive = false;
   }
 }
