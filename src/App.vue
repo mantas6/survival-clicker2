@@ -1,13 +1,16 @@
 <template>
   <div id="app" :class="classes">
-    <message-container></message-container>
-    <header-container></header-container>
-    <main>
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
-    </main>
-    <sidebar></sidebar>
+    <template v-if="isLoaded">
+      <message-container></message-container>
+      <header-container></header-container>
+      <main>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </main>
+      <sidebar></sidebar>
+    </template>
+    <div v-else>...</div>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ import { isUpdateAvailable } from '@/utils/version';
 })
 export default class App extends Vue {
   @Getter isDarkModeEnabled!: boolean;
+  @Getter isLoaded!: boolean;
   @Getter globals!: SerializedGlobals;
 
   get classes() {
@@ -35,14 +39,16 @@ export default class App extends Vue {
       list.push('dark-mode');
     }
 
-    if (this.globals.alive && this.globals.alive.value) {
-      list.push('is-alive');
-    } else {
-      list.push('is-dead');
-    }
+    if (this.isLoaded) {
+      if (this.globals.alive.value) {
+        list.push('is-alive');
+      } else {
+        list.push('is-dead');
+      }
 
-    if (this.globals.isPaused) {
-      list.push('is-paused');
+      if (this.globals.isPaused) {
+        list.push('is-paused');
+      }
     }
 
     return list;

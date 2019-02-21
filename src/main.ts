@@ -47,6 +47,7 @@ relay.on('state', ({ stats, actions, modifiers, timers, globals, processes }) =>
   store.commit('updateTimers', timers);
   store.commit('updateGlobals', globals);
   store.commit('updateProcesses', processes);
+  store.commit('setLoaded');
 });
 
 storage.getItem('debug').then(isEnabled => {
