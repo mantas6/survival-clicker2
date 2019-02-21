@@ -43,7 +43,9 @@ export default class ActionInfo extends Vue {
 
     for (const [ name, value ] of Object.entries(this.item)) {
       if (typeof value === 'object' && value.stat) {
-        list[name] = value;
+        if (value.diff !== '0') {
+          list[name] = value;
+        }
       }
     }
 
@@ -55,7 +57,9 @@ export default class ActionInfo extends Vue {
 
     for (const [ name, value ] of Object.entries(this.item)) {
       if (typeof value === 'object' && value.modifier && value.duration) {
-        list[name] = value;
+        if (value.value !== '0') {
+          list[name] = value;
+        }
       }
     }
 
@@ -67,7 +71,9 @@ export default class ActionInfo extends Vue {
 
     for (const [ name, value ] of Object.entries(this.item)) {
       if (typeof value === 'object' && value.modifier && !value.duration) {
-        list[name] = value;
+        if (value.value !== '0' && value.duration !== '0') {
+          list[name] = value;
+        }
       }
     }
 
