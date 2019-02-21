@@ -1,7 +1,6 @@
 <template>
   <div id="app" :class="classes">
-    <div v-if="isUpdateAvailable" class="update">Update is available. <a href="#" @click.prevent="reload">Reload to update</a></div>
-    <div v-else-if="isStaging" class="staging">You are currently running a staging build. Long term stablility of your savegame is not guaranteed. <a :href="stableBuildUrl">Switch to a stable build</a></div>
+    <message-container></message-container>
     <header-container></header-container>
     <main>
       <keep-alive>
@@ -17,28 +16,17 @@ import { Component, Vue } from 'vue-property-decorator';
 import HeaderContainer from '@/components/layout/HeaderContainer.vue';
 import Navigation from '@/components/layout/Navigation.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
+import MessageContainer from '@/components/layout/MessageContainer.vue';
 import { Getter } from 'vuex-class';
 import { SerializedGlobals } from '@/store/globals';
 import { isUpdateAvailable } from '@/utils/version';
+
 @Component({
-  components: { HeaderContainer, Sidebar },
-  async created(this: App) {
-    this.isUpdateAvailable = await isUpdateAvailable();
-  },
+  components: { HeaderContainer, Sidebar, MessageContainer },
 })
 export default class App extends Vue {
   @Getter isDarkModeEnabled!: boolean;
   @Getter globals!: SerializedGlobals;
-
-  isUpdateAvailable: boolean = false;
-
-  get isStaging() {
-    return process.env.VUE_APP_STAGING_WARNING;
-  }
-
-  get stableBuildUrl() {
-    return process.env.VUE_APP_STABLE_URL;
-  }
 
   get classes() {
     const list = [];
@@ -59,23 +47,9 @@ export default class App extends Vue {
 
     return list;
   }
-
-  reload() {
-    location.reload();
-  }
 }
 </script>
 
 <style lang="scss">
   @import '@/styles/global.scss';
-
-  #app {
-    > .staging {
-      @include top-message(#c72424, white);
-    }
-
-    > .update {
-      @include top-message(#ffea31, black);
-    }
-  }
 </style>
