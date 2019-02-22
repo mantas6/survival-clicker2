@@ -16,6 +16,6 @@ export class Underwear extends ClothingAction {
 
   insulation = new Effect({
     modifier: () => this.modifiers.character.thermoregulation.insulation,
-    value: () => new Decimal(-10),
+    value: () => new Decimal(-50),
   });
 }
