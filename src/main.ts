@@ -29,7 +29,6 @@ if (!process.env.VUE_APP_DISABLE_SENTRY) {
     dsn: process.env.VUE_APP_SENTRY_KEY,
     integrations: [new Sentry.Integrations.Vue({ Vue })],
     environment: process.env.NODE_ENV,
-    enabled: process.env.NODE_ENV === 'production',
   });
 }
 
