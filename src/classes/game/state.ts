@@ -2,12 +2,11 @@ import { Stats } from '@/classes/game/stats';
 import { Processes } from '@/classes/game/processes';
 import { Actions } from '@/classes/game/actions';
 import { Modifiers } from '@/classes/game/modifiers';
-import { StateRoot } from '@/classes/game/base/state-root';
 import { Timers } from '@/classes/game/base/modifiers';
-import { SerializeOn } from '@/classes/game/base/serialization';
+import { SerializeOn, Serializable } from '@/classes/game/base/serialization';
 import { Globals } from './globals';
 
-export class State extends StateRoot {
+export class State extends Serializable {
   @SerializeOn('emit', 'store')
   stats = new Stats();
 
@@ -25,6 +24,10 @@ export class State extends StateRoot {
 
   @SerializeOn('emit', 'store')
   globals = new Globals();
+
+  get timeMultiplier() {
+    return this.modifiers.timeDensity.value;
+  }
 
   // For the time being
   constructor() {
