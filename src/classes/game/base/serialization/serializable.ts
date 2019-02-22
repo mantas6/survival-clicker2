@@ -1,4 +1,4 @@
-import { StateNode } from '@/classes/game/base/state-node';
+import { StateNode, NonChild } from '@/classes/game/base/state-node';
 import { isPrimitive } from '@/utils/guard';
 import { isEmpty } from '@/utils/method';
 
@@ -32,6 +32,27 @@ export abstract class Serializable extends StateNode {
   static descriptorsOfProperties: PropertyDescriptorMap = new Map();
   static defaultTagNames: string[] = [];
   'constructor': typeof Serializable;
+
+  @NonChild
+  private updateListeners: Array<(node: Serializable) => void> = [];
+
+  onUpdate(callback: (node: Serializable) => void) {
+    this.updateListeners.push(callback);
+  }
+
+  emitUpdate(origin?: Serializable) {
+    if (!origin) {
+      origin = this;
+    }
+
+    for (const listener of this.updateListeners) {
+      listener(origin);
+    }
+
+    if (this.parent && this.parent instanceof Serializable) {
+      this.parent.emitUpdate(origin);
+    }
+  }
 
   serialize(tagName: TagName): SerializedNode | undefined {
     const serialized: SerializedNode = {};
