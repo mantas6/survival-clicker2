@@ -6,10 +6,10 @@ import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/c
 import { Transform } from '@/classes/game/base/transformable';
 import { Queued } from '@/classes/game/base/automation';
 
-export type ConditionFunction = (action: Action, opts: ValidationOptions) => boolean;
+export type ConditionFunction<Node> = (action: Node, opts: ValidationOptions) => boolean;
 
 export interface Condition {
-  conditionFunc: ConditionFunction;
+  conditionFunc: ConditionFunction<any>;
 }
 
 export class Action extends Process {
