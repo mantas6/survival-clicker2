@@ -1,8 +1,7 @@
 import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
-
-import { PhysicalFitness } from './physical-fitness';
+import { Fitness } from './fitness';
 
 @SerializeAllOn('emit', 'store')
 export class Skills extends Serializable {
-  physicalFitness = new PhysicalFitness();
+  fitness = new Fitness();
 }
