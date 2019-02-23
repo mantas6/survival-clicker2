@@ -33,20 +33,9 @@ export abstract class Serializable extends StateNode {
   static defaultTagNames: string[] = [];
   'constructor': typeof Serializable;
 
-  @NonChild
-  private updateListeners: Array<(node: Serializable) => void> = [];
-
-  onUpdate(callback: (node: Serializable) => void) {
-    this.updateListeners.push(callback);
-  }
-
   emitUpdate(origin?: Serializable) {
     if (!origin) {
       origin = this;
-    }
-
-    for (const listener of this.updateListeners) {
-      listener(origin);
     }
 
     if (this.parent && this.parent instanceof Serializable) {
