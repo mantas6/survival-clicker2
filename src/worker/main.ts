@@ -52,13 +52,17 @@ relay.on('toggle', ({ path }) => {
   emitAll();
 });
 
-relay.on('auto', ({ path }) => {
+relay.on('auto', ({ path, every }) => {
   const action = get(state, path) as Action;
 
-  if (action.queued) {
+  if (!every) {
     action.queued = undefined;
   } else {
-    action.queued = new Queued({ interval: new Decimal(1) });
+    if (action.queued) {
+      action.queued.interval = new Decimal(every);
+    } else {
+      action.queued = new Queued({ interval: new Decimal(every) });
+    }
   }
 
   emitAll();
