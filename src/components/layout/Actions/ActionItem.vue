@@ -172,8 +172,8 @@ export default class ActionItem extends Vue {
     display: flex;
     justify-content: space-between;
     margin: {
-      top: 0.5rem;
-      bottom: 0.5rem;
+      top: 0.25rem;
+      bottom: 0.25rem;
     };
     padding: {
       top: 0.5rem;
