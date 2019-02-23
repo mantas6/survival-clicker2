@@ -15,11 +15,11 @@ export interface EffectDescriptor {
   type: 'effect';
 }
 
-export type ConditionFunction = (process: Process, opts: ValidationOptions) => boolean;
+export type ConditionFunction<Node> = (process: Node, opts: ValidationOptions) => boolean;
 
 // Rename to Conditional?
 export interface Condition {
-  conditionFunc: ConditionFunction;
+  conditionFunc: ConditionFunction<any>;
 }
 
 export type ProcessableDescriptorMap = Map<string, MutationDescriptor | EffectDescriptor>;
