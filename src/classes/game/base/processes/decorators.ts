@@ -1,7 +1,7 @@
 import { Process, MutationDescriptor, ConditionFunction, ProcessableDescriptorType, EffectDescriptor } from './process';
 import { LimitFlag } from '@/classes/game/base/stats';
 
-export function When<Node = Process>(conditionFunc: ConditionFunction<Node>) {
+export function When<Node extends Process = Process>(conditionFunc: ConditionFunction<Node>) {
   return (ctor: typeof Process) => {
     ctor.conditions = [ ...ctor.conditions, { conditionFunc } ];
   };
