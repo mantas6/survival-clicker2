@@ -16,7 +16,7 @@
       <span>{{ effect.duration }}</span>
       <span> {{ $t('seconds') }}</span>
     </div>
-    <action-interval :item="item"></action-interval>
+    <action-interval v-if="isQueueUnlocked" :item="item"></action-interval>
   </div>
 </template>
 
@@ -26,11 +26,14 @@ import { Getter } from 'vuex-class';
 import { Action } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import ActionInterval from '@/components/layout/Actions/ActionInterval.vue';
+import { SerializedActions } from '@/store/actions';
 
 @Component({
   components: { ActionInterval },
 })
 export default class ActionInfo extends Vue {
+  @Getter allActions!: SerializedActions;
+
   @Prop({ required: true })
   categoryName!: string;
 
@@ -42,6 +45,10 @@ export default class ActionInfo extends Vue {
 
   @Prop({ required: true })
   item!: Action;
+
+  get isQueueUnlocked() {
+    return this.allActions.incarnation.automation.interaction.queue.isCalculatedOnce;
+  }
 
   get mutations() {
     const list: { [name: string]: any } = {};
