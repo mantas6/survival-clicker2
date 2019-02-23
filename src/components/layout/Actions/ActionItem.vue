@@ -4,7 +4,7 @@
       @mouseenter="enter(item.fullPath)"
       class="item"
       :class="itemClasses">
-      <div class="head" @click="activateOrToggle(item.fullPath)">
+      <div class="head" @click="activateOrToggle">
         <div>
           <span class="name">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.title`) }}</span>
           <span class="unseen" v-show="!item.isSeen">*</span>
@@ -13,7 +13,7 @@
         <number-format class="cost" v-else-if="item.points" :value="item.points.diff" post-fix="P"></number-format>
       </div>
       <div class="options" v-if="isMultiplierUnlocked">
-        <span @click="activate(item.fullPath, item.maxMultiplier)" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
+        <span @click="activeMaxMultiplier" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
       </div>
     </div>
     <div class="info" v-show="isHovering">
@@ -93,16 +93,28 @@ export default class ActionItem extends Vue {
     return this.allActions.incarnation.automation.interaction.multiplier.isToggledOn;
   }
 
-  activateOrToggle(path: string) {
+  activateOrToggle() {
+    const path = this.item.fullPath;
+
     if (this.isToggable) {
       this.relay.emit('toggle', { path });
     } else {
-      this.activate(path, '1');
+      this.activate();
     }
   }
 
-  activate(path: string, multiplier: string) {
-    this.relay.emit('action', { path, multiplier });
+  activeMaxMultiplier() {
+    this.relay.emit('action', {
+      path: this.item.fullPath,
+      multiplier: this.item.maxMultiplier,
+    });
+  }
+
+  activate() {
+    this.relay.emit('action', {
+      path: this.item.fullPath,
+      multiplier: '1',
+    });
   }
 
   enter(path: string) {
