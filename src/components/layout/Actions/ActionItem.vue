@@ -171,13 +171,21 @@ export default class ActionItem extends Vue {
     user-select: none;
     display: flex;
     justify-content: space-between;
+    margin: {
+      top: 0.5rem;
+      bottom: 0.5rem;
+    };
     padding: {
-      top: 0.75rem;
-      bottom: 0.75rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
     };
 
     &.toggled-on {
-      border: 1px solid;
+      background-color: #e0e0e0;
+
+      .dark-mode & {
+        background-color: #3c3c3c;
+      }
     }
 
     &.warning .head {
