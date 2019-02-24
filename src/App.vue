@@ -3,7 +3,7 @@
     <template v-if="isLoaded">
       <message-container></message-container>
       <header-container></header-container>
-      <main>
+      <main @wheel="onWheel">
         <keep-alive>
           <router-view/>
         </keep-alive>
@@ -52,6 +52,14 @@ export default class App extends Vue {
     }
 
     return list;
+  }
+
+  onWheel(e: WheelEvent) {
+    if (e.deltaY > 0) {
+      this.$store.commit('scrollWheelDown');
+    } else {
+      this.$store.commit('scrollWheelUp');
+    }
   }
 }
 </script>
