@@ -6,7 +6,7 @@
       :class="itemClasses">
       <div class="head" @click="activateOrToggle">
         <div>
-          <span class="name">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.title`) }}</span>
+          <span class="name">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.title`) }}</span>
           <span class="unseen" v-show="!item.isSeen">*</span>
         </div>
         <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
@@ -21,12 +21,7 @@
       </div>
     </div>
     <div class="info" v-show="isHovering">
-      <action-info
-        :category-name="categoryName"
-        :group-name="groupName"
-        :action-name="actionName"
-        :item="item">
-      </action-info>
+      <action-info :item="item"></action-info>
     </div>
   </div>
 </template>
@@ -44,15 +39,6 @@ import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
 export default class ActionItem extends Vue {
   @Getter relay!: Relay;
   @Getter allActions!: SerializedActions;
-
-  @Prop({ required: true })
-  categoryName!: string;
-
-  @Prop({ required: true })
-  groupName!: string;
-
-  @Prop({ required: true })
-  actionName!: string;
 
   @Prop({ required: true })
   item!: Action | ToggleAction;

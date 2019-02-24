@@ -3,9 +3,6 @@
     <small>{{ $t(`actions.${categoryName}.groups.${groupName}.title`) }}</small>
     <action-item v-for="(action, actionName) of group"
       :key="actionName"
-      :categoryName="categoryName"
-      :groupName="groupName"
-      :actionName="actionName"
       :item="action">
     </action-item>
   </section>

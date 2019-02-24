@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="info">{{ $t(`actions.${categoryName}.groups.${groupName}.items.${actionName}.info`) }}</div>
+    <div class="info">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.info`) }}</div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ name }}</b></div>
       <span>{{ mutation.diff }}</span>
@@ -33,15 +33,6 @@ import { SerializedActions } from '@/store/actions';
 })
 export default class ActionInfo extends Vue {
   @Getter allActions!: SerializedActions;
-
-  @Prop({ required: true })
-  categoryName!: string;
-
-  @Prop({ required: true })
-  groupName!: string;
-
-  @Prop({ required: true })
-  actionName!: string;
 
   @Prop({ required: true })
   item!: Action;

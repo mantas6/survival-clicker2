@@ -78,6 +78,25 @@ export class Action extends Process {
     return this.timesCalculated.greaterThan(0);
   }
 
+  @SerializeOn('emit')
+  get actionName() {
+    return this.name;
+  }
+
+  @SerializeOn('emit')
+  get groupName() {
+    if (this.parent) {
+      return this.parent.name;
+    }
+  }
+
+  @SerializeOn('emit')
+  get categoryName() {
+    if (this.parent && this.parent.parent) {
+      return this.parent.parent.name;
+    }
+  }
+
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);
