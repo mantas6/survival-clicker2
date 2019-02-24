@@ -1,4 +1,5 @@
 import { Serializable, SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
+import { Favorites } from '@/classes/game/actions/mundane/favorites';
 import { Jobs } from '@/classes/game/actions/mundane/jobs';
 import { Consumables } from '@/classes/game/actions/mundane/consumables';
 import { Drugs } from '@/classes/game/actions/mundane/drugs';
@@ -9,6 +10,9 @@ import { Other } from '@/classes/game/actions/other';
 
 @SerializeAllOn('emit', 'store')
 export class Mundane extends Serializable {
+  @SerializeOn('emit')
+  favorites = new Favorites();
+
   jobs = new Jobs();
   consumables = new Consumables();
   drugs = new Drugs();
