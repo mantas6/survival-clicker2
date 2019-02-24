@@ -23,10 +23,6 @@
         :action-name="actionName"
         :item="item">
       </action-info>
-      <span class="auto" @click="setAuto">
-        <span v-show="!item.queued">{{ $t('auto.off') }}</span>
-        <span v-show="item.queued">{{ $t('auto.on') }}</span>
-      </span>
     </div>
   </div>
 </template>
@@ -128,10 +124,6 @@ export default class ActionItem extends Vue {
   leave() {
     this.isHovering = false;
   }
-
-  setAuto() {
-    this.relay.emit('auto', { path: this.item.fullPath });
-  }
 }
 </script>
 
@@ -154,16 +146,6 @@ export default class ActionItem extends Vue {
 
     .dark-mode & {
       background: black;
-    }
-
-    .auto {
-      border-bottom: 1px solid black;
-      cursor: pointer;
-      display: none;
-
-      .dark-mode & {
-        border-color: white;
-      }
     }
   }
 
