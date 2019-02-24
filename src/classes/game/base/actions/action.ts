@@ -5,6 +5,7 @@ import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import { Transform } from '@/classes/game/base/transformable';
 import { Queued } from '@/classes/game/base/automation';
+import { Favorite } from './favorite';
 
 export type ConditionFunction<Node> = (action: Node, opts: ValidationOptions) => boolean;
 
@@ -37,6 +38,10 @@ export class Action extends Process {
   @SerializeOn('store', 'emit')
   @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
   queued?: Queued;
+
+  @SerializeOn('store', 'emit')
+  @Transform('reset', () => undefined)
+  favorite?: Favorite;
 
   @SerializeOn('emit')
   get isAvailable() {
