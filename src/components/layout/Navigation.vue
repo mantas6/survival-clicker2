@@ -58,11 +58,7 @@ export default class Navigation extends Vue {
   private scrollCategory(direction: ScrollDirection): string | undefined {
     const index = this.availableCategories.indexOf(this.selectedCategory) + direction;
 
-    if (index >= this.availableCategories.length) {
-      return head(this.availableCategories);
-    } else if (index < 0) {
-      return last(this.availableCategories);
-    } else {
+    if (index < this.availableCategories.length && index >= 0) {
       return this.availableCategories[index];
     }
   }
