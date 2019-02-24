@@ -219,7 +219,9 @@ export default class ActionItem extends Vue {
     }
 
     &.unavailable {
-      color: grey;
+      .head {
+        color: grey;
+      }
     }
   }
 </style>
