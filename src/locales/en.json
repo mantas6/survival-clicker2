@@ -302,6 +302,10 @@
             "multiplier": {
               "title": "Multiplier",
               "info": "Automatically buy/execute maximum multiplier"
+            },
+            "queue": {
+              "title": "Queue",
+              "info": "Automatically execute actions with a custom time interval"
             }
           }
         }
