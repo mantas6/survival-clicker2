@@ -10,6 +10,7 @@ import { traverse } from '@/utils/node';
 import { Transformable, applyReset } from '@/classes/game/base/transformable';
 import { Action, ToggleAction } from '@/classes/game/base/actions';
 import { Queued } from '@/classes/game/base/automation';
+import { Favorite } from '@/classes/game/base/actions/favorite';
 
 const ctx: Worker = self as any;
 const relay = new Relay(ctx);
@@ -65,6 +66,18 @@ relay.on('auto', ({ path, every }) => {
     }
   }
 
+  emitAll();
+});
+
+relay.on('addFavorite', ({ path }) => {
+  const action = get(state, path) as Action;
+  action.favorite = new Favorite();
+  emitAll();
+});
+
+relay.on('removeFavorite', ({ path }) => {
+  const action = get(state, path) as Action;
+  action.favorite = undefined;
   emitAll();
 });
 

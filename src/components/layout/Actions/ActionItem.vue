@@ -14,6 +14,10 @@
       </div>
       <div class="options" v-if="isMultiplierUnlocked">
         <span @click="activeMaxMultiplier" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
+        <span @click="toggleFavorite">
+          <span v-show="item.favorite">F-</span>
+          <span v-show="!item.favorite">F+</span>
+        </span>
       </div>
     </div>
     <div class="info" v-show="isHovering">
@@ -111,6 +115,14 @@ export default class ActionItem extends Vue {
       path: this.item.fullPath,
       multiplier: '1',
     });
+  }
+
+  toggleFavorite() {
+    if (!this.item.favorite) {
+      this.relay.emit('addFavorite', { path: this.item.fullPath });
+    } else {
+      this.relay.emit('removeFavorite', { path: this.item.fullPath });
+    }
   }
 
   enter(path: string) {
