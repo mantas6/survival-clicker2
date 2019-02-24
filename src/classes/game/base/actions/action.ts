@@ -19,6 +19,7 @@ export class Action extends Process {
   static lockingConditions: Condition[] = [];
   static defaultMaxMultiplier = new Decimal(Infinity);
   static isPersistent: boolean = false;
+  static canBeFavorited: boolean = true;
 
   'constructor': typeof Action;
 
@@ -42,6 +43,11 @@ export class Action extends Process {
   @SerializeOn('store', 'emit')
   @Transform('reset', () => undefined)
   favorite?: Favorite;
+
+  @SerializeOn('emit')
+  get canBeFavorited() {
+    return this.constructor.canBeFavorited;
+  }
 
   @SerializeOn('emit')
   get isAvailable() {

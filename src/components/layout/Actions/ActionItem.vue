@@ -14,7 +14,7 @@
       </div>
       <div class="options" v-if="isMultiplierUnlocked">
         <span @click="activeMaxMultiplier" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
-        <span @click="toggleFavorite">
+        <span @click="toggleFavorite" v-if="item.canBeFavorited">
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>

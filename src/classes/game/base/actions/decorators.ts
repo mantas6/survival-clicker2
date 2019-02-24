@@ -6,6 +6,10 @@ export function Persist(ctor: typeof Action) {
   ctor.isPersistent = true;
 }
 
+export function NoFavorites(ctor: typeof Action) {
+  ctor.canBeFavorited = false;
+}
+
 export function Unlocks<Node extends Action = Action>(actionClass: Node, propertyName: string) {
   const ctor = actionClass.constructor;
 

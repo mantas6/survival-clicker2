@@ -1,4 +1,4 @@
-import { Unlocks, UnlocksWhen, LocksWhen, NoMultiplier, Persist } from './decorators';
+import { Unlocks, UnlocksWhen, LocksWhen, NoMultiplier, Persist, NoFavorites } from './decorators';
 import { Action } from './action';
 import { ToggleAction } from './toggle-action';
 import { StaminaAction } from './stamina-action';
@@ -14,4 +14,5 @@ export {
   NoMultiplier,
   ToggleAction,
   Persist,
+  NoFavorites,
 };
