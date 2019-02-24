@@ -11,10 +11,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+import { Getter } from 'vuex-class';
+import { head, last } from '@/utils/method';
+
+enum ScrollDirection {
+  Up = -1,
+  Down = 1,
+}
 
 @Component
 export default class Navigation extends Vue {
+  @Getter wheelPosition!: number;
+
   @Prop({ required: true })
   availableCategories!: string[];
 
@@ -29,6 +38,33 @@ export default class Navigation extends Vue {
   select(categoryName: string) {
     this.selectedCategory = categoryName;
     this.$emit('selectCategory', categoryName);
+  }
+
+  @Watch('wheelPosition')
+  onWheelChanged(value: number, oldValue: number) {
+    let category: string | undefined;
+
+    if (value > oldValue) {
+      category = this.scrollCategory(ScrollDirection.Down);
+    } else {
+      category = this.scrollCategory(ScrollDirection.Up);
+    }
+
+    if (category) {
+      this.select(category);
+    }
+  }
+
+  private scrollCategory(direction: ScrollDirection): string | undefined {
+    const index = this.availableCategories.indexOf(this.selectedCategory) + direction;
+
+    if (index >= this.availableCategories.length) {
+      return head(this.availableCategories);
+    } else if (index < 0) {
+      return last(this.availableCategories);
+    } else {
+      return this.availableCategories[index];
+    }
   }
 }
 </script>
