@@ -51,45 +51,29 @@ export default class ActionInfo extends Vue {
   }
 
   get mutations() {
-    const list: { [name: string]: any } = {};
-
-    for (const [ name, value ] of Object.entries(this.item)) {
-      if (typeof value === 'object' && value.stat) {
-        if (value.diff !== '0') {
-          list[name] = value;
-        }
+    return this.filterItems(item => {
+      if (item.stat && item.diff !== '0') {
+        return true;
       }
-    }
-
-    return list;
+    });
   }
 
   get timerEffects() {
-    const list: { [name: string]: any } = {};
-
-    for (const [ name, value ] of Object.entries(this.item)) {
-      if (typeof value === 'object' && value.modifier && value.duration) {
-        if (value.value !== '0') {
-          list[name] = value;
-        }
+    return this.filterItems(item => {
+      if (item.modifier && item.duration && item.value !== '0') {
+        return true;
       }
-    }
-
-    return list;
+    });
   }
 
   get effects() {
-    const list: { [name: string]: any } = {};
-
-    for (const [ name, value ] of Object.entries(this.item)) {
-      if (typeof value === 'object' && value.modifier && !value.duration) {
-        if (value.value !== '0' && value.duration !== '0') {
-          list[name] = value;
+    return this.filterItems(item => {
+      if (item.modifier && !item.duration) {
+        if (item.value !== '0' && item.duration !== '0') {
+          return true;
         }
       }
-    }
-
-    return list;
+    });
   }
 
   mutationClass(mutation: Mutation<any>) {
@@ -100,6 +84,18 @@ export default class ActionInfo extends Vue {
         return 'unavailable';
       }
     }
+  }
+
+  private filterItems(filterFunc: (item: any) => boolean | undefined) {
+    const list: { [name: string]: any } = {};
+
+    for (const [ name, item ] of Object.entries(this.item)) {
+      if (typeof item === 'object' && filterFunc(item)) {
+        list[name] = item;
+      }
+    }
+
+    return list;
   }
 }
 </script>
