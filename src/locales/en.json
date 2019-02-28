@@ -32,6 +32,9 @@
     }
   },
   "actions": {
+    "favorites": {
+      "title": "Favorites"
+    },
     "jobs": {
       "title": "Jobs",
       "groups": {
