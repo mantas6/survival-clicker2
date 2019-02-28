@@ -8,8 +8,6 @@
     <article>
       <action-group v-for="(group, groupName) of availableGroups"
         :key="groupName"
-        :groupName="groupName"
-        :categoryName="activeCategory"
         :group="group">
       </action-group>
     </article>
