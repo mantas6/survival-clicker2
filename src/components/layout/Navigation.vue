@@ -40,6 +40,16 @@ export default class Navigation extends Vue {
     this.$emit('selectCategory', categoryName);
   }
 
+  selectFirst() {
+    if (!this.availableCategories.includes(this.selectedCategory)) {
+      const firstCategory = head(this.availableCategories);
+
+      if (firstCategory) {
+        this.select(firstCategory);
+      }
+    }
+  }
+
   @Watch('wheelPosition')
   onWheelChanged(value: number, oldValue: number) {
     let category: string | undefined;
@@ -53,6 +63,11 @@ export default class Navigation extends Vue {
     if (category) {
       this.select(category);
     }
+  }
+
+  @Watch('availableCategories')
+  onAvailableCategoriesChanged() {
+    this.selectFirst();
   }
 
   private scrollCategory(direction: ScrollDirection): string | undefined {
