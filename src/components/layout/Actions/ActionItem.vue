@@ -20,9 +20,7 @@
         </span>
       </div>
     </div>
-    <div class="info" v-show="isHovering">
-      <action-info :item="item"></action-info>
-    </div>
+    <action-info class="info" :item="item" v-show="isHovering"></action-info>
   </div>
 </template>
 
