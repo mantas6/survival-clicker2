@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { head, last } from '@/utils/method';
+import { head } from '@/utils/method';
 
 enum ScrollDirection {
   Up = -1,
