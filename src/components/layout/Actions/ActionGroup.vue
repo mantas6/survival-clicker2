@@ -4,6 +4,9 @@
     <action-item v-for="(action, actionName) of group"
       :key="actionName"
       :item="action">
+      <template #options="{ item }">
+        <slot name="options" :item="item"></slot>
+      </template>
     </action-item>
   </section>
 </template>
