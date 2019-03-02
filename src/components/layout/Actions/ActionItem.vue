@@ -18,6 +18,7 @@
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>
+        <action-interval :item="item" v-if="item.favorite"></action-interval>
       </div>
     </div>
     <action-info class="info" :item="item" v-show="isHovering"></action-info>
@@ -32,8 +33,9 @@ import { SerializedActions } from '@/store/actions';
 import Decimal from 'decimal.js';
 import { Action, ToggleAction } from '@/classes/game/base/actions';
 import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
+import ActionInterval from '@/components/layout/Actions/ActionInterval.vue';
 
-@Component({ components: { ActionInfo } })
+@Component({ components: { ActionInfo, ActionInterval } })
 export default class ActionItem extends Vue {
   @Getter relay!: Relay;
   @Getter allActions!: SerializedActions;
@@ -179,6 +181,7 @@ export default class ActionItem extends Vue {
 
     .options {
       margin-left: 0.5rem;
+      display: flex;
 
       > span {
         border-bottom: 1px solid black;
