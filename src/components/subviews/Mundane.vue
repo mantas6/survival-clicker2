@@ -5,7 +5,7 @@
       :unseen-categories="unseenCategoryNames"
       :available-categories="availableCategoryNames">
     </navigation>
-    <article>
+    <article :class="`category-${activeCategory}`">
       <action-group v-for="(group, groupName) of availableGroups"
         :key="groupName"
         :group="group">
