@@ -14,7 +14,7 @@
       </div>
       <div class="options">
         <span @click="activeMaxMultiplier" v-show="isMaxAvailable" v-if="isMultiplierUnlocked">x{{ item.maxMultiplier }}</span>
-        <span @click="toggleFavorite" v-if="item.canBeFavorited">
+        <span @click="toggleFavorite" v-if="isFavoritesUnlocked && item.canBeFavorited">
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>
@@ -81,6 +81,10 @@ export default class ActionItem extends Vue {
 
   get isQueueUnlocked() {
     return this.allActions.incarnation.automation.interaction.queue.isToggledOn;
+  }
+
+  get isFavoritesUnlocked() {
+    return this.allActions.incarnation.automation.interaction.favorites.isToggledOn;
   }
 
   activateOrToggle() {

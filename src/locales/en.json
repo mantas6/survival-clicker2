@@ -309,6 +309,10 @@
             "queue": {
               "title": "Queue",
               "info": "Automatically execute actions with a custom time interval"
+            },
+            "favorites": {
+              "title": "Favorites",
+              "info": "Favorite actions"
             }
           }
         }
