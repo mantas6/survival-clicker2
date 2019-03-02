@@ -20,26 +20,24 @@ export default class ActionGroup extends Vue {
   group!: { [actionName: string]: {} };
 
   get categoryName() {
-    const actions = Object.values(this.group) as Action[];
-
-    if (actions) {
-      const sample = head(actions);
-
-      if (sample) {
-        return sample.categoryName;
-      }
+    if (this.actionSample) {
+      return this.actionSample.categoryName;
     }
   }
 
   get groupName() {
+    if (this.actionSample) {
+      return this.actionSample.groupName;
+    }
+  }
+
+  get actionSample() {
     const actions = Object.values(this.group) as Action[];
 
     if (actions) {
       const sample = head(actions);
 
-      if (sample) {
-        return sample.groupName;
-      }
+      return sample;
     }
   }
 }
