@@ -12,11 +12,7 @@ export class StealEquipment extends StaminaAction {
   });
 
   temperature = new TemperatureMutation(() => this.stats.character.temperature, () => {
-    if (this.actions.incarnation.modules.character.temperature.isToggledOn) {
-      return new Decimal(0.1);
-    }
-
-    return new Decimal(0);
+    return new Decimal(0.1);
   });
 
   money = new Mutation(() => this.stats.finance.money, () => {
