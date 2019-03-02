@@ -12,13 +12,13 @@
         <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
         <number-format class="cost" v-else-if="item.points" :value="item.points.diff" post-fix="P"></number-format>
       </div>
-      <div class="options" v-if="isMultiplierUnlocked">
-        <span @click="activeMaxMultiplier" v-show="isMaxAvailable">x{{ item.maxMultiplier }}</span>
+      <div class="options">
+        <span @click="activeMaxMultiplier" v-show="isMaxAvailable" v-if="isMultiplierUnlocked">x{{ item.maxMultiplier }}</span>
         <span @click="toggleFavorite" v-if="item.canBeFavorited">
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>
-        <action-interval class="interval" :item="item" v-if="item.favorite"></action-interval>
+        <action-interval class="interval" :item="item" v-if="isQueueUnlocked && item.favorite"></action-interval>
       </div>
     </div>
     <action-info class="info" :item="item" v-show="isHovering"></action-info>
@@ -77,6 +77,10 @@ export default class ActionItem extends Vue {
 
   get isMultiplierUnlocked() {
     return this.allActions.incarnation.automation.interaction.multiplier.isToggledOn;
+  }
+
+  get isQueueUnlocked() {
+    return this.allActions.incarnation.automation.interaction.queue.isToggledOn;
   }
 
   activateOrToggle() {
