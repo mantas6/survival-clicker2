@@ -18,7 +18,7 @@
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>
-        <action-interval :item="item" v-if="item.favorite"></action-interval>
+        <action-interval class="interval" :item="item" v-if="item.favorite"></action-interval>
       </div>
     </div>
     <action-info class="info" :item="item" v-show="isHovering"></action-info>
@@ -182,6 +182,14 @@ export default class ActionItem extends Vue {
     .options {
       margin-left: 0.5rem;
       display: flex;
+
+      .interval {
+        display: none;
+
+        .category-favorites & {
+          display: block;
+        }
+      }
 
       > span {
         border-bottom: 1px solid black;
