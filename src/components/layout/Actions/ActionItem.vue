@@ -187,7 +187,7 @@ export default class ActionItem extends Vue {
         display: none;
 
         .category-favorites & {
-          display: block;
+          display: flex;
         }
       }
 
