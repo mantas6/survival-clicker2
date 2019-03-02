@@ -24,12 +24,9 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { Action } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
-import ActionInterval from '@/components/layout/Actions/ActionInterval.vue';
 import { SerializedActions } from '@/store/actions';
 
-@Component({
-  components: { ActionInterval },
-})
+@Component
 export default class ActionInfo extends Vue {
   @Getter allActions!: SerializedActions;
 
