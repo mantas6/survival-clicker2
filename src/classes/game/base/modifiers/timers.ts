@@ -3,7 +3,6 @@ import { Timer, TimerOptions } from './timer';
 import { TimerEffect } from '@/classes/game/base/modifiers';
 import { TagName, SerializedNode } from '@/classes/game/base/serialization/serializable';
 import { Transform, Transformable } from '../transformable';
-import { get } from '@/utils/method';
 
 interface SerializedTimer {
   effect: { fullPath: string };
@@ -42,12 +41,17 @@ export class Timers extends Transformable {
 
   unserialize(serialized: SerializedNode) {
     for (const serializedItem of Object.values<SerializedTimer>(serialized as any)) {
-      const effect = get(this.state, serializedItem.effect.fullPath) as TimerEffect;
-      const duration = new Decimal(serializedItem.duration);
-      const timePassed = new Decimal(serializedItem.timePassed);
-      const multiplier = new Decimal(serializedItem.multiplier);
+      const effect = this.state.get<TimerEffect>(serializedItem.effect.fullPath);
 
-      this.push({ effect, duration, timePassed, multiplier });
+      // If game code has changed and effect no longer exists, this section will proceed without errors
+      // Simply omitting the effect/timer from the timers list
+      if (effect) {
+        const duration = new Decimal(serializedItem.duration);
+        const timePassed = new Decimal(serializedItem.timePassed);
+        const multiplier = new Decimal(serializedItem.multiplier);
+
+        this.push({ effect, duration, timePassed, multiplier });
+      }
     }
   }
 

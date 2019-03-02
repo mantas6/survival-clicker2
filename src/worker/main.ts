@@ -1,6 +1,5 @@
 import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
-import { get } from '@/utils/method';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import { applyUnlocked } from '@/classes/game/base/actions/methods';
@@ -26,7 +25,8 @@ relay.on('action', ({ path, multiplier }) => {
   }
 
   log('Calculating action of path', path);
-  const action = get(state, path) as Action;
+  const action = state.get<Action>(path)!;
+
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
     action.calculate({ multiplier: new Decimal(multiplier) });
     applyUnlocked(state);
@@ -43,7 +43,8 @@ relay.on('action', ({ path, multiplier }) => {
 });
 
 relay.on('toggle', ({ path }) => {
-  const action = get(state, path) as ToggleAction;
+  const action = state.get<ToggleAction>(path)!;
+
   if (!action.isToggledOn && action.canToggleOn) {
     action.toggleOn();
   } else if (action.isToggledOn && action.canToggleOff) {
@@ -54,7 +55,7 @@ relay.on('toggle', ({ path }) => {
 });
 
 relay.on('auto', ({ path, every }) => {
-  const action = get(state, path) as Action;
+  const action = state.get<Action>(path)!;
 
   const favorite = action.favorite;
 
@@ -68,19 +69,21 @@ relay.on('auto', ({ path, every }) => {
         favorite.queued = new Queued({ interval: new Decimal(every) });
       }
     }
-  }
 
-  emitAll();
+    emitAll();
+  }
 });
 
 relay.on('addFavorite', ({ path }) => {
-  const action = get(state, path) as Action;
+  const action = state.get<Action>(path)!;
+
   action.favorite = new Favorite();
   emitAll();
 });
 
 relay.on('removeFavorite', ({ path }) => {
-  const action = get(state, path) as Action;
+  const action = state.get<Action>(path)!;
+
   action.favorite = undefined;
   emitAll();
 });
@@ -90,7 +93,8 @@ relay.on('enableLogging', () => {
 });
 
 relay.on('seen', ({ path }) => {
-  const action = get(state, path) as Action;
+  const action = state.get<Action>(path)!;
+
   action.isSeen = true;
   emitAll();
 });
