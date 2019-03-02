@@ -16,7 +16,6 @@
       <span>{{ effect.duration }}</span>
       <span> {{ $t('seconds') }}</span>
     </div>
-    <action-interval v-if="isQueueUnlocked" :item="item"></action-interval>
   </div>
 </template>
 
@@ -36,10 +35,6 @@ export default class ActionInfo extends Vue {
 
   @Prop({ required: true })
   item!: Action;
-
-  get isQueueUnlocked() {
-    return this.allActions.incarnation.automation.interaction.queue.isCalculatedOnce;
-  }
 
   get mutations() {
     return this.filterItems(item => {
