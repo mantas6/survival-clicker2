@@ -7,7 +7,8 @@ export function applyQueued(state: State) {
 
   for (const node of traverse(state)) {
     if (node instanceof Action) {
-      if (node.favorite && node.favorite.queued && node.favorite.queued.shouldCalculate({ multiplier })) {
+      const queued = node.favorite && node.favorite.queued;
+      if (queued && queued.shouldCalculate({ multiplier })) {
         if (node.validate({ multiplier })) {
           node.calculate({ multiplier });
         }
