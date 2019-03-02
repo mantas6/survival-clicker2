@@ -2,7 +2,7 @@ import Decimal from 'decimal.js';
 import { Timer, TimerOptions } from './timer';
 import { TimerEffect } from '@/classes/game/base/modifiers';
 import { TagName, SerializedNode } from '@/classes/game/base/serialization/serializable';
-import { Transform, Transformable } from '../transformable';
+import { Transform, Transformable } from '@/classes/game/base/transformable';
 
 interface SerializedTimer {
   effect: { fullPath: string };
