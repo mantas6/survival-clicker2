@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div>
-      <span @click="toggle">Auto</span>
-      <div v-if="item.queued">
-        <span>(every {{ item.queued.interval }} s)</span>
-        <span @click="increase">+</span>
-        <span @click="decrease">-</span>
-      </div>
+    <span @click="toggle">Auto</span>
+    <div v-if="item.queued">
+      <span>(every {{ item.queued.interval }} s)</span>
+      <span @click="increase">+</span>
+      <span @click="decrease">-</span>
     </div>
   </div>
 </template>
@@ -48,6 +46,10 @@ export default class ActionInterval extends Vue {
 </script>
 
 <style lang="scss" scoped>
+  div {
+    display: flex;
+  }
+
   span {
     padding: {
       left: 0.5rem;
