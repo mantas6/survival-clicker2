@@ -18,7 +18,6 @@
           <span v-show="item.favorite">F-</span>
           <span v-show="!item.favorite">F+</span>
         </span>
-        <slot name="options" :item="item"></slot>
       </div>
     </div>
     <action-info class="info" :item="item" v-show="isHovering"></action-info>
