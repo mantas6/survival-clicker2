@@ -1,3 +1,5 @@
+import { get } from '@/utils/method';
+
 export abstract class StateNode {
   static nonChildrenNames: string[] = [];
   'constructor': typeof StateNode;
@@ -49,6 +51,10 @@ export abstract class StateNode {
 
   isChild<PropertyName extends keyof this>(propertyName: PropertyName): boolean {
     return this.constructor.nonChildrenNames.includes(propertyName as string);
+  }
+
+  get<Node extends StateNode = StateNode>(path: string): Node | undefined {
+    return get(this, path);
   }
 
   private findRoot(): void {
