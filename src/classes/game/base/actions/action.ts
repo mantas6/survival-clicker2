@@ -37,10 +37,6 @@ export class Action extends Process {
   isSeen?: boolean;
 
   @SerializeOn('store', 'emit')
-  @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
-  queued?: Queued;
-
-  @SerializeOn('store', 'emit')
   @Transform('reset', () => undefined)
   favorite?: Favorite;
 

@@ -56,13 +56,15 @@ relay.on('toggle', ({ path }) => {
 relay.on('auto', ({ path, every }) => {
   const action = get(state, path) as Action;
 
-  if (!every) {
-    action.queued = undefined;
-  } else {
-    if (action.queued) {
-      action.queued.interval = new Decimal(every);
+  if (action.favorite) {
+    if (!every) {
+      action.favorite.queued = undefined;
     } else {
-      action.queued = new Queued({ interval: new Decimal(every) });
+      if (action.favorite.queued) {
+        action.favorite.queued.interval = new Decimal(every);
+      } else {
+        action.favorite.queued = new Queued({ interval: new Decimal(every) });
+      }
     }
   }
 

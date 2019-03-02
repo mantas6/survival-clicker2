@@ -1,8 +1,8 @@
 <template>
   <div>
     <span @click="toggle">Auto</span>
-    <div v-if="item.queued">
-      <span>(every {{ item.queued.interval }} s)</span>
+    <div v-if="queued">
+      <span>(every {{ queued.interval }} s)</span>
       <span @click="increase">+</span>
       <span @click="decrease">-</span>
     </div>
@@ -23,8 +23,12 @@ export default class ActionInterval extends Vue {
   @Prop({ required: true })
   item!: Action;
 
+  get queued() {
+    return this.item.favorite && this.item.favorite.queued;
+  }
+
   toggle() {
-    if (this.item.queued) {
+    if (this.queued) {
       this.relay.emit('auto', { path: this.item.fullPath });
     } else {
       this.relay.emit('auto', { path: this.item.fullPath, every: 1 });
@@ -32,13 +36,13 @@ export default class ActionInterval extends Vue {
   }
 
   increase() {
-    const every = new Decimal(this.item.queued!.interval).add(1).valueOf();
+    const every = new Decimal(this.queued!.interval).add(1).valueOf();
 
     this.relay.emit('auto', { path: this.item.fullPath, every });
   }
 
   decrease() {
-    const every = new Decimal(this.item.queued!.interval).sub(1).valueOf();
+    const every = new Decimal(this.queued!.interval).sub(1).valueOf();
 
     this.relay.emit('auto', { path: this.item.fullPath, every });
   }
