@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span @click="toggle">Auto</span>
+    <span class="toggle" @click="toggle">Auto</span>
     <div v-if="queued">
       <span>(every {{ queued.interval }} s)</span>
       <span @click="increase">+</span>
@@ -52,6 +52,15 @@ export default class ActionInterval extends Vue {
 <style lang="scss" scoped>
   div {
     display: flex;
+  }
+
+  .toggle {
+    border-bottom: 1px solid black;
+    margin-left: 0.25rem;
+
+    .dark-mode & {
+      border-color: white;
+    }
   }
 
   span {
