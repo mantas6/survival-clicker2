@@ -34,6 +34,7 @@ import Decimal from 'decimal.js';
 import { Action, ToggleAction } from '@/classes/game/base/actions';
 import ActionInfo from '@/components/layout/Actions/ActionInfo.vue';
 import ActionInterval from '@/components/layout/Actions/ActionInterval.vue';
+import { take } from '@/utils/method';
 
 @Component({ components: { ActionInfo, ActionInterval } })
 export default class ActionItem extends Vue {
@@ -76,15 +77,15 @@ export default class ActionItem extends Vue {
   }
 
   get isMultiplierUnlocked() {
-    return this.allActions.incarnation.automation.interaction.multiplier.isToggledOn;
+    return take(() => this.allActions.incarnation.automation.interaction.multiplier.isToggledOn);
   }
 
   get isQueueUnlocked() {
-    return this.allActions.incarnation.automation.interaction.queue.isToggledOn;
+    return take(() => this.allActions.incarnation.automation.interaction.queue.isToggledOn);
   }
 
   get isFavoritesUnlocked() {
-    return this.allActions.incarnation.automation.interaction.favorites.isToggledOn;
+    return take(() => this.allActions.incarnation.automation.interaction.favorites.isToggledOn);
   }
 
   activateOrToggle() {
