@@ -30,7 +30,7 @@
         <container-stat name="hydration" :stat="hydration"></container-stat>
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
-      <div class="incarnation" v-show="incarnationCurrentPoints !== '0' || incarnationTotalPoints !== '0'">
+      <div class="incarnation" v-show="isIncarnationPointsUnlocked">
         <div class="points">
           <number-format :value="incarnationCurrentPoints"></number-format>
           <span> / </span>
@@ -116,12 +116,16 @@ export default class HeaderContainer extends Vue {
     return this.modifiers.finance.income.value;
   }
 
+  get isIncarnationPointsUnlocked() {
+    return this.incarnationCurrentPoints.greaterThanOrEqualTo(1) || this.incarnationTotalPoints.greaterThanOrEqualTo(1);
+  }
+
   get incarnationCurrentPoints() {
-    return this.stats.incarnation.currentPoints.value;
+    return new Decimal(this.stats.incarnation.currentPoints.value);
   }
 
   get incarnationTotalPoints() {
-    return this.stats.incarnation.points.total;
+    return new Decimal(this.stats.incarnation.points.total);
   }
 
   get isAlive() {
