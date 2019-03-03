@@ -58,6 +58,7 @@ import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
 import Decimal from 'decimal.js';
 import { SerializedActions } from '@/store/actions';
+import { take } from '@/utils/method';
 
 @Component({
   components: { GameLogo, ProgressBar, ContainerStat, Controls },
@@ -128,7 +129,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get isTemperatureUnlocked() {
-    return this.allActions.incarnation.modules.character.temperature.isToggledOn;
+    return take(() => this.allActions.incarnation.modules.character.temperature.isToggledOn);
   }
 
   suicide() {
