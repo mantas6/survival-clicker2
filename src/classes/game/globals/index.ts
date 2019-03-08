@@ -1,4 +1,4 @@
-import { SerializeAllOn } from '@/classes/game/base/serialization';
+import { SerializeAllOn, SerializeOn, SerializeAs } from '@/classes/game/base/serialization';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { Alive } from './alive';
 
@@ -8,4 +8,8 @@ export class Globals extends Transformable {
 
   @Transform('reset', () => false)
   isPaused: boolean = false;
+
+  @SerializeOn('store')
+  @SerializeAs(() => process.env.VUE_APP_VERSION)
+  version?: string;
 }
