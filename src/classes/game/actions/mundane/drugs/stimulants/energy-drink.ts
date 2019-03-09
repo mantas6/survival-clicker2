@@ -12,7 +12,7 @@ export class EnergyDrink extends Action {
     value: () => new Decimal(-0.1),
   });
 
-  restoreStamina = new TimerEffect({
+  stamina = new TimerEffect({
     modifier: () => this.modifiers.character.staminaRestoreSpeed,
     duration: () => 5,
     value: () => new Decimal(3),
