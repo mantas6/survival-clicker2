@@ -2,15 +2,15 @@
   <div>
     <div class="info">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.info`) }}</div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
-      <div><b>{{ name }}</b></div>
+      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
       <span>{{ mutation.diff }}</span>
     </div>
     <div v-for="(effect, name) of effects" :key="name">
-      <div><b>{{ name }}</b></div>
+      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
       <span>{{ effect.value }}</span>
     </div>
     <div v-for="(effect, name) of timerEffects" :key="name">
-      <div><b>{{ name }}</b></div>
+      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
       <span>{{ effect.value }}</span>
       <span> {{ $t('for') }} </span>
       <span>{{ effect.duration }}</span>
