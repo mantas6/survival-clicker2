@@ -8,6 +8,8 @@
             <span>{{ temperature }}C</span>
           </div>
           <div class="diff" v-show="isTemperatureUnlocked">
+            <span v-show="isTemperatureRatePositive">+</span>
+            <span v-show="isTemperatureRateNegative">-</span>
             <span>{{ temperatureDiff }}</span>
           </div>
         </div>
@@ -88,8 +90,17 @@ export default class HeaderContainer extends Vue {
 
   get temperatureDiff() {
     return new Decimal(this.stats.character.temperature.rate)
+      .abs()
       .toSignificantDigits(2)
       .toString();
+  }
+
+  get isTemperatureRatePositive() {
+    return new Decimal(this.stats.character.temperature.rate).greaterThan(0);
+  }
+
+  get isTemperatureRateNegative() {
+    return new Decimal(this.stats.character.temperature.rate).lessThan(0);
   }
 
   get health() {
