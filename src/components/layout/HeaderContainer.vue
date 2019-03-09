@@ -18,7 +18,7 @@
           <div class="income">
             + <number-format :value="moneyGain" post-fix="$"></number-format> / s
           </div>
-          <div class="tax">
+          <div class="tax" v-show="isTaxesUnlocked">
             @ <number-format :value="tax" post-fix="%"></number-format> tax
           </div>
         </div>
@@ -134,6 +134,10 @@ export default class HeaderContainer extends Vue {
 
   get isTemperatureUnlocked() {
     return take(() => this.allActions.incarnation.modules.character.temperature.isToggledOn);
+  }
+
+  get isTaxesUnlocked() {
+    return take(() => this.allActions.incarnation.modules.finance.taxes.isToggledOn);
   }
 
   suicide() {

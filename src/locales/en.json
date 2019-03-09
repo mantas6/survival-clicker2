@@ -293,6 +293,15 @@
               "info": "Now I have to take care of my body's temperature"
             }
           }
+        },
+        "finance": {
+          "title": "Finance",
+          "items": {
+            "taxes": {
+              "title": "Taxes",
+              "info": "Great, now I have to pay taxes!"
+            }
+          }
         }
       }
     },
