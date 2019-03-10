@@ -11,6 +11,10 @@ export class ToggleAction extends Action {
   @Transform<undefined, ToggleAction>('reset', () => undefined, action => !action.constructor.isPersistent)
   isToggledOn?: boolean;
 
+  onClock() {
+    this.triggerAuto();
+  }
+
   toggleOn() {
     this.isToggledOn = true;
     this.onToggleOn();
@@ -29,6 +33,15 @@ export class ToggleAction extends Action {
   @SerializeOn('emit')
   get canToggleOff(): boolean {
     return this.isToggledOn !== undefined && this.isToggledOn;
+  }
+
+  protected triggerAuto() {
+    const multiplier = this.state.timeMultiplier;
+    if (this.constructor.isAutoWhenToggled && this.isToggledOn) {
+      if (this.validate({ multiplier })) {
+        this.calculate({ multiplier });
+      }
+    }
   }
 
   protected onToggleOn(): void {

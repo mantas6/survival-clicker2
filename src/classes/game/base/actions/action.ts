@@ -93,6 +93,11 @@ export class Action extends Process {
     }
   }
 
+  onClock() {
+    this.triggerUnlocked();
+    this.triggerQueued();
+  }
+
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);
@@ -106,9 +111,19 @@ export class Action extends Process {
     }
   }
 
-  triggerUnlocked() {
+  protected triggerUnlocked() {
     this.checkUnlock();
     this.checkLock();
+  }
+
+  protected triggerQueued() {
+    const multiplier = this.state.timeMultiplier;
+    const queued = this.favorite && this.favorite.queued;
+    if (queued && queued.shouldCalculate({ multiplier })) {
+      if (this.validate({ multiplier })) {
+        this.calculate({ multiplier });
+      }
+    }
   }
 
   private checkUnlock() {

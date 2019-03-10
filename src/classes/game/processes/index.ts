@@ -11,6 +11,10 @@ export class Processes extends ProcessContainer {
   finance = new Finance();
   incarnation = new Incarnation();
 
+  onClock() {
+    this.calculate();
+  }
+
   serialize(tagName: TagName): SerializedNode | undefined  {
     const processes: Process[] = [];
 

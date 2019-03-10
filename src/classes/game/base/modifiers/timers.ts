@@ -15,6 +15,10 @@ export class Timers extends Transformable {
   @Transform('reset', () => [])
   protected items: Timer[] = [];
 
+  onClock() {
+    this.calculate();
+  }
+
   push(opts: TimerOptions) {
     this.items.push(new Timer(opts));
   }

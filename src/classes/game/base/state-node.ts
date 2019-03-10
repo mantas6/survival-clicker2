@@ -57,6 +57,10 @@ export abstract class StateNode {
     return get(this, path);
   }
 
+  onClock() {
+    //
+  }
+
   private findRoot(): void {
     let rootNode: StateNode = this;
     let path = this.name;

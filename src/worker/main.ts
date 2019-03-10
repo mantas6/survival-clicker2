@@ -2,8 +2,6 @@ import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
-import { applyUnlocked, applyAutoToggled } from '@/classes/game/base/actions/methods';
-import { applyQueued } from '@/classes/game/base/automation/methods';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
 import { Transformable, applyReset } from '@/classes/game/base/transformable';
@@ -29,8 +27,6 @@ relay.on('action', ({ path, multiplier }) => {
 
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
     action.calculate({ multiplier: new Decimal(multiplier) });
-    applyUnlocked(state);
-
     // Toggle on item right after purchase
     if (action instanceof ToggleAction) {
       if (!action.isToggledOn && action.canToggleOn) {
@@ -133,12 +129,6 @@ function runClock() {
   }
 
   applyClock();
-
-  state.processes.calculate();
-  state.timers.calculate();
-  applyUnlocked(state);
-  applyQueued(state);
-  applyAutoToggled(state);
 }
 
 function emitAll() {
@@ -152,8 +142,6 @@ function emitStore() {
 
 function applyClock() {
   for (const node of traverse(state)) {
-    if (node instanceof Transformable) {
-      node.transform('clock');
-    }
+    node.onClock();
   }
 }
