@@ -16,6 +16,7 @@ export class Timers extends Transformable {
   protected items: Timer[] = [];
 
   onClock() {
+    super.onClock();
     this.calculate();
   }
 

@@ -12,6 +12,7 @@ export class Processes extends ProcessContainer {
   incarnation = new Incarnation();
 
   onClock() {
+    super.onClock();
     this.calculate();
   }
 

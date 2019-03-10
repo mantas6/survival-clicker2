@@ -94,6 +94,7 @@ export class Action extends Process {
   }
 
   onClock() {
+    super.onClock();
     this.triggerUnlocked();
     this.triggerQueued();
   }

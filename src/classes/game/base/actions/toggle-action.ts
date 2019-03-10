@@ -12,6 +12,7 @@ export class ToggleAction extends Action {
   isToggledOn?: boolean;
 
   onClock() {
+    super.onClock();
     this.triggerAuto();
   }
 

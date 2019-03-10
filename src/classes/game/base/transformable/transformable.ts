@@ -12,6 +12,7 @@ export abstract class Transformable extends SerializableWithReference {
   'constructor': typeof Transformable;
 
   onClock() {
+    super.onClock();
     this.transform('clock');
   }
 
