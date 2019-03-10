@@ -11,6 +11,10 @@ export abstract class Transformable extends SerializableWithReference {
   static transformations: Array<TransformationDescriptor<any>> = [];
   'constructor': typeof Transformable;
 
+  onClock() {
+    this.transform('clock');
+  }
+
   transform(tagName: string) {
     for (const transformation of this.constructor.transformations) {
       if (transformation.tagName === tagName) {
