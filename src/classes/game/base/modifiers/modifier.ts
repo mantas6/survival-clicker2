@@ -27,6 +27,7 @@ export abstract class Modifier extends SerializableWithReference {
 
     for (const node of traverse(this.actions)) {
       // Should be instanceof ToggleAction check
+      // Also should check for running processes and it's effects?
       if ((node as any).isToggledOn) {
         for (const { effect } of (node as any).effects()) {
           if (effect.modifier === this) {
