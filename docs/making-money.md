@@ -16,4 +16,6 @@
 
 ## Investments
 - Upgrade speed: Slow
+- Only limited by time
+- Can be upgraded through other purchases/perks
 - Completely idle when purchased
