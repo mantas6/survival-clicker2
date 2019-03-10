@@ -2,7 +2,7 @@ import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
 import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
-import { applyUnlocked } from '@/classes/game/base/actions/methods';
+import { applyUnlocked, applyAutoToggled } from '@/classes/game/base/actions/methods';
 import { applyQueued } from '@/classes/game/base/automation/methods';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
@@ -138,6 +138,7 @@ function runClock() {
   state.timers.calculate();
   applyUnlocked(state);
   applyQueued(state);
+  applyAutoToggled(state);
 }
 
 function emitAll() {

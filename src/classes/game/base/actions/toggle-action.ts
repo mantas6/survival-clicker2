@@ -3,6 +3,10 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 import { Transform } from '@/classes/game/base/transformable';
 
 export class ToggleAction extends Action {
+  static isAutoWhenToggled: boolean = false;
+
+  'constructor': typeof ToggleAction;
+
   @SerializeOn('emit', 'store')
   @Transform<undefined, ToggleAction>('reset', () => undefined, action => !action.constructor.isPersistent)
   isToggledOn?: boolean;

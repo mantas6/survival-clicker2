@@ -1,4 +1,4 @@
-import { Action } from '.';
+import { Action, ToggleAction } from '.';
 import { ConditionFunction } from './action';
 import Decimal from 'decimal.js';
 
@@ -30,4 +30,8 @@ export function LocksWhen<Node extends Action = Action>(conditionFunc: Condition
 
 export function NoMultiplier(ctor: typeof Action) {
   ctor.defaultMaxMultiplier = new Decimal(1);
+}
+
+export function AutoWhenToggled(ctor: typeof ToggleAction) {
+  ctor.isAutoWhenToggled = true;
 }
