@@ -29,6 +29,9 @@
     },
     "stomach": {
       "title": "Stomach"
+    },
+    "money": {
+      "title": "Money"
     }
   },
   "actions": {
