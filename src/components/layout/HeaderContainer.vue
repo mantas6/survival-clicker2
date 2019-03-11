@@ -54,7 +54,7 @@ import ProgressBar from '@/components/ProgressBar.vue';
 import ContainerStat from '@/components/ContainerStat.vue';
 import Controls from '@/components/layout/Controls.vue';
 import { SerializedStats } from '@/store/stats';
-import { SerializedModifiers } from '@/store/modifiers';
+import { SerializedMeasures } from '@/store/measures';
 import { SerializedGlobals } from '@/store/globals';
 import { Getter } from 'vuex-class';
 import { Relay } from '@/classes/relay';
@@ -68,7 +68,7 @@ import { take } from '@/utils/method';
 export default class HeaderContainer extends Vue {
   @Getter stats!: SerializedStats;
   @Getter allActions!: SerializedActions;
-  @Getter modifiers!: SerializedModifiers;
+  @Getter measures!: SerializedMeasures;
   @Getter relay!: Relay;
   @Getter globals!: SerializedGlobals;
 
@@ -124,7 +124,7 @@ export default class HeaderContainer extends Vue {
   }
 
   get moneyGain() {
-    return this.modifiers.finance.income.value;
+    return this.measures.finance.income.value;
   }
 
   get isIncarnationPointsUnlocked() {

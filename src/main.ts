@@ -39,13 +39,14 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-relay.on('state', ({ stats, actions, modifiers, timers, globals, processes }) => {
+relay.on('state', ({ stats, actions, modifiers, timers, globals, processes, measures }) => {
   store.commit('updateStats', stats);
   store.commit('updateActions', actions);
   store.commit('updateModifiers', modifiers);
   store.commit('updateTimers', timers);
   store.commit('updateGlobals', globals);
   store.commit('updateProcesses', processes);
+  store.commit('updateMeasures', measures);
   store.commit('setLoaded');
 });
 
