@@ -3,7 +3,7 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 import { Transform } from '@/classes/game/base/transformable';
 
 export class ToggleAction extends Action {
-  static isAutoWhenToggled: boolean = false;
+  static autoWhenToggled: boolean = false;
 
   'constructor': typeof ToggleAction;
 
@@ -27,6 +27,11 @@ export class ToggleAction extends Action {
   }
 
   @SerializeOn('emit')
+  get isAutoWhenToggled() {
+    return this.constructor.autoWhenToggled;
+  }
+
+  @SerializeOn('emit')
   get canToggleOn(): boolean {
     return this.isCalculatedOnce && !this.isToggledOn;
   }
@@ -38,7 +43,7 @@ export class ToggleAction extends Action {
 
   protected triggerAuto() {
     const multiplier = this.state.timeMultiplier;
-    if (this.constructor.isAutoWhenToggled && this.isToggledOn) {
+    if (this.isAutoWhenToggled && this.isToggledOn) {
       if (this.validate({ multiplier })) {
         this.calculate({ multiplier });
       }

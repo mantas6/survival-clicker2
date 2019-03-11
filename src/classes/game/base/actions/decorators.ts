@@ -33,5 +33,5 @@ export function NoMultiplier(ctor: typeof Action) {
 }
 
 export function AutoWhenToggled(ctor: typeof ToggleAction) {
-  ctor.isAutoWhenToggled = true;
+  ctor.autoWhenToggled = true;
 }
