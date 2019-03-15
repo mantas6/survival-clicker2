@@ -17,6 +17,7 @@
     "no-consecutive-blank-lines": true,
     "arrow-parens": [true, "ban-single-arg-parens"],
     "member-access": [true, "no-public"],
+    "max-classes-per-file": [true, 1, "exclude-class-expressions"],
     "whitespace": [
       true,
       "check-branch",
