@@ -1,5 +1,6 @@
 import { Value } from './value';
 import { Container } from './container';
+import { Skill } from './skill';
 import { Persist } from './decorators';
 
 /**
@@ -13,4 +14,4 @@ import { Persist } from './decorators';
  */
 export type LimitFlag = true | 'lessThanMinimum' | 'greaterThanMaximum';
 
-export { Value, Container, Persist };
+export { Value, Container, Persist, Skill };
