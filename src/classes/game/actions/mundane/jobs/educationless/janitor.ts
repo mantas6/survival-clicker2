@@ -17,4 +17,8 @@ export class Janitor extends StaminaAction {
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(5);
   });
+
+  experience = new Mutation(() => this.stats.skills.fitness.experience, () => {
+    return new Decimal(1);
+  });
 }
