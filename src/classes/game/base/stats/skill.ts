@@ -30,6 +30,6 @@ export abstract class Skill extends Transformable {
 
   @SerializeOn('emit')
   get experienceRequired(): Decimal {
-    return this.level.value.add(100).pow(3);
+    return this.level.value.pow(3).add(100);
   }
 }
