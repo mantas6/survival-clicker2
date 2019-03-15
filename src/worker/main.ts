@@ -4,7 +4,7 @@ import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
-import { Transformable, applyReset } from '@/classes/game/base/transformable';
+import { applyReset } from '@/classes/game/base/transformable';
 import { Action, ToggleAction } from '@/classes/game/base/actions';
 import { Queued } from '@/classes/game/base/automation';
 import { Favorite } from '@/classes/game/base/actions/favorite';
