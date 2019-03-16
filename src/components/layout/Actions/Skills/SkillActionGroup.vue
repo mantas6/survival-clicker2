@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="descriptor">
-      <span>{{ $t(`skills.${groupName}.title`) }}</span>
-      <span>Lvl: {{ group.skill.level.value }}</span>
-      <span>XP: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</span>
+      <small>{{ $t(`skills.${groupName}.title`) }}</small>
+      <small>Lvl: {{ group.skill.level.value }}</small>
+      <small>XP: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</small>
     </div>
     <template v-for="(action, actionName) of group">
       <action-item
@@ -38,10 +38,7 @@ export default class ActionGroup extends Vue {
     
     > * {
       margin-right: 0.5rem;
-
-      &:not(:first-child) {
-        color: grey;
-      }
+      color: grey;
     }
   }
 </style>
