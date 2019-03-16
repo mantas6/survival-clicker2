@@ -8,6 +8,8 @@
     <article :class="`category-${activeCategory}`">
       <template v-if="activeCategory == 'skills'">
         <skill-action-group v-for="(group, groupName) of availableGroups"
+          :category-name="activeCategory"
+          :group-name="groupName"
           :key="groupName"
           :group="group">
         </skill-action-group>
