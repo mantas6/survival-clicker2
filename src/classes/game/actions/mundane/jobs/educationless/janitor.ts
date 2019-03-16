@@ -19,6 +19,6 @@ export class Janitor extends StaminaAction {
   });
 
   experience = new Mutation(() => this.stats.skills.fitness.experience, () => {
-    return new Decimal(1);
+    return new Decimal(10);
   });
 }
