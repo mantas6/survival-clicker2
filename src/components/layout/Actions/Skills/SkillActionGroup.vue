@@ -1,6 +1,10 @@
 <template>
   <section>
-    <small>{{ $t(`skills.${groupName}.title`) }}</small>
+    <div class="descriptor">
+      <span>{{ $t(`skills.${groupName}.title`) }}</span>
+      <span>Lvl: {{ group.skill.level.value }}</span>
+      <span>XP: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</span>
+    </div>
     <template v-for="(action, actionName) of group">
       <action-item
         v-if="actionName != 'skill'"
@@ -29,7 +33,15 @@ export default class ActionGroup extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  small {
-    color: grey;
+  .descriptor {
+    display: flex;
+    
+    > * {
+      margin-right: 0.5rem;
+
+      &:not(:first-child) {
+        color: grey;
+      }
+    }
   }
 </style>
