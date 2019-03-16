@@ -1,10 +1,13 @@
 <template>
   <section>
     <small>{{ $t(`skills.${groupName}.title`) }}</small>
-    <action-item v-for="(action, actionName) of group"
-      :key="actionName"
-      :item="action">
-    </action-item>
+    <template v-for="(action, actionName) of group">
+      <action-item
+        v-if="actionName != 'skill'"
+        :key="actionName"
+        :item="action">
+      </action-item>
+    </template>
   </section>
 </template>
 
