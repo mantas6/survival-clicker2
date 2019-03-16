@@ -1,6 +1,6 @@
 <template>
   <section>
-    <small>{{ $t(`actions.${categoryName}.groups.${groupName}.title`) }}</small>
+    <small>{{ $t(`skills.${groupName}.title`) }}</small>
     <action-item v-for="(action, actionName) of group"
       :key="actionName"
       :item="action">
