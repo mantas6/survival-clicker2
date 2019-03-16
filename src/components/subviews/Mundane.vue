@@ -6,10 +6,18 @@
       :available-categories="availableCategoryNames">
     </navigation>
     <article :class="`category-${activeCategory}`">
-      <action-group v-for="(group, groupName) of availableGroups"
-        :key="groupName"
-        :group="group">
-      </action-group>
+      <template v-if="activeCategory == 'skills'">
+        <skill-action-group v-for="(group, groupName) of availableGroups"
+          :key="groupName"
+          :group="group">
+        </skill-action-group>
+      </template>
+      <template v-else>
+        <action-group v-for="(group, groupName) of availableGroups"
+          :key="groupName"
+          :group="group">
+        </action-group>
+      </template>
     </article>
   </div>
 </template>
@@ -19,11 +27,12 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { SerializedActions } from '@/store/actions';
 import ActionGroup from '@/components/layout/Actions/ActionGroup.vue';
+import SkillActionGroup from '@/components/layout/Actions/Skills/SkillActionGroup.vue';
 import Navigation from '@/components/layout/Navigation.vue';
 import { pickBy } from '@/utils/method';
 
 @Component({
-  components: { ActionGroup, Navigation },
+  components: { ActionGroup, SkillActionGroup, Navigation },
 })
 export default class Mundane extends Vue {
   @Getter allActions!: SerializedActions;
