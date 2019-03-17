@@ -7,6 +7,6 @@ import { When } from '@/classes/game/base/processes';
 @When<Action>(action => !action.isCalculatedOnce)
 export class Workout extends Action {
   money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(50).neg();
+    return new Decimal(-50);
   });
 }
