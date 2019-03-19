@@ -35,6 +35,9 @@
     },
     "money": {
       "title": "Money"
+    },
+    "points": {
+      "title": "Points"
     }
   },
   "skills": {
