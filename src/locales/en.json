@@ -34,9 +34,17 @@
       "title": "Money"
     }
   },
+  "skills": {
+    "fitness": {
+      "title": "Fitness"
+    }
+  },
   "actions": {
     "favorites": {
       "title": "Favorites"
+    },
+    "skills": {
+      "title": "Skills"
     },
     "jobs": {
       "title": "Jobs",
