@@ -2,8 +2,8 @@
   <section>
     <div class="descriptor">
       <small>{{ $t(`skills.${groupName}.title`) }}</small>
-      <small>Lvl: {{ group.skill.level.value }}</small>
-      <small>XP: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</small>
+      <small>{{ $t('level') }}: {{ group.skill.level.value }}</small>
+      <small>{{ $t('experience') }}: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</small>
     </div>
     <template v-if="hasPerks">
       <template v-for="(action, actionName) of group">
@@ -15,7 +15,7 @@
       </template>
     </template>
     <div v-else class="empty">
-      <i>No perks unlocked</i>
+      <i>{{ $t('no_perks_unlocked') }}</i>
     </div>
   </section>
 </template>

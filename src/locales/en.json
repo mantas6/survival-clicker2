@@ -10,6 +10,9 @@
   "reincarnate": "Reincarnate",
   "for": "for",
   "seconds": "seconds",
+  "no_perks_unlocked": "No perks unlocked",
+  "level": "Lvl",
+  "experience": "XP",
   "auto": {
     "on": "Auto (On)",
     "off": "Auto (Off)"
