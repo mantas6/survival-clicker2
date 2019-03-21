@@ -1,7 +1,7 @@
 import { Serializable, SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
-import { Mundane } from '@/classes/game/actions/mundane';
-import { Incarnation } from '@/classes/game/actions/incarnation';
-import { Other } from '@/classes/game/actions/other';
+import { Mundane } from './mundane';
+import { Incarnation } from './incarnation';
+import { Other } from './other';
 
 @SerializeAllOn('emit', 'store')
 export class Actions extends Serializable {
