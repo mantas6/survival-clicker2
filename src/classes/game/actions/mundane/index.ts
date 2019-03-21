@@ -7,7 +7,6 @@ import { Investment } from '@/classes/game/actions/mundane/investment';
 import { Education } from '@/classes/game/actions/mundane/education';
 import { Clothing } from '@/classes/game/actions/mundane/clothing';
 import { Skills } from '@/classes/game/actions/mundane/skills';
-import { Other } from '@/classes/game/actions/other';
 
 @SerializeAllOn('emit', 'store')
 export class Mundane extends Serializable {
@@ -22,7 +21,4 @@ export class Mundane extends Serializable {
   clothing = new Clothing();
 
   skills = new Skills();
-
-  @SerializeOn('store')
-  other = new Other();
 }
