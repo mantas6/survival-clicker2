@@ -1,12 +1,12 @@
 import { Serializable, SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
-import { Favorites } from '@/classes/game/actions/mundane/favorites';
-import { Jobs } from '@/classes/game/actions/mundane/jobs';
-import { Consumables } from '@/classes/game/actions/mundane/consumables';
-import { Drugs } from '@/classes/game/actions/mundane/drugs';
-import { Investment } from '@/classes/game/actions/mundane/investment';
-import { Education } from '@/classes/game/actions/mundane/education';
-import { Clothing } from '@/classes/game/actions/mundane/clothing';
-import { Skills } from '@/classes/game/actions/mundane/skills';
+import { Favorites } from './favorites';
+import { Jobs } from './jobs';
+import { Consumables } from './consumables';
+import { Drugs } from './drugs';
+import { Investment } from './investment';
+import { Education } from './education';
+import { Clothing } from './clothing';
+import { Skills } from './skills';
 
 @SerializeAllOn('emit', 'store')
 export class Mundane extends Serializable {
