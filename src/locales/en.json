@@ -62,6 +62,10 @@
               "title": "Janitor",
               "info": "You have to start somewhere, right?"
             },
+            "janitorDaily": {
+              "title": "Janitor (daily)",
+              "info": "Now I can work with contract as janitor. I hope nobody asks about my job"
+            },
             "pizzaDelivery": {
               "title": "Pizza Delivery Driver",
               "info": "Payment includes costs of speeding tickets"
