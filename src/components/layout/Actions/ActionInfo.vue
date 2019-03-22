@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="info">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.info`) }}</div>
+    <div class="tags">
+      <span v-show="isToggable" class="togglable">Togglable</span>
+    </div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
       <span>{{ mutation.diff }}</span>
@@ -22,7 +25,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { Action } from '@/classes/game/base/actions';
+import { Action, ToggleAction } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import { SerializedActions } from '@/store/actions';
 
@@ -31,7 +34,11 @@ export default class ActionInfo extends Vue {
   @Getter allActions!: SerializedActions;
 
   @Prop({ required: true })
-  item!: Action;
+  item!: Action | ToggleAction;
+
+  get isToggable() {
+    return (this.item as ToggleAction).isTogglable || false;
+  }
 
   get mutations() {
     return this.filterItems(item => {
@@ -84,8 +91,15 @@ export default class ActionInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .info {
-    margin-bottom: 0.5rem;
+  .tags {
+    margin: {
+      top: 0.5rem;
+      bottom: 0.5rem;
+    };
+
+    .togglable {
+      color: #1b6be4;
+    }
   }
 
   .unavailable {
