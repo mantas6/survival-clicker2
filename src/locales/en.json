@@ -38,6 +38,9 @@
     },
     "points": {
       "title": "Points"
+    },
+    "experience": {
+      "title": "Experience"
     }
   },
   "skills": {
