@@ -41,6 +41,11 @@ export class ToggleAction extends Action {
     return this.isToggledOn !== undefined && this.isToggledOn;
   }
 
+  @SerializeOn('emit')
+  get isTogglable(): true | undefined {
+    return true;
+  }
+
   protected triggerAuto() {
     const multiplier = this.state.timeMultiplier;
     if (this.isAutoWhenToggled && this.isToggledOn) {

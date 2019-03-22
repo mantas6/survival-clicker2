@@ -73,7 +73,7 @@ export default class ActionItem extends Vue {
   }
 
   get isToggable(): boolean {
-    return (this.item as ToggleAction).canToggleOn || (this.item as ToggleAction).canToggleOff;
+    return (this.item as ToggleAction).isTogglable || false;
   }
 
   get isMultiplierUnlocked() {
