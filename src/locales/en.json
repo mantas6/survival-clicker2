@@ -13,6 +13,7 @@
   "no_perks_unlocked": "No perks unlocked",
   "level": "Lvl",
   "experience": "XP",
+  "togglable": "Togglable",
   "auto": {
     "on": "Auto (On)",
     "off": "Auto (Off)"

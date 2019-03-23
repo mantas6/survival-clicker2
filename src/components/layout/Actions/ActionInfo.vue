@@ -2,7 +2,7 @@
   <div>
     <div class="info">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.info`) }}</div>
     <div class="tags">
-      <span v-show="isToggable" class="togglable">Togglable</span>
+      <span v-show="isToggable" class="togglable">{{ $t('togglable') }}</span>
     </div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
