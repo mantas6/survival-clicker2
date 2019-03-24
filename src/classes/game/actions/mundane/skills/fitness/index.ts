@@ -19,7 +19,7 @@ export class Fitness extends SerializableWithReference {
         return super.serialize(tagName);
       }
     } else {
-      return super.serialize(tagName); 
+      return super.serialize(tagName);
     }
   }
 }
