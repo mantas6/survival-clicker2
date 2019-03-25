@@ -316,6 +316,10 @@
             "temperature": {
               "title": "Temperature",
               "info": "Now I have to take care of my body's temperature"
+            },
+            "skills": {
+              "title": "Skills",
+              "info": "Isn't it great to have an ability to learn something?"
             }
           }
         },
