@@ -3,6 +3,7 @@ import { StaminaAction } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
 import { TemperatureMutation } from '@/classes/game/base/templates/mutations/temperature-mutation';
+import { ExperienceMutation } from '@/classes/game/base/templates/mutations/experience-mutation';
 
 export class Janitor extends StaminaAction {
   @IgnoreLimits('lessThanMinimum')
@@ -18,7 +19,7 @@ export class Janitor extends StaminaAction {
     return new Decimal(5);
   });
 
-  experience = new Mutation(() => this.stats.skills.fitness.experience, () => {
-    return new Decimal(10).div(this.stats.skills.totalLevel.add(1));
+  experience = new ExperienceMutation(() => this.stats.skills.fitness, () => {
+    return new Decimal(10);
   });
 }
