@@ -15,7 +15,7 @@ export class Fitness extends SerializableWithReference {
 
   serialize(tagName: TagName) {
     if (tagName === 'emit') {
-      if (this.skill.experience.value.greaterThan(50) || this.skill.level.value.greaterThan(1)) {
+      if (this.skill.level.value.greaterThan(0)) {
         return super.serialize(tagName);
       }
     } else {

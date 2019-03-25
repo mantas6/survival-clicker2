@@ -8,7 +8,7 @@ import { SerializeOn } from '@/classes/game/base/serialization';
 export abstract class Skill extends Transformable {
   @SerializeOn('emit', 'store')
   level = new (class Level extends Value {
-    readonly default = 1;
+    readonly default = 0;
   });
 
   @SerializeOn('emit', 'store')
@@ -30,6 +30,6 @@ export abstract class Skill extends Transformable {
 
   @SerializeOn('emit')
   get experienceRequired(): Decimal {
-    return this.level.value.pow(3).add(100);
+    return this.level.value.add(1).pow(3).add(100);
   }
 }
