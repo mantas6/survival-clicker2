@@ -18,8 +18,4 @@ export class JanitorDaily extends ToggleAction {
   money = new Mutation(() => this.stats.finance.money, () => {
     return new Decimal(1);
   });
-
-  get canToggleOn(): boolean {
-    return !this.isToggledOn;
-  }
 }

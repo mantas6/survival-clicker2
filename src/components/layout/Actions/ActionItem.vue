@@ -73,6 +73,10 @@ export default class ActionItem extends Vue {
   }
 
   get isToggable(): boolean {
+    if ((this.item as ToggleAction).isCalculableBeforeToggle) {
+      return false;
+    }
+
     return (this.item as ToggleAction).isTogglable || false;
   }
 

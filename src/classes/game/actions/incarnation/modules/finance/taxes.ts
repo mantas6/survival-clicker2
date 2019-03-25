@@ -1,10 +1,18 @@
 import Decimal from 'decimal.js';
 import { Mutation } from '@/classes/game/base/mutations/mutation';
-import { ToggleAction, NoMultiplier, Persist, NoFavorites, Unlocks } from '@/classes/game/base/actions';
+import {
+  ToggleAction,
+  NoMultiplier,
+  Persist,
+  NoFavorites,
+  Unlocks,
+  CalculateBeforeToggle,
+} from '@/classes/game/base/actions';
 
 @NoMultiplier
 @Persist
 @NoFavorites
+@CalculateBeforeToggle
 export class Taxes extends ToggleAction {
   @Unlocks
   points = new Mutation(() => this.stats.incarnation.points, () => {

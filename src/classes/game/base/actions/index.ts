@@ -6,6 +6,7 @@ import {
   Persist,
   NoFavorites,
   AutoWhenToggled,
+  CalculateBeforeToggle,
 } from './decorators';
 
 import { Action } from './action';
@@ -25,4 +26,5 @@ export {
   Persist,
   NoFavorites,
   AutoWhenToggled,
+  CalculateBeforeToggle,
 };

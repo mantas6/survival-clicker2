@@ -4,6 +4,7 @@ import { Transform } from '@/classes/game/base/transformable';
 
 export class ToggleAction extends Action {
   static autoWhenToggled: boolean = false;
+  static calculateBeforeToggle: boolean = false;
 
   'constructor': typeof ToggleAction;
 
@@ -33,7 +34,10 @@ export class ToggleAction extends Action {
 
   @SerializeOn('emit')
   get canToggleOn(): boolean {
-    return this.isCalculatedOnce && !this.isToggledOn;
+    if (this.constructor.calculateBeforeToggle && !this.isCalculatedOnce) {
+      return false;
+    }
+    return !this.isToggledOn;
   }
 
   @SerializeOn('emit')
@@ -44,6 +48,11 @@ export class ToggleAction extends Action {
   @SerializeOn('emit')
   get isTogglable(): true | undefined {
     return true;
+  }
+
+  @SerializeOn('emit')
+  get isCalculableBeforeToggle() {
+    return this.constructor.calculateBeforeToggle && !this.isCalculatedOnce;
   }
 
   protected triggerAuto() {
