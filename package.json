@@ -18,16 +18,16 @@
     ]
   },
   "dependencies": {
-    "@sentry/browser": "^4.6.4",
+    "@sentry/browser": "^4.6.5",
     "decimal.js": "^10.1.1",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
     "rxjs": "^6.4.0",
     "swarm-numberformat": "^0.4.0",
     "vue": "^2.6.10",
-    "vue-class-component": "^7.0.1",
+    "vue-class-component": "^7.0.2",
     "vue-i18n": "^8.9.0",
-    "vue-property-decorator": "^8.0.0",
+    "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",
     "vuex-class": "^0.3.2"
