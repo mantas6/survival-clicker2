@@ -1,4 +1,3 @@
-import { IgnoreLimits } from '@/classes/game/base/processes';
 import { ToggleAction, AutoWhenToggled } from '@/classes/game/base/actions';
 import { Mutation } from '@/classes/game/base/mutations';
 import Decimal from 'decimal.js';
@@ -6,7 +5,6 @@ import { TemperatureMutation } from '@/classes/game/base/templates/mutations/tem
 
 @AutoWhenToggled
 export class JanitorDaily extends ToggleAction {
-  @IgnoreLimits('lessThanMinimum')
   stamina = new Mutation(() => this.stats.character.stamina, () => {
     return new Decimal(-1);
   });
