@@ -25,6 +25,7 @@ export abstract class Skill extends Transformable {
     if (this.experience.value.greaterThanOrEqualTo(this.experienceRequired)) {
       this.experience.mutate(value => value.sub(this.experienceRequired));
       this.level.mutate(value => value.add(1));
+      this.stats.skills.learningPoints.mutate(value => value.add(1));
     }
   }
 
