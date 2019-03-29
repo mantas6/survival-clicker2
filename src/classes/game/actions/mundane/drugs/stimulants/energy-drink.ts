@@ -13,7 +13,7 @@ export class EnergyDrink extends Action {
   });
 
   stamina = new TimerEffect({
-    modifier: () => this.modifiers.character.staminaRestoreSpeed,
+    modifier: () => this.modifiers.character.regeneration.stamina.restoreSpeedBoost,
     duration: () => 5,
     value: () => new Decimal(3),
   });

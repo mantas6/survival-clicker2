@@ -14,7 +14,7 @@ export class Adderall extends Action {
   });
 
   restoreStamina = new TimerEffect({
-    modifier: () => this.modifiers.character.staminaRestoreSpeed,
+    modifier: () => this.modifiers.character.regeneration.stamina.restoreSpeedBoost,
     duration: () => 5,
     value: () => new Decimal(5),
   });

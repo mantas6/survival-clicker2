@@ -7,7 +7,7 @@ import { IgnoreLimits, When } from '@/classes/game/base/processes';
 export class StaminaRestore extends Process {
   @IgnoreLimits('greaterThanMaximum')
   restoreStamina = new Mutation(() => this.stats.character.stamina, () => {
-    return this.restoreSpeed;
+    return this.restoreSpeed.add(this.restoreSpeedBoost);
   });
 
   drainEnergy = new Mutation(() => this.stats.character.energy, () => {
@@ -19,6 +19,10 @@ export class StaminaRestore extends Process {
   });
 
   get restoreSpeed() {
-    return this.modifiers.character.staminaRestoreSpeed.value;
+    return this.modifiers.character.regeneration.stamina.restoreSpeed.value;
+  }
+
+  get restoreSpeedBoost() {
+    return this.modifiers.character.regeneration.stamina.restoreSpeedBoost.value;
   }
 }

@@ -8,7 +8,7 @@ import { MoneyCostMutation } from '@/classes/game/base/templates/mutations/money
 @UnlocksWhen(action => action.modifiers.education.school.value.greaterThanOrEqualTo(5))
 export class Morphine extends Action {
   staminaRestoreSpeed = new TimerEffect({
-    modifier: () => this.modifiers.character.staminaRestoreSpeed,
+    modifier: () => this.modifiers.character.regeneration.stamina.restoreSpeedBoost,
     duration: () => 60,
     value: () => new Decimal(-0.1),
   });
