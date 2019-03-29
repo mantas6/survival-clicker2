@@ -2,8 +2,8 @@
   <section>
     <div class="descriptor">
       <small>{{ $t(`skills.${groupName}.title`) }}</small>
-      <small>{{ $t('level') }}: {{ group.skill.level.value }}</small>
-      <small>{{ $t('experience') }}: {{ group.skill.experience.value }} / {{ group.skill.experienceRequired }}</small>
+      <small>{{ $t('level') }}: <number-format :value="group.skill.level.value"></number-format></small>
+      <small>{{ $t('experience') }}: <number-format :value="group.skill.experience.value"></number-format> / <number-format :value="group.skill.experienceRequired"></number-format></small>
     </div>
     <template v-if="hasPerks">
       <template v-for="(action, actionName) of group">
