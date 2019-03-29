@@ -6,7 +6,7 @@ import { When } from '@/classes/game/base/processes';
 @UnlocksWhen(action => action.stats.skills.fitness.level.value.greaterThanOrEqualTo(5))
 @When<Action>(action => !action.isCalculatedOnce)
 export class WorkoutEnhanced extends Action {
-  money = new Mutation(() => this.stats.finance.money, () => {
-    return new Decimal(-300);
+  learningPoints = new Mutation(() => this.stats.skills.learningPoints, () => {
+    return new Decimal(-3);
   });
 }
