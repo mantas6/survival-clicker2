@@ -9,6 +9,8 @@ export class Health extends Container {
   }
 
   protected onLessThanMinimum(): void {
-    this.state.globals.alive.terminate();
+    if (!this.actions.development.general.character.immortality.isToggledOn) {
+      this.state.globals.alive.terminate();
+    }
   }
 }
