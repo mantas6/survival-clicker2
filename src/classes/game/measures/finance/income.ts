@@ -16,10 +16,11 @@ function hasMoneyMutation(node: ToggleAction): node is WithMoneyMutation {
 export class Income extends Measure {
   compute() {
     let sum = new Decimal(0);
+    const multiplier = new Decimal(1);
 
     for (const node of traverse(this.state)) {
       if (node instanceof ToggleAction) {
-        if (node.isAutoWhenToggled && node.isToggledOn && hasMoneyMutation(node)) {
+        if (node.isAutoWhenToggled && node.isToggledOn && node.validate({ multiplier }) && hasMoneyMutation(node)) {
           sum = sum.add(node.money.diff);
         }
       }
