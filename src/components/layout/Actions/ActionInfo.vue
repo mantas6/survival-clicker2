@@ -6,17 +6,17 @@
     </div>
     <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
       <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <span>{{ mutation.diff }}</span>
+      <number-format :value="mutation.diff"></number-format>
     </div>
     <div v-for="(effect, name) of effects" :key="name">
       <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <span>{{ effect.value }}</span>
+      <number-format :value="effect.value"></number-format>
     </div>
     <div v-for="(effect, name) of timerEffects" :key="name">
       <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <span>{{ effect.value }}</span>
+      <number-format :value="effect.value"></number-format>
       <span> {{ $t('for') }} </span>
-      <span>{{ effect.duration }}</span>
+      <number-format :value="effect.duration"></number-format>
       <span> {{ $t('seconds') }}</span>
     </div>
   </div>
