@@ -9,8 +9,8 @@
           <span class="name">{{ $t(`actions.${item.categoryName}.groups.${item.groupName}.items.${item.actionName}.title`) }}</span>
           <span class="unseen" v-show="!item.isSeen">*</span>
         </div>
-        <number-format class="cost" v-if="item.money" :value="item.money.diff" post-fix="$"></number-format>
-        <number-format class="cost" v-else-if="item.points" :value="item.points.diff" post-fix="P"></number-format>
+        <number-format class="cost" v-if="item.money && item.money.diff != '0'" :value="item.money.diff" post-fix="$"></number-format>
+        <number-format class="cost" v-else-if="item.points && item.points.diff != '0'" :value="item.points.diff" post-fix="P"></number-format>
       </div>
       <div class="options">
         <span @click="activeMaxMultiplier" v-show="isMaxAvailable" v-if="isMultiplierUnlocked">x{{ item.maxMultiplier }}</span>
