@@ -42,6 +42,9 @@
     },
     "experience": {
       "title": "Experience"
+    },
+    "learningPoints": {
+      "title": "Learning Points"
     }
   },
   "skills": {
