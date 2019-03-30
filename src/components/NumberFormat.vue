@@ -15,6 +15,11 @@ export default class NumberFormat extends Vue {
 
   get formatted(): string {
     const value = new Decimal(this.value);
+
+    if (value.lessThan(1) && value.greaterThan(-1)) {
+      return value.toDecimalPlaces(2).valueOf();
+    }
+
     return this.formatter.format(value);
   }
 
