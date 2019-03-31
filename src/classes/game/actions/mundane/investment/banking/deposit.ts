@@ -11,7 +11,7 @@ import { growth } from '@/utils/math';
 @UnlocksWhen(action => action.stats.finance.money.value.greaterThanOrEqualTo(100))
 export class Deposit extends Action {
   money = new MoneyCostMutation(() => this.stats.finance.money, () => {
-    return new Decimal(growth(this.timesCalculated, 200, 1.3));
+    return growth(this.timesCalculated, 200, 1.3);
   });
 
   investment = new Mutation(() => this.stats.finance.investment, () => {
