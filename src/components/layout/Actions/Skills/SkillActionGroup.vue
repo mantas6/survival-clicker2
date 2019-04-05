@@ -15,7 +15,7 @@
       </template>
     </template>
     <div v-else class="empty">
-      <i>{{ $t('no_perks_unlocked') }}</i>
+      <i>{{ $t('noPerksUnlocked') }}</i>
     </div>
   </section>
 </template>
