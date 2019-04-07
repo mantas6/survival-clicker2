@@ -15,10 +15,12 @@
       </div>
       <div v-for="(effect, name) of timerEffects" :key="name">
         <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-        <number-format :value="effect.value"></number-format>
-        <span> {{ $t('for') }} </span>
-        <number-format :value="effect.duration"></number-format>
-        <span> {{ $t('seconds') }}</span>
+        <div>
+          <number-format :value="effect.value"></number-format>
+          <span> {{ $t('for') }} </span>
+          <number-format :value="effect.duration"></number-format>
+          <span> {{ $t('seconds') }}</span>
+        </div>
       </div>
     </div>
   </div>
