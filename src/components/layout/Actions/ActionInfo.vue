@@ -4,20 +4,22 @@
     <div class="tags">
       <span v-show="isToggable" class="togglable">{{ $t('togglable') }}</span>
     </div>
-    <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
-      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <number-format :value="mutation.diff"></number-format>
-    </div>
-    <div v-for="(effect, name) of effects" :key="name">
-      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <number-format :value="effect.value"></number-format>
-    </div>
-    <div v-for="(effect, name) of timerEffects" :key="name">
-      <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
-      <number-format :value="effect.value"></number-format>
-      <span> {{ $t('for') }} </span>
-      <number-format :value="effect.duration"></number-format>
-      <span> {{ $t('seconds') }}</span>
+    <div class="list">
+      <div v-for="(mutation, name) of mutations" :key="name" :class="mutationClass(mutation)">
+        <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
+        <number-format :value="mutation.diff"></number-format>
+      </div>
+      <div v-for="(effect, name) of effects" :key="name">
+        <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
+        <number-format :value="effect.value"></number-format>
+      </div>
+      <div v-for="(effect, name) of timerEffects" :key="name">
+        <div><b>{{ $t(`stats.${name}.title`) }}</b></div>
+        <number-format :value="effect.value"></number-format>
+        <span> {{ $t('for') }} </span>
+        <number-format :value="effect.duration"></number-format>
+        <span> {{ $t('seconds') }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +101,13 @@ export default class ActionInfo extends Vue {
 
     .togglable {
       color: #1b6be4;
+    }
+  }
+
+  .list {
+    > div {
+      display: flex;
+      justify-content: space-between;
     }
   }
 
