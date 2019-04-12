@@ -5,7 +5,7 @@ import { SerializeOn } from '../serialization';
 
 export abstract class Frequency extends Transformable {
   @SerializeOn('emit', 'store')
-  private heat = new Decimal(0);
+  heat = new Decimal(0);
 
   addUse(opts: CalculationOptions) {
     this.heat = this.heat.add(this.riseBy(opts).mod(opts.multiplier));
