@@ -13,6 +13,7 @@ import { Action } from './action';
 import { ToggleAction } from './toggle-action';
 import { StaminaAction } from './stamina-action';
 import { Category } from './category';
+import { Frequency } from './frequency';
 
 export {
   Action,
@@ -27,4 +28,5 @@ export {
   NoFavorites,
   AutoWhenToggled,
   CalculateBeforeToggle,
+  Frequency,
 };
