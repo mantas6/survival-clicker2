@@ -3,22 +3,16 @@ import { Transformable } from '@/classes/game/base/transformable';
 import { CalculationOptions } from '@/classes/game/base/mutations';
 import { SerializeOn } from '../serialization';
 
-interface FrequencyOptions {
-  riseSensitivity: Decimal.Value;
-  fallSensitivity: Decimal.Value;
-}
-
-export class Frequency extends Transformable {
+export abstract class Frequency extends Transformable {
   @SerializeOn('emit', 'store')
   private heat = new Decimal(0);
 
-  private riseSensitivity: Decimal;
-  private fallSensitivity: Decimal;
+  get riseSensitivity(): Decimal {
+    return new Decimal(1);
+  }
 
-  constructor(opts: FrequencyOptions) {
-    super();
-    this.riseSensitivity = new Decimal(opts.riseSensitivity);
-    this.fallSensitivity = new Decimal(opts.fallSensitivity);
+  get fallSensitivity(): Decimal {
+    return new Decimal(1);
   }
 
   addUse(opts: CalculationOptions) {
