@@ -2,7 +2,7 @@
   <div class="stat">
     <div class="head">
       <span>{{ $t(`stats.${name}.title`) }}</span>
-      <small>{{ stat.value }} / {{ stat.max }}</small>
+      <small><number-format :value="stat.value"></number-format> / <number-format :value="stat.max"></number-format></small>
     </div>
     <progress-bar :value="stat.value" :max="stat.max" :variant="progressVariant"></progress-bar>
   </div>
