@@ -5,6 +5,7 @@ import { TagName } from '@/classes/game/base/serialization/serializable';
 import { Calculable, Mutation, ValidationOptions, CalculationOptions } from '@/classes/game/base/mutations';
 import { Transform } from '@/classes/game/base/transformable';
 import { Favorite } from './favorite';
+import { Frequency } from './frequency';
 
 export type ConditionFunction<Node> = (action: Node, opts: ValidationOptions) => boolean;
 
@@ -21,6 +22,9 @@ export class Action extends Process {
   static canBeFavorited: boolean = true;
 
   'constructor': typeof Action;
+
+  @SerializeOn('store', 'emit')
+  frequency?: Frequency;
 
   @SerializeOn('store')
   @Transform<undefined, Action>('reset', () => undefined, action => !action.constructor.isPersistent)
@@ -101,6 +105,9 @@ export class Action extends Process {
   calculate(opts: CalculationOptions) {
     super.calculate(opts);
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);
+    if (this.frequency) {
+      this.frequency.addUse(opts);
+    }
   }
 
   serialize(tagName: TagName) {
