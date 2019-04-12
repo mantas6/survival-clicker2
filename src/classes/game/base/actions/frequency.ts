@@ -1,6 +1,7 @@
 import Decimal from 'decimal.js';
 import { Transformable } from '@/classes/game/base/transformable';
 import { CalculationOptions } from '@/classes/game/base/mutations';
+import { SerializeOn } from '../serialization';
 
 interface FrequencyOptions {
   riseSensitivity: Decimal.Value;
@@ -8,6 +9,7 @@ interface FrequencyOptions {
 }
 
 export class Frequency extends Transformable {
+  @SerializeOn('emit', 'store')
   private heat = new Decimal(0);
 
   private riseSensitivity: Decimal;
