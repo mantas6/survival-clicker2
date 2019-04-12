@@ -1,14 +1,16 @@
 import Decimal from 'decimal.js';
-import { Transformable } from '@/classes/game/base/transformable';
+import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { CalculationOptions } from '@/classes/game/base/mutations';
-import { SerializeOn } from '../serialization';
+import { SerializeOn, UnserializeAs } from '@/classes/game/base/serialization';
 
 export abstract class Frequency extends Transformable {
   @SerializeOn('emit', 'store')
+  @UnserializeAs(input => new Decimal(input.toString()))
+  @Transform<Decimal, Frequency>('reset', () => new Decimal(0))
   heat = new Decimal(0);
 
   addUse(opts: CalculationOptions) {
-    this.heat = this.heat.add(this.riseBy(opts).mod(opts.multiplier));
+    this.heat = this.heat.add(this.riseBy(opts).times(opts.multiplier));
   }
 
   onClock() {
