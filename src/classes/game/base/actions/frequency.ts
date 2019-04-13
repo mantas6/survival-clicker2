@@ -1,32 +1,46 @@
 import Decimal from 'decimal.js';
 import { Transformable, Transform } from '@/classes/game/base/transformable';
 import { CalculationOptions } from '@/classes/game/base/mutations';
-import { SerializeOn, UnserializeAs } from '@/classes/game/base/serialization';
+import { SerializeOn, UnserializeAs, SerializeAs } from '@/classes/game/base/serialization';
+import { last } from '@/utils/method';
 
-export abstract class Frequency extends Transformable {
+interface Tick {
+  count: Decimal;
+}
+
+export class Frequency extends Transformable {
   @SerializeOn('emit', 'store')
-  @UnserializeAs(input => new Decimal(input.toString()))
-  @Transform<Decimal, Frequency>('reset', () => new Decimal(0))
-  heat = new Decimal(0);
+  @UnserializeAs<Tick[]>(input => input.toString().split(',').map(item => ({ count: new Decimal(item) })))
+  @SerializeAs<Tick[]>(input => input.map(item => item.count.valueOf()).join(','))
+  @Transform<Tick[], Frequency>('reset', () => [])
+
+  private ticks: Tick[] = [];
 
   addUse(opts: CalculationOptions) {
-    this.heat = this.heat.add(this.riseBy(opts).times(opts.multiplier));
+    const tick = last(this.ticks);
+    if (tick) {
+      tick.count = tick.count.add(opts.multiplier);
+    }
   }
 
   onClock() {
     super.onClock();
+    this.ticks.push({ count: new Decimal(0) });
 
-    if (this.heat.greaterThan(0)) {
-      const multiplier = new Decimal(1);
-      this.heat = this.heat.minus(this.fallBy({ multiplier }));
+    if (this.ticks.length > 60) {
+      this.ticks.shift();
     }
   }
 
-  protected riseBy(opts: CalculationOptions): Decimal {
-    return new Decimal(1);
-  }
+  ofDuration(duration: number): Decimal {
+    const ticks = this.ticks.slice(-duration);
 
-  protected fallBy(opts: CalculationOptions): Decimal {
-    return new Decimal(1);
+    let total = new Decimal(0);
+
+    for (const tick of ticks) {
+      total = total.add(tick.count);
+    }
+
+    return total.div(duration);
   }
 }
