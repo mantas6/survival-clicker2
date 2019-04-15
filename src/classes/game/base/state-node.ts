@@ -61,6 +61,10 @@ export abstract class StateNode {
     //
   }
 
+  get isActive(): boolean {
+    return true;
+  }
+
   private findRoot(): void {
     let rootNode: StateNode = this;
     let path = this.name;
