@@ -1,9 +1,17 @@
-import { Serializable, SerializeAllOn } from '@/classes/game/base/serialization';
+import { Serializable, SerializeAllOn, SerializableWithReference } from '@/classes/game/base/serialization';
 import { Modules } from './modules';
 import { Automation } from './automation';
 
 @SerializeAllOn('emit', 'store')
-export class Incarnation extends Serializable {
+export class Incarnation extends SerializableWithReference {
   modules = new Modules();
   automation = new Automation();
+
+  get shouldTraverse() {
+    return !this.state.globals.alive.value;
+  }
+
+  get shouldSerialize() {
+    return !this.state.globals.alive.value;
+  }
 }
