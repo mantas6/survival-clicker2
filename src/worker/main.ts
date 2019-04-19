@@ -144,6 +144,7 @@ function emitStore() {
   relay.emit('save', serializedState);
 
   console.timeEnd('emitStore');
+  console.log('Serialized state', serializedState);
 }
 
 function applyClock() {
