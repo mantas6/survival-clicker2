@@ -33,7 +33,11 @@ export abstract class Serializable extends StateNode {
   static defaultTagNames: string[] = [];
   'constructor': typeof Serializable;
 
-  get shouldSerialize(): boolean {
+  get shouldSerializeOnEmit(): boolean {
+    return true;
+  }
+
+  get shouldSerializeOnStore(): boolean {
     return true;
   }
 
@@ -48,7 +52,7 @@ export abstract class Serializable extends StateNode {
   }
 
   serialize(tagName: TagName): SerializedNode | undefined {
-    if (!this.shouldSerialize) {
+    if (tagName === 'emit' && !this.shouldSerializeOnEmit || tagName === 'store' && !this.shouldSerializeOnStore) {
       return undefined;
     }
 

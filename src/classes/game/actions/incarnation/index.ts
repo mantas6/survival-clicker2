@@ -11,7 +11,7 @@ export class Incarnation extends SerializableWithReference {
     return !this.state.globals.alive.value;
   }
 
-  get shouldSerialize() {
+  get shouldSerializeOnEmit() {
     return !this.state.globals.alive.value;
   }
 }
