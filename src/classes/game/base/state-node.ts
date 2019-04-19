@@ -61,7 +61,7 @@ export abstract class StateNode {
     //
   }
 
-  get isActive(): boolean {
+  get shouldTraverse(): boolean {
     return true;
   }
 
