@@ -131,7 +131,9 @@ function runClock() {
 
 function emitAll() {
   console.time('emitAll');
+
   relay.emit('state', state.serialize('emit'));
+
   console.timeEnd('emitAll');
 }
 
