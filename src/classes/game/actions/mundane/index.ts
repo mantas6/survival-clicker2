@@ -1,4 +1,4 @@
-import { Serializable, SerializeAllOn, SerializeOn } from '@/classes/game/base/serialization';
+import { SerializeAllOn, SerializeOn, SerializableWithReference } from '@/classes/game/base/serialization';
 import { Favorites } from './favorites';
 import { Jobs } from './jobs';
 import { Consumables } from './consumables';
@@ -9,7 +9,7 @@ import { Clothing } from './clothing';
 import { Skills } from './skills';
 
 @SerializeAllOn('emit', 'store')
-export class Mundane extends Serializable {
+export class Mundane extends SerializableWithReference {
   @SerializeOn('emit')
   favorites = new Favorites();
 
@@ -21,4 +21,8 @@ export class Mundane extends Serializable {
   clothing = new Clothing();
 
   skills = new Skills();
+
+  get shouldSerializeOnEmit() {
+    return this.state.globals.alive.value;
+  }
 }
