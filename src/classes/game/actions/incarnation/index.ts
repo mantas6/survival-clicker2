@@ -1,4 +1,4 @@
-import { Serializable, SerializeAllOn, SerializableWithReference } from '@/classes/game/base/serialization';
+import { SerializeAllOn, SerializableWithReference } from '@/classes/game/base/serialization';
 import { Modules } from './modules';
 import { Automation } from './automation';
 
