@@ -138,8 +138,12 @@ function emitAll() {
 }
 
 function emitStore() {
+  console.time('emitStore');
+
   const serializedState = state.serialize('store');
   relay.emit('save', serializedState);
+
+  console.timeEnd('emitStore');
 }
 
 function applyClock() {
