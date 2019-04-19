@@ -33,6 +33,10 @@ export abstract class Serializable extends StateNode {
   static defaultTagNames: string[] = [];
   'constructor': typeof Serializable;
 
+  get shouldSerialize(): boolean {
+    return true;
+  }
+
   emitUpdate(origin?: Serializable) {
     if (!origin) {
       origin = this;
@@ -44,6 +48,10 @@ export abstract class Serializable extends StateNode {
   }
 
   serialize(tagName: TagName): SerializedNode | undefined {
+    if (!this.shouldSerialize) {
+      return undefined;
+    }
+
     const serialized: SerializedNode = {};
 
     for (const { name, node, descriptor } of this.serializableProperties(tagName)) {
