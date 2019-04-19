@@ -5,7 +5,6 @@ import router from './router';
 import store from '@/store';
 import { Relay } from '@/classes/relay';
 import Worker from 'worker-loader!./worker/main';
-import { log, enableLogging } from '@/utils/log';
 import { collect } from '@/utils/collect';
 import NumberFormat from '@/components/NumberFormat.vue';
 import LocalForage from 'localforage';
@@ -50,13 +49,6 @@ relay.on('state', ({ stats, actions, modifiers, timers, globals, processes, meas
   store.commit('setLoaded');
 });
 
-storage.getItem('debug').then(isEnabled => {
-  if (isEnabled) {
-    enableLogging();
-    relay.emit('enableLogging');
-  }
-});
-
 storage.getItem('darkMode').then(isEnabled => {
   if (isEnabled) {
     store.commit('setDarkMode', true);
@@ -69,7 +61,6 @@ store.watch(state => state.Settings.darkMode, value => {
 
 relay.on('save', serializedState => {
   storage.setItem('save', serializedState);
-  log('Saving game state', serializedState);
 });
 
 storage.getItem('save').then(previousSave => {

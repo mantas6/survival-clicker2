@@ -1,6 +1,5 @@
 import { Relay } from '@/classes/relay';
 import { State } from '@/classes/game/state';
-import { log, enableLogging } from '@/utils/log';
 import { interval } from 'rxjs';
 import Decimal from 'decimal.js';
 import { traverse } from '@/utils/node';
@@ -22,7 +21,6 @@ relay.on('action', ({ path, multiplier }) => {
     return;
   }
 
-  log('Calculating action of path', path);
   const action = state.get<Action>(path)!;
 
   if (action.validate({ multiplier: new Decimal(multiplier) })) {
@@ -84,10 +82,6 @@ relay.on('removeFavorite', ({ path }) => {
   emitAll();
 });
 
-relay.on('enableLogging', () => {
-  enableLogging();
-});
-
 relay.on('seen', ({ path }) => {
   const action = state.get<Action>(path)!;
 
@@ -128,11 +122,17 @@ function runClock() {
     return;
   }
 
+  console.time('applyClock');
+
   applyClock();
+
+  console.timeEnd('applyClock');
 }
 
 function emitAll() {
+  console.time('emitAll');
   relay.emit('state', state.serialize('emit'));
+  console.timeEnd('emitAll');
 }
 
 function emitStore() {
