@@ -41,6 +41,12 @@ export abstract class StateNode {
 
       const excludeNames = this.constructor.nonChildrenNames;
 
+      if (node instanceof StateNode) {
+        if (node.parent && !node.shouldTraverse) {
+          continue;
+        }
+      }
+
       if (!excludeNames.includes(propertyName)) {
         if (!filterFunc || filterFunc(node)) {
           yield { node, name: propertyName };
