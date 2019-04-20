@@ -39,17 +39,17 @@ export abstract class StateNode {
     for (const propertyName of Object.getOwnPropertyNames(this)) {
       const node = (this as any)[propertyName];
 
-      const excludeNames = this.constructor.nonChildrenNames;
-
-      if (node instanceof StateNode && node.parent && !node.shouldTraverse) {
-        continue;
-      }
-
       if (filterFunc && !filterFunc(node)) {
         continue;
       }
 
+      const excludeNames = this.constructor.nonChildrenNames;
+
       if (excludeNames.includes(propertyName)) {
+        continue;
+      }
+
+      if (node instanceof StateNode && node.parent && !node.shouldTraverse) {
         continue;
       }
 
