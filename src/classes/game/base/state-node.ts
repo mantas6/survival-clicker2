@@ -49,10 +49,6 @@ export abstract class StateNode {
         continue;
       }
 
-      if (node instanceof StateNode && node.parent && !node.shouldTraverse) {
-        continue;
-      }
-
       yield { node, name: propertyName };
     }
   }
@@ -67,10 +63,6 @@ export abstract class StateNode {
 
   onClock() {
     //
-  }
-
-  get shouldTraverse(): boolean {
-    return true;
   }
 
   private findRoot(): void {
