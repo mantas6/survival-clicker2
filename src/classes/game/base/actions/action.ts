@@ -96,6 +96,14 @@ export class Action extends Process {
     }
   }
 
+  get shouldSerializeOnStore() {
+    return this.isUnlocked !== undefined;
+  }
+
+  get shouldSerializeOnEmit() {
+    return this.isUnlocked || false;
+  }
+
   onClock() {
     super.onClock();
     this.triggerUnlocked();
@@ -107,14 +115,6 @@ export class Action extends Process {
     this.timesCalculated = this.timesCalculated.add(opts.multiplier);
     if (this.frequency) {
       this.frequency.addUse(opts);
-    }
-  }
-
-  serialize(tagName: TagName) {
-    if (tagName === 'store' && this.isUnlocked !== undefined) {
-      return super.serialize(tagName);
-    } else if (tagName === 'emit' && this.isUnlocked) {
-      return super.serialize(tagName);
     }
   }
 

@@ -13,13 +13,7 @@ export class Fitness extends SerializableWithReference {
     return this.stats.skills.fitness;
   }
 
-  serialize(tagName: TagName) {
-    if (tagName === 'emit') {
-      if (this.skill.level.value.greaterThan(0)) {
-        return super.serialize(tagName);
-      }
-    } else {
-      return super.serialize(tagName);
-    }
+  get shouldSerializeOnEmit() {
+    return this.skill.level.value.greaterThan(0);
   }
 }
