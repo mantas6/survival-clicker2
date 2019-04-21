@@ -118,10 +118,6 @@ function runClock() {
     return;
   }
 
-  if (!state.globals.alive.value) {
-    return;
-  }
-
   console.time('applyClock');
 
   applyClock();
