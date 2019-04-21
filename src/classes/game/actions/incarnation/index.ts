@@ -6,12 +6,4 @@ import { Automation } from './automation';
 export class Incarnation extends SerializableWithReference {
   modules = new Modules();
   automation = new Automation();
-
-  get shouldTraverse() {
-    return !this.state.globals.alive.value;
-  }
-
-  get shouldSerializeOnEmit() {
-    return !this.state.globals.alive.value;
-  }
 }
