@@ -22,6 +22,10 @@ export class Mundane extends SerializableWithReference {
 
   skills = new Skills();
 
+  get shouldTraverse() {
+    return this.state.globals.alive.value;
+  }
+
   get shouldSerializeOnEmit() {
     return this.state.globals.alive.value;
   }
