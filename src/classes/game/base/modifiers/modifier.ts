@@ -3,6 +3,8 @@ import { SerializableWithReference, SerializeOn } from '@/classes/game/base/seri
 import { traverse } from '@/utils/node';
 
 export abstract class Modifier extends SerializableWithReference {
+  private cachedActions?: any[];
+
   protected abstract compute(cumulated: Decimal): Decimal;
 
   @SerializeOn('emit')
@@ -25,14 +27,10 @@ export abstract class Modifier extends SerializableWithReference {
     const multiplier = new Decimal(1);
     let cumulated = new Decimal(0);
 
-    for (const node of traverse(this.actions)) {
-      // Should be instanceof ToggleAction check
-      // Also should check for running processes and it's effects?
-      if ((node as any).isToggledOn) {
-        for (const { effect } of (node as any).effects()) {
-          if (effect.modifier === this) {
-            cumulated = cumulated.add(effect.compute({ multiplier }));
-          }
+    for (const action of this.effectActions()) {
+      if (action.isToggledOn) {
+        for (const { effect } of action.effects()) {
+          cumulated = cumulated.add(effect.compute({ multiplier }));
         }
       }
     }
@@ -51,5 +49,24 @@ export abstract class Modifier extends SerializableWithReference {
     }
 
     return cumulated;
+  }
+
+  private effectActions() {
+    if (!this.cachedActions) {
+      this.cachedActions = [];
+      for (const node of traverse(this.actions)) {
+        // Should be instanceof ToggleAction check
+        // Also should check for running processes and it's effects?
+        if ((node as any).timesCalculated) {
+          for (const { effect } of (node as any).effects()) {
+            if (effect.modifier === this) {
+              this.cachedActions.push(node);
+            }
+          }
+        }
+      }
+    }
+
+    return this.cachedActions;
   }
 }
