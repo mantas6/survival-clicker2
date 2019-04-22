@@ -11,6 +11,7 @@ import { Globals } from './globals';
 import { Processes } from './processes';
 import { Measures } from './measures';
 import { Wheel } from './wheel';
+import { get, startCase } from '@/utils/method';
 
 Vue.use(Vuex);
 
@@ -28,5 +29,20 @@ export default new Vuex.Store({
     Processes,
     Measures,
     Wheel,
+  },
+  mutations: {
+    updateState(state, { path, serialized }) {
+      const split = path.split('.') as string[];
+      split[0] = startCase(split[0]) + '.list';
+
+      const name = split.pop()!;
+      const preparedPath = split.join('.');
+
+      const stateNode = get(state, preparedPath);
+
+      if (stateNode) {
+        Vue.set(stateNode, name, serialized);
+      }
+    },
   },
 });

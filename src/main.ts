@@ -49,6 +49,10 @@ relay.on('state', ({ stats, actions, modifiers, timers, globals, processes, meas
   store.commit('setLoaded');
 });
 
+relay.on('stateUpdate', ({ path, serialized }) => {
+  store.commit('updateState', { path, serialized });
+});
+
 storage.getItem('darkMode').then(isEnabled => {
   if (isEnabled) {
     store.commit('setDarkMode', true);

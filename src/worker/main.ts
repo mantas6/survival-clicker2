@@ -16,6 +16,11 @@ const state = new State();
 runClock();
 emitAll();
 
+state.whenUpdated(node => {
+  const serialized = node.serialize('emit');
+  relay.emit('stateUpdate', { path: node.path, serialized });
+});
+
 relay.on('action', ({ path, multiplier }) => {
   if (state.globals.isPaused) {
     return;
