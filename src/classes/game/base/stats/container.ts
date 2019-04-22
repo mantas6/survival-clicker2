@@ -23,6 +23,8 @@ export abstract class Container extends Value {
     } else {
       this.current = mutated;
     }
+
+    this.emitUpdate();
   }
 
   probe(mutateFunc: MutationFunction): LimitFlag {

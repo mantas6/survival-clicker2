@@ -48,6 +48,8 @@ export abstract class Value extends Transformable {
     } else {
       this.current = mutated;
     }
+
+    this.emitUpdate();
   }
 
   probe(mutateFunc: MutationFunction): LimitFlag {
