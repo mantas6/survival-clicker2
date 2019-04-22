@@ -4,10 +4,11 @@ import { Actions } from '@/classes/game/actions';
 import { Modifiers } from '@/classes/game/modifiers';
 import { Measures } from '@/classes/game/measures';
 import { Timers } from '@/classes/game/base/modifiers';
-import { SerializeOn, Serializable } from '@/classes/game/base/serialization';
+import { SerializeOn } from '@/classes/game/base/serialization';
+import { StateRoot } from '@/classes/game/base/state-root';
 import { Globals } from './globals';
 
-export class State extends Serializable {
+export class State extends StateRoot {
   @SerializeOn('emit', 'store')
   stats = new Stats();
 
