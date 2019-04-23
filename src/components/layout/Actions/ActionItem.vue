@@ -64,8 +64,18 @@ export default class ActionItem extends Vue {
     if (this.isToggable) {
       list.push('togglable');
 
-      if ((this.item as ToggleAction).isToggledOn) {
+      const toggleAction = this.item as ToggleAction;
+
+      if (toggleAction.isToggledOn) {
         list.push('toggled-on');
+      }
+
+      if (!toggleAction.canToggleOn) {
+        list.push('unavailable-toggle-on');
+      }
+
+      if (!toggleAction.canToggleOff) {
+        list.push('unavailable-toggle-off');
       }
     }
 
@@ -226,7 +236,9 @@ export default class ActionItem extends Vue {
       color: red;
     }
 
-    &.unavailable {
+    &.unavailable,
+    &.togglable.unavailable-toggle-off.toggled-on,
+    &.togglable.unavailable-toggle-on:not(.toggled-on) {
       .head {
         color: grey;
       }
