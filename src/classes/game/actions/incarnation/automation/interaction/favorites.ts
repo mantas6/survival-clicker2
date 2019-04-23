@@ -22,4 +22,12 @@ export class Favorites extends ToggleAction {
 
     return new Decimal(-75);
   });
+
+  get canToggleOff() {
+    if (!this.actions.incarnation.automation.interaction.queue.isToggledOn) {
+      return super.canToggleOff;
+    }
+
+    return false;
+  }
 }

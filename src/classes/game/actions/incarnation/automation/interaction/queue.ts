@@ -24,4 +24,12 @@ export class Queue extends ToggleAction {
 
     return new Decimal(-100);
   });
+
+  get canToggleOn() {
+    if (this.actions.incarnation.automation.interaction.favorites.isToggledOn) {
+      return super.canToggleOn;
+    }
+
+    return false;
+  }
 }
