@@ -24,6 +24,8 @@ export abstract class Transformable extends SerializableWithReference {
         }
 
         (this as any)[transformation.propertyName] = transformation.valueFunc(this);
+
+        this.emitUpdate();
       }
     }
   }
