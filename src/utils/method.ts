@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import set from 'lodash/set';
 import isEmpty from 'lodash/isEmpty';
 import head from 'lodash/head';
 import last from 'lodash/last';
@@ -17,6 +18,7 @@ function take<Result>(callback: () => Result): Result | undefined {
 export {
   take,
   get,
+  set,
   isEmpty,
   head,
   last,
