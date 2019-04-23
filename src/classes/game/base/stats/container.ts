@@ -24,7 +24,9 @@ export abstract class Container extends Value {
       this.current = mutated;
     }
 
-    this.emitUpdate();
+    if (!this.rate.equals(0)) {
+      this.emitUpdate();
+    }
   }
 
   probe(mutateFunc: MutationFunction): LimitFlag {

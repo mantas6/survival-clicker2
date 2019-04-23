@@ -49,7 +49,9 @@ export abstract class Value extends Transformable {
       this.current = mutated;
     }
 
-    this.emitUpdate();
+    if (!this.rate.equals(0)) {
+      this.emitUpdate();
+    }
   }
 
   probe(mutateFunc: MutationFunction): LimitFlag {
