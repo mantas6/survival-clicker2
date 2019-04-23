@@ -16,10 +16,15 @@ const state = new State();
 runClock();
 emitAll();
 
-state.whenUpdated(node => {
+/*state.whenUpdated(node => {
   const serialized = node.serialize('emit');
-  relay.emit('stateUpdate', { path: node.path, serialized });
-});
+  if (node.path) {
+    relay.emit('stateUpdate', { path: node.path, serialized });
+  } else {
+    console.log('Emitting all');
+    emitAll();
+  }
+});*/
 
 relay.on('action', ({ path, multiplier }) => {
   if (state.globals.isPaused) {
@@ -37,7 +42,7 @@ relay.on('action', ({ path, multiplier }) => {
       }
     }
 
-    // emitAll();
+    emitAll();
   }
 });
 
@@ -50,7 +55,7 @@ relay.on('toggle', ({ path }) => {
     action.toggleOff();
   }
 
-  // emitAll();
+  emitAll();
 });
 
 relay.on('auto', ({ path, every }) => {
@@ -69,7 +74,7 @@ relay.on('auto', ({ path, every }) => {
       }
     }
 
-    // emitAll();
+    emitAll();
   }
 });
 
@@ -77,26 +82,26 @@ relay.on('addFavorite', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.favorite = new Favorite();
-  // emitAll();
+  emitAll();
 });
 
 relay.on('removeFavorite', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.favorite = undefined;
-  // emitAll();
+  emitAll();
 });
 
 relay.on('seen', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.isSeen = true;
-  // emitAll();
+  emitAll();
 });
 
 relay.on('pause', () => {
   state.globals.isPaused = !state.globals.isPaused;
-  // emitAll();
+  emitAll();
 });
 
 relay.on('save', () => {
@@ -115,7 +120,7 @@ interval(30e3).subscribe(() => {
 
 interval(1000).subscribe(() => {
   runClock();
-  // emitAll();
+  emitAll();
 });
 
 function runClock() {
