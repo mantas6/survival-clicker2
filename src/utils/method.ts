@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
+import has from 'lodash/has';
 import isEmpty from 'lodash/isEmpty';
 import head from 'lodash/head';
 import last from 'lodash/last';
@@ -19,6 +20,7 @@ export {
   take,
   get,
   set,
+  has,
   isEmpty,
   head,
   last,
