@@ -160,6 +160,8 @@ export class Action extends Process {
 
     // Unlocks the action
     this.isUnlocked = true;
+
+    this.emitUpdate();
   }
 
   private checkLock() {
@@ -181,5 +183,7 @@ export class Action extends Process {
 
     // Locks the action
     this.isUnlocked = false;
+
+    this.emitUpdate();
   }
 }

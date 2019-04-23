@@ -37,7 +37,7 @@ relay.on('action', ({ path, multiplier }) => {
       }
     }
 
-    emitAll();
+    // emitAll();
   }
 });
 
@@ -50,7 +50,7 @@ relay.on('toggle', ({ path }) => {
     action.toggleOff();
   }
 
-  emitAll();
+  // emitAll();
 });
 
 relay.on('auto', ({ path, every }) => {
@@ -69,7 +69,7 @@ relay.on('auto', ({ path, every }) => {
       }
     }
 
-    emitAll();
+    // emitAll();
   }
 });
 
@@ -77,26 +77,26 @@ relay.on('addFavorite', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.favorite = new Favorite();
-  emitAll();
+  // emitAll();
 });
 
 relay.on('removeFavorite', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.favorite = undefined;
-  emitAll();
+  // emitAll();
 });
 
 relay.on('seen', ({ path }) => {
   const action = state.get<Action>(path)!;
 
   action.isSeen = true;
-  emitAll();
+  // emitAll();
 });
 
 relay.on('pause', () => {
   state.globals.isPaused = !state.globals.isPaused;
-  emitAll();
+  // emitAll();
 });
 
 relay.on('save', () => {
@@ -115,7 +115,7 @@ interval(30e3).subscribe(() => {
 
 interval(1000).subscribe(() => {
   runClock();
-  emitAll();
+  // emitAll();
 });
 
 function runClock() {
