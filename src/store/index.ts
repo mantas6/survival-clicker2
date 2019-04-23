@@ -11,7 +11,7 @@ import { Globals } from './globals';
 import { Processes } from './processes';
 import { Measures } from './measures';
 import { Wheel } from './wheel';
-import { get, startCase } from '@/utils/method';
+import { get, set, has, startCase } from '@/utils/method';
 
 Vue.use(Vuex);
 
@@ -38,11 +38,13 @@ export default new Vuex.Store({
       const name = split.pop()!;
       const preparedPath = split.join('.');
 
+      if (!has(state, preparedPath)) {
+        set(state, preparedPath, {});
+      }
+
       const stateNode = get(state, preparedPath);
 
-      if (stateNode) {
-        Vue.set(stateNode, name, serialized);
-      }
+      Vue.set(stateNode, name, serialized);
     },
   },
 });
