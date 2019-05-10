@@ -14,10 +14,18 @@ import { isUpdateAvailable } from '@/utils/version';
 @Component({
   async created(this: MessageContainer) {
     this.isUpdateAvailable = await isUpdateAvailable();
+    this.checkInterval = setInterval(async () => {
+      this.isUpdateAvailable = await isUpdateAvailable();
+    }, 60e3);
+  },
+
+  destroyed(this: MessageContainer) {
+    clearInterval(this.checkInterval);
   },
 })
 export default class MessageContainer extends Vue {
   isUpdateAvailable: boolean = false;
+  checkInterval?: number = undefined;
 
   get isStaging() {
     return process.env.VUE_APP_STAGING_WARNING;
