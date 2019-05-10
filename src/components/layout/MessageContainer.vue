@@ -16,7 +16,7 @@ import { isUpdateAvailable } from '@/utils/version';
     this.isUpdateAvailable = await isUpdateAvailable();
     this.checkInterval = setInterval(async () => {
       this.isUpdateAvailable = await isUpdateAvailable();
-    }, 60e3);
+    }, 120e3);
   },
 
   destroyed(this: MessageContainer) {
