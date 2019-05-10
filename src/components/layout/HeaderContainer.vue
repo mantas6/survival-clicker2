@@ -33,6 +33,7 @@
         <container-stat name="stomach" :stat="stomach"></container-stat>
       </div>
       <div class="incarnation" v-show="isIncarnationPointsUnlocked">
+        <span>{{ $t('incarnationPoints') }}</span>
         <div class="points">
           <number-format :value="incarnationCurrentPoints"></number-format>
           <span> / </span>
