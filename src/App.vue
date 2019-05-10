@@ -22,7 +22,6 @@ import Sidebar from '@/components/layout/Sidebar.vue';
 import MessageContainer from '@/components/layout/MessageContainer.vue';
 import { Getter } from 'vuex-class';
 import { SerializedGlobals } from '@/store/globals';
-import { isUpdateAvailable } from '@/utils/version';
 
 @Component({
   components: { HeaderContainer, Sidebar, MessageContainer },
