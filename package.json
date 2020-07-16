@@ -21,7 +21,7 @@
     "@sentry/browser": "^4.6.6",
     "decimal.js": "^10.2.0",
     "localforage": "^1.7.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "rxjs": "^6.5.2",
     "swarm-numberformat": "^0.4.0",
     "vue": "^2.6.10",
